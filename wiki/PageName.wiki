@@ -1,0 +1,29 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+Welcome to BumpTop Open Source!  
+
+-Download links for Mac, Windows, etc. 
+
+Todo: explain windows, mac codebases.  Mac is more modern but with reduced, simplified, focused features.  2 diff windows versions (more features, less blah). 
+
+= Wishlist/Ideas for development = 
+* Mac *
+  * single color icon
+
+* Windows * 
+  * fix wall functionality? 
+  * play with webkit support? 
+
+* Flash *
+  * apollo link to real filesystem?  
+  * host it on the site somewhere? 
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
