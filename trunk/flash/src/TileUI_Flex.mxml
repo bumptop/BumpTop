@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+//
+//  Copyright 2012 Google Inc. All Rights Reserved.
+//  
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//  
+//      http://www.apache.org/licenses/LICENSE-2.0
+//  
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+-->
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:tileui="tileui.*"
+	
+	pageTitle="tileUI" frameRate="100"
+	layout="absolute"
+	
+	creationComplete="setupTileUI(); addDefaultTiles()">
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.core.BitmapAsset;
+			import mx.events.ListEvent;
+			
+			import org.papervision3d.materials.BitmapMaterial;
+			
+			import tileui.tiles.ImageTile;
+			import tileui.tiles.pv3d.Image3DTile;
+			
+			[Embed(source='/assets/steeltech-wall.jpg')]
+			private var steelFloorClass:Class;
+			
+			[Embed(source='/assets/steeltech-floor-smaller.png')]
+			private var steelSideWallClass:Class;
+			
+			[Embed(source='/assets/steeltech-front.jpg')]
+			private var steelBackWallClass:Class;
+			
+			[Embed(source='/assets/win-7-floor.jpg')]
+			private var winFloorClass:Class;
+			
+			[Embed(source='/assets/win-7-wall.jpg')]
+			private var winSideWallClass:Class;
+			
+			[Embed(source='/assets/win-7-front.jpg')]
+			private var winBackWallClass:Class;
+			
+			[Embed(source='/assets/floor_desktop.jpg')]
+			private var bumptopFloorClass:Class;
+			
+			[Embed(source='/assets/wall.png')]
+			private var bumptopSideWallClass:Class;
+			
+			private function setupTileUI():void {
+				setWinTheme();
+				
+				systemManager.stage.quality = StageQuality.MEDIUM;
+				BitmapMaterial.AUTO_MIP_MAPPING = false;
+				Image3DTile.SMOOTH = true;
+			}
+			
+			private function setSteelTheme():void {
+				tileComponent.floorBitmapData = BitmapAsset(new steelFloorClass()).bitmapData;
+				tileComponent.backWallBitmapData = BitmapAsset(new steelBackWallClass()).bitmapData;
+				tileComponent.sideWallBitmapData = BitmapAsset(new steelSideWallClass()).bitmapData;
+				
+				setStyle("backgroundColor", 0x000000);
+			}
+			
+			private function setWinTheme():void {
+				tileComponent.floorBitmapData = BitmapAsset(new winFloorClass()).bitmapData;
+				tileComponent.backWallBitmapData = BitmapAsset(new winBackWallClass()).bitmapData;
+				tileComponent.sideWallBitmapData = BitmapAsset(new winSideWallClass()).bitmapData;
+				
+				setStyle("backgroundColor", 0x16548E);
+			}
+			
+			private function setBumptopTheme():void {
+				tileComponent.floorBitmapData = BitmapAsset(new bumptopFloorClass()).bitmapData;
+				tileComponent.backWallBitmapData = null;
+				tileComponent.sideWallBitmapData = null;
+				
+				setStyle("backgroundColor", 0x445866);
+			}
+			
+			private function setNoTheme():void {
+				tileComponent.floorBitmapData = null;
+				tileComponent.backWallBitmapData = null;
+				tileComponent.sideWallBitmapData = null;
+			}
+			
+			private function addDefaultTiles():void {
+				for(var i:int=0; i<15; i++) {
+					addTile();
+				}
+			}
+			
+			private var demoTileURLs:Array = ["doug.png", "bumptop-logo.png", "apacheflex.png"];
+			private function addTile():void {
+				var i:Number = Math.round(Math.random() * 2);
+				
+				var url:String = demoTileURLs[i];
+				var tile:ImageTile = new ImageTile("assets/defaultTiles/" + url + "?t=" + new Date().time);
+				tileComponent.addTile(tile);
+			}
+			
+			private function resetTiles():void {
+				tileComponent.removeAllTiles();
+				addDefaultTiles();
+			}
+
+
+		]]>
+	</mx:Script>
+	
+	
+	<tileui:TileUIComponent  width="100%" height="100%"  id="tileComponent" />
+	
+	<mx:VBox backgroundAlpha=".5" backgroundColor="0" left="10" top="10" color="#FFFFFF"
+		paddingLeft="10" paddingRight="10" paddingBottom="10" paddingTop="10">
+		
+		<mx:CheckBox id="settingsCheck" label="Show Settings" textRollOverColor="#FFFFFF" />
+		
+		<mx:VBox width="100%"
+			visible="{settingsCheck.selected}" includeInLayout="{settingsCheck.selected}">
+			
+			<mx:Label text="Theme:" />
+			
+			<mx:VBox verticalGap="0">
+				<mx:RadioButton groupName="theme" click="setWinTheme()" label="Win 7" textRollOverColor="#FFFFFF" selected="true" />
+				<mx:RadioButton groupName="theme" click="setSteelTheme()" label="Steel" textRollOverColor="#FFFFFF" />
+				<mx:RadioButton groupName="theme" click="setBumptopTheme()" label="Bumptop" textRollOverColor="#FFFFFF" />
+				<mx:RadioButton groupName="theme" click="setNoTheme()" label="None" textRollOverColor="#FFFFFF" />
+				
+			</mx:VBox>
+			
+			<mx:Spacer height="10" />
+			
+			<mx:Label text="3D Settings:" />
+			
+			<mx:VBox verticalGap="0">
+				<mx:HSlider id="zoomSlider" minimum="61" value="61" liveDragging="true" maximum="200" change="tileComponent.zoom(event.value);" />
+				<mx:HSlider id="xSlider"	minimum="-4000" maximum="4000" value="0" liveDragging="true" change="tileComponent.moveCameraX(event.value);" />
+				<mx:HSlider id="ySlider"	minimum="0" maximum="7000" value="3500" liveDragging="true" change="tileComponent.moveCameraY(event.value);" />
+				<mx:HSlider	id="zSlider"	minimum="-3600" maximum="-5" value="-1800" liveDragging="true" change="tileComponent.moveCameraZ(event.value);" />
+				<mx:Button label="Reset" click="tileComponent.resetPerspective(); zoomSlider.value = 61; xSlider.value = 0; ySlider.value = 3500; zSlider.value = -1800;" />
+			</mx:VBox>
+			
+			<mx:Spacer height="10" />
+			
+			<mx:Label text="Stage quality:" />
+			<mx:VBox verticalGap="0">
+				<mx:RadioButton groupName="quality" click="systemManager.stage.quality = StageQuality.LOW" label="Low" textRollOverColor="#FFFFFF" />
+				<mx:RadioButton groupName="quality" click="systemManager.stage.quality = StageQuality.MEDIUM" label="Medium" selected="true" textRollOverColor="#FFFFFF" />
+				<mx:RadioButton groupName="quality" click="systemManager.stage.quality = StageQuality.HIGH" label="High" textRollOverColor="#FFFFFF" />
+				<mx:RadioButton groupName="quality" click="systemManager.stage.quality = StageQuality.BEST" label="Best" textRollOverColor="#FFFFFF" />
+			</mx:VBox>
+			
+			<mx:Spacer height="10" />
+			
+			<mx:VBox verticalGap="0">
+				<mx:CheckBox change="Image3DTile.HIDE_SIDES = sidesCheck.selected; resetTiles();" id="sidesCheck" label="Remove tile sides" textRollOverColor="#FFFFFF" />
+				<mx:CheckBox change="Image3DTile.SMOOTH = smoothCheck.selected; resetTiles();" id="smoothCheck" label="Use bitmap smoothing" selected="true" textRollOverColor="#FFFFFF" />
+				<mx:CheckBox change="BitmapMaterial.AUTO_MIP_MAPPING = mipCheck.selected; resetTiles();" id="mipCheck" label="Use auto mip mapping" textRollOverColor="#FFFFFF"/>
+			</mx:VBox>
+			
+		</mx:VBox>
+		
+	</mx:VBox>
+			
+</mx:Application>
