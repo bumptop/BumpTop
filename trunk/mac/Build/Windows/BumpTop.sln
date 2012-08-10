@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BumpTop", "BumpTop.vcproj", "{0A2D85E3-49C4-4F29-A743-105C4A1D77C1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cpplint", "cpplint.vcproj", "{BA609EB8-787F-4DC9-BD90-C1482E673C9D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A2D85E3-49C4-4F29-A743-105C4A1D77C1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0A2D85E3-49C4-4F29-A743-105C4A1D77C1}.Debug|Win32.Build.0 = Debug|Win32
+		{0A2D85E3-49C4-4F29-A743-105C4A1D77C1}.Release|Win32.ActiveCfg = Release|Win32
+		{0A2D85E3-49C4-4F29-A743-105C4A1D77C1}.Release|Win32.Build.0 = Release|Win32
+		{BA609EB8-787F-4DC9-BD90-C1482E673C9D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BA609EB8-787F-4DC9-BD90-C1482E673C9D}.Debug|Win32.Build.0 = Debug|Win32
+		{BA609EB8-787F-4DC9-BD90-C1482E673C9D}.Release|Win32.ActiveCfg = Release|Win32
+		{BA609EB8-787F-4DC9-BD90-C1482E673C9D}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

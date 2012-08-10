@@ -1,0 +1,50 @@
+/*
+ *  Copyright 2012 Google Inc. All Rights Reserved.
+ *  
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *  
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *  
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+//
+// Prefix header for all source files of the 'BumpTop' target in the 'BumpTop' project
+//
+
+#ifdef __OBJC__
+#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
+
+// QtGui headers use Objective-C, so can only be used from .mm files or .cpp files marked as Objective-C++
+#ifdef __cplusplus
+#include "BumpTop/qtgui_includes.h"
+#endif
+
+#endif
+
+#ifndef __OBJC__
+#define __OBJC__ // need this so Ogre doesn't use Carbon-specific callbacks
+#endif
+
+#ifdef __cplusplus
+#include <Carbon/Carbon.h>
+
+#include <mach/mach.h>
+#include <mach/mach_time.h>
+
+#include "BumpTop/boost_includes.h"
+#include "BumpTop/bullet_includes.h"
+#include "BumpTop/ogre_includes.h"
+#include "BumpTop/protobuf_includes.h"
+#include "BumpTop/qtcore_includes.h"
+
+#include "BumpTop/for_each.h"
+
+#endif

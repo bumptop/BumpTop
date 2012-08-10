@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="9.00"
+	Name="cpplint"
+	ProjectGUID="{BA609EB8-787F-4DC9-BD90-C1482E673C9D}"
+	RootNamespace="cpplint"
+	Keyword="MakeFileProj"
+	TargetFrameworkVersion="196613"
+	>
+	<Platforms>
+		<Platform
+			Name="Win32"
+		/>
+	</Platforms>
+	<ToolFiles>
+	</ToolFiles>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="0"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="C:\Python26\python.exe ..\..\Dependencies\run_with_expanded_globs.py C:\Python26\python.exe ..\cpplint.py &quot;..\..\BumpTop\*.cpp&quot; &quot;..\..\BumpTop\*.h&quot;&#x0D;&#x0A;C:\Python26\python.exe ..\..\Dependencies\run_with_expanded_globs.py C:\Python26\python.exe ..\cpplint.py &quot;..\..\BumpTop\Windows\*.cpp&quot; &quot;..\..\BumpTop\Windows\*.h&quot;"
+				ReBuildCommandLine=""
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="WIN32;_DEBUG"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="0"
+			>
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine=""
+				ReBuildCommandLine=""
+				CleanCommandLine=""
+				Output=""
+				PreprocessorDefinitions="WIN32;NDEBUG"
+				IncludeSearchPath=""
+				ForcedIncludes=""
+				AssemblySearchPath=""
+				ForcedUsingAssemblies=""
+				CompileAsManaged=""
+			/>
+		</Configuration>
+	</Configurations>
+	<References>
+	</References>
+	<Files>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

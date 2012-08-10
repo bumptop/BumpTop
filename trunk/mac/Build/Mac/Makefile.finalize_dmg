@@ -1,0 +1,107 @@
+#
+# Build file for creating DMG files.
+#
+# The DMG packager looks for a template.dmg.bz2 for using as its 
+# DMG template. If it doesn't find one, it generates a clean one.
+#
+# If you create a DMG template, you should make one containing all
+# the files listed in $(SOURCE_FILES) below, and arrange everything to suit
+# your style. The contents of the files themselves does not matter, so
+# they can be empty (they will be overwritten later). 
+#
+# Remko Tronçon 
+# http://el-tramo.be/about
+# Licensed under the MIT License. 
+# 
+# Copyright (c) 2006-2009 Remko Tronçon
+# 
+# Permission is hereby granted, free of charge, to any person
+# obtaining a copy of this software and associated documentation
+# files (the "Software"), to deal in the Software without
+# restriction, including without limitation the rights to use,
+# copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the
+# Software is furnished to do so, subject to the following
+# conditions:
+# 
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+# OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+# WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+# OTHER DEALINGS IN THE SOFTWARE.
+
+
+################################################################################
+# Customizable variables
+################################################################################
+
+NAME ?= BumpTop
+INFO ?= "$(BUILT_PRODUCTS_DIR)/$(PROJECT_NAME).app/Contents/Info"
+VERSION ?= "NO_VERSION_SPECIFIED"
+
+SOURCE_DIR ?= Deploy
+SOURCE_FILES ?= BumpTop.app
+OUTPUT_DIR ?= Deploy
+
+TEMPLATE_DMG ?= deploy_template.dmg
+
+
+################################################################################
+# DMG building. No editing should be needed beyond this point.
+################################################################################
+
+MASTER_DMG=$(NAME)-$(VERSION).dmg
+WC_DMG=wc.dmg
+WC_DIR=wc
+
+.PHONY: all
+all: $(OUTPUT_DIR)/$(MASTER_DMG)
+
+include Makefile.clean_app_bundle
+
+#$(TEMPLATE_DMG): $(TEMPLATE_DMG).bz2
+#	bunzip2 -k $<
+$(TEMPLATE_DMG): $(TEMPLATE_DMG).zip
+	unzip -o $<
+	touch $@
+
+$(TEMPLATE_DMG).bz2: 
+	@echo
+	@echo --------------------- Generating empty template --------------------
+	mkdir template
+	hdiutil create -fs HFSX -layout SPUD -size 40m "$(TEMPLATE_DMG)" -srcfolder template -format UDRW -volname "$(NAME)" -quiet
+	rmdir template
+	bzip2 "$(TEMPLATE_DMG)"
+	@echo
+
+$(WC_DMG): $(TEMPLATE_DMG)
+	cp $< $@
+
+$(OUTPUT_DIR)/$(MASTER_DMG): $(WC_DMG) $(addprefix $(SOURCE_DIR)/,$(SOURCE_FILES)) $(SOURCE_DIR)
+	@echo
+	@echo --------------------- Creating Disk Image --------------------
+	mkdir -p $(WC_DIR)
+	hdiutil attach "$(WC_DMG)" -noautoopen -mountpoint "$(WC_DIR)"
+	for i in $(SOURCE_FILES); do  \
+		rm -rf "$(WC_DIR)/$$i"; \
+		ditto -rsrc "$(SOURCE_DIR)/$$i" "$(WC_DIR)/$$i"; \
+	done
+	#rm -f "$@"
+	#hdiutil create -srcfolder "$(WC_DIR)" -format UDZO -imagekey zlib-level=9 "$@" -volname "$(NAME) $(VERSION)" -scrub -quiet
+#	WC_DEV=`hdiutil info | grep "$(WC_DIR)" | grep "Apple_HFS" | awk '{print $$1}'` &&
+	WC_DEV=`hdiutil info | grep "$(WC_DIR)" | grep "/dev/disk" | awk '{print $$1}'` && \
+	hdiutil detach $$WC_DEV -force
+	rm -f "$@"
+	hdiutil convert "$(WC_DMG)" -format UDBZO -imagekey zlib-level=9 -o "$@"
+	rm -rf $(WC_DIR)
+	@echo
+
+.PHONY: clean
+clean:
+	-rm -rf $(TEMPLATE_DMG) $(MASTER_DMG) $(WC_DMG)

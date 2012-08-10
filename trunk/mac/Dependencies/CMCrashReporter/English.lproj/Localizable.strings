@@ -1,0 +1,5 @@
+"%@ was unable to deliver the crahslog." = "%@ was unable to deliver the crahslog.";
+"OK" = "OK";
+"Thanks for helping us improve %@" = "Thanks for helping us improve %@";
+"CrashReport" = "CrashReport";
+"Explanation" = "%@ quit unexpectedly last time it was run. You can send a report to us to help improve %@.";

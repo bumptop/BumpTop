@@ -1,0 +1,13 @@
+Obtained January 19, 2010 by Michael Jurka from http://cmcrashreporter.codingmammoth.com/terms_of_use.php
+
+Terms of use
+
+
+In fact there is just one rule! 
+If you use this framework, you need to add a link to this project-page or add the name "CMCrashReporter" in the about window.. 
+
+The next thing isn't a rule but a request, add your application to the list with applications that uses the framework. 
+
+You may edit the code and use it for a project (freeware - opensource - shareware ...) but it isn't permitted to sell the framework! 
+The framework is opensource and not commercial! 
+If you edit the framework, you still need to create a redict to the original framework! 

@@ -1,0 +1,127 @@
+//
+//  Copyright 2012 Google Inc. All Rights Reserved.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+
+message Vector3Buffer {
+  optional float x = 1;
+  optional float y = 2;
+  optional float z = 3;
+}
+
+message QuaternionBuffer {
+  optional float w = 1;
+  optional float x = 2;
+  optional float y = 3;
+  optional float z = 4;
+}
+
+message VisualPhysicsActorBuffer {
+  optional int32 actor_type = 1;
+  optional Vector3Buffer position = 2;
+  optional QuaternionBuffer orientation = 3;
+  optional Vector3Buffer size = 4;
+
+  optional string file_name = 5;
+
+  repeated VisualPhysicsActorBuffer child = 6;
+  repeated Vector3Buffer child_position = 7;
+  repeated QuaternionBuffer child_orientation = 8;
+
+  optional int32 room_surface = 9;
+  // optional string file_kind = 10; index 10 reserved
+  optional string display_name = 11;
+
+  optional bool name_hidden = 12;
+  optional int32 label_colour = 13 [default = 0];
+
+  optional bool is_new_items_pile = 14 [default = false];
+}
+
+// TODO(DanielP): Consider using this field in VisualPhysicsActorBuffer
+message SavedActorPosition {
+  required string path = 1;
+  required Vector3Buffer position = 2;
+  optional QuaternionBuffer orientation = 3;
+  optional Vector3Buffer size = 4;
+  required int32 room_surface = 5;
+  optional int32 label_colour = 6 [default = 0];
+}
+
+message RoomBuffer {
+  repeated VisualPhysicsActorBuffer actor = 1;
+  optional string last_run_bumptop_version = 2;
+  repeated SavedActorPosition saved_drive_positions = 3;
+}
+
+message Config {
+  required string camera_name = 1;
+  required string context_menu_name = 2;
+  required string flat_square_name = 3;
+  required string primary_resource_location = 5;
+  required string default_resource_group_name = 6;
+  required string ogre_plugins = 7;
+  required string ogre_config = 8;
+  required int32 big_endian_ogre_pixel_format = 9;
+  required int32 little_endian_ogre_pixel_format = 10;
+  required int32 qimage_pixel_format = 11;
+}
+
+message ProConfig {
+  required float flip_pile_scroll_delta_threshold = 1 [default = 10];
+  required int32 flip_pile_scroll_index_advancement = 2 [default = 0];
+  repeated int32 sticky_note_sizes = 3;
+  required float find_as_you_type_y_displacement = 4 [default = 0];
+  required float find_as_you_type_visible_alpha_value = 5 [default = 0];
+  required float find_as_you_type_r_tint = 6 [default = 0];
+  required float find_as_you_type_g_tint = 7 [default = 0];
+  required float find_as_you_type_b_tint = 8 [default = 0];
+  required float find_as_you_type_selected_value = 9 [default = 0];
+  required float pinch_gesture_threshold = 10 [default = 70.0];
+  required float swipe_gesture_threshold = 11 [default = 0];
+}
+
+message License {
+  required bytes license_key_1 = 1; // salt
+  required bytes license_key_2 = 2; // ciphered_master_key
+  optional string key = 3; // the invite code, or pro key
+}
+
+message Settings {
+  optional string floor_image_path = 1 [default = "bumptheme_floor.png"];
+  optional string front_wall_image_path = 2 [default = "bumptheme_front.png"];
+  optional string back_wall_image_path = 3 [default = "bumptheme_front.png"];
+  optional string right_wall_image_path = 4 [default = "bumptheme_wall.png"];
+  optional string left_wall_image_path = 5 [default = "bumptheme_wall.png"];
+
+  optional bool apply_floor_to_all_surfaces = 6 [default = false];
+
+  optional bool bumptop_should_start_on_login = 7;
+  optional string bumptop_login_item_path = 8;
+
+  optional string preferences_window_default_view = 9 [default = "General"];
+  optional string last_usage_tracking_upload_date = 10;
+  optional string last_usage_tracking_version_number = 11;
+
+  optional bool show_taskbar_tooltip = 12 [default = true];
+  optional bool show_gridded_pile_tooltip = 13 [default = true];
+  optional bool show_pile_flip_tooltip = 14 [default = true];
+  optional bool show_name_pile_tooltip = 15 [default = true];
+
+  optional bool image_name_on_walls_hidden = 16 [default = true];
+  optional bool use_lasso_setting = 17 [default = true];
+
+  optional float default_icon_size = 18 [default = 95];
+  optional bool use_new_items_pile_setting = 19 [default = true];
+}

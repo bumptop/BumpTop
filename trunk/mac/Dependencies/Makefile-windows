@@ -1,0 +1,138 @@
+#  Copyright 2012 Google Inc. All Rights Reserved.
+#  
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#  
+#      http://www.apache.org/licenses/LICENSE-2.0
+#  
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+
+# note: make.exe and other useful command line tools can be downloaded from
+# the GnuWin32 project
+
+PYTHON=C:\Python26\python.exe
+RUN_AND_BLOCK=$(PYTHON) run_and_block.py
+RUN_IN_CUSTOM_DIRECTORY_AND_BLOCK=$(PYTHON) run_in_custom_directory_and_block.py
+BJAM=boost-jam-3.1.17-1-ntx86\bjam.exe
+DEVENV=$(RUN_AND_BLOCK) "C:\Program Files (x86)\Microsoft Visual Studio 9.0\Common7\IDE\devenv.exe"
+BOOST_DIR=boost_1_39_0
+BULLET_DIR=bullet-2.74
+
+WINDOWS_PREFIX=Windows
+TOUCH=$(WINDOWS_PREFIX)\touch.exe
+UNZIP=$(WINDOWS_PREFIX)\unzip.exe
+PATCH=$(WINDOWS_PREFIX)\patc_h.exe
+CP=$(WINDOWS_PREFIX)\cp.exe
+GUNZIP=$(WINDOWS_PREFIX)\gzip.exe -d
+TAR=$(WINDOWS_PREFIX)\tar.exe
+CMAKE=$(WINDOWS_PREFIX)\cmake\bin\cmake.exe
+
+all: ogre-built bullet
+
+bullet: bulletcollision bulletdynamics bulletlinearmath
+
+bulletcollision: $(BULLET_DIR)/src/BulletCollision/MinSizeRel/BulletCollision.lib
+
+$(BULLET_DIR)/src/BulletCollision/MinSizeRel/BulletCollision.lib: $(BULLET_DIR)/BULLET_PHYSICS.sln
+	$(DEVENV) $(BULLET_DIR)/BULLET_PHYSICS.sln /Build "MinSizeRel" /Project BulletCollision /ProjectConfig "MinSizeRel" /Out "bullet_build_log.log"
+
+bulletdynamics: $(BULLET_DIR)/src/BulletDynamics/MinSizeRel/BulletDynamics.lib
+
+$(BULLET_DIR)/src/BulletDynamics/MinSizeRel/BulletDynamics.lib: $(BULLET_DIR)/BULLET_PHYSICS.sln
+	$(DEVENV) $(BULLET_DIR)/BULLET_PHYSICS.sln /Build "MinSizeRel" /Project BulletDynamics /ProjectConfig "MinSizeRel" /Out "bullet_build_log.log"
+
+bulletlinearmath: $(BULLET_DIR)/src/LinearMath/MinSizeRel/LinearMath.lib
+
+$(BULLET_DIR)/src/LinearMath/MinSizeRel/LinearMath.lib: $(BULLET_DIR)/BULLET_PHYSICS.sln
+	$(DEVENV) $(BULLET_DIR)/BULLET_PHYSICS.sln /Build "MinSizeRel" /Project LinearMath /ProjectConfig "MinSizeRel" /Out "bullet_build_log.log"
+
+$(BULLET_DIR)/BULLET_PHYSICS.sln: $(BULLET_DIR)
+	$(RUN_IN_CUSTOM_DIRECTORY_AND_BLOCK) $(BULLET_DIR) ..\$(CMAKE) . -G "Visual Studio 9 2008"
+
+$(BULLET_DIR): $(BULLET_DIR).zip
+	$(UNZIP) $(BULLET_DIR).zip
+	$(TOUCH) $(BULLET_DIR)
+
+ogre-built: ogre/lib/OgreMain.dll ogre/lib/RenderSystem_Direct3D9.dll
+
+ogre/lib/OgreMain.dll: boost-thread boost-date_time ogre ogre/Dependencies
+	$(DEVENV) "ogre\Ogre_vc9.sln" /Build "Release" /Project "OgreMain" /ProjectConfig "Release" /Out "ogre_build_log.log"
+
+ogre/lib/RenderSystem_Direct3D9.dll: boost-thread ogre ogre/Dependencies
+	$(DEVENV) "ogre\Ogre_vc9.sln" /Build "Release" /Project "RenderSystem_Direct3D9" /ProjectConfig "Release" /Out "ogre_build_log.log"
+
+ogre/Dependencies: ogre OgreDependencies_VC9_Eihort_20080203
+	$(CP) -r OgreDependencies_VC9_Eihort_20080203/Dependencies ogre
+	$(TOUCH) ogre/Dependencies
+
+OgreDependencies_VC9_Eihort_20080203: OgreDependencies_VC9_Eihort_20080203.zip
+	$(UNZIP) OgreDependencies_VC9_Eihort_20080203.zip
+	$(TOUCH) OgreDependencies_VC9_Eihort_20080203
+
+ogre: ogre-v1-6-2.zip
+	$(UNZIP) ogre-v1-6-2.zip
+	$(TOUCH) ogre
+	$(PATCH) -p0 --input=ogre_v1_6_2_background_texture_loading.patch
+
+boost-jam: boost-jam-3.1.17-1-ntx86/bjam.exe
+
+boost-jam-3.1.17-1-ntx86/bjam.exe:
+	$(UNZIP) boost-jam-3.1.17-1-ntx86.zip
+	$(TOUCH) boost-jam-3.1.17-1-ntx86/bjam.exe
+
+$(BOOST_DIR): $(BOOST_DIR).tar.gz
+	$(GUNZIP) --stdout $(BOOST_DIR).tar.gz | $(TAR) -xv
+	$(TOUCH) $(BOOST_DIR)
+
+boost-date_time: $(BOOST_DIR)/stage/lib/libboost_date_time-vc90-mt.lib
+
+$(BOOST_DIR)/stage/lib/libboost_date_time-vc90-mt.lib: boost-jam boost-unzipped
+	$(RUN_IN_CUSTOM_DIRECTORY_AND_BLOCK) $(BOOST_DIR) ..\$(BJAM) --toolset=msvc --build-type=complete --with-date_time
+	$(TOUCH) $(BOOST_DIR)/stage/lib/libboost_date_time-vc90-mt.lib
+
+boost-thread: $(BOOST_DIR)/stage/lib/libboost_thread-vc90-mt.lib
+
+boost-unzipped: $(BOOST_DIR)
+
+$(BOOST_DIR)/stage/lib/libboost_thread-vc90-mt.lib: boost-jam boost-unzipped
+	$(RUN_IN_CUSTOM_DIRECTORY_AND_BLOCK) $(BOOST_DIR) ..\$(BJAM) --toolset=msvc --build-type=complete --with-thread
+	$(TOUCH) $(BOOST_DIR)/stage/lib/libboost_thread-vc90-mt.lib
+
+gtest: gtest-1.3.0/msvc/Release/gtest.lib
+
+gtest-1.3.0/msvc/Release/gtest.lib: gtest-1.3.0
+	$(DEVENV) gtest-1.3.0\msvc\gtest.sln /Build Release /Project gtest /ProjectConfig Release /Out "gtest_build_log.log"
+
+gtest-1.3.0: gtest-1.3.0.tar.gz
+	$(GUNZIP) --stdout gtest-1.3.0.tar.gz | $(TAR) -xv
+	$(TOUCH) gtest-1.3.0
+#	$(PATCH) gtest-1.3.0/include/gtest/internal/gtest-port.h < gtest-tr1-fix.patch
+
+protobuf: protobuf-2.1.0/vsprojects/Release/libprotobuf.lib protobuf-2.1.0/vsprojects/Debug/libprotobuf.lib protobuf-2.1.0/vsprojects/Release/protoc
+
+protobuf-2.1.0/vsprojects/Release/libprotobuf.lib: protobuf-2.1.0
+	$(DEVENV) protobuf-2.1.0\vsprojects\protobuf.sln /Build Release /Project libprotobuf /ProjectConfig Release /Out "protobuf_build_log.log"
+
+protobuf-2.1.0/vsprojects/Debug/libprotobuf.lib: protobuf-2.1.0
+	$(DEVENV) protobuf-2.1.0\vsprojects\protobuf.sln /Build Debug /Project libprotobuf /ProjectConfig Debug /Out "protobuf_build_log.log"
+
+protobuf-2.1.0/vsprojects/Release/protoc: protobuf-2.1.0
+	$(DEVENV) protobuf-2.1.0\vsprojects\protobuf.sln /Build Release /Project protoc /ProjectConfig Release /Out "protobuf_build_log.log"
+
+protobuf-2.1.0: protobuf-2.1.0.tar.gz
+	$(GUNZIP) --stdout protobuf-2.1.0.tar.gz | $(TAR) -xv
+	$(TOUCH) protobuf-2.1.0
+
+qt: Qt-Win_x86-4.5.2
+
+Qt-Win_x86-4.5.2: Qt-Win_x86-4.5.2.zip
+	$(UNZIP) Qt-Win_x86-4.5.2.zip
+
+moc: moc-Win_x86-4.5.2.zip
+	unzip moc-Win_x86-4.5.2.zip
+	touch moc

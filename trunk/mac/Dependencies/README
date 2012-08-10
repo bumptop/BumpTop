@@ -1,0 +1,66 @@
+#  Copyright 2012 Google Inc. All Rights Reserved.
+#  
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#  
+#      http://www.apache.org/licenses/LICENSE-2.0
+#  
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+
+BUILDING DEPENDENCIES
+To build for Windows, simply run "RUN_MAKE_FOR_WINDOWS.bat".
+To build for Mac, simply type "Make"
+
+Hopefully it's as simple as that! :P
+
+
+HOW TO CREATE A PATCH
+
+To create a patch for a folder "source":
+1. Copy the original to a folder called "source-original"
+2. Modify "source" as desired.
+3. Execute the following command in "source"'s parent directory:
+diff -rup source-original/ source/ > source_patch.patch
+(if you want created/deleted files to be included, the options should be "-rupN")
+
+To patch, execute the following command in "source"'s parent directory:
+1. patch -p0 < source_patch.patch
+
+HOW TO PREPARE A QT BUILD
+
+1. Download and install the QT open source SDK.
+(On Mac:
+http://qt.nokia.com/downloads/mac-os-cpp
+http://get.qt.nokia.com/qt/source/qt-everywhere-opensource-src-4.6.0.tar.gz
+http://get.qt.nokia.com/qt/source/qt-mac-opensource-src-4.5.3.tar.gz)
+
+2. Build it
+ON WIN:
+
+2. Go into C:\Qt\2009.03\qt
+3. Execute the following commands:
+> configure -no-qt3support -debug-and-release -no-webkit -no-scripttools -no-phonon -no-dbus -no-phonon-backend
+> nmake sub-core
+> nmake sub-gui
+4. Copy the include, lib, and src directories into a new directory
+5. Run the script clean_qt_dir.py to clean out unnecessary files (you will probably have to modify the hard-coded path inside it)
+
+
+ON MAC:
+2. on snow leopard, modify mkspecs/macx-g++/qmake.conf to say gcc-4.0 and g++-4.0
+
+3. ./configure -cocoa -no-qt3support -no-scripttools -no-phonon -no-dbus -no-phonon-backend -platform macx-g++ -arch ppc -arch x86 -sdk /Developer/SDKS/MacOSX10.5.sdk -qt-libtiff -qt-libpng -qt-libmng -qt-libjpeg -fast -release  -opensource; gmake sub-tools-bootstrap sub-moc sub-corelib sub-uic sub-rcc sub-gui sub-network sub-xmlpatterns sub-webkit ; gmake --directory=src/plugins sub-imageformats
+
+TO BUILD STATICALLY:
+
+need to pass -static to configure.
+you'll probably need to link to zlib and SystemConfiguration.framework
+4. (ignore this) extra parameter to print out linker symbol map -Wl,-map,load.map
+
+
+
