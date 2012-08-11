@@ -1,0 +1,1893 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+// Copyright 2011 Google Inc. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+-->
+<resource version="2.3.0.1" xmlns="http://www.wxwidgets.org/wxxrc">
+    <object class="wxDialog" name="ID_SETTINGSDIALOG">
+        <style>wxCAPTION|wxSYSTEM_MENU|wxCLOSE_BOX|wxTAB_TRAVERSAL</style>
+        <exstyle>wxWS_EX_BLOCK_EVENTS</exstyle>
+        <size>486,416</size>
+        <title>BumpTop Settings</title>
+        <centered>1</centered>
+        <object class="wxBoxSizer">
+            <orient>wxVERTICAL</orient>
+            <object class="sizeritem">
+                <flag>wxGROW|wxALL</flag>
+                <border>0</border>
+                <object class="wxBoxSizer">	
+                    <orient>wxHORIZONTAL</orient>
+                    <object class="sizeritem">
+                        <flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                        <border>0</border>
+                        <option>1</option>
+                        <object class="wxPanel" name="ID_PANEL">
+                            <style>wxNO_BORDER|wxTAB_TRAVERSAL</style>
+                            <bg>#28282D</bg>
+                            <object class="wxStaticBitmap" name="wxID_STATIC">
+                                <size>421,50</size>
+                                <bitmap>bt_header.png</bitmap>
+                            </object>
+                        </object>
+                    </object>
+                </object>
+            </object>
+            <object class="sizeritem">
+                <flag>wxGROW|wxLEFT|wxRIGHT|wxTOP</flag>
+                <border>8</border>
+                <option>1</option>
+                <object class="wxNotebook" name="ID_NOTEBOOK">
+                    <object class="notebookpage" name="General">
+						<label>General</label>
+						<object class="wxPanel" name="ID_GENERAL">
+                            <style>wxNO_BORDER|wxTAB_TRAVERSAL</style>
+                            <object class="wxBoxSizer">
+                                <orient>wxVERTICAL</orient>
+                                <object class="spacer">
+                                    <flag>wxGROW</flag>
+                                    <border>0</border>
+                                    <size>5,5</size>
+                                </object>
+                                <object class="sizeritem">
+                                    <flag>wxGROW|wxALL</flag>
+                                    <border>5</border>
+                                    <object class="wxBoxSizer">
+                                        <orient>wxHORIZONTAL</orient>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_TOP|wxALL</flag>
+                                            <border>5</border>
+                                            <object class="wxStaticText" name="ID_INTEGRATION_LABEL">
+                                                <size>130,-1</size>
+                                                <font>
+                                                    <size>8</size>
+                                                    <family>swiss</family>
+                                                    <weight>bold</weight>
+                                                    <face>Tahoma</face>
+                                                </font>
+                                                <fg>#4A5860</fg>
+                                                <label>Integration</label>
+                                            </object>
+                                        </object>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                            <border>0</border>
+                                            <option>1</option>
+                                            <object class="wxBoxSizer">
+                                                <orient>wxVERTICAL</orient>		
+                                                <object class="sizeritem">
+                                                    <flag>wxALIGN_LEFT|wxALL</flag>
+                                                    <border>5</border>
+                                                    <object class="wxCheckBox" name="ID_LAUNCHONSTARTUP">
+                                                        <tooltip>The best desktop all day, every day. Start BumpTop with Windows.</tooltip>
+                                                        <label>Launch Automatically at Startup</label>
+                                                        <checked>0</checked>
+                                                    </object>
+                                                </object>
+												<object class="sizeritem">
+                                                    <flag>wxALIGN_LEFT|wxALL</flag>
+                                                    <border>5</border>
+                                                    <object class="wxCheckBox" name="ID_LIBRARYOVERLAY">
+                                                        <tooltip>BumpTop FTW!</tooltip>
+                                                        <label>Enable Library Switching Menu</label>
+                                                        <checked>1</checked>
+                                                    </object>
+                                                </object>
+                                            </object>
+                                        </object>
+                                    </object>
+                                </object>
+								<object class="sizeritem">
+                                    <flag>wxGROW|wxALL</flag>
+                                    <border>5</border>
+									<object class="wxBoxSizer">
+										<orient>wxHORIZONTAL</orient>
+										<object class="sizeritem">
+											<flag>wxALIGN_TOP|wxALL</flag>
+											<border>5</border>
+											<object class="wxStaticText" name="ID_LANGUAGES_LABEL">
+												<size>130,-1</size>
+												<font>
+													<size>8</size>
+													<family>swiss</family>
+													<weight>bold</weight>
+													<face>Tahoma</face>
+												</font>
+												<fg>#4A5860</fg>
+												<label>Language</label>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+											<border>0</border>
+											<option>1</option>
+											<object class="wxBoxSizer">
+												<orient>wxVERTICAL</orient>
+												<object class="sizeritem">
+													<flag>wxALIGN_LEFT|wxALL</flag>
+													<border>5</border>
+													<option>1</option>
+													<object class="wxChoice" name="ID_LANGUAGE_LIST">
+													</object>
+												</object>
+											</object>
+										</object>
+									</object>
+								</object>
+								<object class="sizeritem">
+                                    <flag>wxGROW|wxALL</flag>
+                                    <border>5</border>
+									<object class="wxBoxSizer">
+										<orient>wxHORIZONTAL</orient>
+										<object class="sizeritem">
+											<flag>wxALIGN_TOP|wxALL</flag>
+											<border>5</border>
+											<object class="wxStaticText" name="ID_TEXTURES_LABEL">
+												<size>130,-1</size>
+												<font>
+													<size>8</size>
+													<family>swiss</family>
+													<weight>bold</weight>
+													<face>Tahoma</face>
+												</font>
+												<fg>#4A5860</fg>
+												<label>Image Quality\n(Changes require \nBumpTop restart)</label>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+											<border>0</border>
+											<option>1</option>
+											<object class="wxBoxSizer">
+												<orient>wxVERTICAL</orient>
+												<object class="sizeritem">
+													<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+													<border>0</border>
+													<option>1</option>
+													<object class="wxBoxSizer">
+														<orient>wxVERTICAL</orient>												
+														<object class="sizeritem">
+															<flag>wxALIGN_LEFT|wxALL</flag>
+															<border>5</border>
+															<option>1</option>
+															<object class="wxChoice" name="ID_TEXTURE_LIST">
+															</object>
+														</object>
+													</object>
+												</object>
+												<object class="sizeritem">
+													<flag>wxALIGN_LEFT|wxALL</flag>
+													<border>5</border>
+													<object class="wxStaticText" name="ID_TEXTUREQUALITY_LABEL">
+														<tooltip></tooltip>
+														<label>Texture Quality:</label>
+													</object>
+												</object>
+											</object>
+										</object>
+										<!--
+										<object class="sizeritem">
+											<flag>wxGROW|wxALL</flag>
+											<border>5</border>
+											<object class="wxBoxSizer">
+												<orient>wxVERTICAL</orient>	
+												<object class="sizeritem">
+													<flag>wxALIGN_LEFT|wxALL</flag>
+													<border>5</border>
+													<object class="wxStaticText" name="ID_TEXTUREQUALITY_LABEL">
+														<tooltip></tooltip>
+														<label>Texture Quality:</label>
+													</object>
+												</object>
+												<object class="sizeritem">
+													<flag>wxGROW|wxALL</flag>
+													<border>0</border>
+													<object class="wxBoxSizer">
+														<orient>wxHORIZONTAL</orient>															
+														<object class="sizeritem">
+															<flag>wxALIGN_CENTER_VERTICAL|wxLEFT</flag>
+															<border>20</border>
+															<object class="wxStaticText" name="ID_LOWQUALITY_LABEL">
+																<tooltip>Uses as little texture memory as possible.  May result in blurry, low-resolution textures.</tooltip>
+																<label>Low Quality</label>
+															</object>
+														</object>
+														<object class="sizeritem">
+															<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+															<border>0</border>
+															<object class="wxSlider" name="ID_VISUALS">
+																<style></style>
+																<tooltip></tooltip>
+																<min>1</min>
+																<max>3</max>
+																<tickfreq>1</tickfreq>
+																<pagesize>1</pagesize>
+																<linesize>1</linesize>
+																<thumb>1</thumb>
+															</object>
+														</object>
+														<object class="sizeritem">
+															<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+															<border>0</border>
+															<object class="wxStaticText" name="ID_HIGHQUALITY_LABEL">
+																<tooltip>Uses the highest-resolution textures available.  This requires a modern graphics card.</tooltip>
+																<label>High Quality</label>
+															</object>
+														</object>														
+													</object>
+												</object>
+											</object>
+										</object>
+										-->
+									</object>
+								</object>
+								<object class="sizeritem">
+                                    <flag>wxGROW|wxALL</flag>
+                                    <border>5</border>
+                                    <object class="wxBoxSizer">
+                                        <orient>wxHORIZONTAL</orient>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_TOP|wxALL</flag>
+                                            <border>5</border>
+                                            <object class="wxStaticText" name="ID_MONITORS_LABEL">
+                                                <size>130,-1</size>
+                                                <font>
+                                                    <size>8</size>
+                                                    <family>swiss</family>
+                                                    <weight>bold</weight>
+                                                    <face>Tahoma</face>
+                                                </font>
+                                                <fg>#4A5860</fg>
+                                                <label>Cache</label>
+                                            </object>
+                                        </object>
+                                        <object class="sizeritem">
+											<flag>wxALIGN_LEFT|wxALL</flag>
+											<border>5</border>
+											<object class="wxButton" name="ID_CLEARCACHE">
+												<tooltip>BumpTop stores textures and images to help it load and run faster.</tooltip>
+												<label>Clear Textures Cache</label>
+											</object>
+										</object> 
+                                    </object>
+                                </object>
+								<object class="sizeritem">
+                                    <flag>wxGROW|wxALL</flag>
+                                    <border>5</border>
+                                    <object class="wxBoxSizer">
+                                        <orient>wxHORIZONTAL</orient>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_TOP|wxALL</flag>
+                                            <border>5</border>
+                                            <object class="wxStaticText" name="ID_LAYOUT_LABEL">
+                                                <size>130,-1</size>
+                                                <font>
+                                                    <size>8</size>
+                                                    <family>swiss</family>
+                                                    <weight>bold</weight>
+                                                    <face>Tahoma</face>
+                                                </font>
+                                                <fg>#4A5860</fg>
+                                                <label>Layout</label>
+                                            </object>
+                                        </object>
+                                        <object class="sizeritem">
+											<flag>wxALIGN_LEFT|wxALL</flag>
+											<border>5</border>
+											<object class="wxButton" name="ID_RESETLAYOUT">
+												<tooltip>Returns icon to default positions.  Discards all your BumpTop specific info (piles, pinning, sizing, positioning, etc). </tooltip>
+												<label>Reset BumpTop Layout</label>
+											</object>
+										</object>
+                                    </object>
+                                </object>
+                            </object>
+                        </object>
+                    </object>
+                    <object class="notebookpage" name="Icons_and_Physics">
+						<label>Icons and Physics</label>
+						<object class="wxPanel" name="ID_ICONS">
+                            <style>wxNO_BORDER|wxTAB_TRAVERSAL</style>
+                            <object class="wxBoxSizer">
+                                <orient>wxVERTICAL</orient>
+                                <object class="spacer">
+                                    <flag>wxGROW</flag>
+                                    <border>0</border>
+                                    <size>5,5</size>
+                                </object>
+                                <object class="sizeritem">
+                                    <flag>wxGROW|wxALL</flag>
+                                    <border>5</border>
+                                    <object class="wxBoxSizer">
+                                        <orient>wxHORIZONTAL</orient>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_TOP|wxALL</flag>
+                                            <border>5</border>
+                                            <object class="wxStaticText" name="ID_ICONPHYSICS_LABEL">
+                                                <size>130,-1</size>
+                                                <font>
+                                                    <size>8</size>
+                                                    <family>swiss</family>
+                                                    <weight>bold</weight>
+                                                    <face>Tahoma</face>
+                                                </font>
+                                                <fg>#4A5860</fg>
+                                                <label>Icon Physics</label>
+                                            </object>
+                                        </object>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                            <border>0</border>
+                                            <option>1</option>
+                                            <object class="wxBoxSizer">
+                                                <orient>wxVERTICAL</orient>							
+                                                <object class="sizeritem">
+                                                    <flag>wxALIGN_LEFT|wxALL</flag>
+                                                    <border>5</border>
+                                                    <object class="wxCheckBox" name="ID_LAUNCHFOLDERSASGRID">
+                                                        <tooltip>Toggles whether to launch folders as BumpTop Piles or as Explorer windows</tooltip>
+                                                        <label>Launch small folders as gridded Piles</label>
+                                                        <checked>0</checked>
+                                                    </object>
+                                                </object>
+                                                <object class="sizeritem">
+                                                    <flag>wxALIGN_LEFT|wxALL</flag>
+                                                    <border>5</border>
+                                                    <object class="wxCheckBox" name="ID_ENABLETOSSING">
+                                                        <tooltip>Toss icons with speed at your desk widgets (ie, facebook, email, twitter) or piles to add to them.</tooltip>
+                                                        <label>Enable tossing to Widgets and Piles</label>
+                                                        <checked>1</checked>
+                                                    </object>
+                                                </object>													
+                                            </object>
+                                        </object>
+                                    </object>
+                                </object>
+								<object class="sizeritem">
+                                    <flag>wxALIGN_TOP|wxGROW|wxALL</flag>
+                                    <border>5</border>
+                                    <object class="wxBoxSizer">
+                                        <orient>wxHORIZONTAL</orient>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_TOP|wxALL</flag>
+                                            <border>5</border>
+                                            <object class="wxStaticText" name="ID_ICONALIGNMENT_LABEL">
+                                                <size>130,-1</size>
+                                                <font>
+                                                    <size>8</size>
+                                                    <family>swiss</family>
+                                                    <weight>bold</weight>
+                                                    <face>Tahoma</face>
+                                                </font>
+                                                <fg>#4A5860</fg>
+                                                <label>Icon Alignment</label>
+                                            </object>
+                                        </object>
+										<object class="sizeritem">
+											<flag>wxALIGN_CENTER_VERTICAL|wxALIGN_LEFT|wxALL</flag>
+											<border>0</border>
+											<object class="wxStaticText" name="ID_FREEFORM_LABEL">
+												<label>Straight</label>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<flag>wxALIGN_BOTTOM|wxALIGN_LEFT|wxALL</flag>
+											<border>0</border>
+											<object class="wxSlider" name="ID_ROTATIONLIMIT">
+												<style>wxSL_AUTOTICKS</style>
+												<tooltip>Sets the degree to which icons can be rotated</tooltip>
+												<min>0</min>
+												<max>180</max>
+												<tickfreq>10</tickfreq>
+												<pagesize>10</pagesize>
+												<linesize>10</linesize>
+												<thumb>1</thumb>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<flag>wxALIGN_CENTER_VERTICAL|wxALIGN_LEFT|wxALL</flag>
+											<border>0</border>
+											<object class="wxStaticText" name="ID_DEGREES_LABEL">
+												<label>Free-form</label>
+											</object>
+										</object>
+                                    </object>
+                                </object>
+                            </object>
+                        </object>
+                    </object>
+                    <object class="notebookpage" name="Visuals">
+						<label>Visuals</label>
+						<object class="wxPanel" name="ID_GRAPHICS">
+                            <style>wxNO_BORDER|wxTAB_TRAVERSAL</style>
+                            <object class="wxBoxSizer">
+                                <orient>wxVERTICAL</orient>
+                                <object class="spacer">
+                                    <flag>wxGROW</flag>
+                                    <border>0</border>
+                                    <size>5,5</size>
+                                </object>
+                                <object class="sizeritem">
+                                    <flag>wxGROW|wxALL</flag>
+                                    <border>5</border>
+                                    <object class="wxBoxSizer">
+                                        <orient>wxHORIZONTAL</orient>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_TOP|wxALL</flag>
+                                            <border>5</border>
+                                            <object class="wxStaticText" name="ID_VISUALS_LABEL">
+                                                <size>130,-1</size>
+                                                <font>
+                                                    <size>8</size>
+                                                    <family>swiss</family>
+                                                    <weight>bold</weight>
+                                                    <face>Tahoma</face>
+                                                </font>
+                                                <fg>#4A5860</fg>
+                                                <label>Visuals</label>
+                                            </object>
+                                        </object>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                            <border>0</border>
+                                            <option>1</option>
+                                            <object class="wxBoxSizer">
+                                                <orient>wxVERTICAL</orient>
+                                                <object class="sizeritem">
+                                                    <flag>wxALIGN_LEFT|wxALL</flag>
+                                                    <border>5</border>
+                                                    <object class="wxCheckBox" name="ID_OVERRIDEOSICONS">
+                                                        <tooltip>Don't use BumpTop's high-resolution icon replacements for some icons.  Windows XP users should un-check this.</tooltip>
+                                                        <label>Use Default Windows Icons</label>
+                                                        <checked>0</checked>
+                                                    </object>
+                                                </object>
+                                                <object class="sizeritem">
+                                                    <flag>wxALIGN_LEFT|wxALL</flag>
+                                                    <border>5</border>
+                                                    <object class="wxCheckBox" name="ID_DRAWLINKOVERLAY">
+                                                        <tooltip>Show the little shortcut arrow on links</tooltip>
+                                                        <label>Show Shortcut Arrow</label>
+                                                        <checked>0</checked>
+                                                    </object>
+                                                </object>
+												<object class="sizeritem">
+													<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+													<border>0</border>
+													<option>1</option>
+													<object class="wxBoxSizer">
+														<orient>wxHORIZONTAL</orient>
+														<object class="sizeritem">
+															<flag>wxALIGN_LEFT|wxALL</flag>
+															<border>5</border>
+															<object class="wxCheckBox" name="ID_DRAWTEXT">
+																<tooltip>Show icon filenames</tooltip>
+																<label>Show Filenames</label>
+																<checked>0</checked>
+															</object>
+														</object>
+														<object class="sizeritem">
+															<flag>wxALIGN_LEFT|wxALL</flag>
+															<border>5</border>
+															<object class="wxCheckBox" name="ID_DRAWEXTENSIONS">
+																<tooltip>Show icon filename extensions</tooltip>
+																<label>Show File Extensions</label>
+																<checked>0</checked>
+															</object>
+														</object>
+													</object>
+												</object>
+												<object class="sizeritem">
+													<flag>wxALIGN_LEFT|wxALL</flag>
+													<border>5</border>
+													<object class="wxCheckBox" name="ID_SHOWTOOLTIPS">
+														<tooltip>Show tool tips for pie-menu items</tooltip>
+														<label>Show Pie-Menu Tool Tips</label>
+														<checked>0</checked>
+													</object>
+												</object>
+                                            </object>
+                                        </object>
+                                    </object>
+                                </object>
+								<object class="sizeritem">
+									<flag>wxGROW|wxALL</flag>
+									<border>5</border>
+									<object class="wxBoxSizer">
+										<orient>wxHORIZONTAL</orient>
+										<object class="sizeritem">
+											<flag>wxALIGN_TOP|wxALL</flag>
+											<border>5</border>
+											<object class="wxStaticText" name="ID_PHOTOFRAMES_LABEL">
+												<size>130,-1</size>
+												<font>
+													<size>8</size>
+													<family>swiss</family>
+													<weight>bold</weight>
+													<face>Tahoma</face>
+												</font>
+												<fg>#4A5860</fg>
+												<label>Photo Frames</label>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+											<border>0</border>
+											<option>1</option>
+											<object class="wxBoxSizer">
+												<orient>wxVERTICAL</orient>
+												<object class="sizeritem">
+													<flag>wxALIGN_LEFT|wxALL</flag>
+													<border>5</border>
+													<object class="wxCheckBox" name="ID_DISABLE_PHOTOFRAMES_ON_BATTERY">
+														<tooltip>This will stop photo frames from updating to help improve battery life</tooltip>
+														<label>Disable photo frame updates on battery (Requires Restart)</label>
+														<checked>1</checked>
+													</object>
+												</object> 
+												<object class="sizeritem">
+													<flag>wxGROW|wxALL</flag>
+													<border>0</border>
+													<object class="wxBoxSizer">
+														<orient>wxHORIZONTAL</orient>
+														<object class="sizeritem">
+															<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+															<border>5</border>
+															<object class="wxStaticText" name="ID_CYCLE_PHOTOS_LABEL">
+																<size>130,-1</size>
+																<tooltip>The time to wait before moving to the next photo</tooltip>
+																<label>Cycle photo every</label>
+															</object>
+														</object>
+														<object class="sizeritem">
+															<flag>wxALIGN_TOP|wxALL</flag>
+															<border>5</border>
+															<object class="wxSpinCtrl" name="ID_PHOTOFRAME_IMAGEUPDATE">
+															   <size>75,-1</size>
+															   <style>wxSP_ARROW_KEYS</style>
+																<value>30</value>
+																<min>5</min>
+																<max>900</max>
+															</object>
+														</object>
+														<object class="sizeritem">
+															<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+															<border>5</border>
+															<object class="wxStaticText" name="ID_SECONDS_LABEL">
+																<label>seconds</label>
+															</object>
+														</object>
+													</object>
+												</object>
+												<object class="sizeritem">
+													<flag>wxGROW|wxALL</flag>
+													<border>0</border>
+													<object class="wxBoxSizer">
+														<orient>wxHORIZONTAL</orient>
+														<object class="sizeritem">
+															<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+															<border>5</border>
+															<object class="wxStaticText" name="ID_UPDATE_PHOTOFRAME_LABEL">
+																<size>130,-1</size>
+																<tooltip>The time to wait between checking for new photos</tooltip>
+																<label>Update from source every</label>
+															</object>
+														</object>
+														<object class="sizeritem">
+															<flag>wxALIGN_TOP|wxALL</flag>
+															<border>5</border>
+															<option>1</option>
+															<object class="wxSpinCtrl" name="ID_PHOTOFRAME_SOURCEUPDATE">
+																<style>wxSP_ARROW_KEYS</style>
+																<value>1200</value>
+																<min>1200</min>
+																<max>3600</max>
+															</object>
+														</object>
+														<object class="sizeritem" name="PHOTOFRAME_SOURCEUPDATE">
+															<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+															<border>5</border>
+															<option>1</option>
+															<object class="wxStaticText" name="ID_SECONDS_LABEL">
+																<label>seconds</label>
+															</object>
+														</object>
+													</object>
+												</object> 
+											</object>
+										</object>
+									</object>
+								</object>
+								<object class="sizeritem">
+								<flag>wxGROW|wxALL</flag>
+								<border>5</border>
+									<object class="wxBoxSizer">
+										<orient>wxHORIZONTAL</orient>
+										<object class="sizeritem">
+											<flag>wxALIGN_TOP|wxALL</flag>
+											<border>5</border>
+											<object class="wxStaticText" name="ID_CAMERA_ANGLES_LABEL">
+												<size>130,-1</size>
+												<font>
+													<size>8</size>
+													<family>swiss</family>
+													<weight>bold</weight>
+													<face>Tahoma</face>
+												</font>
+												<fg>#4A5860</fg>
+												<label>Camera Angles</label>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+											<border>0</border>
+											<option>1</option>
+											<object class="wxBoxSizer">
+												<orient>wxVERTICAL</orient>
+												<object class="sizeritem">
+													<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+													<border>0</border>
+													<option>1</option>
+													<object class="wxBoxSizer">
+														<orient>wxVERTICAL</orient>												
+														<object class="sizeritem">
+															<flag>wxALIGN_LEFT|wxALL</flag>
+															<border>5</border>
+															<option>1</option>
+															<object class="wxChoice" name="ID_CAMERALIST">
+															</object>
+														</object>
+													</object>
+												</object>
+											</object>
+										</object>
+									</object>
+								</object>
+								<object class="sizeritem">
+                                    <flag>wxGROW|wxALL</flag>
+                                    <border>5</border>
+                                    <object class="wxBoxSizer">
+                                        <orient>wxHORIZONTAL</orient>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_TOP|wxALL</flag>
+                                            <border>5</border>
+                                            <object class="wxStaticText" name="ID_MONITORS_LABEL">
+                                                <size>130,-1</size>
+                                                <font>
+                                                    <size>8</size>
+                                                    <family>swiss</family>
+                                                    <weight>bold</weight>
+                                                    <face>Tahoma</face>
+                                                </font>
+                                                <fg>#4A5860</fg>
+                                                <label>Monitors</label>
+                                            </object>
+                                        </object>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                            <border>0</border>
+                                            <option>1</option>
+                                            <object class="wxBoxSizer">
+                                                <orient>wxVERTICAL</orient>
+												<object class="sizeritem">
+                                                    <flag>wxALIGN_LEFT|wxALL</flag>
+                                                    <border>5</border>
+                                                    <object class="wxButton" name="ID_CYCLEMONITOR">
+                                                        <tooltip>Moves the BumpTop desktop between the available monitors</tooltip>
+                                                        <label>Move BumpTop to next monitor</label>
+                                                    </object>
+                                                </object>
+                                            </object>
+                                        </object>
+                                    </object>
+                                </object>
+							</object>
+                        </object>
+                    </object>
+                    <object class="notebookpage" name="Themes">
+						<label>Themes</label>
+						<object class="wxPanel" name="ID_THEMESANDWALLPAPERS">
+                            <style>wxNO_BORDER|wxTAB_TRAVERSAL</style>
+                            <object class="wxBoxSizer">
+                                <orient>wxVERTICAL</orient>
+                                <object class="spacer">
+                                    <flag>wxGROW</flag>
+                                    <border>0</border>
+                                    <size>5,5</size>
+                                </object>
+                                <object class="sizeritem">
+                                    <flag>wxGROW|wxLEFT|wxRIGHT|wxTOP</flag>
+                                    <border>5</border>
+                                    <object class="wxBoxSizer">
+                                        <orient>wxHORIZONTAL</orient>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_TOP</flag>
+                                            <border>5</border>
+                                            <object class="wxBoxSizer">
+                                                <orient>wxVERTICAL</orient>
+                                                <object class="sizeritem">
+                                                    <flag>wxALIGN_LEFT|wxALL</flag>
+                                                    <border>5</border>
+                                                    <object class="wxStaticText" name="ID_THEMEPACKS_LABEL">
+                                                        <size>130,-1</size>
+                                                        <font>
+                                                            <size>8</size>
+                                                            <family>swiss</family>
+                                                            <weight>bold</weight>
+                                                            <face>Tahoma</face>
+                                                        </font>
+                                                        <fg>#4A5860</fg>
+                                                        <label>Theme Packs</label>
+                                                    </object>
+                                                </object>
+                                            </object>
+                                        </object>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                            <border>0</border>
+                                            <option>1</option>
+                                            <object class="wxBoxSizer">
+                                                <orient>wxVERTICAL</orient>
+                                                <object class="sizeritem">
+                                                    <flag>wxGROW|wxALL</flag>
+                                                    <border>0</border>
+                                                    <object class="wxBoxSizer">
+                                                        <orient>wxHORIZONTAL</orient>
+                                                        <object class="sizeritem">
+                                                            <flag>wxALIGN_CENTER_VERTICAL|wxLEFT|wxRIGHT</flag>
+                                                            <border>5</border>
+                                                            <option>1</option>
+                                                            <object class="wxChoice" name="ID_THEMESLIST">
+                                                            </object>
+                                                        </object>
+                                                        <object class="sizeritem">
+                                                            <flag>wxALIGN_CENTER_VERTICAL|wxRIGHT</flag>
+                                                            <border>5</border>
+                                                            <object class="wxBitmapButton" name="ID_RELOADTHEMES">
+                                                                <tooltip>Reload the list of themes</tooltip>
+                                                                <style>wxBU_AUTODRAW</style>
+                                                                <bitmap>reload.png</bitmap>
+                                                            </object>
+                                                        </object>
+                                                    </object>
+                                                </object>
+                                                <object class="sizeritem">
+                                                    <flag>wxGROW|wxLEFT|wxRIGHT|wxTOP</flag>
+                                                    <border>5</border>
+                                                    <object class="wxStaticText" name="ID_THEMEINFO">
+                                                        <label>Name (Version, Author) Description Line 1 Description Line 2 </label>
+                                                    </object>
+                                                </object>
+												<object class="spacer">
+				                                    <flag>wxGROW</flag>
+				                                    <border>0</border>
+				                                    <size>5,5</size>
+				                                </object>
+												<object class="spacer">
+				                                    <flag>wxGROW</flag>
+				                                    <border>0</border>
+				                                    <size>5,5</size>
+				                                </object>
+												 <object class="sizeritem">
+                                                    <flag>wxGROW|wxALL</flag>
+                                                    <border>0</border>
+													<object class="wxBoxSizer">
+														<orient>wxHORIZONTAL</orient>
+														<object class="sizeritem">
+															<flag>wxGROW</flag>
+															<border>5</border>
+															<object class="wxButton" name="ID_UPLOADTHEME">
+																<tooltip>Upload your theme to the BumpTop theme site</tooltip>
+																<label>Share Theme</label>
+															</object>
+														</object>
+														<object class="sizeritem">
+															<flag>wxGROW</flag>
+															<border>5</border>															
+															<object class="wxButton" name="ID_GETMORETHEMES">
+																<label>Get more themes...</label>
+															</object>
+														</object>
+													</object>
+												</object>
+                                            </object>
+                                        </object>
+                                    </object>
+                                </object>
+                                <object class="sizeritem">
+                                    <flag>wxGROW|wxLEFT|wxRIGHT|wxTOP</flag>
+                                    <border>5</border>
+                                    <object class="wxBoxSizer">
+                                        <orient>wxHORIZONTAL</orient>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_TOP|wxALL</flag>
+                                            <border>5</border>
+                                            <object class="wxStaticText" name="ID_WALLPAPERS_LABEL">
+                                                <size>130,-1</size>
+                                                <font>
+                                                    <size>8</size>
+                                                    <family>swiss</family>
+                                                    <weight>bold</weight>
+                                                    <face>Tahoma</face>
+                                                </font>
+                                                <fg>#4A5860</fg>
+                                                <label>Wallpapers</label>
+                                            </object>
+                                        </object>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                            <border>0</border>
+                                            <option>1</option>
+                                            <object class="wxBoxSizer">
+                                                <orient>wxVERTICAL</orient>
+                                                <object class="sizeritem">
+                                                    <flag>wxGROW|wxBOTTOM</flag>
+                                                    <border>3</border>
+                                                    <object class="wxBoxSizer">
+                                                        <orient>wxHORIZONTAL</orient>
+                                                        <object class="sizeritem">
+                                                            <flag>wxALIGN_CENTER_VERTICAL|wxLEFT|wxRIGHT</flag>
+                                                            <border>5</border>
+                                                            <object class="wxStaticText" name="ID_FLOOR_LABEL">
+                                                                <size>65,-1</size>
+                                                                <label>Floor</label>
+                                                            </object>
+                                                        </object>
+                                                        <object class="sizeritem">
+                                                            <flag>wxALIGN_CENTER_VERTICAL|wxRIGHT</flag>
+                                                            <border>5</border>
+                                                            <option>1</option>
+                                                            <object class="wxFilePickerCtrl" name="ID_FLOORWALLPAPER">
+                                                                <style>wxFLP_DEFAULT_STYLE|wxFLP_OPEN</style>
+                                                                <value> </value>
+                                                                <message></message>
+                                                                <wildcard>*.jpg;*.jpeg;*.png</wildcard>
+                                                            </object>
+                                                        </object>
+                                                    </object>
+                                                </object>
+                                                <object class="sizeritem">
+                                                    <flag>wxGROW|wxBOTTOM</flag>
+                                                    <border>3</border>
+                                                    <object class="wxBoxSizer">
+                                                        <orient>wxHORIZONTAL</orient>
+                                                        <object class="sizeritem">
+                                                            <flag>wxALIGN_CENTER_VERTICAL|wxLEFT|wxRIGHT</flag>
+                                                            <border>5</border>
+                                                            <object class="wxStaticText" name="ID_FRONTWALL_LABEL">
+                                                                <size>65,-1</size>
+                                                                <label>Front Wall</label>
+                                                            </object>
+                                                        </object>
+                                                        <object class="sizeritem">
+                                                            <flag>wxALIGN_CENTER_VERTICAL|wxRIGHT</flag>
+                                                            <border>5</border>
+                                                            <option>1</option>
+                                                            <object class="wxFilePickerCtrl" name="ID_TOPWALLPAPER">
+                                                                <style>wxFLP_DEFAULT_STYLE|wxFLP_OPEN</style>
+                                                                <value> </value>
+                                                                <message></message>
+                                                                <wildcard>*.jpg;*.jpeg;*.png</wildcard>
+                                                            </object>
+                                                        </object>
+                                                    </object>
+                                                </object>
+                                                <object class="sizeritem">
+                                                    <flag>wxGROW|wxBOTTOM</flag>
+                                                    <border>3</border>
+                                                    <object class="wxBoxSizer">
+                                                        <orient>wxHORIZONTAL</orient>
+                                                        <object class="sizeritem">
+                                                            <flag>wxALIGN_CENTER_VERTICAL|wxLEFT|wxRIGHT</flag>
+                                                            <border>5</border>
+                                                            <object class="wxStaticText" name="ID_LEFTWALL_LABEL">
+                                                                <size>65,-1</size>
+                                                                <label>Left Wall</label>
+                                                            </object>
+                                                        </object>
+                                                        <object class="sizeritem">
+                                                            <flag>wxALIGN_CENTER_VERTICAL|wxRIGHT</flag>
+                                                            <border>5</border>
+                                                            <option>1</option>
+                                                            <object class="wxFilePickerCtrl" name="ID_LEFTWALLPAPER">
+                                                                <style>wxFLP_DEFAULT_STYLE|wxFLP_OPEN</style>
+                                                                <value> </value>
+                                                                <message></message>
+                                                                <wildcard>*.jpg;*.jpeg;*.png</wildcard>
+                                                            </object>
+                                                        </object>
+                                                    </object>
+                                                </object>
+                                                <object class="sizeritem">
+                                                    <flag>wxGROW|wxBOTTOM</flag>
+                                                    <border>3</border>
+                                                    <object class="wxBoxSizer">
+                                                        <orient>wxHORIZONTAL</orient>
+                                                        <object class="sizeritem">
+                                                            <flag>wxALIGN_CENTER_VERTICAL|wxLEFT|wxRIGHT</flag>
+                                                            <border>5</border>
+                                                            <object class="wxStaticText" name="ID_RIGHTWALL_LABEL">
+                                                                <size>65,-1</size>
+                                                                <label>Right Wall</label>
+                                                            </object>
+                                                        </object>
+                                                        <object class="sizeritem">
+                                                            <flag>wxALIGN_CENTER_VERTICAL|wxRIGHT</flag>
+                                                            <border>5</border>
+                                                            <option>1</option>
+                                                            <object class="wxFilePickerCtrl" name="ID_RIGHTWALLPAPER">
+                                                                <style>wxFLP_DEFAULT_STYLE|wxFLP_OPEN</style>
+                                                                <value> </value>
+                                                                <message></message>
+                                                                <wildcard>*.jpg;*.jpeg;*.png</wildcard>
+                                                            </object>
+                                                        </object>
+                                                    </object>
+                                                </object>
+                                                <object class="sizeritem">
+                                                    <flag>wxGROW|wxBOTTOM</flag>
+                                                    <border>3</border>
+                                                    <object class="wxBoxSizer">
+                                                        <orient>wxHORIZONTAL</orient>
+                                                        <object class="sizeritem">
+                                                            <flag>wxALIGN_CENTER_VERTICAL|wxLEFT|wxRIGHT</flag>
+                                                            <border>5</border>
+                                                            <object class="wxStaticText" name="ID_BACKWALL_LABEL">
+                                                                <size>65,-1</size>
+                                                                <label>Back Wall</label>
+                                                            </object>
+                                                        </object>
+                                                        <object class="sizeritem">
+                                                            <flag>wxALIGN_CENTER_VERTICAL|wxRIGHT</flag>
+                                                            <border>5</border>
+                                                            <option>1</option>
+                                                            <object class="wxFilePickerCtrl" name="ID_BOTTOMWALLPAPER">
+                                                                <style>wxFLP_DEFAULT_STYLE|wxFLP_OPEN</style>
+                                                                <value> </value>
+                                                                <message></message>
+                                                                <wildcard>*.jpg;*.jpeg;*.png</wildcard>
+                                                            </object>
+                                                        </object>
+                                                    </object>
+                                                </object>
+												<object class="sizeritem">
+                                                    <flag>wxALIGN_LEFT|wxALL</flag>
+                                                    <border>5</border>
+                                                    <object class="wxCheckBox" name="ID_USEWINDOWSBACKGROUND">
+                                                        <label>Use my Windows background as the floor</label>
+                                                        <tooltip>Your Windows background becomes the floor's carpeting.  Overrides any floor textures provided by your theme.</tooltip>
+                                                        <checked>0</checked>
+                                                    </object>
+                                                </object>
+                                            </object>
+                                        </object>
+                                    </object>
+                                </object>
+								<object class="sizeritem">
+                                    <flag>wxGROW|wxALL</flag>
+                                    <border>5</border>
+                                    <object class="wxBoxSizer">
+                                        <orient>wxHORIZONTAL</orient>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_TOP|wxALL</flag>
+                                            <border>5</border>
+                                            <object class="wxStaticText" name="ID_FONTOVERRIDE_LABEL">
+                                                <size>130,-1</size>
+                                                <font>
+                                                    <size>8</size>
+                                                    <family>swiss</family>
+                                                    <weight>bold</weight>
+                                                    <face>Tahoma</face>
+                                                </font>
+                                                <fg>#4A5860</fg>
+                                                <label>Font Overrides</label>
+                                            </object>
+                                        </object>
+										<object class="sizeritem">
+                                            <flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                            <border>0</border>
+                                            <option>1</option>
+                                            <object class="wxBoxSizer">
+												<orient>wxVERTICAL</orient>
+												<object class="sizeritem">
+													<flag>wxGROW|wxBOTTOM</flag>
+													<border>3</border>
+													<object class="wxBoxSizer">
+														<orient>wxHORIZONTAL</orient>
+														<object class="sizeritem">
+															<flag>wxALIGN_LEFT|wxALL</flag>
+															<border>0</border>
+															<object class="wxButton" name="ID_DEFAULT_FONT_OVERRIDE">
+																<tooltip>Override the default font</tooltip>
+																<label>Default (Arial)</label>
+															</object>
+														</object>
+														<object class="sizeritem">
+															<flag>wxALIGN_LEFT|wxALL</flag>
+															<border>0</border>
+															<object class="wxButton" name="ID_STICKY_FONT_OVERRIDE">
+																<tooltip>Override the Sticky Note font</tooltip>
+																<label>Sticky Note (Comic Sans MS)</label>
+															</object>
+														</object>
+													</object>
+												</object>
+                                            </object>
+                                        </object>
+                                    </object>
+                                </object>
+                            </object>
+                        </object>
+                    </object>
+                    <object class="notebookpage" name="Admin">
+						<label>Admin</label>
+						<object class="wxPanel" name="ID_ADMIN">
+                            <style>wxNO_BORDER|wxTAB_TRAVERSAL</style>
+                            <object class="wxBoxSizer">
+                                <orient>wxVERTICAL</orient>
+                                <object class="spacer">
+                                    <flag>wxGROW</flag>
+                                    <border>0</border>
+                                    <size>5,5</size>
+                                </object>
+                                <object class="sizeritem">
+                                    <flag>wxGROW|wxLEFT|wxRIGHT|wxTOP</flag>
+                                    <border>5</border>
+                                    <object class="wxBoxSizer">
+                                        <orient>wxHORIZONTAL</orient>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_TOP|wxALL</flag>
+                                            <border>5</border>
+                                            <object class="wxStaticText" name="ID_DEBUG_LABEL">
+                                                <size>130,-1</size>
+                                                <font>
+                                                    <size>8</size>
+                                                    <family>swiss</family>
+                                                    <weight>bold</weight>
+                                                    <face>Tahoma</face>
+                                                </font>
+                                                <fg>#4A5860</fg>
+                                                <label>Debug</label>
+                                            </object>
+                                        </object>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                            <border>0</border>
+                                            <option>1</option>
+                                            <object class="wxBoxSizer">
+                                                <orient>wxVERTICAL</orient>
+                                                <object class="sizeritem">
+                                                    <flag>wxALIGN_LEFT|wxALL</flag>
+                                                    <border>5</border>
+                                                    <object class="wxCheckBox" name="ID_SHOWCONSOLE">
+                                                        <label>Show Debug Console</label>
+                                                        <checked>0</checked>
+                                                    </object>
+                                                </object>
+                                            </object>
+                                        </object>
+                                    </object>
+                                </object>
+                            </object>
+                        </object>
+                    </object>
+					<object class="notebookpage" name="Advanced">
+						<label>Advanced</label>
+						<object class="wxPanel" name="ID_Advanced">
+                            <style>wxNO_BORDER|wxTAB_TRAVERSAL</style>
+                            <object class="wxBoxSizer">
+                                <orient>wxVERTICAL</orient>
+                                <object class="spacer">
+                                    <flag>wxGROW</flag>
+                                    <border>0</border>
+                                    <size>5,5</size>
+                                </object>
+								<object class="sizeritem">
+                                    <flag>wxGROW|wxALL</flag>
+                                    <border>5</border>
+                                    <object class="wxBoxSizer">
+                                        <orient>wxHORIZONTAL</orient>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_TOP|wxALL</flag>
+                                            <border>5</border>
+                                            <object class="wxStaticText" name="ID_INFINITE_DESKTOP_LABEL">
+                                                <size>130,-1</size>
+                                                <font>
+                                                    <size>8</size>
+                                                    <family>swiss</family>
+                                                    <weight>bold</weight>
+                                                    <face>Tahoma</face>
+                                                </font>
+                                                <fg>#4A5860</fg>
+                                                <label>Infinite Desktop</label>
+                                            </object>
+                                        </object>
+										<object class="sizeritem">
+											<flag>wxALIGN_LEFT|wxALL</flag>
+											<border>5</border>
+											<object class="wxCheckBox" name="ID_ENABLEINFINITEDESKTOP">
+												<tooltip>Toggles the infinite desktop mode in top-down view</tooltip>
+												<label>Infinite Desktop Mode</label>
+												<checked>0</checked>
+											</object>
+										</object>  
+                                    </object>
+                                </object>
+                                <object class="sizeritem">
+                                    <flag>wxGROW|wxALL</flag>
+                                    <border>5</border>
+                                    <object class="wxBoxSizer">
+                                        <orient>wxHORIZONTAL</orient>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_TOP|wxALL</flag>
+                                            <border>5</border>
+                                            <object class="wxStaticText" name="ID_GRAPHICSCARD_LABEL">
+                                                <size>130,-1</size>
+                                                <font>
+                                                    <size>8</size>
+                                                    <family>swiss</family>
+                                                    <weight>bold</weight>
+                                                    <face>Tahoma</face>
+                                                </font>
+                                                <fg>#4A5860</fg>
+                                                <label>Graphics Card\n(Changes require \nBumpTop restart)</label>
+                                            </object>
+                                        </object>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                            <border>0</border>
+                                            <option>1</option>
+                                            <object class="wxBoxSizer">
+                                                <orient>wxVERTICAL</orient>
+                                                <object class="sizeritem">
+                                                    <flag>wxALIGN_LEFT|wxALL</flag>
+                                                    <border>5</border>
+                                                    <object class="wxCheckBox" name="ID_ENABLEANTIALIASING">
+                                                        <tooltip>Make the edges silky smooth if your video card supports this.</tooltip>
+                                                        <label>Anti-Aliasing (if supported)</label>
+                                                        <checked>0</checked>
+                                                    </object>
+                                                </object>
+                                                <object class="sizeritem">
+                                                    <flag>wxALIGN_LEFT|wxALL</flag>
+                                                    <border>5</border>
+                                                    <object class="wxCheckBox" name="ID_USETHUMBSDB">
+                                                        <tooltip>Conserves video texture memory by using Window's thumbnail previews</tooltip>
+                                                        <label>Use Windows thumbnails (lower resolution, faster loading)</label>
+														<wrap>100</wrap>
+                                                        <checked>0</checked>
+                                                    </object>
+                                                </object>
+                                            </object>
+                                        </object>
+                                    </object>
+                                </object>
+								<object class="sizeritem">
+                                    <flag>wxGROW|wxALL</flag>
+                                    <border>5</border>
+                                    <object class="wxBoxSizer">
+                                        <orient>wxHORIZONTAL</orient>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_TOP|wxALL</flag>
+                                            <border>5</border>
+                                            <object class="wxStaticText" name="ID_NETWORK_LABEL">
+                                                <size>130,-1</size>
+                                                <font>
+                                                    <size>8</size>
+                                                    <family>swiss</family>
+                                                    <weight>bold</weight>
+                                                    <face>Tahoma</face>
+                                                </font>
+                                                <fg>#4A5860</fg>
+                                                <label>Network</label>
+                                            </object>
+                                        </object>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                            <border>0</border>
+                                            <option>1</option>
+                                            <object class="wxBoxSizer">
+                                                <orient>wxVERTICAL</orient>
+                                                <object class="sizeritem">
+                                                    <flag>wxALIGN_LEFT|wxALL</flag>
+                                                    <border>5</border>
+                                                    <object class="wxBoxSizer">
+                                                        <orient>wxHORIZONTAL</orient>
+                                                        <object class="sizeritem">
+                                                            <flag>wxALIGN_CENTER_VERTICAL</flag>
+                                                            <border>5</border>
+                                                            <object class="wxRadioButton" name="ID_AUTOPROXY_RADIO">
+                                                                <tooltip>Attempt to auto-load proxy settings from IE</tooltip>
+                                                                <label>Use Internet Explorer proxy settings</label>
+																<wrap>100</wrap>
+                                                                <value>0</value>
+                                                            </object>
+                                                        </object>
+                                                        <object class="sizeritem">
+                                                            <flag>wxALIGN_CENTER_VERTICAL</flag>
+                                                            <border>5</border>
+                                                            <object class="wxButton" name="ID_LAUNCHIEPROXYDIALOG">
+                                                                <tooltip>Show the IE connections and proxy settings dialog</tooltip>
+                                                                <label>Change...</label>
+                                                            </object>
+                                                        </object>
+                                                    </object>
+                                                </object>
+                                                <object class="sizeritem">
+                                                    <flag>wxGROW|wxLEFT|wxRIGHT</flag>
+                                                    <border>5</border>
+                                                    <object class="wxBoxSizer">
+                                                        <orient>wxVERTICAL</orient>
+                                                        <object class="sizeritem">
+                                                            <flag>wxALIGN_LEFT|wxTOP|wxBOTTOM</flag>
+                                                            <border>5</border>
+                                                            <object class="wxRadioButton" name="ID_MANUALPROXY_RADIO">
+                                                                <tooltip>Override proxy settings with manual configuration</tooltip>
+                                                                <label>Manual proxy configuration</label>
+                                                                <value>0</value>
+                                                            </object>
+                                                        </object>
+                                                        <object class="sizeritem">
+                                                            <flag>wxGROW|wxALL</flag>
+                                                            <border>5</border>
+                                                            <object class="wxBoxSizer">
+                                                                <orient>wxHORIZONTAL</orient>
+                                                                <object class="sizeritem">
+                                                                    <flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                                                    <border>0</border>
+                                                                    <object class="wxStaticText" name="ID_HTTPPROXY_LABEL">
+                                                                        <size>75,-1</size>
+                                                                        <label>    HTTP Proxy</label>
+                                                                    </object>
+                                                                </object>
+                                                                <object class="sizeritem">
+                                                                    <flag>wxALIGN_CENTER_VERTICAL|wxLEFT</flag>
+                                                                    <border>5</border>
+                                                                    <option>1</option>
+                                                                    <object class="wxTextCtrl" name="ID_HTTPPROXY">
+                                                                        <tooltip>Enter your HTTP proxy settings here!</tooltip>
+                                                                    </object>
+                                                                </object>
+                                                            </object>
+                                                        </object>
+                                                    </object>
+                                                </object>
+                                            </object>
+                                        </object>
+                                    </object>
+                                </object>
+								<object class="sizeritem">
+                                    <flag>wxGROW|wxALL</flag>
+                                    <border>5</border>
+									<object class="wxBoxSizer">
+										<orient>wxHORIZONTAL</orient>
+										<object class="sizeritem">
+											<flag>wxALIGN_TOP|wxALL</flag>
+											<border>5</border>
+											<object class="wxStaticText" name="ID_BATTERY_SETTINGS">
+												<size>130,-1</size>
+												<font>
+													<size>8</size>
+													<family>swiss</family>
+													<weight>bold</weight>
+													<face>Tahoma</face>
+												</font>
+												<fg>#4A5860</fg>
+												<label>Power Consumption</label>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+											<border>0</border>
+											<option>1</option>
+											<object class="wxBoxSizer">
+												<orient>wxVERTICAL</orient>
+												<object class="sizeritem">
+													<flag>wxALIGN_LEFT|wxALL</flag>
+													<border>5</border>
+													<object class="wxCheckBox" name="ID_DISABLE_ANIMATIONS_ON_BATTERY">
+														<tooltip>Turns off silky smooth animations</tooltip>
+														<label>Disable animations on battery</label>
+														<checked>1</checked>
+													</object>
+												</object> 	
+											</object>
+										</object>
+										<!--
+										<object class="sizeritem">
+											<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+											<border>0</border>
+											<option>1</option>
+											<object class="wxBoxSizer">
+												<orient>wxVERTICAL</orient>
+												<object class="sizeritem">
+													<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+													<border>0</border>
+													<option>1</option>
+													<object class="wxBoxSizer">
+														<orient>wxVERTICAL</orient>												
+														<object class="sizeritem">
+															<flag>wxALIGN_LEFT|wxALL</flag>
+															<border>5</border>
+															<option>1</option>
+															<object class="wxChoice" name="ID_ANIMATION_LEVEL_LIST">
+															</object>
+														</object>
+													</object>
+												</object>
+												<object class="sizeritem">
+													<flag>wxALIGN_LEFT|wxALL</flag>
+													<border>5</border>
+													<object class="wxStaticText" name="ID_ANIMATION_LABEL">
+														<tooltip></tooltip>
+														<label>Animation Frequency:</label>
+													</object>
+												</object>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+											<border>0</border>
+											<option>1</option>
+											<object class="wxBoxSizer">
+												<orient>wxVERTICAL</orient>
+												<object class="sizeritem">
+													<flag>wxALIGN_LEFT|wxALL</flag>
+													<border>5</border>
+													<object class="wxStaticText" name="ID_ANIMATION_LABEL">
+														<tooltip></tooltip>
+														<label>Animation Frequency:</label>
+													</object>
+												</object>
+												<object class="sizeritem">
+													<flag>wxGROW|wxALL</flag>
+													<border>0</border>
+													<object class="wxBoxSizer">
+														<orient>wxHORIZONTAL</orient>															
+														<object class="sizeritem">
+															<flag>wxALIGN_CENTER_VERTICAL|wxLEFT</flag>
+															<border>20</border>
+															<object class="wxStaticText" name="ID_NO_ANIMATIONS">
+																<tooltip>BumpTop will not render any animations</tooltip>
+																<label>Better Battery Life</label>
+															</object>
+														</object>
+														<object class="sizeritem">
+															<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+															<border>0</border>
+															<object class="wxSlider" name="ID_ANIMATION_LEVEL">
+																<style></style>
+																<tooltip></tooltip>
+																<min>1</min>
+																<max>3</max>
+																<tickfreq>1</tickfreq>
+																<pagesize>1</pagesize>
+																<linesize>1</linesize>
+																<thumb>1</thumb>
+															</object>
+														</object>
+														<object class="sizeritem">
+															<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+															<border>0</border>
+															<object class="wxStaticText" name="ID_ALL_ANIMATIONS">
+																<tooltip>BumpTop will render all animations</tooltip>
+																<label>Better Appearance</label>
+															</object>
+														</object>														
+													</object>
+												</object>
+											</object>
+										</object>
+										-->
+									</object>
+								</object>
+                            </object>
+                        </object>
+                    </object>
+					<object class="notebookpage" name="Pro">
+						<label>Pro</label>
+						<object class="wxPanel" name="ID_PRO">
+						<style>wxNO_BORDER|wxTAB_TRAVERSAL</style>
+                            <object class="wxBoxSizer">
+                                <orient>wxVERTICAL</orient>
+                                <object class="spacer">
+                                    <flag>wxGROW</flag>
+                                    <border>0</border>
+                                    <size>5,5</size>
+                                </object>
+								<object class="sizeritem">
+									<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+									<border>10</border>
+									<object class="wxBoxSizer">
+										<orient>wxVERTICAL</orient>
+										<object class="sizeritem">
+											<flag>wxALIGN_TOP|wxLEFT</flag>
+											<border>0</border>
+											<object class="wxStaticText" name="ID_UPGRADE_TEXT">
+												<label>Upgrade to BumpTop Pro to enjoy new features such as web thumbnails, unlimited sticky notes, and premium support!</label> 
+												<wrap>400</wrap>
+											</object>
+										</object>
+										<object class="sizeritem">
+											<flag>wxALIGN_TOP|wxLEFT</flag>
+											<border>0</border>
+											<object class="wxStaticText" name="ID_SPACE_TEXT">
+												<label>	</label> 
+											</object>
+										</object>
+										   
+										<object class="sizeritem">
+											<flag>wxGROW|wxBOTTOM</flag>
+											<border>5</border>
+											<object class="wxBoxSizer">
+												<orient>wxHORIZONTAL</orient>
+												<object class="sizeritem">
+													<flag>wxALIGN_TOP|wxRIGHT</flag>
+													<border>2</border>
+													<object class="wxStaticText" name="ID_VISITPRE_LABEL">
+														<label>To learn more about BumpTop Pro, visit the</label> 
+													</object>
+												</object>
+												<object class="sizeritem">
+													<flag>wxALIGN_CENTER_VERTICAL|wxLEFT|wxRIGHT</flag>
+													<border>0</border>
+													<object class="wxHyperlinkCtrl" name="ID_BUMPTOPPPROURL">
+														<tooltip>BumpTop Pro (http://www.bumptop.com/pro)</tooltip>
+														<help>BumpTop Pro</help>
+														<style>wxHL_DEFAULT_STYLE</style>
+														<label>BumpTop Feature Comparison Chart</label>
+														<url>http://www.bumptop.com/pro</url>
+													</object>
+												</object>
+																			  
+											</object>
+										</object>
+										
+									</object>
+								</object>       
+								<object class="sizeritem">
+                                    <flag>wxGROW|wxLEFT|wxRIGHT|wxBOTTOM</flag>
+                                    <border>10</border>
+                                    <object class="wxStaticLine" name="wxID_STATIC">
+                                        <style>wxLI_HORIZONTAL</style>
+                                    </object>
+                                </object>	
+								<object class="sizeritem">
+                                    <flag>wxGROW|wxALL</flag>
+                                    <border>5</border>
+                                    <object class="wxBoxSizer">
+                                        <orient>wxHORIZONTAL</orient>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_TOP|wxALL</flag>
+                                            <border>5</border>
+                                            <object class="wxStaticText" name="ID_PROKEY_LABEL">
+                                                <size>130,-1</size>
+                                                <font>
+                                                    <size>8</size>
+                                                    <family>swiss</family>
+                                                    <weight>bold</weight>
+                                                    <face>Tahoma</face>
+                                                </font>
+                                                <fg>#4A5860</fg>
+                                                <label>Pro key</label>
+                                            </object>
+                                        </object>
+										<style>wxNO_BORDER|wxTAB_TRAVERSAL</style>
+										<object class="sizeritem">
+										<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+											<border>0</border>
+											<option>1</option>
+											<object class="wxBoxSizer"  name="ID_BLAH">
+												<orient>wxVERTICAL</orient>
+												<object class="sizeritem">
+													<object class="wxPanel" name="ID_AUTHORIZEPRO">
+														<flag>wxALIGN_LEFT|wxALL</flag>
+														<border>5</border>
+														<object class="wxButton" name="ID_AUTHORIZEPROKEY">
+															<tooltip>Authorize your Pro key on this machine to unlock pro features</tooltip>
+															<label>Authorize Pro key...</label>
+														</object>
+													</object>
+												</object>
+												<object class="sizeritem">
+													<object class="wxPanel" name="ID_DEAUTHORIZEPRO">
+														<flag>wxALIGN_LEFT|wxALL</flag>
+														<hidden>1</hidden>
+														<border>5</border>
+														<object class="wxBoxSizer"  >
+					                                        <orient>wxHORIZONTAL</orient>
+															<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+															<object class="sizeritem">
+																<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+																<object class="wxStaticText" name="ID_PROKEY">
+																	<size>130,-1</size>
+																	<label></label>
+																</object>
+															</object>
+															<object class="sizeritem">
+																<flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+																<object class="wxButton" name="ID_DEAUTHORIZEPROKEY">
+																	<tooltip>Remove this machine from your list of authorized computers</tooltip>
+																	<label>Deauthorize...</label>
+																</object>
+															</object>
+														</object>
+													</object>
+												</object>
+											</object>
+										</object>
+                                    </object>
+                                </object>
+							</object>
+                        </object>
+                    </object>
+                    <object class="notebookpage" name="About">
+						<label>About</label>
+						<object class="wxPanel" name="ID_ABOUT">
+                            <style>wxNO_BORDER|wxTAB_TRAVERSAL</style>
+                            <object class="wxBoxSizer">
+                                <orient>wxVERTICAL</orient>
+                                <object class="sizeritem">
+                                    <flag>wxGROW</flag>
+                                    <border>5</border>
+                                    <object class="wxPanel" name="ID_ABOUTHEADER">
+                                        <style>wxNO_BORDER|wxTAB_TRAVERSAL</style>
+                                        <bg>#FAF9F9</bg>
+                                        <object class="wxBoxSizer">
+                                            <orient>wxHORIZONTAL</orient>
+                                            <object class="spacer">
+                                                <flag>wxALIGN_CENTER_VERTICAL|wxLEFT|wxRIGHT</flag>
+                                                <border>20</border>
+                                                <size>5,5</size>
+                                            </object>
+                                            <object class="sizeritem">
+                                                <flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                                <border>10</border>
+                                                <object class="wxStaticBitmap" name="wxID_STATIC">
+                                                    <size>122,116</size>
+                                                    <bitmap>bt_logo.png</bitmap>
+                                                </object>
+                                            </object>
+                                            <object class="sizeritem">
+                                                <flag>wxGROW|wxRIGHT|wxTOP</flag>
+                                                <border>25</border>
+                                                <object class="wxBoxSizer">
+                                                    <orient>wxVERTICAL</orient>
+                                                    <object class="sizeritem">
+                                                        <flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+                                                        <border>5</border>
+                                                        <object class="wxStaticText" name="ID_BUMPTOPVER_LABEL">
+                                                            <font>
+                                                                <size>18</size>
+                                                                <family>swiss</family>
+                                                                <weight>bold</weight>
+                                                                <face>Tahoma</face>
+                                                            </font>
+                                                            <fg>#4A5860</fg>
+                                                            <label>BumpTop 2.5</label>
+                                                        </object>
+                                                    </object>
+                                                    <object class="sizeritem">
+                                                        <flag>wxGROW|wxALL</flag>
+                                                        <border>5</border>
+                                                        <object class="wxButton" name="ID_CHECKFORUPDATES">
+                                                            <hidden>1</hidden>
+                                                            <enabled>0</enabled>
+                                                            <label>Check for Updates</label>
+                                                        </object>
+                                                    </object>
+                                                    <object class="sizeritem">
+                                                        <flag>wxALIGN_CENTER_HORIZONTAL|wxLEFT|wxRIGHT</flag>
+                                                        <border>5</border>
+                                                        <object class="wxBoxSizer">
+                                                            <orient>wxHORIZONTAL</orient>
+                                                            <object class="sizeritem">
+                                                                <flag>wxALIGN_CENTER_VERTICAL|wxLEFT|wxBOTTOM</flag>
+                                                                <border>5</border>
+                                                                <object class="wxStaticBitmap" name="ID_VERSIONSTATUSICON">
+                                                                    <size>16,16</size>
+                                                                    <enabled>0</enabled>
+                                                                    <bitmap>pass.png</bitmap>
+                                                                </object>
+                                                            </object>
+                                                            <object class="sizeritem">
+                                                                <flag>wxALIGN_CENTER_VERTICAL|wxLEFT|wxRIGHT|wxBOTTOM</flag>
+                                                                <border>5</border>
+                                                                <object class="wxStaticText" name="ID_VERSIONSTATUS">
+                                                                    <style>wxALIGN_RIGHT</style>
+                                                                    <label>Your version of BumpTop is up to date!</label>
+                                                                </object>
+                                                            </object>
+                                                        </object>
+                                                    </object>
+                                                </object>
+                                            </object>
+                                        </object>
+                                    </object>
+                                </object>
+                                <object class="sizeritem">
+                                    <flag>wxGROW</flag>
+                                    <border>5</border>
+                                    <object class="wxStaticLine" name="wxID_STATIC">
+                                        <size>-1,1</size>
+                                        <style>wxLI_HORIZONTAL</style>
+                                    </object>
+                                </object>
+                                <object class="sizeritem">
+                                    <flag>wxGROW|wxALL</flag>
+                                    <border>5</border>
+                                    <object class="wxBoxSizer">
+                                        <orient>wxHORIZONTAL</orient>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_TOP|wxALL</flag>
+                                            <border>5</border>
+                                            <object class="wxStaticText" name="ID_LINKYGOODNESS_LABEL">
+                                                <size>130,-1</size>
+                                                <font>
+                                                    <size>8</size>
+                                                    <family>swiss</family>
+                                                    <weight>bold</weight>
+                                                    <face>Tahoma</face>
+                                                </font>
+                                                <fg>#4A5860</fg>
+                                                <label>Linky Goodness</label>
+                                            </object>
+                                        </object>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_CENTER_VERTICAL|wxRIGHT|wxTOP|wxBOTTOM</flag>
+                                            <border>5</border>
+                                            <object class="wxBoxSizer">
+                                                <orient>wxHORIZONTAL</orient>
+                                                <object class="sizeritem">
+                                                    <flag>wxALIGN_CENTER_VERTICAL|wxLEFT|wxRIGHT</flag>
+                                                    <border>5</border>
+                                                    <object class="wxHyperlinkCtrl" name="ID_BUMPTOPHOMEURL">
+                                                        <tooltip>BumpTop Home (http://www.bumptop.com)</tooltip>
+                                                        <help>BumpTop Home</help>
+                                                        <style>wxHL_DEFAULT_STYLE</style>
+                                                        <label>BumpTop Home</label>
+                                                        <url>http://www.bumptop.com</url>
+                                                    </object>
+                                                </object>
+                                                <object class="sizeritem">
+                                                    <flag>wxALIGN_CENTER_VERTICAL|wxLEFT|wxRIGHT</flag>
+                                                    <border>5</border>
+                                                    <object class="wxHyperlinkCtrl" name="ID_GETSATISFACTION">
+                                                        <tooltip>BumpTop Forums at GetSatisfaction (http://getsatisfaction.com/bumptop/)</tooltip>
+                                                        <help>BumpTop Forums at GetSatisfaction</help>
+                                                        <style>wxHL_DEFAULT_STYLE</style>
+                                                        <label>Forums</label>
+                                                        <url>http://getsatisfaction.com/bumptop/</url>
+                                                    </object>
+                                                </object>
+                                                <object class="sizeritem">
+                                                    <flag>wxALIGN_CENTER_VERTICAL|wxLEFT|wxRIGHT</flag>
+                                                    <border>5</border>
+                                                    <object class="wxHyperlinkCtrl" name="ID_VOTE">
+                                                        <tooltip>Vote on feature requests at (http://bumptop.com/vote)</tooltip>
+                                                        <help>Vote on feature requests</help>
+                                                        <style>wxHL_DEFAULT_STYLE</style>
+                                                        <label>Vote for Features</label>
+                                                        <url>http://bumptop.com/vote</url>
+                                                    </object>
+                                                </object>
+                                                <object class="sizeritem">
+                                                    <flag>wxALIGN_CENTER_VERTICAL|wxLEFT|wxRIGHT</flag>
+                                                    <border>5</border>
+                                                    <object class="wxHyperlinkCtrl" name="ID_BUMPTOPWIKIURL">
+                                                        <tooltip>BumpTop Wiki</tooltip>
+                                                        <help>BumpTop Wiki</help>
+                                                        <style>wxHL_DEFAULT_STYLE</style>
+                                                        <hidden>1</hidden>
+                                                        <enabled>0</enabled>
+                                                        <label>Wiki/Help</label>
+                                                    </object>
+                                                </object>
+                                            </object>
+                                        </object>
+                                    </object>
+                                </object>
+                                <object class="sizeritem">
+                                    <flag>wxGROW|wxLEFT|wxRIGHT|wxBOTTOM</flag>
+                                    <border>5</border>
+                                    <object class="wxBoxSizer">
+                                        <orient>wxHORIZONTAL</orient>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_TOP|wxALL</flag>
+                                            <border>5</border>
+                                            <object class="wxStaticText" name="ID_FEEDBACK_LABEL">
+                                                <size>130,-1</size>
+                                                <font>
+                                                    <size>8</size>
+                                                    <family>swiss</family>
+                                                    <weight>bold</weight>
+                                                    <face>Tahoma</face>
+                                                </font>
+                                                <fg>#4A5860</fg>
+                                                <label>Feedback</label>
+                                            </object>
+                                        </object>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                            <border>0</border>
+                                            <option>1</option>
+                                            <object class="wxBoxSizer">
+                                                <orient>wxVERTICAL</orient>
+                                                <object class="sizeritem">
+                                                    <flag>wxALL</flag>
+                                                    <border>5</border>
+                                                    <object class="wxButton" name="ID_SENDFEEDBACK">
+                                                        <tooltip>Sends feedback to BumpTop</tooltip>
+                                                        <label>Send Feedback to BumpTop HQ</label>
+                                                    </object>
+                                                </object>
+                                                <object class="sizeritem">
+                                                    <flag>wxALIGN_LEFT|wxLEFT|wxRIGHT|wxBOTTOM</flag>
+                                                    <border>5</border>
+                                                    <object class="wxHyperlinkCtrl" name="ID_HYPERLINKCTRL">
+                                                        <style>wxHL_DEFAULT_STYLE</style>
+                                                        <label>Or find your answer in the Forum</label>
+                                                        <url>http://bumptop.com/forum</url>
+                                                    </object>
+                                                </object>
+                                            </object>
+                                        </object>
+                                    </object>
+                                </object>
+								<object class="spacer">
+									<flag>wxGROW</flag>
+									<border>0</border>
+									<size>5,5</size>
+								</object>
+                                <object class="sizeritem">
+                                    <flag>wxGROW|wxLEFT|wxRIGHT|wxBOTTOM</flag>
+                                    <border>5</border>
+                                    <object class="wxBoxSizer">
+                                        <orient>wxHORIZONTAL</orient>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_TOP|wxALL</flag>
+                                            <border>5</border>
+                                            <object class="wxStaticText" name="ID_FINEPRINT_LABEL">
+                                                <size>130,-1</size>
+                                                <font>
+                                                    <size>8</size>
+                                                    <family>swiss</family>
+                                                    <weight>bold</weight>
+                                                    <face>Tahoma</face>
+                                                </font>
+                                                <fg>#4A5860</fg>
+                                                <label>Fine Print</label>
+                                            </object>
+                                        </object>
+                                        <object class="sizeritem">
+                                            <flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                                            <border>0</border>
+                                            <option>1</option>
+                                            <object class="wxBoxSizer">
+                                                <orient>wxVERTICAL</orient>
+                                                <object class="sizeritem">
+                                                    <flag>wxALIGN_LEFT|wxLEFT</flag>
+                                                    <border>5</border>
+                                                    <object class="wxStaticText" name="ID_COPYRIGHT">
+														<wrap>250</wrap>
+                                                        <label>Brought to you by the Bumps. Copyright © Google Inc. All Rights Reserved.</label>
+                                                    </object>
+                                                </object>
+											    <object class="sizeritem">
+                                                    <flag>wxALIGN_CENTER_VERTICAL|wxLEFT|wxRIGHT</flag>
+                                                    <border>5</border>
+                                                    <object class="wxHyperlinkCtrl" name="ID_PRIVACYURL">
+                                                        <tooltip>Privacy Policy (http://bumptop.com/legal)</tooltip>
+                                                        <help>Privacy Policy</help>
+                                                        <style>wxHL_DEFAULT_STYLE</style>
+                                                        <label>Privacy Policy</label>
+                                                        <url>http://bumptop.com/legal</url>
+                                                    </object>
+                                                </object>
+
+                                            </object>
+                                        </object>
+                                    </object>
+                                </object>
+                            </object>
+                        </object>
+                    </object>
+                </object>
+            </object>
+            <object class="sizeritem">
+                <flag>wxGROW|wxALL</flag>
+                <border>8</border>
+                <object class="wxPanel" name="ID_BOTTOM">
+                    <style>wxNO_BORDER|wxTAB_TRAVERSAL</style>
+                    <object class="wxBoxSizer">
+                        <orient>wxHORIZONTAL</orient>
+                        <object class="sizeritem">
+                            <flag>wxALIGN_CENTER_VERTICAL</flag>
+                            <border>5</border>
+                            <object class="wxButton" name="ID_RESETSETTINGS">
+                                <tooltip>Reset to default BumpTop settings</tooltip>
+                                <hidden>1</hidden>
+                                <enabled>0</enabled>
+                                <label>Reset Settings</label>
+                            </object>
+                        </object>
+                        <object class="spacer">
+                            <flag>wxALIGN_CENTER_VERTICAL|wxALL</flag>
+                            <border>0</border>
+                            <option>1</option>
+                            <size>5,5</size>
+                        </object>			
+						<object class="sizeritem">
+							<flag>wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT|wxTOP|wxRIGHT</flag>
+							<border>2</border>
+							<object class="wxAnimationCtrl" name="ID_THROBBER">
+								<tooltip>Applying changes...</tooltip>
+								<size>16,16</size>
+							</object>
+						</object>
+						<object class="sizeritem">
+							<flag>wxALIGN_TOP|wxALIGN_RIGHT|wxALL</flag>
+							<border>5</border>
+							<object class="wxStaticText" name="ID_THROBBER_LABEL">
+								<size>130,-1</size>
+								<font>
+									<size>8</size>
+									<family>swiss</family>
+									<face>Tahoma</face>
+								</font>
+								<fg>#4A5860</fg>
+								<label>Applying Settings</label>
+							</object>
+						</object>							
+                        <object class="sizeritem">
+                            <flag>wxALIGN_CENTER_VERTICAL|wxLEFT|wxRIGHT</flag>
+                            <border>5</border>
+                            <object class="wxButton" name="ID_SAVESETTINGS">
+                                <tooltip>Apply all changes</tooltip>
+                                <label>Apply</label>
+                            </object>
+                        </object>
+                        <object class="sizeritem">
+                            <flag>wxALIGN_CENTER_VERTICAL</flag>
+                            <border>5</border>
+                            <object class="wxButton" name="ID_CANCEL">
+                                <tooltip>Close this settings dialog</tooltip>
+                                <label>Close</label>
+                            </object>
+                        </object>
+                    </object>
+                </object>
+            </object>
+        </object>
+    </object>
+</resource>

@@ -1,0 +1,1 @@
+This goes one level below the website html folder, so that people can't access these credentials.

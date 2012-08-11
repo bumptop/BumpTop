@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+// Copyright 2011 Google Inc. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{38be9e39-03b0-4363-8d82-c540f4e691fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Common">
+      <UniqueIdentifier>{bdcd11ea-8973-4239-ac07-5364aa1a360b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Common\Win32">
+      <UniqueIdentifier>{7454c959-3276-426e-91cb-b053f6167d7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Common">
+      <UniqueIdentifier>{dfe83bad-6bab-4951-8de7-7d218d1b4090}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Common\Win32">
+      <UniqueIdentifier>{fcf81f63-4a4d-432e-bb61-79f8282c8b8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UI">
+      <UniqueIdentifier>{b3795cd9-e325-41ee-ada0-ae64ba58e032}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BT_SettingsApp.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_SettingsAppEventHandler.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_SettingsDialog.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\project\XRC_Settings.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Common.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_ThemeListing.cpp">
+      <Filter>Source Files\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Win32Comm.cpp">
+      <Filter>Source Files\Common\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Win32Path.cpp">
+      <Filter>Source Files\Common\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Win32Registry.cpp">
+      <Filter>Source Files\Common\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Win32Util.cpp">
+      <Filter>Source Files\Common\Win32</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Common.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_ThemeListing.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Win32Comm.h">
+      <Filter>Header Files\Common\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Win32Path.h">
+      <Filter>Header Files\Common\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Win32Registry.h">
+      <Filter>Header Files\Common\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Win32Util.h">
+      <Filter>Header Files\Common\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_SettingsApp.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_SettingsAppEventHandler.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_SettingsDialog.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SettingsDialog.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

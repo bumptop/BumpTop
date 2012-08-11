@@ -1,0 +1,9 @@
+The convoluted process of integrating translation files (TS) from translators for BumpTop Settings
+2:25 PM 11/11/2009
+
+1. Open ExtractPOTFromTS.py, ensure target language is specified in file
+2. Run ExtractPOTFromTS
+3. Open new POT file in Poedit : http://sourceforge.net/projects/poedit/
+4. File, New Catalog from POT file... specify POT file
+5. Save, so that .po and .mo files are created
+6. Copy .mo files over to \Source\Languages

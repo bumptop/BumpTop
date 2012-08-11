@@ -1,0 +1,5 @@
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_BUMPTOP             ICON                    "bt_settings.ico"
+
+#include "wx/msw/wx.rc"
