@@ -1,29 +1,23 @@
-#summary One-sentence summary of this page.
+#summary Welcome to the BumpTop open source project!
 
 = Introduction =
 
-Welcome to BumpTop Open Source!  
+Welcome to the BumpTop open source project!  
 
 -Download links for Mac, Windows, etc. 
 
-Todo: explain windows, mac codebases.  Mac is more modern but with reduced, simplified, focused features.  2 diff windows versions (more features, less blah). 
+Todo: explain history of windows, mac codebases.  Windows was built of Anand's masters thesis research code, NOT following proper coding practices, rushing to deadline.  ie, project is stil named "SampleBoxes".  Mac is more modern, cleaner codebase but with reduced, simplified, focused features.  2 diff windows versions (more features, less blah). 
 
 = Wishlist/Ideas for development = 
 * Mac *
   * single color icon
+  * port to Linux, Windows?  
 
 * Windows * 
   * fix wall functionality? 
   * play with webkit support? 
+  * upgrade to latest PhysX SDK 
 
 * Flash *
   * apollo link to real filesystem?  
   * host it on the site somewhere? 
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
