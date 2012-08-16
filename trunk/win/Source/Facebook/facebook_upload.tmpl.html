@@ -1,0 +1,155 @@
+{#
+ Copyright 2011 Google Inc. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+#}
+
+{% extends "bt_base.tmpl.html" %}
+
+{% block head %}
+	<link rel="stylesheet" type="text/css" href="btfb_common.css" />
+	<link rel="stylesheet" type="text/css" href="btfb_newsfeed.css" />
+	<link rel="stylesheet" type="text/css" href="btfb_upload.css" />
+	<style type="text/css">
+	.filepath_template {
+		display: none;
+	}
+	</style>
+	<script type="text/javascript" src="jquery.timers-1.2.js"></script>
+	<script type="text/javascript" src="jquery.easing.1.3.js"></script>
+	<script type="text/javascript" src="jquery.blockUI.js"></script>
+	<script type="text/javascript" src="{{ common_js_dir }}/json2.min.js"></script>
+
+	<script type="text/javascript" src="btfb_common.js"></script>
+	<script type="text/javascript" src="btfb_upload.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			var page = new FacebookWidgetUploadPage();
+			page.init();
+		});
+	</script>	
+{% endblock head %}
+
+{% block body %}
+	<div class="bumpwidget">
+		<div id="btfb_header">
+			<img class="logo" src="facebook_logo.png"/>
+			<a href="facebook_newsfeed.html" class="navtitle">{{ _("Feed") }}</a>
+			<a href="#" class="navtitle status_button">{{ _("Status") }}</a>
+			<a href="facebook_photoalbums.html" class="navtitle">{{ _("My Photos") }}</a>
+			<span class="navtitle selected">{{ _("Upload") }}</span>
+			<a href="#" class="navtitle logout">{{ _("Logout") }}</a>
+		</div>
+		<div id="btfb_content">
+			<div class="instructions">
+				{{ _("Drop <em>images</em> onto this widget to upload them to Facebook!") }}
+			</div>
+			<table>
+				<tr>
+					<td class="header">
+						{{ _("To album:") }}
+					</td>
+					<td>
+						<select class="albums_list">
+							<option value="">{{ _("Loading...") }}</option>
+						</select>
+						<a href="#" class="create_album">{{ _("(Create new album...)") }}</a>
+					</td>				
+				</tr>			
+				<tr><td colspan="2" style="height: 5px;"></td></tr>
+				<tr class="file_list">
+					<td class="header">
+						{{ _("Upload files:") }}
+					</td>
+					<td>
+						<div class="list">
+							<div class="filepath filepath_template">
+								<img src="" />
+								<div class="description">
+									<span class="name"></span>
+									<span class="remove"><a href="#">{{ _("remove") }}</a></span>
+								</div>
+							</div>
+						</div>
+						<a href="#"><div id="upload_button" class="button">{{ _("Upload") }}</div></a>
+						<a href="#"><div id="cancel_button" class="button">{{ _("Cancel") }}</div></a>
+					</td>										
+				</tr>				
+			</table>			
+		</div>
+		<div id="status_dialog">
+			<div class="label">{{ _("Update your status") }}</div>
+			<div class="status_update selected">
+				<form>
+					<div class="last_status"></div>
+					<textarea class="status_update_textarea"></textarea>
+					<div class="share_gloss">
+						<input type="submit" id="status_dialog_submit" class="share" value="" />
+						<a href="#" class="cancel">{{ _("Cancel") }}</a>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div id="create_album_dialog" style="display:none">		
+			<form>
+				<table>
+					<tr>
+						<td colspan="2" class="dialog_title">
+							{{ _("Create a new Photo Album") }}
+						</td>
+					</tr>
+					<tr>
+						<td class="label">{{ _("Name") }}</td>
+						<td><input type="text" id="create_album_name" /></td>
+					</tr>
+					<tr>
+						<td class="label">{{ _("Location") }}</td>
+						<td><input type="text" id="create_album_location" /></td>
+					</tr>
+					<tr>
+						<td valign="top" class="label">{{ _("Description") }}</td>
+						<td><textarea id="create_album_description" rows="4"></textarea></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" id="create_album_submit" value="" /><a href="#" class="dialog_cancel">{{ _("(Cancel)") }}</a></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div id="photos_uploaded_dialog" style="display:none">		
+			<form>
+				<table>
+					<tr>
+						<td class="dialog_title">
+							{{ _("Photos Uploaded to Facebook!") }}
+						</td>
+					</tr>
+					<tr>
+						<td class="link" id="uploaded_view_in_browser"><a href="#"><img src="view_photos_external.png" /> <span>{{ _("View photos in external browser") }}</span></a></td>
+					</tr>
+					<tr>
+						<td class="link" id="uploaded_return_to_feed"><a href="#"><img src="back_to_feed.png" /> <span>{{ _("Return to feed") }}</span></a></td>
+					</tr>
+					<tr>					
+						<td><br/><a href="#" class="dialog_cancel">{{ _("(Close dialog)") }}</a></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div id="updating_dialog">
+			{{ _("Uploading photos...") }}<br/>
+			<img src="loading.gif" />
+		</div>
+	</div>
+{% endblock body %}

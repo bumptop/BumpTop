@@ -1,0 +1,812 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral (Default) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEUD)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_DEFAULT
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_INPUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 225
+        VERTGUIDE, 166
+        VERTGUIDE, 171
+        VERTGUIDE, 200
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 59
+        HORZGUIDE, 17
+        HORZGUIDE, 33
+    END
+
+    IDD_INPUTBOX_BROWSE, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 225
+        VERTGUIDE, 163
+        VERTGUIDE, 171
+        VERTGUIDE, 202
+        TOPMARGIN, 4
+        BOTTOMMARGIN, 51
+        HORZGUIDE, 22
+        HORZGUIDE, 35
+    END
+
+    IDD_THEME_CONFLICT, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 256
+        VERTGUIDE, 163
+        VERTGUIDE, 171
+        VERTGUIDE, 200
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 60
+        HORZGUIDE, 17
+        HORZGUIDE, 33
+    END
+
+    IDD_INPUTBOX2, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 225
+        VERTGUIDE, 163
+        VERTGUIDE, 171
+        VERTGUIDE, 200
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 64
+        HORZGUIDE, 17
+        HORZGUIDE, 48
+    END
+
+    IDD_BREAKPILE, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 229
+        VERTGUIDE, 124
+        VERTGUIDE, 163
+        VERTGUIDE, 171
+        VERTGUIDE, 200
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 53
+        HORZGUIDE, 17
+        HORZGUIDE, 33
+    END
+
+    IDD_UPDATEDRIVERS, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 244
+        VERTGUIDE, 163
+        VERTGUIDE, 171
+        VERTGUIDE, 200
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 44
+        HORZGUIDE, 17
+        HORZGUIDE, 33
+    END
+
+    IDD_AUTHFAILED, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 255
+        VERTGUIDE, 163
+        VERTGUIDE, 171
+        VERTGUIDE, 200
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 60
+        HORZGUIDE, 17
+        HORZGUIDE, 33
+    END
+
+    IDD_UPDATEMESSAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 245
+        VERTGUIDE, 163
+        VERTGUIDE, 171
+        VERTGUIDE, 200
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 68
+        HORZGUIDE, 17
+        HORZGUIDE, 33
+    END
+
+    IDD_FACEBOOK_AUTH, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 255
+        VERTGUIDE, 163
+        VERTGUIDE, 171
+        VERTGUIDE, 200
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 60
+        HORZGUIDE, 17
+        HORZGUIDE, 33
+    END
+
+    IDD_FACEBOOK_CONFIRM, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 256
+        VERTGUIDE, 163
+        VERTGUIDE, 171
+        VERTGUIDE, 200
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 38
+        HORZGUIDE, 17
+        HORZGUIDE, 33
+    END
+
+    IDD_DEAUTHORIZE_CONFIRM, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 256
+        VERTGUIDE, 163
+        VERTGUIDE, 171
+        VERTGUIDE, 200
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 38
+        HORZGUIDE, 17
+        HORZGUIDE, 33
+    END
+
+    IDD_TWITTER_AUTH, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 256
+        VERTGUIDE, 163
+        VERTGUIDE, 171
+        VERTGUIDE, 200
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 67
+        HORZGUIDE, 17
+        HORZGUIDE, 27
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_INPUTBOX DIALOGEX 22, 17, 231, 65
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_CAPTION | WS_SYSMENU
+CAPTION "X_BumpTop"
+FONT 8, "MS Shell Dlg", 700, 0, 0x0
+BEGIN
+    EDITTEXT        IDC_INPUTBOX_TEXT,6,27,219,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "X_Ok",IDOK,115,44,51,15,WS_GROUP
+    PUSHBUTTON      "X_Cancel",IDCANCEL,171,44,54,15,WS_GROUP
+    LTEXT           "X_Prompt",IDC_INPUTBOX_PROMPT,6,6,219,19,SS_NOPREFIX
+END
+
+IDD_INPUTBOX_BROWSE DIALOGEX 22, 17, 231, 57
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_CAPTION | WS_SYSMENU
+CAPTION "X_BumpTop"
+FONT 8, "MS Shell Dlg", 700, 0, 0x0
+BEGIN
+    EDITTEXT        IDC_INPUTBOX_BROWSE_TEXT,6,16,196,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BROWSE,207,15,18,15
+    DEFPUSHBUTTON   "X_Ok",IDOK,112,35,51,16,WS_GROUP
+    PUSHBUTTON      "X_Cancel",IDCANCEL,171,35,54,16,WS_GROUP
+    LTEXT           "X_Prompt",IDC_INPUTBOX_BROWSE_PROMPT,6,5,219,11,SS_NOPREFIX
+END
+
+IDD_THEME_CONFLICT DIALOGEX 22, 17, 262, 66
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_CAPTION | WS_SYSMENU
+CAPTION "X_BumpTop Theme Conflict"
+FONT 8, "MS Shell Dlg", 700, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "X_Merge",IDOK,75,44,48,16,WS_GROUP
+    PUSHBUTTON      "X_Replace with Default",IDNO,127,44,81,16,WS_GROUP
+    PUSHBUTTON      "X_Quit",IDCANCEL,212,44,44,16,WS_GROUP
+    LTEXT           "X_Prompt",IDC_THEME_CONFLICT_PROMPT,6,6,250,35,SS_NOPREFIX
+END
+
+IDD_INPUTBOX2 DIALOGEX 22, 17, 231, 70
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_CAPTION | WS_SYSMENU
+CAPTION "X_BumpTop"
+FONT 8, "MS Shell Dlg", 700, 0, 0x0
+BEGIN
+    EDITTEXT        IDC_INPUTBOX_TEXT,6,28,219,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "X_Ok",IDOK,112,48,51,16,WS_GROUP
+    PUSHBUTTON      "X_Cancel",IDCANCEL,171,48,54,16,WS_GROUP
+    LTEXT           "X_Prompt\nLine 2",IDC_INPUTBOX_PROMPT,6,6,219,19,SS_NOPREFIX
+END
+
+IDD_BREAKPILE DIALOGEX 22, 17, 249, 54
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_CAPTION | WS_SYSMENU
+CAPTION "X_Break Folder Pile"
+FONT 8, "MS Shell Dlg", 700, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "X_Move files and break pile",IDOK,78,32,114,16,WS_GROUP
+    PUSHBUTTON      "X_Cancel",IDCANCEL,196,32,46,16,WS_GROUP
+    DEFPUSHBUTTON   "X_Move files",IDNO,24,32,51,16,NOT WS_VISIBLE | WS_DISABLED | WS_GROUP
+    LTEXT           "X_Break Pile",IDC_PROMPT,6,6,237,19,SS_NOPREFIX
+END
+
+IDD_UPDATEDRIVERS DIALOGEX 22, 17, 250, 50
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_CAPTION | WS_SYSMENU
+CAPTION "X_Update your drivers!"
+FONT 8, "MS Shell Dlg", 700, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "X_Download latest graphics drivers...",IDOK,25,28,153,16,WS_GROUP
+    PUSHBUTTON      "X_Exit BumpTop",IDCANCEL,182,28,62,16,WS_GROUP
+    LTEXT           "X_BumpTop is unable to initialize 3D hardware acceleration.  Please update to the latest drivers for your video card and relaunch BumpTop.",IDC_PROMPT,6,6,238,19,SS_NOPREFIX
+END
+
+IDD_AUTHFAILED DIALOGEX 22, 17, 261, 66
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_CAPTION | WS_SYSMENU
+CAPTION "X_Help us help you!"
+FONT 8, "MS Shell Dlg", 700, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "X_Buy BumpTop Pro License...",IDOK,32,44,107,16,WS_GROUP
+    PUSHBUTTON      "X_Continue running free version",IDCANCEL,143,44,112,16,WS_GROUP
+    LTEXT           "X_You may be running an altered version of BumpTop!\n\nPlease consider purchasing a BumpTop Pro license so that we can continue innovating on the best 3D physics-based desktop available.",IDC_PROMPT,6,6,249,36,SS_NOPREFIX
+END
+
+IDD_UPDATEMESSAGE DIALOGEX 22, 17, 251, 74
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_CAPTION | WS_SYSMENU
+CAPTION "X_BumpTop Notification"
+FONT 8, "MS Shell Dlg", 700, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "X_Visit BumpTop for more information...",IDOK,37,52,152,16,WS_GROUP
+    PUSHBUTTON      "X_Close",IDCANCEL,193,52,52,16,WS_GROUP
+    LTEXT           "<256 chars available>",IDC_PROMPT,6,6,239,41,SS_NOPREFIX
+END
+
+IDD_FACEBOOK_AUTH DIALOGEX 22, 17, 261, 66
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_CAPTION | WS_SYSMENU
+CAPTION "X_Facebook Photo Uploader"
+FONT 8, "MS Shell Dlg", 700, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "X_Start uploading photos to Facebook!",IDOK,46,44,150,16,WS_GROUP
+    PUSHBUTTON      "X_Cancel",IDCANCEL,200,44,55,16,WS_GROUP
+    LTEXT           "X_We are redirecting you to the BumpTop's Facebook Photo Uploader login page.  Please continue after you have logged in.\n\n(You only have to login once!)",IDC_PROMPT,6,6,249,37,SS_NOPREFIX
+END
+
+IDD_FACEBOOK_CONFIRM DIALOGEX 22, 17, 262, 44
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_CAPTION | WS_SYSMENU
+CAPTION "X_Upload to Facebook"
+FONT 8, "MS Shell Dlg", 700, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "X_Cancel",IDCANCEL,200,22,56,16,WS_GROUP
+    PUSHBUTTON      "X_Upload",IDOK,140,22,56,16,WS_GROUP
+    LTEXT           "X_Upload these photo(s) to Facebook?",IDC_PROMPT,6,6,250,11,SS_NOPREFIX
+END
+
+IDD_DEAUTHORIZE_CONFIRM DIALOGEX 22, 17, 262, 44
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_CAPTION | WS_SYSMENU
+CAPTION "X_BumpTop Settings"
+FONT 8, "MS Shell Dlg", 700, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "X_No, do not deauthorize",IDCANCEL,163,22,93,16,WS_GROUP
+    PUSHBUTTON      "X_Yes, deauthorize",IDOK,61,22,93,16,WS_GROUP
+    LTEXT           "X_Are you sure you want to deauthorize your pro key?",IDC_PROMPT,6,6,250,11,SS_NOPREFIX
+END
+
+IDD_TWITTER_AUTH DIALOGEX 22, 17, 262, 73
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_CAPTION | WS_SYSMENU
+CAPTION "X_Twitter Integration Login"
+FONT 8, "MS Shell Dlg", 700, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "X_Start Twittering!",IDOK,108,51,88,16,WS_GROUP
+    PUSHBUTTON      "X_Cancel",IDCANCEL,200,51,56,16,WS_GROUP
+    LTEXT           "X_We are redirecting you to the Twitter authorization page.  Please continue after you have logged in.",IDC_PROMPT,6,6,250,19,SS_NOPREFIX
+    EDITTEXT        IDC_PIN_TEXT,6,31,250,14,ES_AUTOHSCROLL
+END
+
+#endif    // Neutral (Default) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_PROCESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 43
+        HORZGUIDE, 17
+    END
+
+    IDD_CRASHBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 287
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 164
+    END
+
+    IDD_FEEDBACK, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 287
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 201
+    END
+
+    IDD_TWITTER_LOGIN, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 174
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 78
+    END
+
+    IDD_EULA, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 305
+        TOPMARGIN, 3
+        BOTTOMMARGIN, 215
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PROCESS DIALOGEX 0, 0, 186, 50
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "X_BumpTop"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CTEXT           "X_Content",IDC_MODELESS_PROMPT,7,7,172,36,SS_CENTERIMAGE
+END
+
+IDD_CRASHBOX DIALOGEX 0, 0, 294, 169
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "X_Send Feedback To BumpTop"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_CRASHBOX_DLG_EDIT,7,47,280,51,ES_MULTILINE | ES_AUTOVSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_GROUP,WS_EX_CLIENTEDGE
+    EDITTEXT        IDC_CRASHBOX_EMAIL,7,114,280,14,ES_AUTOHSCROLL | WS_GROUP
+    DEFPUSHBUTTON   "X_Restart",IDOK,235,150,52,14,BS_CENTER | BS_VCENTER | WS_GROUP
+    PUSHBUTTON      "X_Close BumpTop",IDNO,153,150,62,14,WS_GROUP
+    LTEXT           "X_Prompt:\n1\n2\n3",IDC_CRASHBOX_PROMPT,7,7,280,32,SS_NOPREFIX
+    LTEXT           "Your Email Address (We will email you once this issue is resolved):",IDC_EMAIL_LABEL,7,104,280,10
+    CONTROL         "Send Feedback",IDC_SEND_FEEDBACK,"Button",BS_AUTOCHECKBOX | BS_TOP | BS_MULTILINE | WS_TABSTOP,7,131,68,15
+    CONTROL         "Reset BumpTop Settings",IDC_RESET_BUMPTOP_SETTINGS,
+                    "Button",BS_AUTOCHECKBOX | BS_TOP | BS_MULTILINE | WS_TABSTOP,7,148,93,16
+END
+
+IDD_FEEDBACK DIALOGEX 0, 0, 294, 206
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "X_BumpTop Feedback Reporter"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_FEEDBACK_TYPE,71,31,216,12,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_FEEDBACK_EMAIL,71,49,216,12,ES_AUTOHSCROLL | WS_GROUP
+    EDITTEXT        IDC_FEEDBACK_MESSAGE,71,66,216,89,ES_MULTILINE | ES_AUTOVSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_GROUP,WS_EX_CLIENTEDGE
+    DEFPUSHBUTTON   "X_Send Feedback",IDOK,158,187,76,14,BS_CENTER | BS_VCENTER | WS_GROUP
+    PUSHBUTTON      "X_Cancel",IDCANCEL,239,187,48,14,WS_GROUP
+    LTEXT           "X_We want your feedback!\nLet us know what you think about BumpTop and how we can improve the experience.",IDC_CRASHBOX_PROMPT,7,7,280,18,SS_NOPREFIX
+    LTEXT           "X_Email Address:",IDC_FEEDBACK_LABEL2,7,49,62,10,SS_CENTERIMAGE
+    LTEXT           "X_Type of feedback:",IDC_EMAIL_LABEL2,7,31,62,10,SS_CENTERIMAGE
+    LTEXT           "X_Message:",IDC_FEEDBACK_LABEL3,7,66,62,10,SS_CENTERIMAGE
+    LTEXT           "X_If this is a bug, help us to locate and fix the problem by explaining the problem in detail, listing the steps taken to produce the problem, and what you expected to happen instead.",IDC_STATIC,72,157,216,25
+END
+
+IDD_TWITTER_LOGIN DIALOGEX 0, 0, 181, 83
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "X_Twitter - Login"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_TWITTER_LOGIN_USERNAME,59,28,115,12,ES_AUTOHSCROLL | WS_GROUP
+    EDITTEXT        IDC_TWITTER_LOGIN_PASSWORD,59,44,115,12,ES_PASSWORD | ES_AUTOHSCROLL | WS_GROUP
+    DEFPUSHBUTTON   "X_Login to Twitter",IDOK,40,64,82,14,BS_CENTER | BS_VCENTER | WS_GROUP
+    PUSHBUTTON      "X_Cancel",IDCANCEL,126,64,48,14,WS_GROUP
+    LTEXT           "X_Username:",IDC_TWITTER_LOGIN_USERNAME_LABEL,7,29,52,10,SS_CENTERIMAGE
+    LTEXT           "X_Password:",IDC_TWITTER_LOGIN_PASSWORD_LABEL,7,45,52,10,SS_CENTERIMAGE
+    LTEXT           "X_Login below to send tweets and upload photos to your Twitter",IDC_TWITTER_LOGIN_LABEL,7,7,167,18
+END
+
+IDD_CHOOSE_VERSION DIALOGEX 0, 0, 333, 277
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Please Choose a Version of BumpTop"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         142,IDC_BACKGROUND_IMAGE,"Static",SS_BITMAP,0,0,333,277
+    EDITTEXT        IDC_PRO_KEY_TEXT_BOX,168,255,94,12,ES_AUTOHSCROLL | ES_WANTRETURN | NOT WS_BORDER
+    CONTROL         143,IDC_GET_PRO_BUTTON,"Static",SS_BITMAP | SS_NOTIFY,188,180,125,17
+    CONTROL         146,IDC_USE_FREE_BUTTON,"Static",SS_BITMAP | SS_NOTIFY,21,180,125,17
+    CONTROL         150,IDC_ACTIVATE_BUTTON,"Static",SS_BITMAP | SS_NOTIFY,273,252,52,17
+    CONTROL         154,IDC_OTHER_GOODNESS_LINK,"Static",SS_BITMAP | SS_NOTIFY | NOT WS_VISIBLE,227,214,83,13
+END
+
+IDD_THANK_YOU DIALOGEX 0, 0, 333, 184
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Thank You"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         151,IDC_BACKGROUND_IMAGE,"Static",SS_BITMAP | SS_REALSIZEIMAGE,0,0,333,184
+    CONTROL         152,IDC_NO_PROBLEM_BUTTON,"Static",SS_BITMAP | SS_NOTIFY | SS_REALSIZEIMAGE,14,153,70,17
+END
+
+IDD_EULA DIALOGEX 0, 0, 309, 220
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_TEXTBOX,"RichEdit20W",ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | ES_WANTRETURN | WS_VSCROLL | WS_TABSTOP,3,4,303,192,WS_EX_CLIENTEDGE
+    DEFPUSHBUTTON   "X_&Accept",IDOK,170,201,65,14
+    PUSHBUTTON      "X_DECLINE",IDCANCEL,240,201,65,14
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON                    "Textures\\bumptop.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_POPUP_MENU MENU 
+BEGIN
+    POPUP "POPUP"
+    BEGIN
+        MENUITEM "X_Sho&w BumpTop \t(Start+D)", ID_POPUP_REVEALWINDOWSDESKTOP
+        MENUITEM "X_Send &Feedback",            ID_POPUP_SENDFEEDBACK
+        MENUITEM "X_Check for &updates",        ID_POPUP_UPDATE
+        POPUP "Help"
+        BEGIN
+            MENUITEM "X_&Online Help",              ID_POPUP_BUMPTOPBETAHQ
+            MENUITEM "Run X_&Tutorial",             ID_POPUP_RUN_TUTORIAL
+        END
+        MENUITEM "X_&Go Pro",                   ID_POPUP_GOPRO
+        MENUITEM SEPARATOR
+        MENUITEM "X_&Settings... \t(Ctrl+,)",   ID_POPUP_EDITSETTINGS
+        MENUITEM "X_E&xit BumpTop \t(Alt+F4)",  ID_POPUP_EXITBUMPTOP
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_CHOOSE_VERSION      BITMAP                  "Textures\\bt_choose_version.bmp"
+IDB_GET_PRO             BITMAP                  "Textures\\bt_get_pro.bmp"
+IDB_GET_PRO_HOVER       BITMAP                  "Textures\\bt_get_pro_hover.bmp"
+IDB_USE_FREE            BITMAP                  "Textures\\bt_use_free.bmp"
+IDB_USE_FREE_HOVER      BITMAP                  "Textures\\bt_use_free_hover.bmp"
+IDB_ACTIVATE            BITMAP                  "Textures\\bt_activate.bmp"
+IDB_ACTIVATE_HOVER      BITMAP                  "Textures\\bt_activate_hover.bmp"
+IDB_ACTIVATE_DISABLED   BITMAP                  "Textures\\bt_activate_disabled.bmp"
+IDB_THANK_YOU           BITMAP                  "Textures\\bt_thank_you.bmp"
+IDB_NO_PROBLEM          BITMAP                  "Textures\\bt_no_problem.bmp"
+IDB_OTHER_GOODNESS      BITMAP                  "Textures\\bt_other_goodness.bmp"
+IDB_NO_PROBLEM_HOVER    BITMAP                  "Textures\\bt_no_problem_hover.bmp"
+IDB_CHOOSE_VERSION_EXPIRED BITMAP                  "Textures\\bt_choose_version_expired.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2,1,5937,0
+ PRODUCTVERSION 2,1,5937,0
+ FILEFLAGSMASK 0x17L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "FileDescription", "BumpTop 3D Desktop"
+            VALUE "FileVersion", "2, 1, 5937, 0"
+            VALUE "InternalName", "BumpTop"
+            VALUE "LegalCopyright", "Copyright (C) 2009"
+            VALUE "OriginalFilename", "BumpTop.exe"
+            VALUE "ProductName", "BumpTop"
+            VALUE "ProductVersion", "2.1.5937"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (Canada) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENC)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_CAN
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_PHOTO_FRAME, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 275
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 146
+    END
+
+    IDD_UPDATE_BUMPTOP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 186
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 140
+    END
+
+    IDD_CHANGEICON, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 174
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 22
+    END
+
+    IDD_TWITTER, DIALOG
+    BEGIN
+        LEFTMARGIN, 3
+        RIGHTMARGIN, 261
+        TOPMARGIN, 3
+        BOTTOMMARGIN, 104
+    END
+
+    IDD_AUTHORIZE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 272
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 148
+    END
+
+    IDD_AUTHORIZATION_CHOOSE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 272
+        BOTTOMMARGIN, 108
+    END
+
+    IDD_INPUTBOX_AUTHORIZATION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 272
+        BOTTOMMARGIN, 98
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PHOTO_FRAME DIALOGEX 0, 0, 282, 153
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_CAPTION | WS_SYSMENU
+CAPTION "X_Select the Photo Frame source"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "X_Local Directory:",IDC_LOCAL_RADIO,"Button",BS_AUTORADIOBUTTON,14,23,203,8
+    EDITTEXT        IDC_PHOTO_LOCALDIR_TEXT,24,36,220,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BROWSE_LOCALDIR,247,36,21,12
+    CONTROL         "X_Flickr tag:",IDC_FLICKR_RADIO,"Button",BS_AUTORADIOBUTTON,14,57,203,9
+    EDITTEXT        IDC_PHOTO_FLICKR_TEXT,24,70,243,12,ES_AUTOHSCROLL
+    CONTROL         "X_Photo RSS Feed (ie, from Flickr or Picasa Web):",IDC_RSS_RADIO,
+                    "Button",BS_AUTORADIOBUTTON,14,89,252,9
+    EDITTEXT        IDC_PHOTO_RSSFEED_TEXT,24,102,243,12,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "X_OK",IDOK,171,132,50,14
+    PUSHBUTTON      "X_Cancel",IDCANCEL,225,132,50,14
+    GROUPBOX        "X_Photo Frame Source",IDC_PHOTO_FRAME,7,7,268,116
+END
+
+IDD_UPDATE_BUMPTOP DIALOGEX 0, 0, 193, 147
+STYLE DS_SETFONT | DS_MODALFRAME | DS_SETFOREGROUND | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOPMOST
+CAPTION "X_New Update Available"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "X_Submit a screenshot of my Desktop to help improve BumpTop.  It will be kept private.",IDC_UPDATE_SEND_SCREENSHOT,
+                    "Button",BS_AUTOCHECKBOX | BS_TOP | BS_MULTILINE | WS_TABSTOP,7,7,179,18
+    DEFPUSHBUTTON   "X_Install",IDOK,46,126,93,14
+    PUSHBUTTON      "X_Cancel",IDCANCEL,143,126,43,14
+    CONTROL         "",IDC_UPDATE_SCREENSHOT,"Static",SS_BITMAP | WS_BORDER,17,27,16,14
+END
+
+IDD_CHANGEICON DIALOGEX 0, 0, 181, 30
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "X_Change Icon..."
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "X_Change Icon...",IDOK,7,8,97,14
+    PUSHBUTTON      "X_Clear changes",IDCANCEL,109,8,65,14
+END
+
+IDD_TWITTER DIALOGEX 0, 0, 264, 108
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "X_Twitter - What are you doing?"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_TEXTBOX,"RichEdit20W",ES_MULTILINE | ES_AUTOHSCROLL | ES_WANTRETURN | WS_VSCROLL | WS_TABSTOP,3,16,258,71,WS_EX_CLIENTEDGE
+    DEFPUSHBUTTON   "X_&Update",IDOK,144,90,67,14
+    PUSHBUTTON      "X_Cancel",IDCANCEL,215,90,46,14
+    LTEXT           "Static",IDC_TWITTER_CHARCOUNT,5,90,136,14,SS_CENTERIMAGE
+    LTEXT           "X_What are you doing?",IDC_TWITTER_LABEL,4,4,258,11
+END
+
+IDD_AUTHORIZE DIALOGEX 0, 0, 279, 155
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_CAPTION | WS_SYSMENU
+CAPTION "X_BumpTop Authorization"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "X_Continue using Free version of BumpTop (Pro-only features available for 30 more days)",IDC_FREE_RADIO,
+                    "Button",BS_AUTORADIOBUTTON | BS_TOP | BS_MULTILINE,14,64,245,18
+    PUSHBUTTON      "Learn more...",IDC_PRO_LEARNMORE,195,87,57,13
+    CONTROL         "X_Upgrade to BumpTop Pro!",IDC_PRO_RADIO,"Button",BS_AUTORADIOBUTTON | BS_VCENTER,14,86,181,14
+    DEFPUSHBUTTON   "X_Authorize",IDOK,154,134,63,14
+    PUSHBUTTON      "X_Close",IDCANCEL,222,134,50,14
+    GROUPBOX        "X_BumpTop Version",IDC_AUTHORIZE_FRAME,7,36,265,91
+    CONTROL         132,IDC_AUTH_HEADER,"Static",SS_BITMAP | SS_CENTERIMAGE,0,0,279,30
+    LTEXT           "X_BumpTop is going Pro! Blah Blah Blah",IDC_PROMPT,13,48,232,14
+    LTEXT           "X_BumpTop Pro Key:",IDC_PRO_LABEL,25,105,60,12,SS_CENTERIMAGE | WS_DISABLED
+    EDITTEXT        IDC_PRO_INPUT,87,105,79,12,ES_AUTOHSCROLL | WS_DISABLED
+END
+
+IDD_AUTHORIZATION_CHOOSE DIALOGEX 0, 0, 279, 115
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Get Pro Discount",IDOK,32,73,98,31
+    PUSHBUTTON      "Decide Later",IDNO,153,73,97,32
+    LTEXT           "X_As a Thank You for beta testing you get a discount on BumpTop Pro, only $19.  Otherwise on May 1, 2009 you'll be switched to BumpTop Free.",IDC_QUESTION,7,36,187,26
+    CONTROL         "",IDC_AUTH_HEADER,"Static",SS_BITMAP | SS_CENTERIMAGE,0,0,279,30
+    PUSHBUTTON      "X_Why go Pro?",IDC_LEARNMORE,198,37,72,14
+END
+
+IDD_INPUTBOX_AUTHORIZATION DIALOGEX 0, 0, 279, 105
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "X_Manual",IDC_AUTHORIZEMANUALLY,62,82,49,16
+    PUSHBUTTON      "X_Proxy",IDC_PROXYSETTINGS,7,82,49,16
+    DEFPUSHBUTTON   "X_Ok",IDOK,167,82,50,16,WS_GROUP
+    PUSHBUTTON      "X_Cancel",IDCANCEL,223,82,49,16,WS_GROUP
+    LTEXT           "X_Please enter your BumpTop Pro key",IDC_INPUTBOX_PROMPT,7,33,265,18,SS_NOPREFIX
+    PUSHBUTTON      "X_Go Pro",IDC_BUYPROKEY,223,48,49,16
+    CONTROL         132,IDC_AUTH_HEADER,"Static",SS_BITMAP | SS_CENTERIMAGE,0,0,279,30
+    EDITTEXT        IDC_INPUTBOX_TEXT,7,50,209,12,ES_AUTOHSCROLL
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON2               ICON                    "Textures\\personalize.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_AUTH_HEADER         BITMAP                  "Textures\\bt_auth_header.bmp"
+#endif    // English (Canada) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

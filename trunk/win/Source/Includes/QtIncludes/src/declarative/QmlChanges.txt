@@ -1,0 +1,364 @@
+=============================================================================
+The changes below are pre Qt 4.7.0 RC1
+
+TextInput
+   - copy(), cut() and paste() functions added
+Font.letterSpacing
+   - was percentage based.  Now specified in pixels.
+Item
+   - wantsFocus renamed to activeFocus
+   - forceFocus() renamed to forceActiveFocus()
+   - focus now returns the scoped focus (i.e. focus read/write now manipulate
+     the same value)
+TextInput and TextEdit:
+   - focusOnPress renamed to activeFocusOnPress
+
+=============================================================================
+The changes below are pre Qt 4.7.0 beta 2
+
+QDeclarativeView
+   - initialSize() function added
+TextInput and TextEdit: 
+   - openSoftwareInputPanel() and closeSoftwareInputPanel() functions added
+Flickable:
+   - overShoot is replaced by boundsBehavior enumeration
+   - flickingHorizontally and flickingVertically properties added
+   - movingHorizontally and movingVertically properties added
+   - flickDirection is renamed flickableDirection
+Component:
+    - isReady, isLoading, isError and isNull properties removed, use
+      status property instead
+    - errorsString() renamed to errorString()
+ListView:
+    - ListView.prevSection property changed to ListView.previousSection
+TextInput:
+    - xToPosition -> positionAt (to match TextEdit.positionAt)
+Image:
+    - pixmap property removed, use QDeclarativeImageProvider to serve pixmaps
+      instead
+
+QList<QObject*> models no longer provide properties in model object.  The
+properties are now updated when the object changes.  An object's property
+"foo" may now be accessed as "foo", modelData.foo" or model.modelData.foo"
+component.createObject has gained a mandatory "parent" argument
+TextEdit and TextInput now have a "selectByMouse" property that defaults to false.
+
+C++ API
+-------
+QDeclarativeExpression::value() has been renamed to
+QDeclarativeExpression::evaluate()
+
+The QDeclarativeExpression constructor has changed from
+    QDeclarativeExpression(context, expression, scope)
+to
+    QDeclarativeExpression(context, scope, expression, parent = 0)
+
+QDeclarativeImageProvider::request() has been renamed to
+QDeclarativeImageProvider::image() and the class can now provide
+both qimages and qpixmaps, and qimages can be served synchronously
+
+QML Viewer
+------------
+The standalone qml executable has been renamed back to Qml Viewer. Runtime warnings
+can be now accessed via the menu (Debugging->Show Warnings).
+
+=============================================================================
+The changes below are pre Qt 4.7.0 beta 1
+
+TextEdit: wrap property is replaced by wrapMode enumeration.
+Text: wrap property is replaced by wrapMode enumeration.
+Removed Q-prefix from validators (IntValidator, DoubleValidator, and RegExpValidator)
+PathView: offset property now uses range 0-1.0 rather than 0-100
+ListView, GridView::positionViewAtIndex() gained a 'mode' parameter
+Removed Qt.playSound (replaced by SoundEffect element)
+Removed Qt.closestAngle (use RotationAnimation instead)
+Removed NumberFormatter
+Removed DateTimeFormatter (use Qt.formatDateTime() instead)
+Using WebView now requires "import QtWebKit 1.0"
+Using Particles now requires "import Qt.labs.particles 1.0"
+AnchorAnimation must now be used to animate anchor changes (and not NumberAnimation)
+Removed ParentAction (use ParentAnimation instead)
+ScriptAction: renamed stateChangeScriptName -> scriptName
+Animation: replace repeat with loops (loops: Animation.Infinite gives the old repeat behavior)
+AnchorChanges: use natural form to specify anchors (anchors.left instead of left)
+AnchorChanges: removed reset property. (reset: "left" should now be anchors.left: undefined)
+PathView: snapPosition replaced by preferredHighlightBegin, preferredHighlightEnd
+createQmlObject: Moved to the Qt object, now use Qt.createQmlObject()
+createComponent: Moved to the Qt object, now use Qt.createComponent()
+
+C++ API
+-------
+QDeclarativeContext::addDefaultObject() has been replaced with
+QDeclarativeContext::setContextObject()
+
+Behavior and Animation syntax
+-----------------------------
+Previously animations and behaviors could be "assigned" to properties like this:
+    Item { x: Behavior {}; y: NumberAnimation {} }
+To make it more obvious that these are not regular value assignments a new "on"
+syntax has been introduced:
+    Item { Behavior on x {}; NumberAnimation on y {} }
+Only the syntax has changed, the behavior is identical.
+
+EaseFollow renamed to SmoothedFollow
+---------------------------------------
+This element shares the internal implementation with SmoothedAnimation,
+both providing the same easing function, but with SmoothedFollow it's
+easier to set a start value to animate intially and then start to follow,
+while SmoothedAnimation is still convenient for using inside Behaviors
+and Transitions.
+
+
+Add SmoothedAnimation element
+---------------------------------------
+SmoothedAnimation inherits from NumberAnimaton and as a
+consequence SmoothedAnimation can be used inside Behaviors,
+as PropertySourceValues or in state transitions, like any other animation.
+
+The old EaseFollow properties changed to comply with the other declarative
+animations ('source' changed to 'to'), so now 'to' changes are not
+automatically 'followed' anymore.
+
+If you want to follow an hypothetical rect1, you should do now:
+
+     Rectangle {
+         color: "green"
+         width: 60; height: 60;
+         x: rect1.x - 5; y: rect1.y - 5;
+         Behavior on x { SmoothedAnimation { velocity: 200 } }
+         Behavior on y { SmoothedAnimation { velocity: 200 } }
+     }
+
+instead of the old automatic source changed tracking:
+
+     Rectangle {
+         color: "green"
+         width: 60; height: 60;
+         EaseFollow on x { source: rect1.x - 5; velocity: 200 }
+         EaseFollow on y { source: rect1.y - 5; velocity: 200 }
+    }
+
+This is a syntax and behavior change.
+
+
+Script element removed
+----------------------
+Inline Script{} blocks have been deprecated, and will soon be removed entirely.
+If you used Script to write inline javascript code, it can simply be removed.
+For example
+
+Item {
+    Script {
+        function doSomething() {}
+    }
+}
+
+becomes
+
+Item {
+    function doSomething() {}
+}
+
+If you used Script to include external JavaScript files, you can replace the
+Script element with an “import” line.  For example
+
+MouseArea {
+    Script {
+        source: “foo.js”
+    }
+    onClicked: foo()
+}
+
+becomes
+
+import “foo.js” as Foo
+MouseArea {
+    onClicked: Foo.foo()
+}
+
+The “as” qualifier is mandatory for script imports (as opposed to type
+imports where it is optional).
+
+
+=============================================================================
+The changes below are pre Qt 4.7.0 alpha
+
+Flickable: renamed viewportWidth -> contentWidth
+Flickable: renamed viewportHeight -> contentHeight
+Flickable: renamed viewportX -> contentX
+Flickable: renamed viewportY -> contentY
+Removed Flickable.reportedVelocitySmoothing
+Renamed MouseRegion -> MouseArea
+Connection: syntax and rename:
+    Connection { sender: a; signal: foo(); script: xxx }
+    Connection { sender: a; signal: bar(); script: yyy }
+  becomes:
+    Connections { target: a; onFoo: xxx; onBar: yyy }
+
+ListView::sectionExpression has been replaced by section.property, section.criteria
+
+ListModel
+---------
+- types are strictly checked (previously, everything was a string)
+ - foo: "bar"  continues to work as before
+ - foo: bar  is now invalid, use  foo: "bar"
+ - foo: true  is now a bool (not string "true")
+ - foo: false  is now a bool (not string "false" == true!)
+
+PropertyAnimation
+------------------
+matchProperties and matchTargets have been renamed back to properties and targets.
+The semantics are explained in the PropertyAnimation::properties documentation
+and the animation overview documentation.
+
+Easing curves and their parameters are now specified via dot properties:
+* easing.type : enum
+* easing.amplitude : real
+* easing.overshoot : real
+* easing.period : real
+For example:
+PropertyAnimation { properties: "y"; easing.type: "InOutElastic"; easing.amplitude: 2.0; easing.period: 1.5 }
+
+C++ API
+-------
+QML_DEFINE_... definition macros, previously global macros, are replaced by
+qmlRegisterType registration functions, which must be called explicitly.
+C++ API users should also consider using the QmlExtensionPlugin (previously
+named QmlModulePlugin) as a cleaner mechanism for publishing libraries of QML
+types, or the upcoming application plugin features of the qmlviewer /
+qmlruntime / qml.
+
+QmlView
+-------
+The API of QmlView has been narrowed and its role as a convenience class
+reinforced.
+- remove addItem()
+- remove clearItems() - use 'delete root()'
+- remove reset()
+- resizeContent -> enum ResizeMode { SizeViewToRootObject, SizeRootObjectToView }
+- remove setQml(), qml()
+- rename setUrl(), ur() to setSource(), source()
+- root() -> rootObject(),  returns QGraphicsObject rather than QmlGraphicsItem
+- remove quit() signal -> use quit() signal of engine()
+- initialSize() signal removed
+- Added status() to determine status of the internal QmlComponent
+- removed execute() - setSource() will also execute the QML.
+
+
+=============================================================================
+The changes below are pre-4.6.0 release.
+
+QML API Review
+==============
+
+The QML API is being reviewed.  This file documents the changes.
+Note that the changes are incremental, so a rename A->B for example may be followed
+by another subsequent rename B->C, if later reviews override earlier reviews.
+
+API Changes
+===========
+
+Renamed Elements:
+LineEdit         -> TextInput
+VerticalLayout   -> Column
+HorizontalLayout -> Row
+VerticalPositioner -> Column
+HorizontalPositioner -> Row
+GridLayout       -> Grid
+GridPositioner   -> Grid
+Rect             -> Rectangle
+FocusRealm       -> FocusScope
+FontFamily       -> FontLoader
+Palette          -> SystemPalette
+Bind             -> Binding
+SetProperties    -> PropertyChanges
+RunScript        -> StateChangeScript
+SetAnchors       -> AnchorChanges
+SetPropertyAction  -> PropertyAction
+RunScriptAction    -> ScriptAction
+ParentChangeAction -> ParentAction
+VisualModel        -> VisualDataModel
+Follow             -> SpringFollow
+
+Renamed properties:
+Item: contents         -> childrenRect
+MouseRegion: xmin      -> minimumX
+MouseRegion: xmax      -> maximumX
+MouseRegion: ymin      -> minimumY
+MouseRegion: ymin      -> maximumY
+Text elements: hAlign  -> horizontalAlignment
+Text elements: vAlign  -> verticalAlignment
+Text elements: highlightColor -> selectionColor
+Text elements: highlightedTextColor -> selectedTextColor
+Text elements: preserveSelection -> persistentSelection
+State: operations      -> changes
+Transition: operations -> animations
+Transition: fromState  -> from
+Transition: toState    -> to
+Follow: followValue    -> value
+Flickable: xPosition   -> viewportX
+Flickable: yPosition   -> viewportY
+Flickable: xVelocity   -> horizontalVelocity
+Flickable: yVelocity   -> verticalVelocity
+Flickable: velocityDecay -> reportedVelocitySmoothing
+Flickable: locked      -> interactive (note reversal of meaning)
+Flickable: pageXPosition -> visibleArea.xPosition
+Flickable: pageYPosition -> visibleArea.yPosition
+Flickable: pageWidth    -> visibleArea.widthRatio
+Flickable: pageHeight   -> visibleArea.heightRatio
+WebView: idealWidth    -> preferredWidth
+WebView: idealHeight   -> preferredHeight
+WebView: status        -> statusText
+WebView: mouseX        -> clickX (parameter to onDoubleClick)
+WebView: mouseY        -> clickY (parameter to onDoubleClick)
+WebView: cacheSize     -> pixelCacheSize
+Repeater: component    -> delegate
+Repeater: dataSource   -> model
+ListView: current      -> currentItem
+GridView: current      -> currentItem
+ListView: wrap         -> keyNavigationWraps
+ListView: autoHighlight -> highlightFollowsCurrentItem
+GridView: wrap         -> keyNavigationWraps
+GridView: autoHighlight -> highlightFollowsCurrentItem
+Animation: targets -> matchTargets
+Animation: properties -> matchProperties
+
+Additions:
+MouseRegion: add "acceptedButtons" property
+MouseRegion: add "hoverEnabled" property
+MouseRegion: add "pressedButtons" property
+Timer: add start() and stop() slots
+WebView: add newWindowComponent and newWindowParent properties
+Loader: add status() and progress() properties
+Loader: add sourceComponent property
+Loader: add resizeMode property
+ListView: preferredHighlightBegin, preferredHighlightEnd
+ListView: strictlyEnforceHighlightRange
+Particles: Added emissionRate, emissionVariance and burst()
+
+Deletions:
+Column/VerticalPositioner: lost "margins" property
+Row/HorizontalPositioner: lost "margins" property
+Grid/Positioner/Layout: lost "margins" property
+WebView: lost "interactive" property (always true now)
+Flickable: removed "dragMode" property
+ComponentInstance: removed.  Replaced by Loader.sourceComponent
+ListView: removed currentItemMode.  Replaced by highligh range.
+ListView: removed snapPos.
+Particles: removed streamIn. Replaced by emissionRate
+
+Other Changes:
+ids must be lowercase: Text { id: foo }, not Text { id: Foo }
+Drag: axis becomes an enum with values "XAxis", "YAxis", "XandYAxis"
+Image: scaleGrid property removed. New item called BorderImage instead.
+KeyActions: changed to a Keys attached property on any item.
+KeyProxy: changed to a Keys.forwardTo property on any item.
+Script: now an intrinsic type in the language
+ - cannot be assigned to properties
+ - good: Item { Script { ... } }
+ - bad:  Item { resources: Script { ... } }
+Script: delay-loaded of the QML file until their source has been loaded (this only effects QML files loaded across the network.)
+Scope: declared properties shadow a property of the same name (was previously the reverse)
+ScriptAction and StateChangeScript: the script property now takes script rather than a string containing script (script: doSomething() rather than script: "doSomething()")
+QmlGraphicsItem::transformOrigin default changed from TopLeft to Center
+Animations used as PropertySourceValues are set to 'running: true' as default

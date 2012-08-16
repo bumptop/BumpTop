@@ -1,0 +1,56 @@
+// Copyright 2011 Google Inc. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+{
+	// Widget header block
+	"header" : {
+		"version" : 		"0.1",
+		"name" : 			"Test Widget",
+		"author" : 			"Bump Technologies Inc.",
+		"description" : 	"A test widget",
+		"url" : 			"http://www.bumptop.com/widgets",
+		
+		// NOTE: This represents the schema from which this widget file will be validated 
+		// 		 against.  This allows BumpTop to add and modify default widget changes as 
+		// 		 time progresses, and allows theme developers to ensure that their widgets
+		// 		 work on the latest compatible versions of BumpTop.  Do not change this 
+		// 		 value, unless your widget conforms to the specified in the value.  
+		// 		 Please see the widget docs for more information.
+		"schema" : 			"widget/0.1"
+	},
+	
+	"widget" : {
+		"relativeWorkingDirectory" : "data/",
+	
+		// application to load on startup, and has the same lifetime as the BumpTop process itself
+		"startupApplication" : {
+			"path" : "testApp.exe",
+			"args" : ""
+		},
+		
+		// an icon reference whose behaviour can be overriden to launch an external application 
+		// or path
+		"icons" : [
+			{
+				// note that this only applies to the file in the working directory
+				"filename" : "testWidget.bmp",
+				"label" : "Test Widget2asdf",
+				"launchApplication" : {
+					"path" : "testApp.exe",
+					"args" : "-edit"
+				}
+			}
+		]
+	}
+}

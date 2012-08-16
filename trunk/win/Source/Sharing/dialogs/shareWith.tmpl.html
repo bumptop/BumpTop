@@ -1,0 +1,96 @@
+{#
+ Copyright 2011 Google Inc. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+#}
+
+{% extends "../Sharing/dialogs/dialogs_common.tmpl.html" %}
+
+{% block jquery_include %}<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>{% endblock %}
+
+{% block dialog_head %}
+	<script type="text/javascript">
+		$(document).ready(function () {
+			var uploadData = BumpTopNative.getDialogUserData();
+			
+			// Fill in the info about the shared files
+			var count = 0;
+			for (var name in uploadData) {
+				if (uploadData.hasOwnProperty(name)) {
+					if (count++ > 0) {
+						$(".share_info:first").clone().insertAfter($(".share_info:last"));
+					}
+					$(".share_info:last")
+						.find(".name").text(name).end()
+						.find(".public_link").val(uploadData[name]).end();
+				}
+			}
+			
+			$(".copyButton").click(function() {
+				var url = $(this).siblings("input[type=text]").val();
+				BumpTopNative.copyTextToClipboard(url);
+			});
+		});
+	</script>
+	<style type="text/css">
+		#content table {
+			width: 100%;
+			margin-top: 1em;
+			margin-bottom: 2em;
+		}
+		
+		#content table td {
+			text-align: center;
+		}
+		
+		input[type=text] {
+			width: 225px;
+		}
+		
+		h2, h3 {
+			margin-bottom: 1em;
+		}
+	</style>
+{% endblock dialog_head %}
+
+{% block dialog_content %}
+	<div id="content">
+		<h2>Upload complete!</h2>
+		<!--
+		<table cellpadding="0" cellspacing="0">
+			<tr>
+				<td><img src="images/email.png"/></td>
+				<td><img src="images/facebook.png"/></td>
+				<td><img src="images/twitter.png"/></td>
+			</tr>
+			<tr>
+				<td>{{ _("Email") }}</td>
+				<td>{{ _("Facebook") }}</td>
+				<td>{{ _("Twitter") }}</td>
+			</tr>
+		</table>
+		-->
+		<div class="share_info">
+			<h3 class="name"></h3>
+			<p>{{ _("Share this link:") }} <input type="text" class="public_link"/>
+				<a class="buttonlink copyButton" href="#"><span class="grey button">{{ _("Copy") }}</span></a>
+			</p>
+		</div>
+
+		<hr id="bottomdivider"/>
+		<div class="right">
+			<a class="buttonlink" href="#" id="okButton"><span class="blue button">Done</span></a>
+		</div>
+		<hr id="clear"/>
+	</div>
+{% endblock dialog_content %}

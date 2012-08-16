@@ -1,0 +1,22 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qmldbg_tcp", "D:/qt-everywhere-opensource-src-4.7.4/src/plugins/qmltooling/qmldbg_tcp\qmldbg_tcp.vcxproj", "{7753A4A2-E72A-3C5E-9F77-1D376DAB35CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug|Win32
+		ConfigName.1 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{7753A4A2-E72A-3C5E-9F77-1D376DAB35CC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7753A4A2-E72A-3C5E-9F77-1D376DAB35CC}.Debug|Win32.Build.0 = Debug|Win32
+		{7753A4A2-E72A-3C5E-9F77-1D376DAB35CC}.Release|Win32.ActiveCfg = Release|Win32
+		{7753A4A2-E72A-3C5E-9F77-1D376DAB35CC}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

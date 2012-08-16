@@ -1,0 +1,191 @@
+// Copyright 2011 Google Inc. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// BumpTop Theme properties
+// see http://www.bumptop.com/themes for more information
+// 
+// NOTE: All colors are represented in [Red, Green, Blue, Alpha]
+// NOTE: Font familys are a set of fallbacks, which will be tried in
+//		 the order specified in the set, defaulting to Arial if none
+// 		 of the fonts in the set are found
+//
+{
+	// Theme header block
+	"header" : {
+		"version" : 		"0.1.1552",
+		"name" : 			"Test Theme",
+		"author" : 			"Bump Technologies, Inc.",
+		"description" : 	"A test theme.",
+		"url" : 			"http://www.bumptop.com/themes",
+		
+		// NOTE: This represents the schema from which this theme file will be validated 
+		// 		 against.  This allows BumpTop to add and modify default theme changes as 
+		// 		 time progresses, and allows theme developers to ensure that their themes 
+		// 		 work on the latest compatible versions of BumpTop.  Do not change this 
+		// 		 value, unless your theme conforms to the specified in the value.  
+		// 		 Please see the theming docs for more information.
+		"schema" : 			"theme/1.0"
+	},
+	
+	// UI theme block
+	"ui" : {
+		"icon" : {
+			"highlight" : {
+				"color" : {
+					"selection" : 	[153, 255, 127, 130],
+					"hover" : 		[102, 102, 204, 180],
+					"freshness" : 	[252, 221, 0, 255]
+				}
+			},			
+			"font" : {
+				"family" : 			["Arial", "Tahoma"],
+				"size" : 			12,		
+				// NOTE: alpha is ignored for this font color		
+				"color" : 		 	[255, 255, 255, 255],
+				"background" : {
+					"default" :		[0, 0, 0, 0],	
+					"selection" :	[0, 0, 0, 140]
+				}
+			}
+		},		
+		"lasso" : {
+			"color" : {
+				"overlay" : 		[43, 79, 134, 76],
+				"border" : {
+					"bottom" : 		[0, 0, 0, 255],
+					"top" : 		[255, 255, 255, 77]
+				}
+			}
+		},		
+		"markingMenu" : {
+			"color" : {
+				"default" : {
+					"inner" : 		[87, 126, 187, 255],
+					"outer" : 		[87, 126, 187, 220]
+				},
+				"highlight" : {
+					"inner" : 		[108, 151, 217, 255],
+					"outer" : 		[108, 151, 217, 220]
+				},
+				// NOTE: the border alpha is determined by the animated
+				//  	 alpha of the inner color for now (it is ignored)
+				"border" : 			[0, 0, 0, 255]
+			},
+			"font" : {
+				"family" : 			["Arial", "Tahoma"],
+				"size" : 			18,
+				"subTextSize" : 	12,
+				// NOTE: the font alpha is determined by the menu animation
+				// 		 and is ignored for both the color and subtext color
+				"color"	: 			[255, 255, 255, 255],
+				"subTextColor" : 	[235, 235, 235, 255],				
+				"disabledColor" : 	[159, 159, 159, 111]
+			}
+		},		
+		"message" : {
+			"color" : {
+				"background" : 		[25, 25, 30, 160]
+			},
+			"font" : {
+				"family" : 			["Tahoma", "Arial"],
+				"size" : 			24,
+				// NOTE: the font alpha is determined by the animated alpha
+				// 		 of the message for now (it is ignored)
+				"color"	: 			[255, 255, 255, 0]
+			}
+		}
+	},
+
+	// Theme textures block
+	"textures" : {
+		"relativeRoot" : 			"./",
+		
+		"icon" : {
+			"relativeRoot" : 		"./core/icon/",
+			"linkOverlay" : 		"link_arrow_overlay.png",
+			"selection" : {
+				"alphaMask" : 		"selection_alphaMask.png"
+			},
+			"custom" : {
+				// NOTE: Note the hierarchy, this is relative to the icon relative
+				// 		 root path
+				"relativeRoot" : 	"./custom/",
+				"email" : 			"email.png",
+				"printer" : 		"printer.png"
+			}
+		},
+		"pile" : {	
+			"relativeRoot" : 		"./core/pile/",
+			"background" : 			"background.png"
+		},
+		"floor" : {
+			"relativeRoot" : 		"./desktop/",		
+			// NOTE: the desktop background specified here is only used
+			// 		 if the user has disabled their own windows background
+			// 		 (or if there are errors loading their background)
+			"desktop" : 			"floor_infinite.png",
+			"infinite" : 			"floor_infinite.png"
+		},
+		"wall" : {			
+			"relativeRoot" : 		"./desktop/",
+			// NOTE: all the wall textures will have an AO-baked overlay 
+			// 		 applied to them unless otherwise specified, to give 
+			// 		 the desktop a more 3d feel.  If you choose to bake your
+			// 		 own effects onto your wall textures, disable this setting
+			// 		 below.
+			"allowOverlay" : 		true,
+			"top" : 				"",
+			"right" : 				"",
+			"bottom" : 				"",
+			"left" : 				"",
+			"allowStretch" : true
+		},
+		"widget" : {
+			"relativeRoot" : 		"./widgets/",
+			"close" : 				"close.png",
+			"launchInExplorer" : 	"launchInExplorer.png",
+			"scroll" : {
+				"up" : 				"scrollUp.png",
+				"up_disabled" : 	"scrollUp_disabled.png",
+				"down" : 			"scrollDown.png",
+				"down_disabled" : 	"scrollDown_disabled.png"				
+			},
+			"lassoMenu" : {
+				"dragAndCross" : 	"dragAndCross.png"
+			}
+		},
+		// NOTE: the override textures usage depends on whether the user's settings
+		// 		 are set to override native os textures
+		"override" : {
+			"relativeRoot" : 		"./override/",
+			// NOTE: with the exception of folders, you can add an override for any 
+			// 		 file type by adding an entry below and putting the texture in the
+			// 		 appropriate folder
+			"ext" : {
+				"folder" : 			"folder.png",
+				"doc" : 			"doc.png",
+				"pdf" : 			"pdf.png",
+				"txt" : 			"txt.png"
+			},
+			"virtual" : {
+				"myComputer" : 		"myComputer.png"
+			}
+		},
+		"slideshow" : {
+			"relativeRoot" : 		"./slideshow/",
+			"next" : 				"next.png",
+			"previous" : 			"previous.png"
+		}
+	}
+}

@@ -1,0 +1,362 @@
+[
+    {
+        "location": "../Facebook/facebook_upload.tmpl.html", 
+        "source": "(Cancel)", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_upload.tmpl.html", 
+        "source": "(Close dialog)", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_upload.tmpl.html", 
+        "source": "(Create new album...)", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/SettingsModifyDialog.tmpl.html", 
+        "source": "Administrator Email", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/CreateShareDialog.tmpl.html", 
+        "source": "Administrator Password <em>(optional)</em>:", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/ConnectExistingShareDialog.tmpl.html", 
+        "source": "Administrator or guest password (if required):", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/SettingsModifyDialog.tmpl.html", 
+        "source": "Administrator passwords do not match!", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/DeleteTabDialog.tmpl.html", 
+        "source": "Are you sure you want to remove this BumpShare from your tabs?", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_newsfeed.tmpl.html", 
+        "source": "Automatic slideshow", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/shareWith.tmpl.html,../Sharing/dialogs/ConnectExistingShareDialog.tmpl.html,../Sharing/dialogs/DeleteTabDialog.tmpl.html,../Sharing/dialogs/InviteFriendsDialog.tmpl.html,../Sharing/dialogs/CreateShareDialog.tmpl.html,../Sharing/dialogs/SettingsModifyDialog.tmpl.html", 
+        "source": "BumpTop Sharing", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/DeleteTabDialog.tmpl.html,../Sharing/dialogs/SettingsModifyDialog.tmpl.html,../Sharing/dialogs/SettingsModifyDialog.tmpl.html,../Facebook/facebook_newsfeed.tmpl.html,../Facebook/facebook_photoalbums.tmpl.html,../Facebook/facebook_upload.tmpl.html,../Facebook/facebook_upload.tmpl.html", 
+        "source": "Cancel", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/CreateShareDialog.tmpl.html", 
+        "source": "Choose your new Shared Wall name:", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_no_connection.tmpl.html", 
+        "source": "Close window", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/SettingsModifyDialog.tmpl.html", 
+        "source": "Confirm Administrator Password", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/shareWith.tmpl.html", 
+        "source": "Copy", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_no_connection.tmpl.html", 
+        "source": "Could not load the Facebook login page.", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_upload.tmpl.html", 
+        "source": "Create a new Photo Album", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/DeleteTabDialog.tmpl.html", 
+        "source": "Delete this BumpShare permanently?", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/DeleteTabDialog.tmpl.html", 
+        "source": "Deleting:", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_upload.tmpl.html", 
+        "source": "Description", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_upload.tmpl.html", 
+        "source": "Drop <em>images</em> onto this widget to upload them to Facebook!", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/shareWith.tmpl.html", 
+        "source": "Email", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/CreateShareDialog.tmpl.html", 
+        "source": "Email Address <em>(required)</em>:", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/ConnectExistingShareDialog.tmpl.html,../Sharing/dialogs/CreateShareDialog.tmpl.html", 
+        "source": "Email me when files are added or removed", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/SettingsModifyDialog.tmpl.html", 
+        "source": "Enter or change your email if you wish to receive updates", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/SettingsModifyDialog.tmpl.html", 
+        "source": "Enter your email if you wish to receive updates", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/shareWith.tmpl.html", 
+        "source": "Facebook", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_newsfeed.tmpl.html,../Facebook/facebook_photoalbums.tmpl.html,../Facebook/facebook_upload.tmpl.html", 
+        "source": "Feed", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/ShareCreatedDialog.tmpl.html", 
+        "source": "Finish", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/CreateShareDialog.tmpl.html", 
+        "source": "Guest Password <em>(optional)</em>:", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/DeleteTabDialog.tmpl.html", 
+        "source": "If you select no, you will be able to reconnect to this share at a later date.", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/ShareCreatedDialog.tmpl.html", 
+        "source": "Invite Friends", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_photoalbums.tmpl.html", 
+        "source": "Loading photos...", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_photoalbums.tmpl.html", 
+        "source": "Loading your photo albums...", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_newsfeed.tmpl.html", 
+        "source": "Loading your photo feed...", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_upload.tmpl.html", 
+        "source": "Loading...", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_upload.tmpl.html", 
+        "source": "Location", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_login.tmpl.html", 
+        "source": "Login", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_newsfeed.tmpl.html,../Facebook/facebook_photoalbums.tmpl.html,../Facebook/facebook_upload.tmpl.html", 
+        "source": "Logout", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/SettingsModifyDialog.tmpl.html", 
+        "source": "Modifying Settings for:", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_newsfeed.tmpl.html", 
+        "source": "More", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_newsfeed.tmpl.html,../Facebook/facebook_photoalbums.tmpl.html,../Facebook/facebook_upload.tmpl.html", 
+        "source": "My Photos", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_upload.tmpl.html", 
+        "source": "Name", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/DeleteTabDialog.tmpl.html", 
+        "source": "No", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/DeleteTabDialog.tmpl.html", 
+        "source": "Note: Only administrators can delete BumpShares permanently.", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/SettingsModifyDialog.tmpl.html,../Sharing/dialogs/SettingsModifyDialog.tmpl.html", 
+        "source": "Ok", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_upload.tmpl.html", 
+        "source": "Photos Uploaded to Facebook!", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_no_connection.tmpl.html", 
+        "source": "Please check make sure you are connected to the Internet.", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/ConnectExistingShareDialog.tmpl.html", 
+        "source": "Please enter a BumpShare name!", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/SettingsModifyDialog.tmpl.html", 
+        "source": "Please enter an administrator password!", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/SettingsModifyDialog.tmpl.html", 
+        "source": "Public Access Password (<em>optional</em>):", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_upload.tmpl.html", 
+        "source": "Return to feed", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/SettingsModifyDialog.tmpl.html", 
+        "source": "Set Administrator Password", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/shareWith.tmpl.html", 
+        "source": "Share this link:", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/ConnectExistingShareDialog.tmpl.html", 
+        "source": "Shared Wall name or URL:", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_newsfeed.tmpl.html", 
+        "source": "Show photos", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_newsfeed.tmpl.html", 
+        "source": "Show status updates", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_newsfeed.tmpl.html,../Facebook/facebook_photoalbums.tmpl.html,../Facebook/facebook_upload.tmpl.html", 
+        "source": "Status", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_upload.tmpl.html", 
+        "source": "To album:", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_no_connection.tmpl.html", 
+        "source": "Try again", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/shareWith.tmpl.html", 
+        "source": "Twitter", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_newsfeed.tmpl.html,../Facebook/facebook_photoalbums.tmpl.html,../Facebook/facebook_upload.tmpl.html", 
+        "source": "Update your status", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_newsfeed.tmpl.html,../Facebook/facebook_photoalbums.tmpl.html,../Facebook/facebook_upload.tmpl.html,../Facebook/facebook_upload.tmpl.html", 
+        "source": "Upload", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_upload.tmpl.html", 
+        "source": "Upload files:", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_upload.tmpl.html", 
+        "source": "Uploading photos...", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_upload.tmpl.html", 
+        "source": "View photos in external browser", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/DeleteTabDialog.tmpl.html", 
+        "source": "Yes", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/dialogs/ShareCreatedDialog.tmpl.html", 
+        "source": "Your BumpShare has been created under the following name:", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_photoalbums.tmpl.html", 
+        "source": "albums", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_login.tmpl.html", 
+        "source": "or <a class=\"signup\" href=\"#\">Sign up</a>", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_photoalbums.tmpl.html", 
+        "source": "play", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/facebook_upload.tmpl.html", 
+        "source": "remove", 
+        "translation": ""
+    }
+]

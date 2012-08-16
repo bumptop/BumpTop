@@ -1,0 +1,22 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qsqlite", "D:/qt-everywhere-opensource-src-4.7.4/src/plugins/sqldrivers/sqlite\qsqlite.vcxproj", "{FA1D4D46-5A64-35BF-860C-89D718062579}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug|Win32
+		ConfigName.1 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{FA1D4D46-5A64-35BF-860C-89D718062579}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FA1D4D46-5A64-35BF-860C-89D718062579}.Debug|Win32.Build.0 = Debug|Win32
+		{FA1D4D46-5A64-35BF-860C-89D718062579}.Release|Win32.ActiveCfg = Release|Win32
+		{FA1D4D46-5A64-35BF-860C-89D718062579}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

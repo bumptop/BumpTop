@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+// Copyright 2011 Google Inc. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+-->
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	 xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
+  <Description about="urn:mozilla:install-manifest">
+	<em:id>bumptabs@bumptop.com</em:id>
+	<em:version>$Rev$</em:version>
+	<em:type>2</em:type>
+
+	<!-- Target Application this extension can install into, 
+		 with minimum and maximum supported versions. --> 
+	<em:targetApplication>
+	  <Description>
+		<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+		<em:minVersion>3.0</em:minVersion>
+		<em:maxVersion>3.*</em:maxVersion>
+	  </Description>
+	</em:targetApplication>
+
+	<!-- Front End MetaData -->
+	<em:name>Bump these tabs</em:name>
+	<em:description>Open the current set of browser tabs in BumpTop</em:description>
+	<em:iconURL>chrome://bumptabs/skin/BumpTop32x32.png</em:iconURL>
+	<em:creator>BumpTop</em:creator>
+	<em:homepageURL>http://bumptop.com</em:homepageURL>
+  </Description>      
+</RDF>

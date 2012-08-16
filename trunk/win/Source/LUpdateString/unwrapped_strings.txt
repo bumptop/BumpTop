@@ -1,0 +1,1122 @@
+BT_AutomatedDemo.cpp : 	QString path = native(winOS->GetDataDirectory()) + "\\demoPerf.txt"; 
+BT_AutomatedDemo.cpp : 	"\n\r" 
+BT_AutomatedDemo.cpp : 	"Operation: %1\n\r" 
+BT_AutomatedDemo.cpp : 	"FPS: %2\n\r" 
+BT_AutomatedDemo.cpp : 	"Total frames rendered: %3\n\r" 
+BT_AutomatedDemo.cpp : 	"Max Average FPS: %4\n\r" 
+BT_AutomatedDemo.cpp : 	"O/A/P: %5/%6/%7\n\r" 
+BT_AutomatedDemo.cpp : 	"\n\r" 
+BT_AutomatedDemo.cpp : 	tmpState = new InitPerformanceData(0, "Initialize performance data"); 
+BT_AutomatedDemo.cpp : 	tmpState = new ScatterActorsState(2000, "\\_demo.*"); 
+BT_AutomatedDemo.cpp : 	tmpState = new SelectFileSystemActorsState(1000, "\\_demo.*"); 
+BT_AutomatedDemo.cpp : 	tmpState = new ZoomIntoImageState(1500, "\\_demo[^\\.]*\\.jpg"); 
+BT_AutomatedDemo.cpp : 	tmpState = new CreatePileState(500, "\\_demo.*"); 
+BT_AutomatedDemo.cpp : 	tmpState = new SelectPilesWithFileSystemActorsState(100, "\\_demo.*"); 
+BT_AutomatedDemo.cpp : 	tmpState = new SortFileSystemActorsByTypeState(1000, "\\_demo.*"); 
+BT_AutomatedDemo.cpp : 	tmpState = new SelectPilesWithFileSystemActorsState(100, "\\_demo[^\\.]*\\.(jpg|gif)"); 
+BT_AutomatedDemo.cpp : 	tmpState = new SelectFileSystemActorsState(1000, "\\_demo[^\\.]*\\.(jpg|gif)"); 
+BT_AutomatedDemo.cpp : 	tmpState = new ZoomIntoImageState(1500, "\\_demo[^\\.]*\\.(jpg|gif)"); 
+BT_AutomatedDemo.cpp : 	tmpState = new SelectPilesWithFileSystemActorsState(100, "\\_demo[^\\.]*\\.jpg"); 
+BT_AutomatedDemo.cpp : 	tmpState = new CollectPerformanceData(0, "All demo tasks - "); 
+BT_AutomatedJSONTesting.cpp : 	_testDescription = "Testing leafing through a pile and searching for demo files."; 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new SelectFileSystemActorsState(1000, "\\_demo.*")); 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new CreatePileState(500, "\\_demo.*")); 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new SelectPilesWithFileSystemActorsState(2000, "\\_demo.*")); 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new SelectPilesWithFileSystemActorsState(100, "\\_demo.*")); 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new FindAsYouTypeState(keyDownTime, KeyCombo('D'), "You can do this in BumpTop!!!")); 
+BT_AutomatedJSONTesting.cpp : 	_testDescription = "This test will zoom into some photos, pile all items and grid them"; 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new ScatterActorsState(2000, "\\_demo.*")); 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new SelectFileSystemActorsState(1000, "\\_demo.*")); 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new ZoomIntoImageState(1500, "\\_demo[^\\.]*\\.jpg")); 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new CreatePileState(500, "\\_demo.*")); 
+BT_AutomatedJSONTesting.cpp : 	_testDescription = "This is a basic successful test."; 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new ScatterActorsState(2000, "\\_demo.*")); 
+BT_AutomatedJSONTesting.cpp : 	_testDescription = "Blank test."; 
+BT_AutomatedJSONTesting.cpp : 	_testDescription = "This test will create, rename both body and extension and then delete the file."; 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new SelectFileSystemActorsState(1000, "_demo_document_.txt")); 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new RenameFileState(2000, "changeName.txt")); 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new RenameFileState(2000, "changeName.changeExt")); 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new DeleteFilesState(2000, "changeName.changeExt", false, true)); //Simulate cancel dialog box 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new DeleteFilesState(2000, "changeName.changeExt")); 
+BT_AutomatedJSONTesting.cpp : 	_testDescription = "This test will move an item in and out of a folder."; 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new FolderizeSelectedFilesState(2000, "_demo_document_.txt", "_demo_folder")); // Folder must already exist 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new FolderizeSelectedFilesState(2000, "_demo_document_.txt", "_demo_folder")); // Folder must already exist 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new SelectFileSystemActorsState(2000, "_demo_folder")); 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new RemoveFileSystemActorFromPileState(2000, "_demo_document_.txt")); 
+BT_AutomatedJSONTesting.cpp : 	_testDescription = "This test will pile 3 items, move another in and out of the pile, move pile to folder, move out of folder, unpile."; 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new CreatePileState(2000, ".*.jpg", "We can create piles!")); 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new CreatePileState(2000, ".*.jpg", "We can create piles!")); 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new CreatePileState(2000, ".*.tif|.*.jpg", "")); 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new RemoveFileSystemActorFromPileState(2000, ".*.tif")); 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new ScatterActorsState(2000, ".*.*")); 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new SelectPilesWithFileSystemActorsState(2000, "_demo_image_bt_.jpg")); 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new FolderizeSelectedPileState(3000, "newly_created_folder")); 
+BT_AutomatedJSONTesting.cpp : 	NEW_STATE(new SelectFileSystemActorsState(2000, "newly_created_folder")); 
+BT_AutomatedJSONTesting.cpp : 	scnManager->messages()->addMessage(new Message("AutomatedJSONTestRunner::play", "Starting New JSON Test \nFile Name: " + currentTestSuite()->getFileName() +  
+BT_AutomatedJSONTesting.cpp : 		"\nTest Name: " + currentTestSuite()->getName() + "\nTest Description: " + currentTestSuite()->getDescription(), Message::Ok, clearPolicy)); 
+BT_AutomatedJSONTesting.cpp : 		"\nTest Name: " + currentTestSuite()->getName() + "\nTest Description: " + currentTestSuite()->getDescription(), Message::Ok, clearPolicy)); 
+BT_AutomatedJSONTesting.cpp : 	scnManager->messages()->addMessage(new Message("AutomatedJSONTestRunner::stop", "Stopping JSON Test", Message::Ok, clearPolicy)); 
+BT_AutomatedJSONTesting.cpp : 		scnManager->messages()->addMessage(new Message("AutomatedJSONTestRunner::fail", "TEST FAILED: See log for details", Message::Ok, clearPolicy)); 
+BT_AutomatedTest.cpp : 	scnManager->messages()->addMessage(new Message("AutomatedTestRunner::play", "Starting Automated Tests", Message::Ok, clearPolicy)); 
+BT_AutomatedTest.cpp : 	scnManager->messages()->addMessage(new Message("AutomatedTestRunner::stop", "Stopping Automated Tests", Message::Ok, clearPolicy)); 
+BT_AutomatedTests.cpp : 	tmpState = new SelectFileSystemActorsState(1000, "\\_demo.*"); 
+BT_AutomatedTests.cpp : 	tmpState = new CreatePileState(500, "\\_demo.*"); 
+BT_AutomatedTests.cpp : 	scnManager->messages()->addMessage(new Message("AutomatedTests::play", "Starting automated tests", Message::Ok, clearPolicy)); 
+BT_AutomatedTests.cpp : 	scnManager->messages()->addMessage(new Message("AutomatedTests::stop", "Stopping automated tests", Message::Ok, clearPolicy)); 
+BT_AutomatedTradeshowDemo.cpp : 	tmpState = new SelectFileSystemActorsState(1000, ".*\\.doc"); 
+BT_AutomatedTradeshowDemo.cpp : 	tmpState = new ZoomIntoSelectionState(2000, ".*\\.doc"); 
+BT_AutomatedTradeshowDemo.cpp : 	tmpState = new ResizeActorsState(3000, ".*\\.doc", FileSystem, true, "We can grow objects if they are important", true); 
+BT_AutomatedTradeshowDemo.cpp : 	tmpState = new ResizeActorsState(3000, ".*\\.doc", FileSystem, true, "We can grow objects if they are important", true); 
+BT_AutomatedTradeshowDemo.cpp : 	tmpState = new PointCameraToState(2000, Vec3(frontCenter.x - frontExtents.x, 0, frontCenter.z), "You can control what you see"); 
+BT_AutomatedTradeshowDemo.cpp : 	tmpState = new ZoomCameraToPointState(2500, Vec3(frontCenter.x - frontExtents.x, 0, frontCenter.z), "You can even zoom in using the scroll wheel!"); 
+BT_AutomatedTradeshowDemo.cpp : 	tmpState = new ZoomIntoImageState(2500, ".*.jpg", "Double clicking an image will start up BumpTop Slideshow"); 
+BT_AutomatedTradeshowDemo.cpp : 	tmpState = new ZoomIntoImageState(2500, ".*.jpg", "Double clicking an image will start up BumpTop Slideshow"); 
+BT_AutomatedTradeshowDemo.cpp : 	tmpState = new FindAsYouTypeState(keyDownTime, KeyCombo('W'), "We can find files by typing in their name. Where's Waldo?"); 
+BT_AutomatedTradeshowDemo.cpp : 	tmpState = new CreatePileState(3000, ".*Waldo.*", "We can pile items just like we can on a regular table."); 
+BT_AutomatedTradeshowDemo.cpp : 	tmpState = new CreatePileState(3000, ".*Waldo.*", "We can pile items just like we can on a regular table."); 
+BT_AutomatedTradeshowDemo.cpp : 	tmpState = new GridSelectedPileState(3000, "Double clicking a pile will bring up a grid of the items"); 
+BT_AutomatedTradeshowDemo.cpp : 	tmpState = new SelectPilesWithFileSystemActorsState(100, ".*Waldo.*"); 
+BT_AutomatedTradeshowDemo.cpp : 	tmpState = new BreakSelectedPileState(2500, "We can also break piles when we are done with them"); 
+BT_AutomatedTradeshowDemo.cpp : 	tmpState = new SortFileSystemActorsByTypeState(2500, ".*", "Bumptop also lets you quickly pile all your items by type!"); 
+BT_AutomatedTradeshowDemo.cpp : 	tmpState = new SelectPilesWithFileSystemActorsState(100, ".*\\.doc"); 
+BT_AutomatedTradeshowDemo.cpp : 	tmpState = new LeafThroughPileState(1500, "Using the scroll wheel you can leaf through a pile"); 
+BT_AutomatedTradeshowDemo.cpp : 	tmpState = new PrintMessageState(2000, "This is just a small taste of what BumpTop can do. In a few moments try for yourself.", 5); 
+BT_Camera.cpp : 	_twitterImage = new ImageOverlay("pui.twitter"); 
+BT_Camera.cpp : 	_facebookImage = new ImageOverlay("pui.facebook"); 
+BT_Camera.cpp : 	_emailImage = new ImageOverlay("pui.email"); 
+BT_Camera.cpp : 	_printerImage = new ImageOverlay("pui.print"); 
+BT_Camera.cpp : 	_editImage = new ImageOverlay("pui.edit"); 
+BT_Camera.cpp : 	_dividerImage1 = new ImageOverlay("pui.divider"); 
+BT_Camera.cpp : 	_dividerImage2 = new ImageOverlay("pui.divider"); 
+BT_Camera.cpp : 	_dividerImage3 = new ImageOverlay("pui.divider"); 
+BT_Camera.cpp : 	_dividerImage4 = new ImageOverlay("pui.divider"); 
+BT_Camera.cpp : 	_dividerImage5 = new ImageOverlay("pui.divider"); 
+BT_Camera.cpp : 	_dividerImage6 = new ImageOverlay("pui.divider"); 
+BT_Camera.cpp : 	_closeImage = new ImageOverlay("pui.close"); 
+BT_Camera.cpp : 	_nextImage = new ImageOverlay("pui.next"); 
+BT_Camera.cpp : 	_prevImage = new ImageOverlay("pui.previous"); 
+BT_Camera.cpp : 		fsManager->launchFile(dynamic_cast<FileSystemActor *>(currentActor)->getFullPath(),L"edit"); 
+BT_CameraPanGesture.cpp : Gesture("Camera Pan", 2, 2, false) 
+BT_CameraPanGesture.cpp : 		return gestureRejected("First finger is on an object"); 
+BT_CameraPanGesture.cpp : 		return gestureRejected("Second finger is on an object"); 
+BT_CameraPanGesture.cpp : 		gestureRejected("Not a two finger swipe"); 
+BT_CameraZoomGesture.cpp : Gesture("Camera Zoom", 2, 2, false) 
+BT_CameraZoomGesture.cpp : 		return gestureRejected("Fingers are on the same object (this is pinch zoom)"); 
+BT_CameraZoomGesture.cpp : 		return gestureRejected("Fingers are on objects of an existing selection (this is pinch zoom)"); 
+BT_CameraZoomGesture.cpp : 		return gestureRejected("Fingers not moving in opposite directions"); 
+BT_ChooseVersionDialog.cpp : 						L"Arial"); 
+BT_ChooseVersionDialog.cpp : 		launchBumpTopProPage("firstRun", true); 
+BT_ChooseVersionDialog.cpp : 				::MessageBox(_dlgHwnd, (LPCWSTR) error.utf16(), L"Authorization Error", MB_OK); 
+BT_ChooseVersionDialog.cpp : 		launchBumpTopProPage("otherGoodnessLink"); 
+BT_CommonFiniteStates.cpp : 		THROW_RUNTIME_ERROR("Slideshow Mode is not active!"); 
+BT_CommonFiniteStates.cpp : 		THROW_RUNTIME_ERROR("Slideshow Mode is not active!"); 
+BT_CommonFiniteStates.cpp : 			append_file_utf8("Failed to pile items", winOS->GetDataDirectory().absoluteFilePath("ErrorLog.txt")); 
+BT_CommonFiniteStates.cpp : 			append_file_utf8("Failed to pile items", winOS->GetDataDirectory().absoluteFilePath("ErrorLog.txt")); 
+BT_CommonFiniteStates.cpp : 			THROW_RUNTIME_ERROR("Failed to pile items"); 
+BT_CommonFiniteStates.cpp : 		THROW_RUNTIME_ERROR("No piles have been selected"); 
+BT_CommonFiniteStates.cpp : 		THROW_RUNTIME_ERROR("Expected files not found!"); 
+BT_CommonFiniteStates.cpp : 		THROW_RUNTIME_ERROR("Certain files could not be moved to the folder"); 
+BT_CommonFiniteStates.cpp : 			THROW_RUNTIME_ERROR("Could not delete all files specified!"); 
+BT_CommonFiniteStates.cpp : 		THROW_RUNTIME_ERROR("Must select only one pile!"); 
+BT_CommonFiniteStates.cpp : 		THROW_RUNTIME_ERROR("Must select only one pile"); 
+BT_CommonFiniteStates.cpp : 		THROW_RUNTIME_ERROR("No piles were selected!"); 
+BT_CommonFiniteStates.cpp : 			THROW_RUNTIME_ERROR("Must select file that is contained in a pile!"); 
+BT_CommonFiniteStates.cpp : 		THROW_RUNTIME_ERROR("Must select only one pile!"); 
+BT_CommonFiniteStates.cpp : 		THROW_RUNTIME_ERROR("Must select only one file system actor!"); 
+BT_CommonFiniteStates.cpp : 		THROW_RUNTIME_ERROR("Selected bump object must be a bump actor!"); 
+BT_CommonFiniteStates.cpp : 		THROW_RUNTIME_ERROR("Selected bump actor must be a file system actor!"); 
+BT_CommonFiniteStates.cpp : 			THROW_RUNTIME_ERROR("Found pile containing specified file actors!"); 
+BT_CommonFiniteStates.cpp : 		THROW_RUNTIME_ERROR("Expected files not found!"); 
+BT_CommonFiniteStates.cpp : 		THROW_RUNTIME_ERROR("Unexpected files found!"); 
+BT_CommonFiniteStates.cpp : 		THROW_RUNTIME_ERROR("Unexpected number of files found!"); 
+BT_CommonFiniteStates.cpp : 		THROW_RUNTIME_ERROR("Slideshow is unexpectedly enabled!"); 
+BT_CommonFiniteStates.cpp : 		THROW_RUNTIME_ERROR("Slideshow is unexpectedly disabled!"); 
+BT_CommonFiniteStates.cpp : 				THROW_RUNTIME_ERROR("Expected equal object dimensions!"); 
+BT_CommonFiniteStates.cpp : 				THROW_RUNTIME_ERROR("Expected smaller object dimensions!"); 
+BT_CommonFiniteStates.cpp : 				THROW_RUNTIME_ERROR("Expected larger object dimensions!"); 
+BT_CommonFiniteStates.cpp : 		THROW_RUNTIME_ERROR("A greater number of actors than expected was found!"); 
+BT_CommonFiniteStates.cpp : 		THROW_RUNTIME_ERROR("A lesser number of actors than expected was found!"); 
+BT_CrashDialog.cpp : 	dumpFileName = native(QFileInfo(winOS->GetDataDirectory(), "Bump.dmp")); 
+BT_CrashDialog.cpp : 	if (_sendFeedback && EmailCrashReport("feedback@bumptop.com", "Crash Report", enteredText, email, dumpFileName)) 
+BT_CrashDialog.cpp : 	if (_sendFeedback && EmailCrashReport("feedback@bumptop.com", "Crash Report", enteredText, email, dumpFileName)) 
+BT_CrashDialog.cpp : 		QDir backupThemeDirectory = themesDir.absolutePath() / ("Default backup " + QString::number(themeDirectoryContents.size())); 
+BT_CrashDialog.cpp : 				backupThemeDirectory = themesDir.absolutePath() / ("Default backup " + QString::number(i)); 
+BT_CrashDialog.cpp : 	_resetBumpTopSettings = winOS->getRegistryDwordValue("ShutdownIncomplete"); 
+BT_CustomizeWizard.cpp : 		status->setFont(QFont("Tahoma", 12)); 
+BT_DXRender.cpp : 		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE, L"Arial", &font ); 
+BT_DesktopLockTest.cpp : 	firstLock = new DesktopLock("desktop.test.lock"); 
+BT_DesktopLockTest.cpp : 	secondLock = new DesktopLock("desktop.test.lock"); 
+BT_DialogManager.cpp : 	_comctrlModule = LoadLibrary(_T("comctl32.dll")); 
+BT_DialogManager.cpp : 		_pTaskDialogIndirect = (TaskDialogIndirect) GetProcAddress(_comctrlModule, "TaskDialogIndirect"); 
+BT_DialogManager.cpp : 	caption = "BumpTop"; 
+BT_DialogManager.cpp : 						dlgManager->setText("merge"); 
+BT_DialogManager.cpp : 						dlgManager->setText("break"); 
+BT_DialogManager.cpp : 						dlgManager->setText("replace"); 
+BT_DialogManager.cpp : 						dlgManager->setText("move"); 
+BT_DialogManager.cpp : 						launchBumpTopProPage("settingsGoProButton"); 
+BT_DialogManager.cpp : 					launchBumpTopProPage("whyGoProButton"); 
+BT_DialogManager.cpp : 			QString label = QString("%1 characters left").arg(TWITTER_MAX_CHARS - charCount); 
+BT_DialogManager.cpp : 				label = QString("Too many characters! (%1 extra)").arg(charCount - TWITTER_MAX_CHARS); 
+BT_EllipsisMenu.cpp : 			fsManager->launchFile("rundll32.exe", "appwiz.cpl,NewLinkHere " + native(shortFilePathQS), "", false, false); 
+BT_EllipsisMenu.cpp : 			fsManager->launchFile("rundll32.exe", "appwiz.cpl,NewLinkHere " + native(shortFilePathQS), "", false, false); 
+BT_EllipsisMenu.cpp : 				fsManager->launchFileAsync("Rundll32.exe", "shell32.dll,Control_RunDLL Desk.cpl", "", false, false); 
+BT_EllipsisMenu.cpp : 				fsManager->launchFileAsync("Rundll32.exe", "shell32.dll,Control_RunDLL Desk.cpl", "", false, false); 
+BT_EllipsisMenu.cpp : 				fsManager->launchFileAsync("control.exe", "/name Microsoft.Personalization", "", false, false); 
+BT_EllipsisMenu.cpp : 				fsManager->launchFileAsync("control.exe", "/name Microsoft.Personalization", "", false, false); 
+BT_EllipsisMenu.cpp : 			fsManager->launchFileAsync("sidebar.exe", " /showGadgets", "", false, false); 
+BT_EllipsisMenu.cpp : 			fsManager->launchFileAsync("sidebar.exe", " /showGadgets", "", false, false); 
+BT_EllipsisMenu.cpp : 			fsManager->launchFileAsync("control.exe", "desk.cpl,,@settings", "", false, false);	 
+BT_EllipsisMenu.cpp : 			fsManager->launchFileAsync("control.exe", "desk.cpl,,@settings", "", false, false);	 
+BT_EllipsisMenu.cpp : 	removeMenuItem(menu, "&Bump This Folder"); 
+BT_EllipsisMenu.cpp : 		removeMenuItem(hMenu, "&View"); 
+BT_EllipsisMenu.cpp : 		removeMenuItem(hMenu, "S&ort By"); 
+BT_EllipsisMenu.cpp : 		removeMenuItem(hMenu, "Grou&p By"); 
+BT_EllipsisMenu.cpp : 		removeMenuItem(hMenu, "Stac&k By"); 
+BT_EllipsisMenu.cpp : 		removeMenuItem(hMenu, "R&efresh"); 
+BT_EllipsisMenu.cpp : 		removeMenuItem(hMenu, "Arrange &Icons By"); 
+BT_EventManager.cpp : 	_hLibModule = LoadLibrary(_T("User32.dll")); 
+BT_EventManager.cpp : 		pShutdownBlockReasonCreate = (ShutdownBlockReasonCreateSignature) GetProcAddress(_hLibModule, "ShutdownBlockReasonCreate"); 
+BT_EventManager.cpp : 		pShutdownBlockReasonDestroy = (ShutdownBlockReasonDestroySignature) GetProcAddress(_hLibModule, "ShutdownBlockReasonDestroy"); 
+BT_EventManager.cpp : 		pShutdownBlockReasonQuery = (ShutdownBlockReasonQuerySignature) GetProcAddress(_hLibModule, "ShutdownBlockReasonQuery"); 
+BT_EventManager.cpp : 					pShutdownBlockReasonCreate(winOS->GetWindowsHandle(), L"Saving your scene file...");			 
+BT_EventManager.cpp : 			renderReason = "Optimizations Off";  
+BT_EventManager.cpp : 			renderReason = "Multi-Touch On";  
+BT_EventManager.cpp : 			renderReason = "RndrManager said so";  
+BT_EventManager.cpp : 			renderReason = "Interaction";  
+BT_EventManager.cpp : 			renderReason = "markingMenu->isAnimating()";  
+BT_EventManager.cpp : 			renderReason = QString::number(animManager->getNumObjsAnimating()) + " Objs Animating";  
+BT_EventManager.cpp : 	return QString("%1\t%2").arg(msg.message).arg(GetMessageName(msg.message)); 
+BT_FacebookWizard.cpp : 		QString dialogPath = facebookWidgetDir.absoluteFilePath("facebook_no_connection.html"); 
+BT_FacebookWizard.cpp : 			_webView->page()->mainFrame()->evaluateJavaScript("FBConnectLoginBootstrap.showRegularLoginUI();"); 
+BT_FacebookWizard.cpp : 		_result = url.queryItemValue("session"); 
+BT_FanOutGesture.cpp : 	Gesture("Fan Out", 2, 2, false) 
+BT_FanOutGesture.cpp : 		return gestureRejected("Distance between fingers changed too much, probably a zoom gesture"); 
+BT_FanOutGesture.cpp : 		return gestureRejected("No finger is on a pile"); 
+BT_FanOutGesture.cpp : 		return gestureRejected("Pile must be stacked to fan out"); 
+BT_FileSystemManager.cpp : 	_hMSIDll = LoadLibrary(L"Msi.dll"); 
+BT_FileSystemManager.cpp : 		tempRelFolder = QString("%1 %2").arg(folderName).arg(i); 
+BT_FileSystemManager.cpp : 		fileOperation.pTo = L"\0\0"; 
+BT_FileSystemManager.cpp : 		fileOp.pTo = L"\0\0"; 
+BT_FileSystemManager.cpp : 		case 0: errMsg.append("Out of Memory or Resources."); break; 
+BT_FileSystemManager.cpp : 		case ERROR_BAD_FORMAT: errMsg.append("The .exe file is invalid (non-Microsoft Win32 .exe or error in .exe image). "); break; 
+BT_FileSystemManager.cpp : 		case SE_ERR_ACCESSDENIED: errMsg.append("The operating system denied access to the specified file or link target. "); break; 
+BT_FileSystemManager.cpp : 		case SE_ERR_ASSOCINCOMPLETE: errMsg.append("The file name association is incomplete or invalid. "); break; 
+BT_FileSystemManager.cpp : 		case SE_ERR_DDEBUSY: errMsg.append("The Dynamic Data Exchange (DDE) transaction could not be completed because other DDE transactions were being processed. "); break; 
+BT_FileSystemManager.cpp : 		case SE_ERR_DDEFAIL: errMsg.append("The DDE transaction failed. "); break; 
+BT_FileSystemManager.cpp : 		case SE_ERR_DDETIMEOUT: errMsg.append("The DDE transaction could not be completed because the request timed out. "); break; 
+BT_FileSystemManager.cpp : 		case SE_ERR_DLLNOTFOUND: errMsg.append("The specified DLL was not found. "); break; 
+BT_FileSystemManager.cpp : 		case SE_ERR_FNF: errMsg.append("The specified file was not found. "); break; 
+BT_FileSystemManager.cpp : 		case SE_ERR_NOASSOC: errMsg.append("There is no application associated with the given file name extension. "); break; 
+BT_FileSystemManager.cpp : 		case SE_ERR_OOM: errMsg.append("There was not enough memory to complete the operation. "); break; 
+BT_FileSystemManager.cpp : 		case SE_ERR_PNF: errMsg.append("The specified path was not found. "); break; 
+BT_FileSystemManager.cpp : 		case SE_ERR_SHARE: errMsg.append("A sharing violation occurred. "); break; 
+BT_FileSystemManager.cpp : 		sei.lpVerb =  L"runas"; // 'secret' verb to prompt for elevation on Vista 
+BT_FileSystemManager.cpp : 			static QString driveLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ"); 
+BT_FileSystemManager.cpp : 					driveLetter += ":\\"; 
+BT_FileSystemManager.cpp : 	volumeNameOut = QString("Removable Disk (%1)").arg(volume); 
+BT_FileSystemPile.cpp : 		QString program = winOS->GetExecutableDirectory().absolutePath() + "/BumpTop.exe"; 
+BT_FileTransferManager.cpp : 	"ftp://ftp.bumptop.com/stats/", 
+BT_FileTransferManager.cpp : 	"ftp://ftp.bumptop.com/test/", 
+BT_FileTransferManager.cpp : 	"ftp://ftp.bumptop.com/download/", 
+BT_FileTransferManager.cpp : 	"ftp://ftp.bumptop.com/stats/toshiba/", 
+BT_FileTransferManager.cpp : 	"ftp://ftp.bumptop.com/stats/dell/", 
+BT_FileTransferManager.cpp : 	"ftp://ftp.bumptop.com/", 
+BT_FileTransferManager.cpp : 	"ftp://ftp.bumptop.com/staging/", 
+BT_FileTransferManager.cpp : 	"http://bumptop.com/download/", 
+BT_FileTransferManager.cpp : 	"http://bumptop.com/download/staging/", 
+BT_FileTransferManager.cpp : 	"alpha@omexcards.com",		// ftp://ftp.bumptop.com/stats/ 
+BT_FileTransferManager.cpp : 	"alpha@omexcards.com",		// ftp://ftp.bumptop.com/test/ 
+BT_FileTransferManager.cpp : 	"alpha@omexcards.com",		// ftp://ftp.bumptop.com/download/ 
+BT_FileTransferManager.cpp : 	"alpha@omexcards.com",		// ftp://ftp.bumptop.com/stats/toshiba 
+BT_FileTransferManager.cpp : 	"alpha@omexcards.com",		// ftp://ftp.bumptop.com/stats/dell 
+BT_FileTransferManager.cpp : 	"alpha@omexcards.com",		// ftp://ftp.bumptop.com 
+BT_FileTransferManager.cpp : 	"alpha@omexcards.com",		// ftp://ftp.bumptop.com/staging 
+BT_FileTransferManager.cpp : 	"alpha@omexcards.com",		// http://bumptop.com/download 
+BT_FileTransferManager.cpp : 	"alpha@omexcards.com"		// http://bumptop.com/download/staging 
+BT_FileTransferManager.cpp : 	"free57love",				// ftp://ftp.bumptop.com/stats/ 
+BT_FileTransferManager.cpp : 	"free57love",				// ftp://ftp.bumptop.com/test/ 
+BT_FileTransferManager.cpp : 	"free57love",				// ftp://ftp.bumptop.com/download/ 
+BT_FileTransferManager.cpp : 	"free57love",				// ftp://ftp.bumptop.com/stats/toshiba 
+BT_FileTransferManager.cpp : 	"free57love",				// ftp://ftp.bumptop.com/stats/dell 
+BT_FileTransferManager.cpp : 	"free57love",				// ftp://ftp.bumptop.com 
+BT_FileTransferManager.cpp : 	"free57love",				// ftp://ftp.bumptop.com/staging 
+BT_FileTransferManager.cpp : 	"free57love",				// http://bumptop.com/download/ 
+BT_FileTransferManager.cpp : 	"free57love",				// http://bumptop.com/download/staging 
+BT_FileTransferManager.cpp : 	_hMod = LoadLibrary(_T("Wininet.dll")); 
+BT_FileTransferManager.cpp : 		_pfnICC = (InternetCheckConnectionW) GetProcAddress(_hMod, "InternetCheckConnectionW"); 
+BT_FileTransferManager.cpp : 		_pfnIGCC = (InternetGetConnectedState) GetProcAddress(_hMod, "InternetGetConnectedState"); 
+BT_FileTransferManager.cpp : 	QString userAgent = QString("BumpTop/r%1/%2").arg(SVN_VERSION_NUMBER).arg(winOS->GetGUID()); 
+BT_FileTransferManager.cpp : 	request.setRawHeader("User-Agent", tmp); 
+BT_FileTransferManager.cpp : 	if (transfer.getUrl().startsWith("http://", Qt::CaseInsensitive)) 
+BT_FileTransferManager.cpp : 	QString userAgent = QString("BumpTop/r%1/%2").arg(SVN_VERSION_NUMBER).arg(winOS->GetGUID()); 
+BT_FileTransferManager.cpp : 	request->setRawHeader("User-Agent", tmp); 
+BT_FileTransferManager.cpp : 	if (transfer.getUrl().startsWith("http://", Qt::CaseInsensitive)) 
+BT_FileTransferManager.cpp : 	QString boundary = QString("--------BUMPTOPBOUNDKf3Ie32MbvD2J78"); 
+BT_FileTransferManager.cpp : 	QString crlf = QString("\r\n"); 
+BT_FileTransferManager.cpp : 			request->setRawHeader("Content-Type", ("multipart/form-data; boundary=" + boundary).toAscii()); 
+BT_FileTransferManager.cpp : 			request->setRawHeader("Content-Type", ("multipart/form-data; boundary=" + boundary).toAscii()); 
+BT_FileTransferManager.cpp : 					*ftw->_postData += "Content-Disposition: form-data; name=\"" + tmp + "\"; filename=\"" + upInfo.fileName() + "\"" + crlf;		 
+BT_FileTransferManager.cpp : 					*ftw->_postData += "Content-Disposition: form-data; name=\"" + tmp + "\"; filename=\"" + upInfo.fileName() + "\"" + crlf;		 
+BT_FileTransferManager.cpp : 					QString upContentType = "application/octet-stream"; 
+BT_FileTransferManager.cpp : 					*ftw->_postData += "Content-Type: " + upContentType + crlf + crlf; 
+BT_FileTransferManager.cpp : 					*ftw->_postData += "Content-Disposition: form-data; name=\"" + tmp + "\"" + crlf + crlf; 
+BT_FileTransferManager.cpp : 			QString("%1=") 
+BT_FlickrPhotoFrameSource.cpp : 	QString flickrProtocol("flickr://"); 
+BT_FlickrPhotoFrameSource.cpp : 	QString groupPool("groups_pool"); 
+BT_FlickrPhotoFrameSource.cpp : 	QString publicPool("photos_public"); 
+BT_FlickrPhotoFrameSource.cpp : 	QString favouritePool("photos_faves"); 
+BT_FlickrPhotoFrameSource.cpp : 	QString flickrProtocol("flickr://"); 
+BT_FlickrPhotoFrameSource.cpp : 		QString publicPhotosByTag("photos_public.gne?tags"); 
+BT_FlickrPhotoFrameSource.cpp : 		QString publicPhotosById("photos_public.gne?id"); 
+BT_FlickrPhotoFrameSource.cpp : 		printError("Invalid photo frame source given!"); 
+BT_FlickrPhotoFrameSource.cpp : 	QRegExp validId("\\d+@N\\d+"); 
+BT_FlickrPhotoFrameSource.cpp : 	QString id = rssFeed.right(rssFeed.size() - rssFeed.indexOf("id=") - 3); 
+BT_FlickrPhotoFrameSource.cpp : 	if (rssFeed.startsWith("flickr://", Qt::CaseInsensitive)) 
+BT_FlickrPhotoFrameSource.cpp : 	else if (rssFeed.startsWith("http://", Qt::CaseInsensitive)) 
+BT_FlickrPhotoFrameSource.cpp : 		QString tagParam("tags="); 
+BT_FontManager.cpp : 	if (fontString.startsWith("calibri", Qt::CaseInsensitive) || 
+BT_FontManager.cpp : 		fontString.startsWith("candara", Qt::CaseInsensitive) ||  
+BT_FontManager.cpp : 		fontString.startsWith("consolas", Qt::CaseInsensitive) || 
+BT_FontManager.cpp : 		fontString.startsWith("verdana", Qt::CaseInsensitive)) 
+BT_FontManager.cpp : 	_systemFont = FontDescription(_fontDatabase.font("Arial", "", fontSize).family(), fontSize); 
+BT_GLTextureManager.cpp : 		QString commandLine = QString("-f%1 -d%2 -t%3 -v\"\"") 
+BT_GLTextureManager.cpp : 					QString cacheFilePath = cacheDir + generateCacheFilePath(obj.srcPath, obj.imageDimensions, "png"); 
+BT_GLTextureManager.cpp : 		QString message("GLTextureManager::onPowerResume"); 
+BT_GLTextureManager.cpp : 		QString saveAsJPGName = QString("%1.%2.jpg").arg(qrand()).arg(filename(filePath)); 
+BT_GLTextureManager.cpp : 			GetEncoderClsid(L"image/jpeg", &jpgClsid); 
+BT_GLTextureManager.cpp : 		commandLine += " -q\"\" "; 
+BT_GLTextureManager.cpp : 	QString commandLine = QString("-f%1 -d%2 -c%3 -x%4 ") 
+BT_GLTextureManager.cpp : 		commandLine += " -e\"\" "; 
+BT_GLTextureManager.cpp : 	QString thumbPath = QString("images/%1/%2/{%3_%4_%5_%6}.%7") 
+BT_GLTextureManager.cpp : 		.arg(COMPRESSION_VERSION).arg("thumbnail") 
+BT_GLTextureManager.cpp : 		.arg(compressed ? "dds" : "jpg"); 
+BT_GLTextureManager.cpp : 		.arg(compressed ? "dds" : "jpg"); 
+BT_GLTextureManager.cpp : 	QString commandLine = QString("-f%1 -d%2 -t%3 -b%4") 
+BT_GLTextureManager.cpp : 		commandLine += " -e\"\" "; 
+BT_GLTextureManager.cpp :  	QString thumbPath = QString("images/%1/%2/{%3_%4_%5_%6}.%7") 
+BT_GLTextureManager.cpp :  		.arg(COMPRESSION_VERSION).arg("images") 
+BT_GLTextureManager.cpp : 	return generateCacheFilePath(filePath, imageDim, QString("dds")); 
+BT_Gesture.cpp : 	if (_logFileStream) outputLogMessage(true, QString("Gesture accepted")); 
+BT_JavaScriptAPI.cpp : , javaScriptObjectName("BumpTopNative") 
+BT_JavaScriptAPI.cpp : 	if (url.scheme().startsWith("http")) 
+BT_JavaScriptAPI.cpp : 		downloadDir.mkdir("BumpTop Downloads"); 
+BT_JavaScriptAPI.cpp : 		downloadDir.cd("BumpTop Downloads"); 
+BT_JavaScriptAPI.cpp : 		QString filename = fileInfo.baseName() + "_XXXXXX." + fileInfo.completeSuffix(); 
+BT_JavaScriptAPI.cpp : 			_page->evaluateJavaScript(callbackName + "(true);"); 
+BT_JavaScriptAPI.cpp : 		_page->evaluateJavaScript(callbackName + "(false);"); 
+BT_JavaScriptAPI.cpp : 		.arg(*callbackName).arg(success ? "true" : "false")); 
+BT_JavaScriptAPI.cpp : 		.arg(*callbackName).arg(success ? "true" : "false")); 
+BT_JavaScriptAPI.cpp : 	header.addValue("Host", url.host()); 
+BT_JavaScriptAPI.cpp : 			.arg(error ? "false" : "true"); 
+BT_JavaScriptAPI.cpp : 			.arg(error ? "false" : "true"); 
+BT_JavaScriptAPI.cpp : 		"(function () {" 
+BT_JavaScriptAPI.cpp : 		"	var evt = document.createEvent('UIEvents');" 
+BT_JavaScriptAPI.cpp : 		"	evt.initUIEvent('%1', true, true, window, null);" 
+BT_JavaScriptAPI.cpp : 		"	evt.screenX = evt.screenY = evt.clientX = evt.clientY = 0;" 
+BT_JavaScriptAPI.cpp : 		"	evt.ctrlKey = evt.shiftKey = evt.altKey = evt.metaKey = false;" 
+BT_JavaScriptAPI.cpp : 		"	evt.button = 0;" 
+BT_JavaScriptAPI.cpp : 		"	evt.relatedTarget = null;" 
+BT_JavaScriptAPI.cpp : 		"	evt.dataTransfer = { types: ['Files'], files: [%2] };" 
+BT_JavaScriptAPI.cpp : 		"	var canceled = !document.getElementsByTagName('body').item(0).dispatchEvent(evt);" 
+BT_JavaScriptAPI.cpp : 		"	return canceled;" 
+BT_JavaScriptAPI.cpp : 		"}());").arg(eventName).arg(_dragAndDropData); 
+BT_JavaScriptAPI.cpp : 			if(path.endsWith(".lnk")) 
+BT_JavaScriptAPI.cpp : 	return injectDragAndDropEvent("dragenter"); 
+BT_JavaScriptAPI.cpp : 	return injectDragAndDropEvent("drop"); 
+BT_JavaScriptAPI.cpp : 	_page->evaluateJavaScript("jQuery.event.trigger('widgetfocus');"); 
+BT_JavaScriptAPI.cpp : 	_page->evaluateJavaScript("jQuery.event.trigger('widgetblur');"); 
+BT_JavaScriptAPI.cpp : 		stream.setCodec("UTF-8"); 
+BT_JavaScriptAPI.cpp : 		stream.setCodec("UTF-8"); 
+BT_JavaScriptAPI.cpp : 	assert(QUrl(url, QUrl::StrictMode).scheme().startsWith("http")); 
+BT_KeyCombo.cpp : 			out.append("Ctrl+"); 
+BT_KeyCombo.cpp : 			out.append("Double-Click"); 
+BT_KeyCombo.cpp : 				out.append("ScrollWheel");  
+BT_KeyCombo.cpp : 		case KeyBackspace: keyStr = QString("Backspace"); break; 
+BT_KeyCombo.cpp : 		case KeyTab: keyStr = QString("Tab"); break; 
+BT_KeyCombo.cpp : 		case KeyEnter: keyStr = QString("Enter"); break; 
+BT_KeyCombo.cpp : 		case KeyShift: keyStr = QString("Shift"); break; 
+BT_KeyCombo.cpp : 		case KeyLeftShift: keyStr = QString("Left Shift"); break; 
+BT_KeyCombo.cpp : 		case KeyRightShift: keyStr = QString("Right Shift"); break; 
+BT_KeyCombo.cpp : 		case KeyControl: keyStr = QString("Control"); break; 
+BT_KeyCombo.cpp : 		case KeyLeftControl: keyStr = QString("Left control"); break; 
+BT_KeyCombo.cpp : 		case KeyRightControl: keyStr = QString("Right control"); break; 
+BT_KeyCombo.cpp : 		case KeyAlt: keyStr = QString("Alt"); break; 
+BT_KeyCombo.cpp : 		case KeyLeftAlt: keyStr = QString("Left Alt"); break; 
+BT_KeyCombo.cpp : 		case KeyRightAlt: keyStr = QString("Right Alt"); break; 
+BT_KeyCombo.cpp : 		case KeyEscape: keyStr = QString("Escape"); break; 
+BT_KeyCombo.cpp : 		case KeySpace: keyStr = QString("Space"); break; 
+BT_KeyCombo.cpp : 		case KeyPageUp: keyStr = QString("Page up"); break; 
+BT_KeyCombo.cpp : 		case KeyPageDown: keyStr = QString("Page down"); break; 
+BT_KeyCombo.cpp : 		case KeyEnd: keyStr = QString("End"); break; 
+BT_KeyCombo.cpp : 		case KeyHome: keyStr = QString("Home"); break; 
+BT_KeyCombo.cpp : 		case KeyLeft: keyStr = QString("Left"); break; 
+BT_KeyCombo.cpp : 		case KeyRight: keyStr = QString("Right"); break; 
+BT_KeyCombo.cpp : 		case KeyDown: keyStr = QString("Down"); break; 
+BT_KeyCombo.cpp : 		case KeyDelete: keyStr = QString("Delete"); break; 
+BT_KeyCombo.cpp : 		case KeyF10: keyStr = QString("F10"); break; 
+BT_KeyCombo.cpp : 		case KeyF11: keyStr = QString("F11"); break; 
+BT_KeyCombo.cpp : 		case KeyF12: keyStr = QString("F12"); break; 
+BT_KeyCombo.cpp : 		if (subKeys.isCtrlPressed) out.append("Ctrl+"); 
+BT_KeyCombo.cpp : 		if (subKeys.isAltPressed) out.append("Alt+"); 
+BT_KeyCombo.cpp : 		if (subKeys.isShiftPressed) out.append("Shift+"); 
+BT_LeafForwardMenuActionCustomizer.cpp : 		action->setAdditionalLabel("PRO"); 
+BT_LeafForwardMenuActionCustomizer.cpp : 		launchBumpTopProPage("leaf"); 
+BT_LegacyPersistenceManager.cpp : 	FILE * fp = _wfopen((LPCWSTR) filePath.utf16(), L"r+b"); 
+BT_LegacyPersistenceManager.cpp : 				QString ext = ".URL"; 
+BT_LegacyPersistenceManager.cpp : 				QString contents = "[InternetShortcut]\r\nURL="; 
+BT_LegacyPersistenceManager.cpp : 				QString HTMLFile = "WebWidget.html"; 
+BT_LibraryOverlay.cpp : 	BrowseFolderMenuItem* browseFolder = new BrowseFolderMenuItem(QString("More places...")); 
+BT_Logger.cpp : 		_logStream->setCodec("UTF-8"); 
+BT_MD5HasherTest.cpp : 	hasher.updateWithFile("BT_Common.cpp"); 
+BT_MD5HasherTest.cpp : 	CPPUNIT_ASSERT_EQUAL(string("5ebcb5f6e9189b822f72ca160ecbb7fe"), hasher.hexDigest()); 
+BT_MD5HasherTest.cpp : 	hasher2.update("this is a test", strlen("this is a test")); 
+BT_MD5HasherTest.cpp : 	hasher2.update("this is a test", strlen("this is a test")); 
+BT_MD5HasherTest.cpp : 	CPPUNIT_ASSERT_EQUAL(string("54b0c58c7ce9f2a8b551351102ee0938"), hasher2.hexDigest()); 
+BT_MenuAction.cpp : 		return QString("(%1)").arg(hotKey.toString()); 
+BT_MouseEventManager.cpp : 			MessageBox(NULL, L"unknown message", L"err", MB_OK | MB_ICONERROR); 
+BT_MouseEventManager.cpp : 			MessageBox(NULL, L"unknown message", L"err", MB_OK | MB_ICONERROR); 
+BT_OgreController.cpp : #define PLUGINS_CFG "plugins.cfg" 
+BT_OgreController.cpp : #define DISPLAY_CFG "display.cfg" 
+BT_OgreController.cpp : #define RENDER_LOG "render.log" 
+BT_OgreController.cpp : 		obj = new Ogre::ManualObject("DesktopFloor"); 
+BT_OgreController.cpp : 		obj->begin("default"); 
+BT_OgreController.cpp : 		obj = new Ogre::ManualObject("TopWall"); 
+BT_OgreController.cpp : 		obj->begin("default"); 
+BT_OgreController.cpp : 		obj = new Ogre::ManualObject("BottomWall"); 
+BT_OgreController.cpp : 		obj->begin("default"); 
+BT_OgreController.cpp : 		obj = new Ogre::ManualObject("RightWall"); 
+BT_OgreController.cpp : 		obj->begin("default"); 
+BT_OgreController.cpp : 		obj = new Ogre::ManualObject("RightWall"); 
+BT_OgreController.cpp : 		obj->begin("default"); 
+BT_OgreController.cpp : 	tmpOverlay = overlayManager.create("overlay.primary"); 
+BT_OgreView.cpp : #define RESOURCES_CFG "resources.cfg" 
+BT_OgreView.cpp : #define PLUGINS_CFG "plugins.cfg" 
+BT_OgreView.cpp : #define DISPLAY_CFG "display.cfg" 
+BT_OgreView.cpp : #define RENDER_LOG "render.log" 
+BT_OgreView.cpp : 	const char * directxRenderSystem = "RenderSystem_Direct3D9_d"; 
+BT_OgreView.cpp : 	const char * openglRenderSystem = "RenderSystem_GL_d"; 
+BT_OgreView.cpp : 	const char * directxRenderSystem = "RenderSystem_Direct3D9"; 
+BT_OgreView.cpp : 	const char * openglRenderSystem = "RenderSystem_GL"; 
+BT_OgreView.cpp : 		_renderSystem->setConfigOption("Full Screen", "No"); 
+BT_OgreView.cpp : 			QString str = QString("  %1: %2 [%3]\n") 
+BT_OgreView.cpp : 		"BumpTop", 
+BT_OgreView.cpp : 	_camera = _sceneManager->createCamera("DefaultCamera"); 
+BT_OgreView.cpp : 	Ogre::Light * light = _sceneManager->createLight("MainLight"); 
+BT_OverlayComponent.cpp : , _font("Tahoma", 24) 
+BT_OverlayComponent.cpp : , _font("Tahoma", 24) 
+BT_PhotoCropGesture.cpp : 	Gesture("PhotoCrop", 2, 2, true) 
+BT_PhotoCropGesture.cpp : 		return gestureRejected("Not in slideshow mode"); 
+BT_PhotoFrameDialog.cpp : 	_tag = "lego"; 
+BT_PhotoFrameDialog.cpp : 		return QString("flickr://") + _tag; 
+BT_Pile.cpp : 		closeWidget->setText("closeWidget"); 
+BT_Pile.cpp : 			launchOwnerWidget->setText("launchOwnerWidget"); 
+BT_Pile.cpp : 			nextPageWidget->setText("nextPageWidget"); 
+BT_Pile.cpp : 			prevPageWidget->setText("prevPageWidget"); 
+BT_Pile.cpp : 			launchExternalWidget->setText("launchExternalWidget"); 
+BT_PinchZoomGesture.cpp : 	Gesture("Pinch Zoom", 2, 2, false) 
+BT_PinchZoomGesture.cpp : 		return gestureRejected("Fingers are on diff't objs, or no objs (probably camera zoom)"); 
+BT_ProxySettings.cpp : 		errorLogWrite("Failed to get IE proxy config info; ::WinHttpGetIEProxyConfigForCurrentUser() failed; error = " + QString::number(::GetLastError()) + ".\n"); 
+BT_ProxySettings.cpp : 		errorLogWrite("Failed to get IE proxy config info; ::WinHttpGetIEProxyConfigForCurrentUser() failed; error = " + QString::number(::GetLastError()) + ".\n"); 
+BT_ProxySettings.cpp : 		errorLogWrite("Failed to discover proxy info; ::WinHttpGetProxyForUrl() failed; error = " + QString::number(::GetLastError()) + ".\n"); 
+BT_ProxySettings.cpp : 		errorLogWrite("Failed to discover proxy info; ::WinHttpGetProxyForUrl() failed; error = " + QString::number(::GetLastError()) + ".\n"); 
+BT_ProxySettings.cpp : 			errorLogWrite("Failed to discover proxy info; ::WinHttpSetOption() failed; error = " + QString::number(::GetLastError()) + ".\n"); 
+BT_ProxySettings.cpp : 			errorLogWrite("Failed to discover proxy info; ::WinHttpSetOption() failed; error = " + QString::number(::GetLastError()) + ".\n"); 
+BT_ProxySettings.cpp : 	HINTERNET hSession = ::WinHttpOpen(L"BumpTop-Proxy-Checker/1.0", 
+BT_ProxySettings.cpp : 	_httpProxyUrl = getProxyServer( AUTO_DETECT, "", "http://bumptop.com"); 
+BT_ProxySettings.cpp : 	_httpProxyUrl = getProxyServer( AUTO_CONFIGURATION_URL, configurationURL, "http://bumptop.com"); 
+BT_PullDownWallsGesture.cpp : 	Gesture("Pull Down Walls", 2, 2, false) 
+BT_PullDownWallsGesture.cpp : 			return gestureRejected("Touch did not begin on a wall"); 
+BT_PullDownWallsGesture.cpp : 		return gestureRejected("Not a two-finger swipe"); 
+BT_QtUtil.cpp : 	pathStr.replace("\"", "\\\""); 
+BT_QtUtil.cpp : 	return read_file(filename, "UTF-8"); 
+BT_QtUtil.cpp : 	return validate_file_startswith(filename, "UTF-8", header); 
+BT_QtUtil.cpp : 		stream.setCodec("UTF-8"); 
+BT_QtUtil.cpp : 		stream.setCodec("UTF-8"); 
+BT_RSSPhotoFrameSource.cpp : 		QRegExp imgTagRe("(<[^>]*image/(jpg|jpeg|gif|png)[^>]*>)"); 
+BT_RSSPhotoFrameSource.cpp : 		QRegExp imgUrlRe("(http://[\\w\\.-]+(:\\d+)?(/[\\w\\.\\+-]+)+\\.(jpg|jpeg|gif|png))"); 
+BT_RSSPhotoFrameSource.cpp : 					imgTagRe = QRegExp("(<[^>]*height[^>]*>)"); 
+BT_RSSPhotoFrameSource.cpp : 	QString flickrProtocol("flickr://"); 
+BT_RSSPhotoFrameSource.cpp : 		const QString pre("http://api.flickr.com/services/feeds/photos_public.gne?tags="); 
+BT_RSSPhotoFrameSource.cpp : 		const QString post("&lang=en-us&format=atom"); 
+BT_RSSPhotoFrameSource.cpp : 			tags.replace("%20", " "); 
+BT_RSSPhotoFrameSource.cpp : 		return "RSS Photoframe"; 
+BT_Rename.cpp : 	_lineEdit->setObjectName("RenamerBox"); 
+BT_RenderManager.cpp : #define RESOURCES_CFG "resources.cfg" 
+BT_RenderManager.cpp : 		wglSwapIntervalEXT = (PFNWGLSWAPINTERVALFARPROC) wglGetProcAddress("wglSwapIntervalEXT"); 
+BT_RenderManager.cpp : 	DWORD userDisableAA = winOS->getRegistryDwordValue("DisableAntiAliasing", hasUserAAOverride); 
+BT_RenderManager.cpp : 		if (winOS->getRegistryDwordValue("DisableAntiAliasing")) return true; 
+BT_RenderManager.cpp : 	PFNWGLCHOOSEPIXELFORMATARBPROC wglChoosePixelFormatARB = (PFNWGLCHOOSEPIXELFORMATARBPROC) wglGetProcAddress("wglChoosePixelFormatARB");	 
+BT_RenderManager.cpp : 	winOS->setRegistryDwordValue("DisableAntiAliasing", (state ? 0 : 1)); 
+BT_RightClickGesture.cpp : 	Gesture("RightClick", 1, 1, true) 
+BT_RightClickGesture.cpp : 		return gestureRejected(QString("Total path displacement (%1) greater than maximum (%2)").arg(displacement).arg(MAXIMUM_PATH_LENGTH)); 
+BT_RotateDesktopGesture.cpp : 	Gesture("Rotate Desktop", 2, 2, false) 
+BT_RotateDesktopGesture.cpp : 		return gestureRejected("First finger is on an object"); 
+BT_RotateDesktopGesture.cpp : 		return gestureRejected("Second finger is on an object"); 
+BT_SceneManager.cpp : 	supportedExtensions.replace(".mp3", ""); 
+BT_SceneManager.cpp : 	backupSceneFile = QFile(native(currentSceneFile) + ".bak"); 
+BT_SceneManager.cpp : 	backupSceneFile = QFile(native(currentSceneFile) + ".bak"); 
+BT_SceneManager.cpp : 	if (fsManager->isValidFileName(strFileName) && strFileName.endsWith(".lnk", Qt::CaseInsensitive)) 
+BT_SceneManager.cpp : 				if (strFileName.endsWith(".lnk", Qt::CaseInsensitive) && fsData->isFileSystemType(DeadLink)) 
+BT_SceneManager.cpp : 	_backupSceneFile = QFile(native(_sceneFile) + ".bak"); 
+BT_ScrunchGesture.cpp : 	Gesture("Scrunch", 3, 5, false) 
+BT_Settings.cpp : 		"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",  
+BT_Settings.cpp : 		"HideFileExt", queryShowIconExtensions); 
+BT_Settings.cpp : 					proxySettings.errorLogWrite(QString("switching to no proxy, proxy URL ") + savedHttpProxyUrl + QString(" was not working")); 
+BT_Settings.cpp : 					proxySettings.errorLogWrite(QString("switching to no proxy, proxy URL ") + savedHttpProxyUrl + QString(" was not working")); 
+BT_SettingsAppMessageHandler.cpp : 	ResetDesktopLayout = ::RegisterWindowMessage(L"ResetDesktopLayout"); 
+BT_SettingsAppMessageHandler.cpp : 	IsInfiniteDesktopModeEnabled = ::RegisterWindowMessage(L"IsInfiniteDesktopModeEnabled"); 
+BT_SettingsAppMessageHandler.cpp : 	ToggleInfiniteDesktopMode = ::RegisterWindowMessage(L"ToggleInfiniteDesktopMode"); 
+BT_SettingsAppMessageHandler.cpp : 	CheckForUpdates = ::RegisterWindowMessage(L"CheckForUpdates"); 
+BT_SettingsAppMessageHandler.cpp : 	SendFeedback = ::RegisterWindowMessage(L"SendFeedback"); 
+BT_SettingsAppMessageHandler.cpp : 	ReloadTheme = ::RegisterWindowMessage(L"ReloadTheme"); 
+BT_SettingsAppMessageHandler.cpp : 	ReloadSettings = ::RegisterWindowMessage(L"ReloadSettings"); 
+BT_SettingsAppMessageHandler.cpp : 	CycleMonitors = ::RegisterWindowMessage(L"CycleMonitors"); 
+BT_SettingsAppMessageHandler.cpp : 	AuthorizeProKey = ::RegisterWindowMessage(L"AuthorizeProKey");  
+BT_SettingsAppMessageHandler.cpp : 	DeauthorizeProKey = ::RegisterWindowMessage(L"DeauthorizeProKey");  
+BT_SettingsAppMessageHandler.cpp : 	LaunchProxySettings = ::RegisterWindowMessage(L"LaunchProxySettings"); 
+BT_SettingsAppMessageHandler.cpp : 	AuthorizationDialogClose = ::RegisterWindowMessage(L"AuthorizationDialogClose"); 
+BT_SettingsAppMessageHandler.cpp : 	UploadTheme = ::RegisterWindowMessage(L"UploadTheme"); 
+BT_SettingsAppMessageHandler.cpp : 	SettingsRequireRestart = ::RegisterWindowMessage(L"SettingsRequireRestart"); 
+BT_SettingsAppMessageHandler.cpp : 	StartCustomizeDialog = ::RegisterWindowMessage(L"StartCustomizeDialog"); 
+BT_SettingsAppMessageHandler.cpp : 	InstallWebWidget = ::RegisterWindowMessage(L"InstallWebWidget"); 
+BT_SettingsAppMessageHandler.cpp : 			HWND btSettings = FindWindowEx(NULL, NULL, NULL, L"BumpTop Settings"); 
+BT_SettingsAppMessageHandler.cpp : 		HWND btSettings = FindWindowEx(NULL, NULL, NULL, L"BumpTop Settings"); 
+BT_SettingsAppMessageHandler.cpp : 				HWND btSettings = FindWindowEx(NULL, NULL, NULL, L"BumpTop Settings"); 
+BT_SettingsAppMessageHandler.cpp : 			QString themeFileNameExt = themeFileName + ".bumptheme"; 
+BT_SettingsAppMessageHandler.cpp : 				fileParamKeys.insert("file"); 
+BT_SettingsAppMessageHandler.cpp : 				params.insert("submission[title]", "testing title"); 
+BT_SettingsAppMessageHandler.cpp : 				params.insert("submission[notes]", "testing notes"); 
+BT_SettingsAppMessageHandler.cpp : 				params.insert("debug_mode", "true"); 
+BT_SettingsAppMessageHandler.cpp : 				fsManager->copyFileByName(screenShotPath, scnManager->getWorkingDirectory().absolutePath(), themeFileName + ".jpg", false, true, true); 
+BT_SettingsAppMessageHandler.cpp : 	HWND btSettings = FindWindowEx(NULL, NULL, NULL, L"BumpTop Settings"); 
+BT_SettingsAppMessageHandler.cpp : 	HWND btSettings = FindWindowEx(NULL, NULL, NULL, L"BumpTop Settings"); 
+BT_ShoveGesture.cpp : 	Gesture("Shove Gesture", 1, 5, false) 
+BT_StatsManager.cpp : 	return path + ".recording"; 
+BT_StatsManager.cpp : 	return path.mid(0, path.size() - QString(".recording").size()); 
+BT_StatsManager.cpp : 	QString statFileStream = QString("stats_%1_%2_%3_%4_%5.xml") 
+BT_StatsManager.cpp : 	QString statFileStream = QString("screenshot_%1_%2.jpg") 
+BT_StatsManager.cpp : 		StrList allRecordingStatFiles = fsManager->getDirectoryContents(native(winOS->GetStatsDirectory()), "*.recording"); 
+BT_StatsManager.cpp : 			if (statFileName.endsWith(".xml.recording")) 
+BT_StatsManager.cpp : 				parsedStatFileName = statFileName.mid(0, statFileName.size() - QString(".xml.recording").size()).split("_"); 
+BT_StatsManager.cpp : 			QString remoteFile = QString("%1_%2.%3").arg(fileNameWithoutExt).arg(time(NULL)).arg(fileNameExt); 
+BT_StatsManager.cpp : 				params.insert("submit", "send"); 
+BT_StatsManager.cpp : 				.setRelativeUrl(QString("http://%1.stats.bumptop.com/stats_upload/upload_hwmanf.php").arg(SVN_VERSION_NUMBER), remoteFile.str()) 
+BT_StatsManager.cpp : 				.setLogin("bumptop_stats_upload") 
+BT_StatsManager.cpp : 				.setPassword("free57love") 
+BT_StatsManager.cpp : 				QString destination = QString("http://%1.stats.bumptop.com/stats_upload/upload.php").arg(SVN_VERSION_NUMBER); 
+BT_StatsManager.cpp : 				.setLogin("bumptop_stats_upload") 
+BT_StatsManager.cpp : 				.setPassword("free57love") 
+BT_StatsManager.cpp : 		uploadFiles("xml"); 
+BT_StatsManager.cpp : 	uploadFiles("jpg", true, true); 
+BT_StatsManager.cpp : 	StrList allXmlFiles = fsManager->getDirectoryContents(native(winOS->GetStatsDirectory()), "*.xml"); 
+BT_StatsManager.cpp : 		GetModuleHandle(TEXT("kernel32.dll")),  
+BT_StatsManager.cpp : 		"GetNativeSystemInfo"); 
+BT_StatsManager.cpp : 		case PROCESSOR_ARCHITECTURE_AMD64: _statsData.hardware.cpuArch = "AMD64"; break; 
+BT_StatsManager.cpp : 		case PROCESSOR_ARCHITECTURE_IA64: _statsData.hardware.cpuArch = "IA64"; break; 
+BT_StatsManager.cpp : 		case PROCESSOR_ARCHITECTURE_INTEL: _statsData.hardware.cpuArch = "x86"; break; 
+BT_StatsManager.cpp : 		case PROCESSOR_ARCHITECTURE_UNKNOWN: _statsData.hardware.cpuArch = "Unknown"; break; 
+BT_StatsManager.cpp : 		case PROCESSOR_INTEL_386: _statsData.hardware.cpuType = "386"; break; 
+BT_StatsManager.cpp : 		case PROCESSOR_INTEL_486: _statsData.hardware.cpuType = "486"; break; 
+BT_StatsManager.cpp : 		case PROCESSOR_INTEL_PENTIUM: _statsData.hardware.cpuType = "Pentium"; break; 
+BT_StatsManager.cpp : 		case PROCESSOR_INTEL_IA64: _statsData.hardware.cpuType = "IA64"; break; 
+BT_StatsManager.cpp : 		case PROCESSOR_AMD_X8664: _statsData.hardware.cpuType = "AMDx64"; break; 
+BT_StatsManager.cpp : 			windowsType += "Windows Vista "; 
+BT_StatsManager.cpp : 		else windowsType += "Windows Server 2008 "; 
+BT_StatsManager.cpp : 			GetModuleHandle(TEXT("kernel32.dll")),  
+BT_StatsManager.cpp : 			"GetProductInfo"); 
+BT_StatsManager.cpp : 				windowsType += "Ultimate Edition"; 
+BT_StatsManager.cpp : 				windowsType += "Home Premium Edition"; 
+BT_StatsManager.cpp : 				windowsType += "Home Basic Edition"; 
+BT_StatsManager.cpp : 				windowsType += "Enterprise Edition"; 
+BT_StatsManager.cpp : 				windowsType += "Business Edition"; 
+BT_StatsManager.cpp : 				windowsType += "Starter Edition"; 
+BT_StatsManager.cpp : 				windowsType += "Cluster Server Edition"; 
+BT_StatsManager.cpp : 				windowsType += "Datacenter Edition"; 
+BT_StatsManager.cpp : 				windowsType += "Datacenter Edition (core installation)"; 
+BT_StatsManager.cpp : 				windowsType += "Enterprise Edition"; 
+BT_StatsManager.cpp : 				windowsType += "Enterprise Edition (core installation)"; 
+BT_StatsManager.cpp : 				windowsType += "Enterprise Edition for Itanium-based Systems"; 
+BT_StatsManager.cpp : 				windowsType += "Small Business Server"; 
+BT_StatsManager.cpp : 				windowsType += "Small Business Server Premium Edition"; 
+BT_StatsManager.cpp : 				windowsType += "Standard Edition"; 
+BT_StatsManager.cpp : 				windowsType += "Standard Edition (core installation)"; 
+BT_StatsManager.cpp : 				windowsType += "Web Server Edition"; 
+BT_StatsManager.cpp : 	_statsData.hardware.cpuFeatures.append(IsProcessorFeaturePresent(PF_3DNOW_INSTRUCTIONS_AVAILABLE) ? "3DNOW " : ""); 
+BT_StatsManager.cpp : 	_statsData.hardware.cpuFeatures.append(IsProcessorFeaturePresent(PF_MMX_INSTRUCTIONS_AVAILABLE) ? "MMX " : ""); 
+BT_StatsManager.cpp : 	_statsData.hardware.cpuFeatures.append(IsProcessorFeaturePresent(PF_XMMI64_INSTRUCTIONS_AVAILABLE) ? "SSE2 " : ""); 
+BT_StatsManager.cpp : 	_statsData.hardware.cpuFeatures.append(IsProcessorFeaturePresent(PF_XMMI_INSTRUCTIONS_AVAILABLE) ? "SSE " : ""); 
+BT_StatsManager.cpp : 	if (SUCCEEDED(RegOpenKeyEx(HKEY_LOCAL_MACHINE, L"HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", NULL, KEY_READ, &hKey))) 
+BT_StatsManager.cpp : 		if (SUCCEEDED(RegQueryValueEx(hKey, L"ProcessorNameString", NULL, &dwTypeStr, (LPBYTE) &lszValue, &dwSize))) 
+BT_StatsManager.cpp : 		RegQueryValueEx(hKey, L"~MHZ", NULL, &dwTypeDWORD, (LPBYTE) &_statsData.hardware.cpuSpeed, (LPDWORD) &dwSizeUint); 
+BT_StatsManager.cpp : 	vector<QString> statsDirListing = fsManager->getDirectoryContents(statsDir, "stats_*"); 
+BT_StickyNoteMenuActionCustomizer.cpp : 		action->setAdditionalLabel("PRO"); 
+BT_StickyNoteMenuActionCustomizer.cpp : 		launchBumpTopProPage("stickyNote"); 
+BT_SystemTray.cpp : 					UINT isAntiAliasingDisabled = (winOS->getRegistryDwordValue("UserDisableAntiAliasing") || winOS->getRegistryDwordValue("DisableAntiAliasing")) ? MF_UNCHECKED : MF_CHECKED; 
+BT_SystemTray.cpp : 					UINT isAntiAliasingDisabled = (winOS->getRegistryDwordValue("UserDisableAntiAliasing") || winOS->getRegistryDwordValue("DisableAntiAliasing")) ? MF_UNCHECKED : MF_CHECKED; 
+BT_SystemTray.cpp : 						QString helpSiteUrl = QString("http://www.bumptop.com/help?rev=%1&lang=%2&ed=%3") 
+BT_SystemTray.cpp : 						bool isAntiAliasingDisabled = (winOS->getRegistryDwordValue("UserDisableAntiAliasing") || winOS->getRegistryDwordValue("DisableAntiAliasing")); 
+BT_SystemTray.cpp : 						bool isAntiAliasingDisabled = (winOS->getRegistryDwordValue("UserDisableAntiAliasing") || winOS->getRegistryDwordValue("DisableAntiAliasing")); 
+BT_SystemTray.cpp : 							winOS->setRegistryDwordValue("UserDisableAntiAliasing", 0); 
+BT_SystemTray.cpp : 							winOS->setRegistryDwordValue("UserDisableAntiAliasing", 1); 
+BT_SystemTray.cpp : 							CreateLink(native(parent(winOS->getRegistryStringValue("ApplicationPath"))),  
+BT_SystemTray.cpp : 								"BumpTop.exe", "", "BumpTop", "BumpTop.lnk", winOS->GetSystemPath(CSIDL_STARTUP)); 
+BT_SystemTray.cpp : 								"BumpTop.exe", "", "BumpTop", "BumpTop.lnk", winOS->GetSystemPath(CSIDL_STARTUP)); 
+BT_SystemTray.cpp : 								"BumpTop.exe", "", "BumpTop", "BumpTop.lnk", winOS->GetSystemPath(CSIDL_STARTUP)); 
+BT_SystemTray.cpp : 					launchBumpTopProPage("sysTray"); 
+BT_SystemTray.cpp : 						launchBumpTopProPage("sysTrayBalloon"); 
+BT_SystemTray.cpp : 	QString sysTrayLabel = "BumpTop"; 
+BT_SystemTray.cpp : 	if(scnManager->isInSandboxMode) sysTrayLabel.append("SandBox"); 
+BT_SystemTray.cpp : 	sysTrayLabel.append("DEBUG"); 
+BT_SystemTray.cpp : 	QFileInfo commonStartupPos(QDir(winOS->GetSystemPath(CSIDL_COMMON_STARTUP)), "BumpTop.lnk"); 
+BT_SystemTray.cpp : 	QFileInfo userStartupPos(QDir(winOS->GetSystemPath(CSIDL_STARTUP)), "BumpTop.lnk"); 
+BT_TapZoomGesture.cpp : 	Gesture("Tap Zoom", 0, 2, false) // Min of 0 because it's recognized when 2 fingers are lifted 
+BT_TapZoomGesture.cpp : 				return gestureRejected(QString("Time between two fingers coming up (%1) greater than maximum (%2)").arg(delta).arg(MAXIMUM_DELAY)); 
+BT_TapZoomGesture.cpp : 				return gestureRejected(QString("Time between two fingers going down (%1) greater than maximum (%2)").arg(delta).arg(MAXIMUM_DELAY)); 
+BT_TestCommon.cpp : 		Message * message = new Message("runBumptopTests", "Running BumpTop Unit Tests", Message::Ok, clearPolicy); 
+BT_TestFilesystemOperations.cpp : 	CPPUNIT_ASSERT(exists(current_path() / path("BT_TestFilesystemOperations.cpp", native))); 
+BT_TestFilesystemOperations.cpp : 	CPPUNIT_ASSERT(!exists(current_path() / path("this_file_does_not_exist.cpp", native))); 
+BT_TestFilesystemOperations.cpp : 	CPPUNIT_ASSERT(exists(path("BT_TestFilesystemOperations.cpp", native))); 
+BT_TestFilesystemOperations.cpp : 	CPPUNIT_ASSERT(!exists(path("this_file_does_not_exist", native))); 
+BT_TestFilesystemOperations.cpp : 	CPPUNIT_ASSERT(my_exists(current_path().native_directory_string() + "\\" + "BT_TestFilesystemOperations.cpp")); 
+BT_TestFilesystemOperations.cpp : 	CPPUNIT_ASSERT(!my_exists(current_path().native_directory_string() + "\\" + "this_file_does_not_exist.cpp")); 
+BT_TestFilesystemOperations.cpp : 	CPPUNIT_ASSERT(my_exists("BT_TestFilesystemOperations.cpp")); 
+BT_TestFilesystemOperations.cpp : 	CPPUNIT_ASSERT(!my_exists("this_file_does_not_exist.cpp")); 
+BT_TestFilesystemOperations.cpp : 		"C:\\Users\\Folder",  
+BT_TestFilesystemOperations.cpp : 		"C:\\Users\\Folder\\", 
+BT_TestFilesystemOperations.cpp : 		"C:\\Users\\Folder\\file.txt", 
+BT_TestFilesystemOperations.cpp : 		"C:\\", 
+BT_TestFilesystemOperations.cpp : 		"relative\\path", 
+BT_TestFilesystemOperations.cpp : 		"C:\\Users",  
+BT_TestFilesystemOperations.cpp : 		"C:\\Users\\Folder", 
+BT_TestFilesystemOperations.cpp : 		"C:\\Users\\Folder", 
+BT_TestFilesystemOperations.cpp : 		"relative", 
+BT_TestFilesystemOperations.cpp : 		CPPUNIT_ASSERT_EQUAL_MESSAGE("\"" + test_path + "\".branch_path()", test_path_branch_path, test_boost_path.branch_path().native_directory_string()); 
+BT_TestFilesystemOperations.cpp : 		CPPUNIT_ASSERT_EQUAL_MESSAGE("my_branch_path(\"" + test_path + "\")", test_path_branch_path, my_branch_path(test_path)); 
+BT_TestFilesystemOperations.cpp : 		CPPUNIT_ASSERT_EQUAL_MESSAGE("my_branch_path(\"" + test_path + "\")", test_path_branch_path, my_branch_path(test_path)); 
+BT_TestFilesystemOperations.cpp : 		"E:\\Users\\Folder",  
+BT_TestFilesystemOperations.cpp : 		"E:\\Users\\Folder\\", 
+BT_TestFilesystemOperations.cpp : 		"E:\\Users\\Folder\\file.txt", 
+BT_TestFilesystemOperations.cpp : 		"E:\\", 
+BT_TestFilesystemOperations.cpp : 		"relative\\path", 
+BT_TestFilesystemOperations.cpp : 		"oogly:", 
+BT_TestFilesystemOperations.cpp : 		"oogly:\\" 
+BT_TestFilesystemOperations.cpp : 		"Folder",  
+BT_TestFilesystemOperations.cpp : 		"file.txt", 
+BT_TestFilesystemOperations.cpp : 		"path", 
+BT_TestFilesystemOperations.cpp : 		"oogly:", 
+BT_TestFilesystemOperations.cpp : 		CPPUNIT_ASSERT_EQUAL_MESSAGE("\"" + test_path + "\".leaf()", test_path_leaf, test_boost_path.leaf()); 
+BT_TestFilesystemOperations.cpp : 		CPPUNIT_ASSERT_EQUAL_MESSAGE("my_leaf(\"" + test_path + "\")", test_path_leaf, my_leaf(test_path)); 
+BT_TestFilesystemOperations.cpp : 		CPPUNIT_ASSERT_EQUAL_MESSAGE("my_leaf(\"" + test_path + "\")", test_path_leaf, my_leaf(test_path)); 
+BT_TexHelperManager.cpp : 				_ASSERTE(!"TexHelperManager received unexpected pixel data"); 
+BT_TextManager.cpp : 				if (!cam->isCameraFreeForm() && GLOBAL(settings).cameraPreset.startsWith("def"))  
+BT_ThemeManager.cpp : 	_root["header"]["schema"] = backupRoot["header"]["schema"]; 
+BT_ThemeManager.cpp : 	_root["header"]["schema"] = backupRoot["header"]["schema"]; 
+BT_ThemeManager.cpp : 	vector<std::string>::iterator iter = find(members.begin(), members.end(), "relativeRoot"); 
+BT_TouchPoint.cpp : const char *TouchPoint::STATE_NAMES[] = { "DOWN", "MOVE", "UP" }; 
+BT_TouchPoint.cpp : const char *TouchPoint::STATE_NAMES[] = { "DOWN", "MOVE", "UP" }; 
+BT_Training.cpp : 	QString textureBaseNames[] = {"winImage4.png", "winAVI.avi", "winNotes.txt", "winPDF2.pdf", "winWord.doc"}; 
+BT_Training.cpp : 	QString textureBaseNames[] = {"winImage4.png", "winAVI.avi", "winNotes.txt", "winPDF2.pdf", "winWord.doc"}; 
+BT_Training.cpp : 	QString textureBaseNames[] = {"winImage4.png", "winAVI.avi", "winNotes.txt", "winPDF2.pdf", "winWord.doc"}; 
+BT_Training.cpp : 	QString textureBaseNames[] = {"winImage4.png", "winAVI.avi", "winNotes.txt", "winPDF2.pdf", "winWord.doc"}; 
+BT_Training.cpp : 	QString textureBaseNames[] = {"winImage4.png", "winAVI.avi", "winNotes.txt", "winPDF2.pdf", "winWord.doc"}; 
+BT_UpdateInstallerTest.cpp : 	CPPUNIT_ASSERT_EQUAL(QString("msiexec.exe"), u->_shellExecuteExe);  
+BT_UpdateServer.cpp : 	return "Downloading the BumpTop update failed"; 
+BT_UpdateServer.cpp : 	_messageFileUrl = "http://download.bumptop.com/message.txt"; 
+BT_UpdateServer.cpp : 	_versionFileUrl = "http://download.bumptop.com/v4_version.txt"; 
+BT_UpdateServer.cpp : 	_descFileUrl = "http://download.bumptop.com/v4_desc.txt"; 
+BT_UpdateServer.cpp : 	_md5FileUrl = "http://download.bumptop.com/v4_md5.txt"; 
+BT_UpdateServer.cpp : 	_pointerToBumptopInstallerUrl = "http://download.bumptop.com/v4_url.txt"; 
+BT_UpdateServer.cpp : 	_bumptopInstallerFilename = "BumpTopInstaller.exe"; 
+BT_UpdateServer.cpp : 	QString existingMessagePath = _downloadDirPath + "\\message.txt"; 
+BT_UpdateServer.cpp : 			int i = newMessage.indexOf("<error>", 0, Qt::CaseInsensitive); 
+BT_UpdateServer.cpp : 			int j = newMessage.lastIndexOf("</error>", -1, Qt::CaseInsensitive); 
+BT_UpdateServer.cpp : 	QString downloadedHexDigest = read_file_utf8((_downloadDirPath + "\\md5.txt")); 
+BT_UpdateServer.cpp : 		.setLocalPath(_downloadDirPath + "\\version.txt")); 
+BT_UpdateServer.cpp : 	_messageFileUrl = "http://bumptop.com/download/staging/message.txt"; 
+BT_UpdateServer.cpp : 	_versionFileUrl = "http://bumptop.com/download/staging/version.txt"; 
+BT_UpdateServer.cpp : 	_descFileUrl = "http://bumptop.com/download/staging/desc.txt"; 
+BT_UpdateServer.cpp : 	_md5FileUrl = "http://bumptop.com/download/staging/md5.txt"; 
+BT_UpdateServer.cpp : 	_pointerToBumptopInstallerUrl = "http://bumptop.com/download/staging/url.txt"; 
+BT_UpdateServer.cpp : 	_messageFileUrl = "http://download.bumptop.com/vip_message.txt"; 
+BT_UpdateServer.cpp : 	_versionFileUrl = "http://download.bumptop.com/vip_v4_version.txt"; 
+BT_UpdateServer.cpp : 	_descFileUrl = "http://download.bumptop.com/vip_v4_desc.txt"; 
+BT_UpdateServer.cpp : 	_md5FileUrl = "http://download.bumptop.com/vip_v4_md5.txt"; 
+BT_UpdateServer.cpp : 	_pointerToBumptopInstallerUrl = "http://download.bumptop.com/vip_v4_url.txt"; 
+BT_UpdateServerTest.cpp : 	if (exists("BumptopInstaller.msi")) 
+BT_UpdateServerTest.cpp : 		remove("BumptopInstaller.msi"); 
+BT_UpdateServerTest.cpp : 	CPPUNIT_ASSERT(!exists("BumptopInstaller.msi")); 
+BT_UpdateServerTest.cpp : 	myfile.open("BumptopInstaller.msi"); 
+BT_UpdateServerTest.cpp : 	boost::uintmax_t fileSize = file_size("BumptopInstaller.msi"); 
+BT_UpdateServerTest.cpp : 	if (exists("BumptopInstaller.msi")) 
+BT_UpdateServerTest.cpp : 		remove("BumptopInstaller.msi"); 
+BT_UpdateServerTest.cpp : 	CPPUNIT_ASSERT(!exists("BumptopInstaller.msi")); 
+BT_UpdateServerTest.cpp : 	myfile.open("BumptopInstaller.msi"); 
+BT_UpdateServerTest.cpp : 	boost::uintmax_t fileSize = file_size("BumptopInstaller.msi"); 
+BT_Updater.cpp : 	return "Parsing the version number failed"; 
+BT_Updater.cpp : 				QString notificationBumpTopURL("http://bumptop.com/updateNotification"); 
+BT_Updater.cpp : 				QString error_message = QString("downloadNewVersion finished but still not updating," 
+BT_Updater.cpp : 					"isUpdateDownloaded(): %1;" 
+BT_Updater.cpp : 					"getNewestVersionNumber(): %2;" 
+BT_Updater.cpp : 					"getDownloadedVersionNumber(): %3;") 
+BT_Updater.cpp : 		logError("UpdateCheckFailedException"); 
+BT_Updater.cpp : 		logError("DownloadFailedException"); 
+BT_Updater.cpp : 		QString downloadedVersionStringStream = read_file_utf8((_downloadDirectory + "\\version.txt")); 
+BT_Updater.cpp : 	return RegisterWindowMessage((LPCWSTR) QString("BUMPTOP_UPDATE_DOWNLOADED").utf16()); 
+BT_Updater.cpp : 	QString contents = QString("r%1\t%2-%3-%4 %5:%6:%7\t%8") 
+BT_Updater.cpp : 	append_file_utf8(contents, (_downloadDirectory + "\\error.log")); 
+BT_UpdaterTest.cpp : 		"1", "abc", "-2", "234sc", "2", "" 
+BT_UpdaterTest.cpp : 		"1", "abc", "-2", "234sc", "2", "" 
+BT_UpdaterTest.cpp : 	versionStrings.push_back("800"); 
+BT_UpdaterTest.cpp : 	versionStrings.push_back("900"); 
+BT_UpdaterTest.cpp : 	versionStrings.push_back("1000"); 
+BT_UpdaterTest.cpp : 	versionStrings.push_back("Error, no connection"); 
+BT_UpdaterTest.cpp : 	versionStrings.push_back("1100"); 
+BT_UpdaterTest.cpp : 	versionStrings.push_back("1200"); 
+BT_UpdaterTest.cpp : 	versionStrings.push_back("800"); 
+BT_UpdaterTest.cpp : 	versionStrings.push_back("900"); 
+BT_UpdaterTest.cpp : 	versionStrings.push_back("1000"); 
+BT_UpdaterTest.cpp : 	versionStrings.push_back("Error, no connection"); 
+BT_UpdaterTest.cpp : 	versionStrings.push_back("1100"); 
+BT_UpdaterTest.cpp : 	versionStrings.push_back("1200"); 
+BT_UpdaterTest.cpp : 	if (exists("a_temporary_test_data_directory")) 
+BT_UpdaterTest.cpp : 		remove("a_temporary_test_data_directory\\BumpTopInstaller.msi"); 
+BT_UpdaterTest.cpp : 		remove("a_temporary_test_data_directory\\version.txt"); 
+BT_UpdaterTest.cpp : 		remove("a_temporary_test_data_directory\\desc.txt"); 
+BT_UpdaterTest.cpp : 	versionStrings.push_back("800"); 
+BT_UpdaterTest.cpp : 	Updater *u = new Updater(mus, 99, "a_temporary_test_data_directory", 0, 0, 0); 
+BT_UpdaterTest.cpp : 	create_directory("a_temporary_test_data_directory"); 
+BT_UpdaterTest.cpp : 	ofstream installer("a_temporary_test_data_directory//BumpTopInstaller.msi"); 
+BT_UpdaterTest.cpp : 	ofstream versionFile("a_temporary_test_data_directory//version.txt"); 
+BT_UpdaterTest.cpp : 	ofstream descFile("a_temporary_test_data_directory//desc.txt"); 
+BT_UpdaterTest.cpp : 	remove("a_temporary_test_data_directory\\BumpTopInstaller.msi"); 
+BT_UpdaterTest.cpp : 	remove("a_temporary_test_data_directory\\version.txt"); 
+BT_UpdaterTest.cpp : 	remove("a_temporary_test_data_directory\\desc.txt"); 
+BT_UpdaterTest.cpp : 	remove("a_temporary_test_data_directory"); 
+BT_UpdaterTest.cpp : 	remove("a_temporary_test_data_directory\\BumpTopInstaller.msi"); 
+BT_UpdaterTest.cpp : 	remove("a_temporary_test_data_directory\\version.txt"); 
+BT_UpdaterTest.cpp : 	remove("a_temporary_test_data_directory\\desc.txt"); 
+BT_UpdaterTest.cpp : 	remove("a_temporary_test_data_directory"); 
+BT_UpdaterTest.cpp : 	remove("version.txt"); 
+BT_UpdaterTest.cpp : 	remove("desc.txt"); 
+BT_UpdaterTest.cpp : 	remove("BumpTopInstaller.msi"); 
+BT_UpdaterTest.cpp : 	versionStrings.push_back("800"); 
+BT_UpdaterTest.cpp : 	path bumptopDirPath = current_path().branch_path() / path("Source/Debug", native); 
+BT_UpdaterTest.cpp : 	path bumptopDirPath = current_path().branch_path() / path("Source/Release", native); 
+BT_UpdaterTest.cpp : 	path bumptopPath = bumptopDirPath / path("BumpTop.exe"); 
+BT_UpdaterTest.cpp : 	CPPUNIT_ASSERT_MESSAGE("Testing if we found the BumpTop window", foundBumptopWindow); 
+BT_UpdaterTest.cpp : 	versionStrings.push_back("800"); 
+BT_Util.cpp : 		SetConsoleTitle(L"Debug Window"); 
+BT_Util.cpp : 		newObj->setText("fadeAndDeleteActor"); 
+BT_Util.cpp : 		errorMessage.append("]\n"); 
+BT_Util.cpp : 		QString newFolderName("Piled Stuff"); 
+BT_Util.cpp : 	paramsStr.append(QString(" -bumptopHWND %1").arg((unsigned int) winOS->GetWindowsHandle())); 
+BT_Util.cpp : 		paramsStr.append(QString(" -inviteCode %1").arg(GLOBAL(settings).inviteCode)); 
+BT_Util.cpp : 		paramsStr.append(" -admin"); 
+BT_Util.cpp : 	paramsStr.append(QString(" -language %1").arg(winOS->GetLocaleLanguage())); 
+BT_Util.cpp : 	HWND settingsWindow = FindWindowEx(NULL, NULL, NULL, L"BumpTop Settings"); 
+BT_Util.cpp : 				url.setUrl(QString("http://") + data); 
+BT_Util.cpp : 		printUnique("ConsoleLoggingQWebPage::userAgentForUrl", "Default BumpTop User Agent"); 
+BT_Util.cpp : 		printUnique("ConsoleLoggingQWebPage::userAgentForUrl", "iPhone User Agent"); 
+BT_Util.cpp : 		printUnique("ConsoleLoggingQWebPage::userAgentForUrl", "IE8 User Agent"); 
+BT_Util.cpp : 		printStr("Profiling started"); 
+BT_Util.cpp : 		printStr(QString("Profiling stopped, results written to %1").arg(native(winOS->GetDataDirectory()))); 
+BT_Util.cpp : 	QStringList filter(QString("*.json")); 
+BT_Util.cpp : 	QStringList JSONTestScriptFiles("customTests.json"); 
+BT_Util.cpp : 			QString err = "No such key path exists:\n" + keyPath; 
+BT_Util.cpp : 			::MessageBox(winOS->GetWindowsHandle(), (LPCTSTR) err.utf16(), L"BumpTop Util Error", MB_OK | MB_ICONERROR); 
+BT_Util.cpp : 	QString fileName = "/tradeshow.json"; 
+BT_Util.cpp : 			fileProperty.append(".position"); 
+BT_Util.cpp : 			fileProperty.append(".relativeTo"); 
+BT_Util.cpp : 			fileProperty.append(".pinWall"); 
+BT_Util.cpp : 			fileProperty.append(".grow"); 
+BT_Util.cpp : 	if (!cam->isCameraFreeForm() && (GLOBAL(settings).cameraPreset.startsWith("def") || GLOBAL(settings).cameraPreset.isEmpty()) || GLOBAL(isInInfiniteDesktopMode)) 
+BT_Util.cpp : 	dlgManager->setText("Piled Stuff"); 
+BT_Util.cpp : 	QString invalidChars = "\\:/*?\"<>|";			// taken from windows explorer 
+BT_Util.cpp : 		return QString("%1s").arg(winOS->GetFileTypeDescription(fsActor->getTargetPath())); 
+BT_Util.cpp : 	vector<QString> settingJsonFiles = fsManager->getDirectoryContents(winOS->GetDataDirectory().absolutePath(), "settings.*"); 
+BT_Util.cpp : 	QString newFileName = settingsPath.absoluteFilePath() + QString::number(settingJsonFiles.size()) + ".bak"; 
+BT_Util.cpp : 			newFileName = settingsPath.absoluteFilePath() + QString::number(i) + ".bak"; 
+BT_Util.cpp : 		fsManager->deleteFileByName(dataDirectory.absoluteFilePath("scene.bump.bak"), true); 
+BT_Util.cpp : 		fsManager->deleteFileByName(dataDirectory.absoluteFilePath("scene.bump"), true); 
+BT_Util.cpp : 		fsManager->deleteFileByName(dataDirectory.absoluteFilePath("scene.pb.bump.bak"), true); 
+BT_Util.cpp : 		fsManager->deleteFileByName(dataDirectory.absoluteFilePath("scene.pb.bump"), true); 
+BT_Util.cpp : 		QString subject = QString("[BumpTop Feedback][%1] - %2").arg(type).arg(winOS->GetGUID()); 
+BT_Util.cpp : 	paramsStr.append(QString(" -bumptopHWND %1").arg((unsigned int) winOS->GetWindowsHandle())); 
+BT_Util.cpp : 		paramsStr.append(QString(" -inviteCode %1").arg(GLOBAL(settings).inviteCode)); 
+BT_Util.cpp : 		paramsStr.append(" -admin"); 
+BT_Util.cpp : 	paramsStr.append(QString(" -proUrl %1").arg(getBumpTopProPageUrl("settingsComparisonChart"))); 
+BT_Util.cpp : 	paramsStr.append(QString(" -proUrl %1").arg(getBumpTopProPageUrl("settingsComparisonChart"))); 
+BT_Util.cpp : 	paramsStr.append(QString(" -language %1").arg(winOS->GetLocaleLanguage())); 
+BT_Util.cpp : 	paramsStr.append(QString(" -themesTab")); 
+BT_Util.cpp : 	pfDialog->setRawFeed("http://api.flickr.com/services/feeds/photos_faves.gne?nsid=26799028@N06&lang=en-us&format=rss_200"); 
+BT_Util.cpp : 		sei.lpFile = L"cmd.exe"; 
+BT_Util.cpp : 		QString params = QString("/k cd \"%1\"").arg(native(scnManager->getWorkingDirectory())); 
+BT_Util.cpp : 	return QString("%1, %2, %3\n").arg(v.x).arg(v.y).arg(v.z); 
+BT_Util.cpp : 		matrixString += QString("%1, ").arg(ori[i]); 
+BT_Util.cpp : 	widgetActor->load("bumpwidget-facebook://newsfeed", true); 
+BT_Util.cpp : 	return url.startsWith("bumpsharedfolder://"); 
+BT_Util.cpp : 	return QString("bumpsharedfolder://") + (info.isNull() ? "" : info); 
+BT_Util.cpp : 	QString invalids = "\\:/*?\"<>|"; 
+BT_VideoRender.cpp :     hr = _graph->AddFilter(_vmr9, L"VMR9");  
+BT_VistaFileOperation.cpp : 	_hMod = LoadLibrary(L"Shell32.dll"); 
+BT_VistaFileOperation.cpp : 	pSHCreateItemFromParsingName = (SHCreateItemFromParsingNameSignature) GetProcAddress(_hMod, "SHCreateItemFromParsingName"); 
+BT_VistaFileOperation.cpp : 	pSHCreateShellItemArrayFromIDLists = (SHCreateShellItemArrayFromIDListsSignature) GetProcAddress(_hMod, "SHCreateShellItemArrayFromIDLists"); 
+BT_WebPage.cpp : 		return "Mozilla/5.0 (iPhone; U; CPU iPhone OS 2_1 like Mac OS X; en-us) AppleWebKit/525.18.1 (KHTML, like Gecko) Version/3.1.1 Mobile/5F136 Safari/525.20"; 
+BT_WebPage.cpp : 		return "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; FBSMTWB; InfoPath.2; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; MS-RTC LM 8)"; 
+BT_WidgetManager.cpp : 					QString launchApp = qstringFromValue(iconOverrides[i]["launchApplication"]["path"]); 
+BT_WidgetManager.cpp : 					ovr.launchOverrideParams = qstringFromValue(iconOverrides[i]["launchApplication"]["args"]); 
+BT_WidgetManager.cpp : 					ovr.label = qstringFromValue(iconOverrides[i]["label"]); 
+BT_WidgetManager.cpp : 						ovr.scale = NxMath::min(6.0f, (float) iconOverrides[i]["scale"].asDouble()); 
+BT_Windows7Multitouch.cpp : 	_hMod = LoadLibrary(_T("User32.dll")); 
+BT_Windows7Multitouch.cpp : 		pRegisterTouchWindow = (RegisterTouchWindowSignature) GetProcAddress(_hMod, "RegisterTouchWindow"); 
+BT_Windows7Multitouch.cpp : 		pUnregisterTouchWindow = (UnregisterTouchWindowSignature) GetProcAddress(_hMod, "UnregisterTouchWindow"); 
+BT_Windows7Multitouch.cpp : 		pCloseTouchInputHandle = (CloseTouchInputHandleSignature) GetProcAddress(_hMod, "CloseTouchInputHandle"); 
+BT_Windows7Multitouch.cpp : 		pGetTouchInputInfo = (GetTouchInputInfoSignature) GetProcAddress(_hMod, "GetTouchInputInfo"); 
+BT_Windows7Multitouch.cpp : 		pTKGetGestureMetrics = (TKGetGestureMetricsSignature) GetProcAddress(_hMod, "TKGetGestureMetrics"); 
+BT_Windows7Multitouch.cpp : 					logError(QString("\nFailed to initialize Manipulation Processor, HRESULT = %1").arg(hr)); 
+BT_Windows7Multitouch.cpp : 		scnManager->touchDebugLogFilename = logDir.absoluteFilePath("touchDebugLog.txt"); 
+BT_Windows7Multitouch.cpp : 				QString("%1 #%2 %3 at (%4, %5); ") 
+BT_Windows7Multitouch.cpp : 		logError(QString("\nGetTouchInputInfo failed, GetLastError = %1").arg(GetLastError())); 
+BT_WindowsOS.cpp : 	body.replace("\n", "<br/>"); 
+BT_WindowsOS.cpp : 		subject += QString(" [%1]").arg(GLOBAL(settings).proInviteCode); 
+BT_WindowsOS.cpp : 	subject.append("tbone study participant id# "); 
+BT_WindowsOS.cpp : 		SmtpServer.Connect(L"mail.bumptop.com", L"bugs@bumptop.com", L"killbugs"); 
+BT_WindowsOS.cpp : 		SmtpServer.Connect(L"mail.bumptop.com", L"bugs@bumptop.com", L"killbugs"); 
+BT_WindowsOS.cpp : 		SmtpServer.Connect(L"mail.bumptop.com", L"bugs@bumptop.com", L"killbugs"); 
+BT_WindowsOS.cpp : 	if (winOS->getRegistryDwordValue("ShutdownIncomplete")) 
+BT_WindowsOS.cpp : 		winOS->setRegistryDwordValue("ShutdownIncomplete", 0); 
+BT_WindowsOS.cpp : 		dumpFileName = native(QFileInfo(winOS->GetDataDirectory(), "Bump.dmp")); 
+BT_WindowsOS.cpp : 		hDll = LoadLibrary(L"DBGHELP.DLL"); 
+BT_WindowsOS.cpp : 			pDump = (MINIDUMPWRITEDUMP) GetProcAddress(hDll, "MiniDumpWriteDump"); 
+BT_WindowsOS.cpp : 		launchBumpTopProPage("buyProOverlay"); 
+BT_WindowsOS.cpp : 		HMODULE _hMod = LoadLibrary(_T("User32.dll")); 
+BT_WindowsOS.cpp : 		SetProcessDPIAwareSignature f = GetProcAddress(_hMod,"SetProcessDPIAware"); 
+BT_WindowsOS.cpp : 	BUMPTOP_UPDATE_DOWNLOADED = RegisterWindowMessage(L"BUMPTOP_UPDATE_DOWNLOADED"); 
+BT_WindowsOS.cpp : 	desktopLock = new DesktopLock("desktop.lock"); 
+BT_WindowsOS.cpp : 			HWND hWnd = FindWindowEx(FindWindowEx(FindWindow(L"Progman", NULL), NULL, L"SHELLDLL_DefView", NULL), NULL, L"BumpTop", NULL); 
+BT_WindowsOS.cpp : 			HWND hWnd = FindWindowEx(FindWindowEx(FindWindow(L"Progman", NULL), NULL, L"SHELLDLL_DefView", NULL), NULL, L"BumpTop", NULL); 
+BT_WindowsOS.cpp : 			HWND hWnd = FindWindowEx(FindWindowEx(FindWindow(L"Progman", NULL), NULL, L"SHELLDLL_DefView", NULL), NULL, L"BumpTop", NULL); 
+BT_WindowsOS.cpp : 			themeLoadingError = "Unspecified"; 
+BT_WindowsOS.cpp : 		MessageBox(windowHwnd, (LPCWSTR) ("Could not load your BumpTop Theme:\n" + themeLoadingError).utf16(),  
+BT_WindowsOS.cpp : 			L"BumpTop Theme Error", MB_OK | MB_ICONERROR); 
+BT_WindowsOS.cpp : 			scnManager->isShellExtension ? parentHwnd : FindWindow(L"Progman", NULL)); 
+BT_WindowsOS.cpp : 			winOS->getRegistryDwordValue("RelaunchBumpTopWindow")) 
+BT_WindowsOS.cpp : 			winOS->setRegistryDwordValue("RelaunchBumpTopWindow", 0); 
+BT_WindowsOS.cpp : 				MessageBox(GetTopWindow(NULL), L"Tests Failed!\nCheck your output console for more information.\nPlease fix these issues before submitting your change!", L"BumpTop Tests Failed!", MB_ICONERROR | MB_OK); 
+BT_WindowsOS.cpp : 				MessageBox(GetTopWindow(NULL), L"Tests Failed!\nCheck your output console for more information.\nPlease fix these issues before submitting your change!", L"BumpTop Tests Failed!", MB_ICONERROR | MB_OK); 
+BT_WindowsOS.cpp : 		if (winOS->getRegistryDwordValue("ShutdownIncomplete")) 
+BT_WindowsOS.cpp : 			winOS->setRegistryDwordValue("ShutdownIncomplete", 0); 
+BT_WindowsOS.cpp : 				MessageBox(GetForegroundWindow(), L"Usage: BumpTop.exe\n" 
+BT_WindowsOS.cpp : 					 L"\t-d <directory>\tPoints BumpTop at the specified directory\n" 
+BT_WindowsOS.cpp : 					 L"\t-help\t\tDisplays this help message", 
+BT_WindowsOS.cpp : 					 L"BumpTop Startup Flags", MB_OK); 
+BT_WindowsOS.cpp : 				QString version = QString("BumpTop %1 %2").arg(winOS->GetBuildNumber()).arg(winOS->BumpTopEditionName(GetBumpTopEdition())); 
+BT_WindowsOS.cpp : 				pFile = fopen ("BUMPTOP_VERSION.txt","w"); 
+BT_WindowsOS.cpp : 				scnManager->JSONTestFilesPath = winOS->GetTestsDirectory()/"Environment"; 
+BT_WindowsOS.cpp : 				QDir dir(parent(winOS->GetTexturesDirectory()) / "LiveMeshDemo" / "Scene"); 
+BT_WindowsOS.cpp : 					"Defaulting to the Desktop directory."); 
+BT_WindowsOS.cpp : 		errStr.append("\n\nRun BumpTop with the -help flag for more information"); 
+BT_WindowsOS.cpp : 		MessageBox(GetForegroundWindow(), (LPCWSTR) errStr.utf16(), L"Error Parsing Command Line",  
+BT_WindowsOS.cpp : 		QString relThemesName = "Themes"; 
+BT_WindowsOS.cpp : 		QString relWidgetsName = "Widgets"; 
+BT_WindowsOS.cpp : 		QString relCacheName = "Cache"; 
+BT_WindowsOS.cpp : 		QString relFramesName = "Frames"; 
+BT_WindowsOS.cpp : 		QString relTestsName = "Tests"; 
+BT_WindowsOS.cpp : 		QString relTexturesName = "Textures"; 
+BT_WindowsOS.cpp : 		QString relLanguagesName = "Languages"; 
+BT_WindowsOS.cpp : 	QFileInfo statsPath(GetUserApplicationDataPath(), "stats"); 
+BT_WindowsOS.cpp : 			QString relDataName("SandboxData"); 
+BT_WindowsOS.cpp : 			QString relDataName("UnitTestData"); 
+BT_WindowsOS.cpp : 	ShellExecute(NULL, L"open", L"http://bumptop.com/help", NULL, NULL, SW_SHOWNORMAL); 
+BT_WindowsOS.cpp : 	ShellExecute(NULL, L"open", L"http://bumptop.com/help", NULL, NULL, SW_SHOWNORMAL); 
+BT_WindowsOS.cpp : 		HMODULE hLib = GetModuleHandle(L"shell32"); 
+BT_WindowsOS.cpp : 			(FARPROC&) pfnFileIconInit = GetProcAddress(hLib, "FileIconInit"); 
+BT_WindowsOS.cpp : 				"Using default settings.").utf16(), L"BumpTop", MB_OK | MB_ICONINFORMATION); 
+BT_WindowsOS.cpp : 			parent = FindWindow(NULL, L"Program Manager"); 
+BT_WindowsOS.cpp : 	LONG returnStatus = RegOpenKeyEx(HKEY_CURRENT_USER, L"Control Panel\\Colors", 0L, KEY_READ, &hKey); 
+BT_WindowsOS.cpp : 		returnStatus = RegQueryValueEx(hKey, L"Background", NULL, &dwType, (LPBYTE)&lszValue, &dwSize); 
+BT_WindowsOS.cpp : 	LONG returnStatus = RegOpenKeyEx(HKEY_CURRENT_USER, L"Control Panel\\Desktop", 0L, KEY_READ, &hKey); 
+BT_WindowsOS.cpp : 		returnStatus = RegQueryValueEx(hKey, L"TileWallpaper", NULL, &dwType, (LPBYTE)&lszValue, &dwSize); 
+BT_WindowsOS.cpp : 		returnStatus = RegQueryValueEx(hKey, L"WallpaperStyle", NULL, &dwType2, (LPBYTE)&lszValue2, &dwSize2); 
+BT_WindowsOS.cpp : 	LONG returnStatus = RegOpenKeyEx(HKEY_CURRENT_USER, L"Control Panel\\Desktop", 0L, KEY_READ, &hKey); 
+BT_WindowsOS.cpp : 		returnStatus = RegQueryValueEx(hKey, L"ConvertedWallpaper", NULL, &dwType, (LPBYTE)&lszValue, &dwSize); 
+BT_WindowsOS.cpp : 		FileName.endsWith(".lnk", Qt::CaseInsensitive)) 
+BT_WindowsOS.cpp : 				return "override.ext.folder"; 
+BT_WindowsOS.cpp : 	QDir getIconPositionsApp = winOS->GetExecutableDirectory() / "x64" / "GetIconPositions.exe"; 
+BT_WindowsOS.cpp : 	progmanHwnd = FindWindow(NULL, L"Program Manager"); 
+BT_WindowsOS.cpp : 		desktopViewHwnd = FindWindowEx(progmanHwnd, NULL, L"SHELLDLL_DefView", NULL); 
+BT_WindowsOS.cpp : 			listViewHwnd = FindWindowEx(desktopViewHwnd, NULL, L"SysListView32", NULL); 
+BT_WindowsOS.cpp : 				winOS->desktopLock = new DesktopLock("desktop.test.lock"); 
+BT_WindowsOS.cpp : 	hLib = GetModuleHandle(L"shell32"); 
+BT_WindowsOS.cpp : 		(FARPROC&) pfnGetImageList = GetProcAddress(hLib, "SHGetImageList"); 
+BT_WindowsOS.cpp : 	return QString("bumptop://texture_id_%1").arg(uniqueIdCounter++); 
+BT_WindowsOS.cpp : 			windowTitle = "BumpPhoto"; 
+BT_WindowsOS.cpp : 	uint browseToChildMsg = RegisterWindowMessage(L"BtShExt_browseChild"); 
+BT_WindowsOS.cpp : 	uint updateStatusBarMsg = RegisterWindowMessage(L"BtShExt_updateStatusBar"); 
+BT_WindowsOS.cpp : 		HWND hWnd = FindWindowEx(FindWindow(L"Progman", NULL), NULL, L"SHELLDLL_DefView", NULL); 
+BT_WindowsOS.cpp : 		HWND hWnd = FindWindowEx(FindWindow(L"Progman", NULL), NULL, L"SHELLDLL_DefView", NULL); 
+BT_WindowsOS.cpp : 	HWND shellWin = FindWindowEx(hwnd, NULL, L"SHELLDLL_DefView", NULL); 
+BT_WindowsOS.cpp : 		HMODULE hLib = GetModuleHandle(L"shell32"); 
+BT_WindowsOS.cpp : 			(FARPROC&) pfnSHCreateItemFromParsingName = GetProcAddress(hLib, "SHCreateItemFromParsingName"); 
+BT_WindowsOS.cpp : 	setRegistryDwordValue("RelaunchBumpTopWindow", 1); 
+BT_WindowsOS.cpp : 	setRegistryDwordValue("ShutdownIncomplete", 1);	 
+BT_WindowsOS.cpp : 	LONG returnStatus = RegOpenKeyEx(HKEY_LOCAL_MACHINE, L"HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0", 0L, KEY_READ, &hKey); 
+BT_WindowsOS.cpp : 		returnStatus = RegQueryValueEx(hKey, L"Identifier", NULL, &dwType, (LPBYTE)&lszValue, &dwSize); 
+BT_WindowsOS.cpp : 	QString dxArguments = "/t " + dxDiagOut; 
+BT_WindowsOS.cpp : 		QRegExp filter("Vendor ID: ([^\n\r]*)"); 
+BT_WindowsOS.cpp : 		filter.setPattern("Device ID: ([^\n\r]*)"); 
+BT_WindowsOS.cpp : 		filter.setPattern("SubSys ID: ([^\n\r]*)"); 
+BT_WindowsOS.cpp : 		filter.setPattern("Revision ID: ([^\n\r]*)"); 
+BT_WindowsOS.cpp : 		QUrl driversUrl("http://bumptop.com/drivers#video_cards"); 
+BT_WindowsOS.cpp : 			QRegExp filter("Operating System:([^\n\r]*)"); 
+BT_WindowsOS.cpp : 			filter.setPattern("Card name:([^\n\r]*)"); 
+BT_WindowsOS.cpp : 				driversUrl.addQueryItem("card", filter.cap(1).trimmed()); 
+BT_WindowsOS.cpp : 			filter.setPattern("Manufacturer:([^\n\r]*)"); 
+BT_WindowsOS.cpp : 				driversUrl.addQueryItem("manufacturer", filter.cap(1).trimmed()); 
+BT_WindowsOS.cpp : 			filter.setPattern("Driver Version:([^\n\r]*)"); 
+BT_WindowsOS.cpp : 				driversUrl.addQueryItem("driver_version", filter.cap(1).trimmed()); 
+BT_WindowsOS.cpp : 			driversUrl.addQueryItem("video_hardware_id", hardwareID); 
+BumpTop.cpp : 	if (!scnManager->isShellExtension && (renderer.startsWith("gdi", Qt::CaseInsensitive)) && !(winOS->ignoreGDI())) 
+BumpTop.cpp : 			desktop->setText("My Desk"); 
+BumpTop.cpp : 			desktop->getNameableOverlay()->getTextOverlay()->setFont(FontDescription("Arial Bold", 20));				 
+BumpTop.cpp : 			desktop->image = new ImageOverlay("user.me"); 
+BumpTop.cpp : 			desktop->bgTextureOverride = "user.bg.vista"; 
+BumpTop.cpp : 			desktop->setText("David"); 
+BumpTop.cpp : 			desktop->getNameableOverlay()->getTextOverlay()->setFont(FontDescription("Arial Bold", 20));					 
+BumpTop.cpp : 			desktop->image = new ImageOverlay("user.left"); 
+BumpTop.cpp : 			desktop->setText("My Picture Frame"); 
+BumpTop.cpp : 			desktop->getNameableOverlay()->getTextOverlay()->setFont(FontDescription("Arial Bold", 20));			 
+BumpTop.cpp : 			desktop->bgTextureOverride = "user.bg.vista_2"; 
+BumpTop.cpp : 			desktop->setText("Dad"); 
+BumpTop.cpp : 			desktop->getNameableOverlay()->getTextOverlay()->setFont(FontDescription("Arial Bold", 20));			 
+BumpTop.cpp : 			desktop->image = new ImageOverlay("user.top"); 
+BumpTop.cpp : 			const char * baseTextures[] = {"floor.desktop", "wall.top", "wall.bottom", "wall.right", "wall.left"}; 
+BumpTop.cpp : 			const char * baseTextures[] = {"floor.desktop", "wall.top", "wall.bottom", "wall.right", "wall.left"}; 
+BumpTop.cpp : 			const char * baseTextures[] = {"floor.desktop", "wall.top", "wall.bottom", "wall.right", "wall.left"}; 
+BumpTop.cpp : 			const char * baseTextures[] = {"floor.desktop", "wall.top", "wall.bottom", "wall.right", "wall.left"}; 
+BumpTop.cpp : 			const char * baseTextures[] = {"floor.desktop", "wall.top", "wall.bottom", "wall.right", "wall.left"}; 
+BumpTop.cpp : 			const char * overlayTextures[] = {"floor.ao_overlay", "wall.tb.ao_overlay", "wall.tb.ao_overlay", "wall.lr.ao_overlay", "wall.lr.ao_overlay"}; 
+BumpTop.cpp : 			const char * overlayTextures[] = {"floor.ao_overlay", "wall.tb.ao_overlay", "wall.tb.ao_overlay", "wall.lr.ao_overlay", "wall.lr.ao_overlay"}; 
+BumpTop.cpp : 			const char * overlayTextures[] = {"floor.ao_overlay", "wall.tb.ao_overlay", "wall.tb.ao_overlay", "wall.lr.ao_overlay", "wall.lr.ao_overlay"}; 
+BumpTop.cpp : 			const char * overlayTextures[] = {"floor.ao_overlay", "wall.tb.ao_overlay", "wall.tb.ao_overlay", "wall.lr.ao_overlay", "wall.lr.ao_overlay"}; 
+BumpTop.cpp : 			const char * overlayTextures[] = {"floor.ao_overlay", "wall.tb.ao_overlay", "wall.tb.ao_overlay", "wall.lr.ao_overlay", "wall.lr.ao_overlay"}; 
+BumpTop.cpp : 					DrawDesktopSide(-1, "floor.infinite", Vec3(0.0f), 7.0f * mainWorkspaceDims); 
+BumpTop.cpp : 							DrawDesktopSide(-1, "user.overlay.toshibaFrame", Vec3(0.0f, 0.0f, 0.0f), mainWorkspaceDims + Vec3(2.0f)); 
+BumpTop.cpp : 								DrawDesktopSide(-1, "floor.desktop", Vec3(0.0f), mainWorkspaceDims + Vec3(2.0f)); 
+BumpTop.cpp : 								DrawDesktopSide(-1, "floor.desktop.buffer", Vec3(0.0f), mainWorkspaceDims + Vec3(2.0f)); 
+BumpTop.cpp : 		winOS->getRegistryDwordValue("DisableAntiAliasing", hasUserAAOverride); 
+BumpTop.cpp : 				FontDescription font("Arial", 14); 
+BumpTop.cpp : 				vector<FileSystemActor*> actors = scnManager->getFileSystemActors(QString(".*Starred"), true, true); 
+BumpTop.cpp : 	QString filename("StickyNote"); 
+BumpTop.cpp : 	filename.append(".txt"); 
+BumpTop.cpp : 	QString stickyNoteFileName = "StickyNote"; 
+BumpTop.cpp : 	QString postItHeader("BUMPTOP_STICKY_NOTE"); 
+BumpTop.cpp : 	QString postItHeader("BUMPTOP_STICKY_NOTE"); 
+DelayedDirectoryChangeHandler.cpp : 				TRACE(_T("Following exception occurred: %d -- File: %s Line: %d\n"), dwEx, _T(__FILE__), __LINE__); 
+DelayedDirectoryChangeHandler.cpp : 		TRACE(_T("CDelayedNotificationWindow -- Creating the notification window\n")); 
+DelayedDirectoryChangeHandler.cpp : 		TRACE(_T("CDelayedNotificationWindow -- Destroying the notification window\n")); 
+DelayedDirectoryChangeHandler.cpp : 		TRACE(_T("CDirChangeNotification::RegisterWindowClass - RegisterClass failed: %d\n"), GetLastError()); 
+DelayedDirectoryChangeHandler.cpp : 	TCHAR szClassName[] = _T("Delayed_Message_Sender"); 
+DelayedDirectoryChangeHandler.cpp : 	s_hWnd 	= CreateWindowEx(0, szClassName, _T("DelayedWnd"),0,0,0,0,0, NULL, 0,  
+DelayedDirectoryChangeHandler.cpp : 		TRACE(_T("Unable to create notification window! GetLastError(): %d\n"), GetLastError()); 
+DelayedDirectoryChangeHandler.cpp : 		TRACE(_T("File: %s Line: %d\n"), _T(__FILE__), __LINE__); 
+DelayedDirectoryChangeHandler.cpp : 	TRACE(_T("CDelayedNotificationThread::StartThread()\n")); 
+DelayedDirectoryChangeHandler.cpp : 	TRACE(_T("CDelayedNotificationThread::StopThread()\n")); 
+DelayedDirectoryChangeHandler.cpp : 	TRACE(_T("CDelayedNotificationThread::ThreadFunc() ThreadID: %d -- Starting\n"), GetCurrentThreadId()); 
+DelayedDirectoryChangeHandler.cpp : 				TRACE(_T("The following exception occurred: %d -- File: %s Line: %d\n"), dwEx, _T(__FILE__), __LINE__); 
+DelayedDirectoryChangeHandler.cpp : 	TRACE(_T("CDelayedNotificationThread::ThreadFunc() exiting. ThreadID: %d\n"), GetCurrentThreadId()); 
+DelayedDirectoryChangeHandler.cpp : 			s_hShlwapi_dll = ::LoadLibrary(_T("Shlwapi.dll")); 
+DelayedDirectoryChangeHandler.cpp : 				s_fpPatternMatchSpec = (FUNC_PatternMatchSpec)::GetProcAddress(s_hShlwapi_dll, "PathMatchSpecW"); 
+DelayedDirectoryChangeHandler.cpp : 				s_fpPatternMatchSpec = (FUNC_PatternMatchSpec)::GetProcAddress(s_hShlwapi_dll, "PathMatchSpecA"); 
+DelayedDirectoryChangeHandler.cpp : 					MessageBox(NULL,_T("An RTFM Exception was raised in onWatchStopped() -- see Comments for CDirectoryChangeHandler::onWatchStopped() in DirectoryChanges.h."), _T("Programmer Note(DEBUG INFO):"), MB_ICONEXCLAMATION | MB_OK); 
+DelayedDirectoryChangeHandler.cpp : 					MessageBox(NULL,_T("An RTFM Exception was raised in onWatchStopped() -- see Comments for CDirectoryChangeHandler::onWatchStopped() in DirectoryChanges.h."), _T("Programmer Note(DEBUG INFO):"), MB_ICONEXCLAMATION | MB_OK); 
+DelayedDirectoryChangeHandler.cpp : 					TRACE(_T("WARNING: Possible Deadlock detected! ThreadID: %d File: %s Line: %d\n"), GetCurrentThreadId(), _T(__FILE__), __LINE__); 
+DelayedDirectoryChangeHandler.cpp : 						TRACE(_T("WARNING: Possible Deadlock detected! ThreadID: %d File: %s Line: %d\n"), GetCurrentThreadId(), _T(__FILE__), __LINE__); 
+DelayedDirectoryChangeHandler.cpp : 		TRACE(_T("WARNING: Unable to wait for notification that the onWatchStopped function has been dispatched to another thread.\n")); 
+DelayedDirectoryChangeHandler.cpp : 		TRACE(_T("An Exception may occur shortly.\n")); 
+DelayedDirectoryChangeHandler.cpp : 		TRACE(_T("File: %s Line: %d"), _T(__FILE__), __LINE__); 
+DirectoryChanges.cpp : 			TRACE(_T("EXCEPTION!  CFileNotifyInformation::CopyCurrentRecordToBeginningOfBuffer() -- probably because bytes overlapped in a call to memcpy()")); 
+DirectoryChanges.cpp : 			TRACE(_T("Unable to enable privilege: %s	--	GetLastError(): %d\n"), arPrivelegeNames[i], GetLastError()); 
+DirectoryChanges.cpp : 			TRACE(_T("CDirectoryChangeWatcher notifications may not work as intended due to insufficient access rights/process privileges.\n")); 
+DirectoryChanges.cpp : 			TRACE(_T("File: %s Line: %d\n"), _T(__FILE__), __LINE__); 
+DirectoryChanges.cpp : 		TRACE(_T("CDirectoryChangeHandler...is becoming used by a different CDirectoryChangeWatcher!\n")); 
+DirectoryChanges.cpp : 		TRACE(_T("Directories being handled by this object will now be unwatched.\nThis object is now being used to ") 
+DirectoryChanges.cpp : 			  _T("handle changes to a directory watched by different CDirectoryChangeWatcher object, probably on a different directory")); 
+DirectoryChanges.cpp : 	TRACE(_T("The following file was added: %s\n"), strFileName); 
+DirectoryChanges.cpp : 	TRACE(_T("The following file was removed: %s\n"), strFileName); 
+DirectoryChanges.cpp : 	TRACE(_T("The following file was modified: %s\n"), strFileName); 
+DirectoryChanges.cpp : 	TRACE(_T("The file %s was RENAMED to %s\n"), strOldFileName, strNewFileName); 
+DirectoryChanges.cpp : 	TRACE(_T("WARNING!!!!!\n")); 
+DirectoryChanges.cpp : 	TRACE(_T("An error has occurred on a watched directory!\n")); 
+DirectoryChanges.cpp : 	TRACE(_T("This directory has become unwatched! -- %s \n"), strDirectoryName); 
+DirectoryChanges.cpp : 	TRACE(_T("ReadDirectoryChangesW has failed! %d"), dwError); 
+DirectoryChanges.cpp : 		TRACE(_T("A watch has begun on the following directory: %s\n"), strDirectoryName); 
+DirectoryChanges.cpp : 		TRACE(_T("A watch failed to start on the following directory: (Error: %d) %s\n"),dwError, strDirectoryName); 
+DirectoryChanges.cpp : 	TRACE(_T("The watch on the following directory has stopped: %s\n"), strDirectoryName); 
+DirectoryChanges.cpp : 		TRACE(_T("ERROR: You've passed invalid parameters to CDirectoryChangeWatcher::WatchDirectory()\n")); 
+DirectoryChanges.cpp : 		TRACE(_T("ERROR: CDirectoryChangeWatcher::WatchDirectory() -- %s is not a directory!\n"), strDirToWatch); 
+DirectoryChanges.cpp : 		TRACE(_T("CDirectoryChangeWatcher::WatchDirectory() -- Couldn't open directory for monitoring. %d\n"), dwError); 
+DirectoryChanges.cpp : 		TRACE(_T("WARNING: Couldn't allocate a new CDirWatchInfo() object --- File: %s Line: %d\n"), _T(__FILE__), __LINE__); 
+DirectoryChanges.cpp : 		TRACE(_T("ERROR -- Unable to create I/O Completion port! GetLastError(): %d File: %s Line: %d"), GetLastError(), _T(__FILE__), __LINE__); 
+DirectoryChanges.cpp : 				TRACE(_T("CDirectoryChangeWatcher::WatchDirectory()-- AfxBeginThread failed!\n")); 
+DirectoryChanges.cpp : 			   TRACE(_T("Unable to watch directory: %s -- GetLastError(): %d\n"), dwStarted); 
+DirectoryChanges.cpp : 			TRACE(_T("WARNING! Possible lockup detected. FILE: %s Line: %d\n"), _T(__FILE__), __LINE__); 
+DirectoryChanges.cpp : 		TRACE(_T("PostQueuedCompletionStatus() failed! GetLastError(): %d\n"), GetLastError()); 
+DirectoryChanges.cpp : 				TRACE(_T("WARNING: Possible Deadlock detected! ThreadID: %d File: %s Line: %d\n"), GetCurrentThreadId(), _T(__FILE__), __LINE__); 
+DirectoryChanges.cpp : 			TRACE(_T("GetQueuedCompletionStatus() returned FALSE\nGetLastError(): %d Completion Key: %p lpOverlapped: %p\n"), GetLastError(), pdi, lpOverlapped); 
+DirectoryChanges.cpp : 				TRACE(_T("CDirectoryChangeWatcher::MonitorDirectoryChanges() -- pdi->LockProperties() raised an exception!\n")); 
+DirectoryChanges.cpp : 							TRACE(_T("WARNING: ReadDirectoryChangesW has failed during normal operations...failed on directory: %s\n"), pdi->m_strDirName); 
+DirectoryChanges.cpp : 					TRACE(_T("MonitorDirectoryChanges() -- how did I get here?\n")); 
+DirectoryChanges.cpp : 		TRACE(_T("Invalid arguments to CDirectoryChangeWatcher::ProcessChangeNotifications() -- pdi is invalid!\n")); 
+DirectoryChanges.cpp : 		TRACE(_T("File: %s Line: %d"), _T(__FILE__), __LINE__); 
+DirectoryChanges.cpp : 		TRACE(_T("CDirectoryChangeWatcher::ProcessChangeNotifications() Unable to continue, pdi->GetChangeHandler() returned NULL!\n")); 
+DirectoryChanges.cpp : 		TRACE(_T("File: %s  Line: %d\n"), _T(__FILE__), __LINE__); 
+DirectoryChanges.cpp : 			TRACE(_T("CDirectoryChangeWatcher::ProcessChangeNotifications() -- unknown FILE_ACTION_ value! : %d\n"), notify_info.GetAction()); 
+FacebookClient.cpp : #define FB_APIKEY "8287b0dc1c727df0a393da413ee2e789" 
+FacebookClient.cpp : #define FB_SECRETKEY "d8808715f329aa2b855c3ac825bef3db" 
+FacebookClient.cpp : #define FB_SERVERURL "api.facebook.com/restserver.php" 
+FacebookClient.cpp : 		result.append(QString("%1=%2").arg(iter.key()).arg(iter.value())); 
+FacebookClient.cpp : 	params.insert("format", "JSON"); 
+FacebookClient.cpp : 	params.insert("format", "JSON"); 
+FacebookClient.cpp : 	QString serverAddr = "http://" + _serverUrl; 
+FacebookClient.cpp : 	QString serverAddr = "http://" + _serverUrl; 
+FacebookClient.cpp : 	QString serverAddr = "http://" + _serverUrl; 
+FacebookClient.cpp : 	QString serverAddr = "http://" + _serverUrl; 
+FacebookClient.cpp : 	QString serverAddr = "https://" + _serverUrl; 
+FacebookClient.cpp : , _version("1.0") 
+FacebookClient.cpp : 	_supportedUploadExtensionsContentTypes.insert(".gif", "image/gif"); 
+FacebookClient.cpp : 	_supportedUploadExtensionsContentTypes.insert(".jpg", "image/jpeg"); 
+FacebookClient.cpp : 	_supportedUploadExtensionsContentTypes.insert(".jpeg", "image/jpeg"); 
+FacebookClient.cpp : 	_supportedUploadExtensionsContentTypes.insert(".png", "image/png"); 
+FacebookClient.cpp : 	_supportedUploadExtensionsContentTypes.insert(".psd", "image/vnd.adobe.photoshop"); 
+FacebookClient.cpp : 	_supportedUploadExtensionsContentTypes.insert(".tiff", "image/tiff"); 
+FacebookClient.cpp : 	_supportedUploadExtensionsContentTypes.insert(".tif", "image/tiff"); 
+FacebookClient.cpp : 	_supportedUploadExtensionsContentTypes.insert(".jp2", "image/jp2"); 
+FacebookClient.cpp : 	_supportedUploadExtensionsContentTypes.insert(".iff", "image/iff"); 
+FacebookClient.cpp : 	_supportedUploadExtensionsContentTypes.insert(".bmp", "image/bmp"); 
+FacebookClient.cpp : 	_supportedUploadExtensionsContentTypes.insert(".wbmp", "image/vnd.wap.wbmp"); 
+FacebookClient.cpp : 	_supportedUploadExtensionsContentTypes.insert(".xbm", "image/x-xbitmap"); 
+FacebookClient.cpp : 		pattern = QString("\"%1\"\\s*:\\s*\"(\\d+)\"").arg(key); 
+FacebookClient.cpp : 		pattern = QString("\"%1\"\\s*:\\s*(\\d+)").arg(key); 
+FacebookClient.cpp : 	QString successUrl = "http://www.facebook.com/connect/login_success.html"; 
+FacebookClient.cpp : 	QString cancelUrl = "http://www.facebook.com/connect/login_failure.html"; 
+FacebookClient.cpp : 		params.insert("fbconnect", "true"); 
+FacebookClient.cpp : 		params.insert("connect_display", "popup"); 
+FacebookClient.cpp : 		params.insert("return_session", "true");		 
+FacebookClient.cpp : 		params.insert("req_perms", "publish_stream,read_stream,offline_access"); 
+FacebookClient.cpp : 			QString("%1=") 
+FacebookClient.cpp : 	QString loginUrl = "http://www.facebook.com/login.php?" + paramsStr; 
+FacebookClient.cpp : 					QString uid = extractUidFromJsonResult("uid", result); 
+FacebookClient.cpp : 					if (root["session_key"].isString() && !uid.isEmpty() && root["secret"].isString()) 
+FacebookClient.cpp : 						_sessionKey = extractStringFromJsonResult("session_key", root); 
+FacebookClient.cpp : 						_sessionSecretKey = extractStringFromJsonResult("secret", root); 
+FacebookClient.cpp : 						int expires = extractIntFromJsonResult("expires", root); 
+FacebookClient.cpp : 		errorReason = "No files specified"; 
+FacebookClient.cpp : 			errorReason = QString("Image format unsupported by Facebook: %1").arg(filename(iter->filePath)); 
+FacebookClient.cpp : 	QString method = "facebook.photos.upload"; 
+FacebookClient.cpp : 	QString method = "facebook.photos.upload"; 
+FacebookClient.cpp : 	QString method = "facebook.photos.getAlbums"; 
+FacebookClient.cpp : 					QString name = extractStringFromJsonResult("name", album); 
+FacebookClient.cpp : 						albumLink = extractStringFromJsonResult("link", album); 
+FacebookClient.cpp : 	QString method = "facebook.photos.createAlbum"; 
+FacebookClient.cpp : 	QString method = "facebook.stream.getFilters"; 
+FacebookClient.cpp : 						filterKeysOut.append(extractStringFromJsonResult("filter_key", v)); 
+FacebookClient.cpp : 	QString method = "facebook.status.get"; 
+FacebookClient.cpp : 				statusOut->message = extractStringFromJsonResult("message", statusRoot); 
+FacebookClient.cpp : 				statusOut->time = QDateTime::fromTime_t(extractIntFromJsonResult("time", statusRoot)); 
+FacebookClient.cpp : 	QString method = "facebook.status.set"; 
+FacebookClient.cpp : 	QString method = "facebook.comments.get"; 
+FacebookClient.cpp : 			"SELECT aid, cover_pid, name, description, size, link, modified_major	\ 
+FacebookClient.cpp : 				WHERE owner = '%1' %2").arg(_userid).arg(includeProfile ? "" : "AND type <> 'profile'")); 
+FacebookClient.cpp : 			"SELECT pid, aid, src_big, src_big_height, src_big_width	\ 
+FacebookClient.cpp : 				newAlbum->aid = extractStringFromJsonResult("aid", album); 
+FacebookClient.cpp : 				newAlbum->coverPid = extractStringFromJsonResult("cover_pid", album); 
+FacebookClient.cpp : 				newAlbum->name = extractStringFromJsonResult("name", album); 
+FacebookClient.cpp : 				newAlbum->description = extractStringFromJsonResult("description", album); 
+FacebookClient.cpp : 				newAlbum->link = extractStringFromJsonResult("link", album); 
+FacebookClient.cpp : 				newAlbum->size = extractIntFromJsonResult("size", album); 
+FacebookClient.cpp : 				newAlbum->modificationDate = QDateTime::fromTime_t(extractIntFromJsonResult("modified_major", album)); 
+FacebookClient.cpp : 				FacebookAlbum * album = aidToAlbumsLookup[extractStringFromJsonResult("aid", cover)]; 
+FacebookClient.cpp : 				item->albumCoverUrl = extractStringFromJsonResult("src_big", cover); 
+FacebookClient.cpp : 				item->albumCoverWidth = extractIntFromJsonResult("src_big_width", cover); 
+FacebookClient.cpp : 				item->albumCoverHeight = extractIntFromJsonResult("src_big_height", cover); 
+FacebookClient.cpp : 			"SELECT pid, src_big, src_big_height, src_big_width, link, caption, created	\ 
+FacebookClient.cpp : 				newPhoto->pid = extractStringFromJsonResult("pid", photo); 
+FacebookClient.cpp : 				newPhoto->title = extractStringFromJsonResult("caption", photo); 
+FacebookClient.cpp : 				newPhoto->permalink = extractStringFromJsonResult("link", photo); 
+FacebookClient.cpp : 				newPhoto->url = extractStringFromJsonResult("src_big", photo); 
+FacebookClient.cpp : 				newPhoto->width = extractIntFromJsonResult("src_big_width", photo); 
+FacebookClient.cpp : 				newPhoto->height = extractIntFromJsonResult("src_big_height", photo); 
+FacebookClient.cpp : 				newPhoto->creationDate = extractIntFromJsonResult("created", photo); 
+FacebookClient.cpp : 					const Json::Value& mediasRoot = post["attachment"]["media"]; 
+FacebookClient.cpp : 		clauses.append(QString("page_id = '%1'").arg(pageIds[i])); 
+FacebookClient.cpp : 		"SELECT page_id, name, page_url	\ 
+FacebookClient.cpp : 		%1").arg(clauses.join(" OR "))); 
+FacebookClient.cpp : 				QString pageId = extractUidFromJsonResult("page_id", pageStr); 
+FacebookClient.cpp : 					page->name = extractStringFromJsonResult("name", pageResult); 
+FacebookClient.cpp : 					page->pageUrl = extractStringFromJsonResult("page_url", pageResult); 
+FacebookClient.cpp : 		clauses.append(QString("pid = '%1'").arg(pids[i])); 
+FacebookClient.cpp : 			%1").arg(clauses.join(" OR "))); 
+FacebookClient.cpp : 	QString method = "facebook.fql.multiquery"; 
+FacebookClient.cpp : 	QString method = "facebook.fql.multiquery"; 
+FacebookClient.cpp : 	QString method = "facebook.users.hasAppPermission"; 
+FacebookClient.cpp : 	QString method = "facebook.users.isAppUser"; 
+FlickrClient.cpp : 	QString method = "auth/"; 
+FlickrClient.cpp : 		result.append(QString("%1%2").arg(iter.key()).arg(iter.value())); 
+FlickrClient.cpp : 	QString getFrobMethod = "flickr.auth.getFrob"; 
+FlickrClient.cpp : 		std::string filePath = "frob._content"; 
+FlickrClient.cpp : 	QString server = "flickr.com/services/auth/?"; 
+FlickrClient.cpp : 	params.insert("perms", "write"); // Need write permission to upload photos 
+FlickrClient.cpp : 	QString serverAddr = QString("http://%1&%2") 
+FlickrClient.cpp : 	params.insert("method", "flickr.auth.getToken"); 
+FlickrClient.cpp : 		std::string filePath = "auth.token._content"; 
+FlickrClient.cpp : 	QString serverAddr = QString("%1?%2") 
+FlickrClient.cpp : 	QString serverAddr = QString("http://%1&%2") 
+FlickrClient.cpp : 	params->insert("format", "json"); 
+FlickrClient.cpp : 	params.insert("method", "flickr.photos.search"); 
+FlickrClient.cpp : 	params.insert("method", "flickr.favorites.getList"); 
+FlickrClient.cpp : 	params.insert("method", "flickr.photos.search"); 
+FlickrClient.cpp : 	params.insert("method", "flickr.people.getInfo"); 
+FlickrClient.cpp : 	params.insert("method", "flickr.groups.getInfo"); 
+FlickrClient.cpp : 		QString server = "http://api.flickr.com/services/upload/"; 
+FlickrClient.cpp : 			params.insert("tags", "BumpTop"); 
+FlickrClient.cpp : 	QString editPage = "http://www.flickr.com/tools/uploader_edit.gne?ids="; 
+NetworkAccessManager.cpp : 	_cookieJarFilePath = native(winOS->GetCacheDirectory() / "Webkit" / "cookies.json"); 
+OAuthClient.cpp : 	QString serverAddr = QString("%1?%2") 
+OAuthClient.cpp : 	prepareParameters(_requestTokenRequestUri, "POST", params); 
+OAuthClient.cpp : 	prepareParameters(_accessTokenRequestUri, "POST", params); 
+OAuthClient.cpp : 	prepareParameters(_accessTokenRequestUri, "POST", params); 
+OAuthClient.cpp : 	QString serverAddr = QString("%1?%2") 
+OAuthClient.cpp : 	params.insert("oauth_signature_method", "HMAC-SHA1"); 
+OAuthClient.cpp : 	params.insert("oauth_version", "1.0"); 
+OAuthClient.cpp : 		paramsList.append(QString("%1=%2").arg(iter.key()).arg(encodeStr(iter.value()))); 
+Test_FlickrClient.cpp : 		userId("26799028@N06"), // BumptopFlickr photos 
+Test_FlickrClient.cpp : 		groupId("806251@N24"),  // bumptop group 
+Test_FlickrClient.cpp : 		favouriteId("26799028@N06"), // Bumptop flickr favourites 
+Test_FlickrClient.cpp : 		invalidId("123@N00") // Random invalid id 
+TextPixmapBuffer.cpp : , _font(QFont("Arial", 14)) 
+TextPixmapBuffer.cpp : 	_text = "Lorem Ipsum"; 
+TwitterClient.cpp : 	params.insert("source", "bumptop"); 
+TwitterClient.cpp : 	QString serverAddr = QString("http://%1/%2?%3") 
+TwitterClient.cpp : 	QString serverAddr = QString("http://%1/%2?%3") 
+TwitterClient.cpp : 	QString serverAddr = QString("http://%1/%2").arg(_serverUrl).arg(method); 
+TwitterClient.cpp : 	return _oauthClient.postRequest(serverAddr, "POST", params); 
+TwitterClient.cpp : 	QString serverAddr = QString("http://%1/%2").arg(_serverUrl).arg(method); 
+TwitterClient.cpp : 	const char * kTwitterCustomerKey = "JCHH0DSC1pbpQ6j0ROYtww"; 
+TwitterClient.cpp : 	const char * kTwitterCustomerSecret = "HlqAAa9IXc42oZ4fxYMISy0Xuwngya2LPaCIHaLn2A"; 
+TwitterClient.cpp : 		bool gotReqToken = _oauthClient.getRequestToken("http://twitter.com/oauth/request_token",  
+TwitterClient.cpp : 			_oauthClient.launchAuthorizationUrl("http://twitter.com/oauth/authorize"); 
+TwitterClient.cpp : 				return _oauthClient.getAccessToken("http://twitter.com/oauth/access_token", pin); 
+TwitterClient.cpp : 	return QString("http://%1/%2").arg(_serverUrl).arg(GLOBAL(settings).tw_login); 
+TwitterClient.cpp : 	QString method = "statuses/update.json"; 
+TwitterClient.cpp : 	QString method = "account/verify_credentials.json"; 
+TwitterClient.cpp : 	_supportedUploadExtensionsContentTypes.insert(".gif", "image/gif"); 
+TwitterClient.cpp : 	_supportedUploadExtensionsContentTypes.insert(".jpg", "image/jpeg"); 
+TwitterClient.cpp : 	_supportedUploadExtensionsContentTypes.insert(".jpeg", "image/jpeg"); 
+TwitterClient.cpp : 	_supportedUploadExtensionsContentTypes.insert(".png", "image/png"); 
+TwitterClient.cpp : 	params.insert("source", "bumptop"); 
+TwitterClient.cpp : 	QString serverAddr = QString("http://%1/%2").arg(_serverUrl).arg(method); 
+TwitterClient.cpp : 	return QString("http://%1/%2").arg(TWITTER_SERVER).arg(GLOBAL(settings).tw_login); 
+TwitterClient.cpp : 	QString method = "uploadAndPost"; 
+TwitterClient.cpp : 	QString method = "upload"; 
+TwitterClient.cpp : 		QRegExp urlRe("<mediaurl>([^<]*)</mediaurl>"); 

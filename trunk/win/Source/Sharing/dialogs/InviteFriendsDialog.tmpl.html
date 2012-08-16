@@ -1,0 +1,38 @@
+{#
+ Copyright 2011 Google Inc. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+#}
+
+{% extends "../Sharing/dialogs/dialogs_common.tmpl.html" %}
+
+{% block dialog_head %}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#emailFriends").focus(function() {
+				$(this).select();
+			});
+		});
+	</script>
+{% endblock dialog_head %}
+	
+{% block dialog_content %}
+	<div id="content">
+		<b>Enter email addresses of friends to share with</b><br/>
+		<textarea id="emailFriends" cols="40" rows="5">Separate addresses with a semicolon</textarea>
+		<br/><br/>
+		<button id="okButton" class="btn">Ok</button>
+		<button id="cancelButton" class="btn">Cancel</button>
+	</div>
+{% endblock dialog_content %}
+ 

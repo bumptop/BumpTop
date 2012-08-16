@@ -1,0 +1,451 @@
+
+show
+status-message
+: 
+.remove
+http://api.drop.io
+.item_profile
+.media
+.image
+.item:first
+.filepath
+ 
+slow
+ Photos)
+mismatching items: 
+#droptarget .base_container img
+(
+</option>
+0
+writeFile
+window.currentWidgetPage.onRequestPageInfoSuccessful
+.status_link_desc
+fontSize
+The drop does not exist.
+.name
+closeFile
+facebook_
+renameAndCloseFile
+.slideshow_images
+ (
+_callback_
+.bmp
+.aid
+sharing.json
+.image_src.auto
+easeOutCubic
+.slideshow_image_template:first
+#droptarget .base_container img.
+upload
+remove
+.dialog_cancel
+#btfb_content .feed .load_more .more_throbber
+item_template
+window.currentWidgetPage.onRequestAlbumsSuccessful
+.item
+.label
+#create_album_dialog
+blur
+e21929fd5f2bcb279c56078997d93835c7ec37f7
+#tabContainer
+.wbmp
+upload_complete
+.status_pointer
+/drops/:drop_name/subscriptions
+#loading_dialog
+.options_overlay
+DeleteTabDialog.html
+/drops/:drop_name/assets/:asset_name
+.image_src
+result
+.status_update_button
+2.0
+.options_overlay [name=slideshow]
+click
+bold
+ui-state-error
+Status Updates
+)
+GET
+.options_overlay #photos_option
++
+selected
+#create_album_location
+.options_overlay .options_list
+ERROR: JSON data is not an array
+Upload failed
+.status_text_container > .status_link:last
+dragleave
+Unable to connect
+ hours ago
+email
++0000
+&nbsp;
+body
+relative
+34%
+.options_overlay #slideshow_option
+.psd
+250px
+44%
+upload_files_json
+.item.photo
+.item_album_name
+.slideshow_image:not(.slideshow_image_template)
+path
+#FFFFFF
+.item_middle_photo
+.item_profilepic_container
+CreateShareDialog.html
+newsfeed-data
+#status_dialog .cancel
+18px
+ minutes ago
+22px
+s
+.item_right
+.feed
+#photos_uploaded_dialog
+pdf
+Yes
+#btfb_content
+window.currentWidgetPage.onUploadSuccessful
+color
+#status_dialog_submit
+height
+.permalink
+<option value="">
+#000
+.shared_item
+5000ms
+.item:not(.item_template)
+BumpTopNative
+use strict
+2px solid rgb(109, 140, 203)
+Failure
+px
+.
+.item.update
+json
+admin_password
+0px solid transparent
+touchclick
+type
+start
+xlsx
+a.drop_link
+_s.jpg
+.centered_container
+1ms
+photoframe-data
+visibility
+.status_spacer
+ERROR in validateFeed: Item 
+Drop name: 
+.item_middle_status
+.label > a
+300s
+http://www.facebook.com?referrer=BumpTop
+.bump_share
+.item_template
+.comments
+#connectExistingShare
+facebook_upload.html
+none
+left
+ERROR in validateFeed: duplicate image 
+window.currentWidgetPage.onRequestFeedUpdateSuccessful
+window.currentWidgetPage.onRequestPhotoAlbumPhotosSuccessful
+images/icon_
+http://tinyurl.com/api-create.php?url=
+cursor
+ASSERTION FAILED
+.xbm
+error
+PUT
+.status_link
+/drops/:drop_name/assets
+.status_text_container
+</div>
+#uploaded_view_in_browser
+maxWidth
+s ago
+	
+.status_text
+margin-left
+ and 
+/drops/
+jpg
+.delete
+kineticScroll
+.loading_label div
+.status_text_container > :not(div)
+ready
+filepath_template
+.scrolling_container
+showFlyout
+id
+absolute
+end
+, 
+.navtitle
+ seconds ago
+.logout
+email_addr
+<div class='status_link_container'/>
+#file_list
+marginLeft
+.overlay
+sharingTemp.json
+.item_cl
+#btfb_content .feed .load_more span
+#cancel_button
+status
+UTC
+http://assets.drop.io/upload
+photoalbums
+&ldquo;
+
+
+    from 
+.play > a
+after
+newsfeed-last-update
+ out of order
+.item_time
+.message_area
+">
+SettingsModifyDialog.html
+facebook_newsfeed.html
+fb_data
+.png
+asset_name
+undefined
+.status_link_container > .status_thumb
+#ddd
+.description
+.date_created
+uploading
+copyTextToClipboard
+.item:not(.update):first
+.author
+.left_edge
+position
+mouseover
+#upload_button
+getFileInfoList failed
+.slideshow_image:eq(
+    </div>
+photo
+slideshow_image_template
+jpeg
+#create_album_description
+disabled
+.status_link_domain
+window.currentWidgetPage.onRequestPhotoAlbumsUpdateSuccessful
+before
+Files
+http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js
+img
+.item_profilepic
+,
+.item:not(.item_template):not(.update)
+#btfb_header .logo
+input
+hidden
+.item_template:first
+pptx
+...
+docx
+borderBottom
+_n.jpg
+#000000
+<option value="
+.clear_all
+#btfb_slideshow_view .scroll_wrapper
+openInBrowser
+        <div class="icon_container"><img class="icon"/></div>
+password
+.slideshow_images:first
+.status_link_container > .status_link
+name
+dragenter
+Links
+.status_link_container
+drop
+drop_name
+trimmed
+token
+.filepath_template:first
+10px
+xls
+.albums_list option:last
+DELETE
+.status_text_field
+.title
+ui-state-highlight
+.back
+.play
+#btfb_content .feed
+ppt
+.jpg
+static
+Status updated
+dragover
+.slideshow_image_template
+.jpeg
+.image_src.manual
+        <a class="delete" href="#"/>
+px solid #ccc
+openFileBrowser
+http://
+#updating_dialog
+/
+BumpTop web API installed
+
+#upload_progress
+Loading photo feed...
+?
+.item_description
+24%
+        <div class="date_created"></div>
+linear
+.jp2
+.status_thumb
+www.youtube.com
+.loading_label
+images/icon_default.png
+.item_time_cl_container
+.likes_num
+.albums_list option
+.likes
+POST
+_
+src
+newsfeed-latest-postid
+.item.photo.
+<i>
+&
+/drops/:drop_name/assets/:asset_name/download/original
+w
+.options_overlay #status_option
+.html
+http://drop.io/
+marginTop
+window.currentWidgetPage.onRequestHighResolutionPhotosSuccessful
+update
++=
+        <div class="description">Filename.ext</div>
+openFile
+ ago
+image
+float
+.filepath:first
+.iff
+right
+submit
+Loading sharing widget...
+Unable to delete drop
+#btfb_header
+45%
+#firebugIconDiv
+27%
+.create_album
+checked
+script
+.sharing_control
+1px solid LightGray
+fast
+response
+gif
+/drops/:drop_name
+last_page
+sendXmlHttpRequest
+.status_text_container > .status_link
+.last_status
+.item:not(.item_template):not(.update):last
+.comments_num
+easeInOutCubic
+<div class="shared_item">
+29%
+#status_dialog
+dummy_status_update
+35%
+scrollLeft
+borderRight
+.aid:first
+link
+.gif
+sendHttpPostFileUpload
+borderTop
+true
+png
+#btfb_slideshow_view .slideshow_images
+:
+ui-state-highlight ui-state-error
+&rdquo;
+default
+.item_album_size
+scroll
+r
+newsfeed-posttypes
+.item_left
+Found more than 1 tab!
+highlight
+20px
+admin_email
+window.currentWidgetPage.onRequestAlbumsInfoSuccessful
+display
+.tiff
+#btfb_content .feed .load_more
+block
+#create_album_submit
+false
+.load_more
+ERROR: kineticScroll expects a container with a single child
+.slideshow_image:first
+borderLeft
+.slideshow_image
+firebug
+marginRight
+border
+option
+.photo_overlay
+.status_update_textarea
+#uploaded_return_to_feed
+.tif
+.status_button
+-
+Yesterday
+readFile
+Photos
+newsfeed-slideshow
+=
+.albums_list
+opacity
+.options_overlay [name=post_type_status]
+hires
+.login_frame > .button
+.item:last
+.status_update > form
+#droptarget img.uploading
+.icon
+</i>
+    <div class="styled_container">
+inline
+.options_overlay [name=post_type_photos]
+        <div class="overlay"><img class="throbber" src="images/throbber.gif"/></div>
+#create_album_name
+textarea
+doc
+maxHeight
+.share_deleted
+25%
+ui.kineticScroll
+ConnectExistingShareDialog.html
+newsfeed
+a2j10jfshvba1d9sj91m9ks7s2d1tn9sd32fs93op2du9
+latest
+#btfb_slideshow_view
+width
+.options_overlay .open_button

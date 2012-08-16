@@ -1,0 +1,276 @@
+{#
+ Copyright 2011 Google Inc. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+#}
+
+{% extends "bt_base.tmpl.html" %}
+
+{% block jquery_include %}<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>{% endblock %}
+
+{% block head %}
+	<script type="text/javascript" src="{{ common_js_dir }}/json2.min.js"></script>
+	
+	<script type="text/javascript" src="BumpTop.js"></script>
+	<script type="text/javascript" src="sharedFolder.js"></script>
+	
+<style type="text/css">
+	body {
+		overflow: hidden;
+		margin: 0;
+		font-family: Corbel, Tahoma, Verdana, Helvetica, Arial, sans-serif;
+		color: #252525;
+		font-size: 1em;
+	}
+	
+	.visible_container {
+		/* This must be relatively positioned, so that absolute positioning
+		can be used for the .left_edge and .right_edge */
+		position: relative;		
+		top: 0;
+		left: 0;
+	}
+	
+	.visible_container .left_edge {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 50px;
+		height: 12em;
+		
+		/* Start this offscreen. It will be eased in as the scroll bar is scrolled. */
+		margin-left: -50px;
+	}
+	
+	.visible_container .right_edge {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 50px;
+		height: 12em;
+	}
+	
+	.scrolling_container {
+		width: 100%;
+		overflow-x: visible; /* Show a horizontal scroll bar */
+		overflow-y: hidden;
+		margin-bottom: 1em;
+	}
+	
+	.bump_share {
+		width: 0; /* Our js code assumes that this element has a declared width */
+		overflow: hidden;
+		margin-bottom: 0.5em;
+		height: 12.5em;
+	}
+
+	.overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+	}
+	
+	#droptarget .base_container {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		overflow: hidden;
+	}
+	
+	#droptarget #upload_progress {
+		position: absolute;
+		top: 127px;
+		left: 0;
+		height: 8px; 
+		width: 0;
+	}
+	
+	#droptarget img.uploading {
+		display: none;
+	}
+
+	#droptarget img.upload_complete {
+		display: none;
+	}
+
+	.sharing_control {
+		margin: 0;
+		padding: 0;
+	}
+	
+	.shared_item {
+		float: left;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		overflow: hidden;
+	}
+	
+	/* We need an extra container element here because if the .shared_item has
+	a border and padding, we can't hide/show it by animating its width. By
+	adding an extra wrapper div, we can animated the width of the wrapper. */
+	.shared_item .styled_container {
+		padding: 8px;
+		height: 11.25em;
+		overflow: hidden;
+		text-align: center;
+		position: relative;
+		top: 0;
+		font-weight: 500; /* Normal is 400, bold is 700 */
+		border-radius: 3px;
+		-moz-border-radius: 3px;
+		-webkit-border-radius: 3px;
+		border: 1px solid white;		
+	}
+	
+	.shared_item .styled_container:hover {
+		border-color: LightGray;
+	}
+	
+	.shared_item .icon_container {
+		margin-bottom: 0.5em;
+		height: 96px;
+		overflow: hidden;
+	}
+	
+	.shared_item .overlay {
+		height: 10em; /* To cover icon & description */
+	}
+	
+	.shared_item .icon {
+		max-height: 96px;
+		max-width: 96px;
+	}
+	
+	.shared_item .delete {
+		position: absolute;
+		right: 8px;
+		top: 8px;
+		width: 14px;
+		height: 14px;
+		background: transparent url('images/close.png') 0 0 no-repeat;
+		display: none;
+	}
+
+	/* Change the delete button (using the sprite) on mouseover/click */
+	.shared_item .delete:hover { background-position: -14px; }
+	.shared_item .delete:active { background-position: -28px; }
+	
+	.shared_item .overlay .throbber {
+		position: absolute;
+		/* Centre the throbber horizontally and vertically */
+		top: 40px;
+		left: 50%;
+		margin-left: -8px;
+	}
+	
+	.shared_item .description {
+		font-size: 1em;
+		line-height: 1.4em;
+		height: 2.8em;
+		overflow: hidden;
+		word-wrap: break-word;
+		text-align: center;
+		margin: 0 auto 0.5em auto;
+	}
+
+	.centered_container {
+		position: absolute;
+		left: 50%;
+		top: 60px;
+		margin-left: -200px;
+		width: 400px;
+		text-align: center;
+	}
+	
+	.bumpwidget {
+		width: 168px;
+		height: 168px;
+	}
+	
+	.share_deleted {
+		display: none;
+		text-align: center;
+	}
+	
+	.date_created {
+		color: grey;
+		font-size: 75%;
+		line-height: 1.4em;
+	}
+	
+	.tab_links {
+		text-align: right;
+		font-size: small;
+		margin: 0 0.5em 0.5em 0.5em;
+		padding: 0;
+	}
+
+	button {
+		background:transparent url(images/btn.jpg) repeat scroll 0 0;
+		border:0 none;
+		color:#FFFFFF;
+		cursor:pointer;
+		font-family:"Lucida Grande",Lucida,Verdana,sans-serif;
+		font-size:11px;
+		font-weight:bold;
+		height:25px !important;
+		line-height:25px !important;
+		padding:0;
+		text-align:center;
+		text-decoration:none;
+		width:125px;
+	}
+	
+	#new_drop {
+		text-align: center;
+	}
+	
+	#file_list {
+		display: none;
+	}
+</style>
+{% endblock head %}
+
+{% block body %}
+	<div class="bumpwidget">
+		<div id="droptarget">
+			<div class="base_container">
+				<img class="ready" src="images/ready.png"/>
+				<img class="uploading" src="images/uploading.png"/>
+				<img class="upload_complete" src="images/upload_complete.png"/>
+			</div>
+			<img id="upload_progress" src="images/progress.png" />
+		</div>
+
+		<div class="centered_container">
+			<div class="message_area"></div>
+		</div>
+		
+		<!-- The list of all files shared so far (hidden by default) -->
+		<div id="file_list">
+			<div class="sharing_control">
+				<div class="visible_container">
+					<div class="scrolling_container">
+						<div class="bump_share"></div>
+					</div>
+					<img class="left_edge" src="images/fade_left.png"/>
+					<img class="right_edge" src="images/fade_right.png"/>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock body %}

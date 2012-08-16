@@ -1,0 +1,22 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "phonon_ds9", "D:/qt-everywhere-opensource-src-4.7.4/src/plugins/phonon/ds9\phonon_ds9.vcxproj", "{972AC713-145E-3ED5-8F5A-2A1831BCAC9B}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug|Win32
+		ConfigName.1 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{972AC713-145E-3ED5-8F5A-2A1831BCAC9B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{972AC713-145E-3ED5-8F5A-2A1831BCAC9B}.Debug|Win32.Build.0 = Debug|Win32
+		{972AC713-145E-3ED5-8F5A-2A1831BCAC9B}.Release|Win32.ActiveCfg = Release|Win32
+		{972AC713-145E-3ED5-8F5A-2A1831BCAC9B}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

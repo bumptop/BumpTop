@@ -1,0 +1,115 @@
+// Copyright 2011 Google Inc. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+{
+	// the expected version to verify all themes against
+	"expectedSchema" : "theme/1.0.3",
+	
+	// initial theme properties
+	"theme/1.0" : 
+	{
+		"header":{"version":"","name":"","author":"","description":"","url":"","schema":""},		
+		"ui":{
+			"icon":{"highlight":{"color":{"selection":[0,0,0,0],"hover":[0,0,0,0],"freshness":[0,0,0,0]}},"font":{"family":[""],"size":0,"color":[0,0,0,0], "background" : {"default" : [0, 0, 0, 0], "selection" : [0, 0, 0, 120]}}},
+			"lasso":{"color":{"overlay":[0,0,0,0],"border":{"bottom":[0,0,0,0],"top":[0,0,0,0]}}},
+			"markingMenu":{"color":{"default":{"inner":[0,0,0,0],"outer":[0,0,0,0]},"highlight":{"inner":[0,0,0,0],"outer":[0,0,0,0]},"border":[0,0,0,0]},"font":{"family":[""],"size":0,"subTextSize":0,"color":[0,0,0,0],"subTextColor":[0,0,0,0],"disabledColor":[0,0,0,0]}},
+			"message":{"color":{"background":[0,0,0,0]},"font":{"family":[""],"size":0,"color":[0,0,0,0]}}
+		},
+		"textures":{
+			"relativeRoot":"",
+			"icon":{"relativeRoot":"","linkOverlay":"","selection":{"alphaMask":""},"custom":{"relativeRoot":"","email":"","printer":""}},
+			"pile":{"relativeRoot":"","background":""},
+			"floor":{"relativeRoot":"","desktop":"","infinite":""},
+			"wall":{"relativeRoot":"","allowOverlay":true,"top":"","right":"","bottom":"","left":""},
+			"widget":{"relativeRoot":"","close":"","launchInExplorer":"","scroll":{"up":"","up_disabled":"","down":"","down_disabled":""},"lassoMenu":{"dragAndCross":""}},
+			"override":{"relativeRoot":"","ext":{"doc":"","folder":"","pdf":"","txt":""},"virtual":{"myComputer":""}},
+			"slideshow":{"relativeRoot":"","next":"","previous":""}
+		}
+	},	
+	
+	// added Sticky Note image to theme properties
+	"theme/1.0.1" : 
+	{
+		"header":{"version":"","name":"","author":"","description":"","url":"","schema":""},		
+		"ui":{
+			"icon":{"highlight":{"color":{"selection":[0,0,0,0],"hover":[0,0,0,0],"freshness":[0,0,0,0]}},"font":{"family":[""],"size":0,"color":[0,0,0,0], "background" : {"default" : [0, 0, 0, 0], "selection" : [0, 0, 0, 120]}}},
+			"lasso":{"color":{"overlay":[0,0,0,0],"border":{"bottom":[0,0,0,0],"top":[0,0,0,0]}}},
+			"markingMenu":{"color":{"default":{"inner":[0,0,0,0],"outer":[0,0,0,0]},"highlight":{"inner":[0,0,0,0],"outer":[0,0,0,0]},"border":[0,0,0,0]},"font":{"family":[""],"size":0,"subTextSize":0,"color":[0,0,0,0],"subTextColor":[0,0,0,0],"disabledColor":[0,0,0,0]}},
+			"message":{"color":{"background":[0,0,0,0]},"font":{"family":[""],"size":0,"color":[0,0,0,0]}}
+		},
+		"textures":{
+			"relativeRoot":"",
+			"icon":{"relativeRoot":"","linkOverlay":"","selection":{"alphaMask":""},"custom":{"relativeRoot":"","email":"","printer":"",
+				"stickyNote":"stickyNote.png"
+			}},
+			"pile":{"relativeRoot":"","background":""},
+			"floor":{"relativeRoot":"","desktop":"","infinite":""},
+			"wall":{"relativeRoot":"","allowOverlay":true,"top":"","right":"","bottom":"","left":""},
+			"widget":{"relativeRoot":"","close":"","launchInExplorer":"","scroll":{"up":"","up_disabled":"","down":"","down_disabled":""},"lassoMenu":{"dragAndCross":""}},
+			"override":{"relativeRoot":"","ext":{"doc":"","folder":"","pdf":"","txt":""},"virtual":{"myComputer":""}},
+			"slideshow":{"relativeRoot":"","next":"","previous":""}
+		}
+	},
+	
+	// more sticky note properties
+	"theme/1.0.2" : 
+	{
+		"header":{"version":"","name":"","author":"","description":"","url":"","schema":""},		
+		"ui":{
+			"icon":{"highlight":{"color":{"selection":[0,0,0,0],"hover":[0,0,0,0],"freshness":[0,0,0,0]}},"font":{"family":[""],"size":0,"color":[0,0,0,0], "background" : {"default" : [0, 0, 0, 0], "selection" : [0, 0, 0, 120]}}},
+			"stickyNote":{"font":{"family":[""],"size":0}},
+			"lasso":{"color":{"overlay":[0,0,0,0],"border":{"bottom":[0,0,0,0],"top":[0,0,0,0]}}},
+			"markingMenu":{"color":{"default":{"inner":[0,0,0,0],"outer":[0,0,0,0]},"highlight":{"inner":[0,0,0,0],"outer":[0,0,0,0]},"border":[0,0,0,0]},"font":{"family":[""],"size":0,"subTextSize":0,"color":[0,0,0,0],"subTextColor":[0,0,0,0],"disabledColor":[0,0,0,0]}},
+			"message":{"color":{"background":[0,0,0,0]},"font":{"family":[""],"size":0,"color":[0,0,0,0]}}
+		},
+		"textures":{
+			"relativeRoot":"",
+			"icon":{"relativeRoot":"","linkOverlay":"","selection":{"alphaMask":""},"custom":{"relativeRoot":"","email":"","printer":"",
+				"stickyNote":"stickyNote.png"
+			}},
+			"pile":{"relativeRoot":"","background":""},
+			"floor":{"relativeRoot":"","desktop":"","infinite":""},
+			"wall":{"relativeRoot":"","allowOverlay":true,"top":"","right":"","bottom":"","left":""},
+			"widget":{"relativeRoot":"","close":"","launchInExplorer":"","scroll":{"up":"","up_disabled":"","down":"","down_disabled":""},"lassoMenu":{"dragAndCross":""}},
+			"override":{"relativeRoot":"","ext":{"doc":"","folder":"","pdf":"","txt":""},"virtual":{"myComputer":""}},
+			"slideshow":{"relativeRoot":"","next":"","previous":""}
+		}
+	}
+	
+	// Taller walls
+	"theme/1.0.3" : 
+	{
+		"header":{"version":"","name":"","author":"","description":"","url":"","schema":""},		
+		"ui":{
+			"icon":{"highlight":{"color":{"selection":[0,0,0,0],"hover":[0,0,0,0],"freshness":[0,0,0,0]}},"font":{"family":[""],"size":0,"color":[0,0,0,0], "background" : {"default" : [0, 0, 0, 0], "selection" : [0, 0, 0, 120]}}},
+			"stickyNote":{"font":{"family":[""],"size":0}},
+			"lasso":{"color":{"overlay":[0,0,0,0],"border":{"bottom":[0,0,0,0],"top":[0,0,0,0]}}},
+			"markingMenu":{"color":{"default":{"inner":[0,0,0,0],"outer":[0,0,0,0]},"highlight":{"inner":[0,0,0,0],"outer":[0,0,0,0]},"border":[0,0,0,0]},"font":{"family":[""],"size":0,"subTextSize":0,"color":[0,0,0,0],"subTextColor":[0,0,0,0],"disabledColor":[0,0,0,0]}},
+			"message":{"color":{"background":[0,0,0,0]},"font":{"family":[""],"size":0,"color":[0,0,0,0]}}
+		},
+		"textures":{
+			"relativeRoot":"",
+			"icon":{"relativeRoot":"","linkOverlay":"","selection":{"alphaMask":""},"custom":{"relativeRoot":"","email":"","printer":"","stickyNote":"stickyNote.png"}},
+			"pile":{"relativeRoot":"","background":""},
+			"floor":{"relativeRoot":"","desktop":"","infinite":""},
+			"wall":{"relativeRoot":"","allowOverlay":true,"top":"","right":"","bottom":"","left":"",
+				"allowStretch":true
+			},
+			"widget":{"relativeRoot":"","close":"","launchInExplorer":"","scroll":{"up":"","up_disabled":"","down":"","down_disabled":""},"lassoMenu":{"dragAndCross":""}},
+			"override":{"relativeRoot":"","ext":{"doc":"","folder":"","pdf":"","txt":""},"virtual":{"myComputer":""}},
+			"slideshow":{"relativeRoot":"","next":"","previous":""}
+		}
+	}
+
+}

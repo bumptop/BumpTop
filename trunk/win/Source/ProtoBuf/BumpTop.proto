@@ -1,0 +1,120 @@
+// Copyright 2011 Google Inc. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import "Nx.proto";
+import "PhotoFrameSource.proto";
+
+message PbBumpTop {
+	optional PbHeader header	= 1;
+	optional PbScene scene		= 2;
+}
+
+message PbHeader {
+	optional string	build		= 1;
+	optional int32 version		= 2;
+}
+
+message PbScene {
+	optional string working_directory	= 1;
+	// <message fields buffer>
+	
+	repeated PbBumpObject free_objects	= 10;	// only references objects not in piles
+	repeated PbBumpObject piles			= 11;	
+	optional PbCamera camera			= 12;
+}
+
+message PbBumpObject {
+	// may be used to reconstruct the object type
+	optional string class_name			= 1;
+	optional fixed32 type				= 2;
+	optional PbPoseDims pose_Dims		= 3;
+	
+	optional string text				= 10;
+	optional bool text_visible			= 11;
+	
+	optional PbVec3 pin_point_world		= 15;
+	optional PbVec3 pin_point_actor		= 16;
+	optional bool pinned				= 17;
+	
+	extensions 100 to 4999;
+}
+
+message PbPile {
+	message PbPileItem {
+		optional PbBumpObject item				= 1;
+		optional PbMat34 original_world_pose	= 2;
+	}
+		
+	extend PbBumpObject {
+		optional uint32 ext_min_tag				= 100;
+		// <message fields buffer>
+				
+		repeated PbPileItem children			= 111;
+	}
+}
+message PbActor {
+	extend PbBumpObject {
+		optional uint32 ext_min_tag				= 200;
+	}
+}
+message PbFileSystemActor {
+	message PbCachedFilePathDims {
+		optional string file_path				= 1;
+		optional PbVec3 dims					= 2;
+	}
+	
+	extend PbBumpObject {
+		optional uint32 ext_min_tag				= 300;
+		// <message fields buffer>
+		
+		optional string full_path				= 310;
+		optional string launch_override_path	= 311;
+		optional string texture_override_path	= 312;
+		// <message fields buffer>
+		
+		optional bool pileized					= 320;
+		optional bool thumbnailized				= 321;
+		// <message fields buffer>
+		
+		optional uint32 launch_count			= 330;
+				
+		repeated PbCachedFilePathDims prev_pileized_children_dims = 340;
+	}
+}
+message PbCustomActor {
+	extend PbBumpObject {
+		optional uint32 ext_min_tag				= 400;
+		optional string impl_class_name			= 401;
+	}
+}
+message PbPhotoFrameActor {
+	extend PbBumpObject {
+		optional uint32 ext_min_tag				= 500;
+		optional uint32 source_type				= 501;
+		optional PbPhotoFrameSource source		= 502;
+	}
+}
+message PbWebActor {
+	extend PbBumpObject {
+		optional uint32 ext_min_tag				= 600;
+		optional uint32 type					= 601;
+		optional string content					= 602;
+	}
+}
+
+message PbCamera {
+	optional PbVec3 eye		= 1;
+	optional PbVec3 up		= 2;
+	optional PbVec3 dir		= 3;
+}

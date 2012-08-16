@@ -1,0 +1,12 @@
+#ifndef QT_ACTIVEQT_MODULE_H
+#define QT_ACTIVEQT_MODULE_H
+#include "qaxtypes.h"
+#include "qaxaggregated.h"
+#include "qaxbindable.h"
+#include "qaxfactory.h"
+#include "qaxbase.h"
+#include "qaxobject.h"
+#include "qaxscript.h"
+#include "qaxselect.h"
+#include "qaxwidget.h"
+#endif

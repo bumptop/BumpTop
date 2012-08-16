@@ -1,0 +1,5 @@
+1. test phplist on the new server (front page and mac things sign you up just fine)
+2. test that machines hitting the old server can still authenticate (and will authenticate on the new machine)
+3. test that all the download pages will work with people's invite codes
+4. admin should be password, off-limits
+5. should not be able to see any files ending with # or ~

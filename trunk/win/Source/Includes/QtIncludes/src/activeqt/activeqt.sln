@@ -1,0 +1,28 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QAxContainer", "D:/qt-everywhere-opensource-src-4.7.4/src/activeqt/container\QAxContainer.vcxproj", "{7789ED83-46C1-3C07-A4FA-D5155F890D4C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QAxServer", "D:/qt-everywhere-opensource-src-4.7.4/src/activeqt/control\QAxServer.vcxproj", "{B553AF16-3FF7-3023-AD8B-DBB80E965C07}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug|Win32
+		ConfigName.1 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{7789ED83-46C1-3C07-A4FA-D5155F890D4C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7789ED83-46C1-3C07-A4FA-D5155F890D4C}.Debug|Win32.Build.0 = Debug|Win32
+		{7789ED83-46C1-3C07-A4FA-D5155F890D4C}.Release|Win32.ActiveCfg = Release|Win32
+		{7789ED83-46C1-3C07-A4FA-D5155F890D4C}.Release|Win32.Build.0 = Release|Win32
+		{B553AF16-3FF7-3023-AD8B-DBB80E965C07}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B553AF16-3FF7-3023-AD8B-DBB80E965C07}.Debug|Win32.Build.0 = Debug|Win32
+		{B553AF16-3FF7-3023-AD8B-DBB80E965C07}.Release|Win32.ActiveCfg = Release|Win32
+		{B553AF16-3FF7-3023-AD8B-DBB80E965C07}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

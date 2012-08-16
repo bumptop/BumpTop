@@ -1,0 +1,161 @@
+/*
+ Copyright 2011 Google Inc. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+*/
+
+/* LOGIN PAGE SPECIFIC CSS */
+td {
+	padding-left: 10px;
+}
+#btfb_content .instructions {
+	padding: 10px;
+	text-align: center;
+	
+	color: rgb(160, 160, 160);
+	font-size: 14pt;
+	font-weight: bold;
+}
+#btfb_content table {
+	width: 90%;
+	margin-left: 8%;
+	
+	font-size: 13pt;
+}
+	#btfb_content table .header {
+		width: 90px;
+		color: rgb(100, 100, 100);
+		font-weight: bold;
+	}
+		#btfb_content table .header .clear_all {
+			color: rgb(59, 90, 153);	
+			font-weight: normal;
+		}
+	#btfb_content .albums_list {
+		max-width: 250px;
+	}
+	a.create_album {
+		color: rgb(79, 110, 173);	
+		text-decoration: none;
+	}
+	.file_list .list {
+		padding-top: 2px;
+		overflow-y: auto; 
+		overflow-x: hidden; 
+		height: 140px; 
+		width: 100%;
+		
+		background: rgb(240, 240, 240);
+		-webkit-border-radius: 4px;		
+	}
+		.file_list .list .remove a {		
+			padding-left: 5px;
+			
+			color: rgb(79, 110, 173);	
+			font-size: 10pt;
+		}
+		.file_list .list .filepath {
+			padding: 5px 5px 0px 7px;
+			clear: both;
+			
+			color: rgb(59, 90, 153);
+			font-size: 14pt;
+			vertical-align: top;			
+		}
+			.file_list .list .description {
+				float: left;
+				margin: 5px 0 0 5px;
+				overflow: hidden;
+			}
+			.file_list .list .filepath img {
+				float: left;
+				width: 32px;
+				height: 32px;
+				
+				border: 1px solid rgb(59, 90, 153);
+				-webkit-border-radius: 4px;
+			}
+	.file_list a {
+		text-decoration: none;
+	}
+	.file_list .button {
+		margin-top: 10px;
+		padding: 5px 10px 5px 10px;
+		width: 100px;
+		display: inline-block;
+		
+		color: white;
+		font-weight: bold;
+		text-shadow: 0px 1px 1px rgb(64, 64, 64);
+		text-align: center;
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0.0, rgb(84, 125, 212)), color-stop(1.0, rgb(59, 90, 153)));	
+		border-top: 2px solid rgb(104, 145, 232);
+	}
+	#btfb_content table td {
+		vertical-align: top;
+	}
+
+.dialog_title {
+	padding-bottom: 16px;
+	color: rgb(79, 110, 173);	
+	font-size: 16pt;
+}
+.dialog_cancel {
+	color: rgb(79, 110, 173);	
+	text-decoration: none;
+}
+
+#create_album_dialog #create_album_name, 
+#create_album_dialog #create_album_location,
+#create_album_dialog textarea {
+	width: 240px;
+	resize: none;
+}
+	#create_album_dialog #create_album_submit {
+		margin-top: 10px;
+		margin-right: 5px;
+	}
+	#create_album_dialog .label {
+		color: rgb(90, 90, 90);
+	}
+
+#photos_uploaded_dialog .link a {
+	color: rgb(109, 140, 203);	
+	font-size: 14pt;
+	text-decoration: none;
+}
+	#uploaded_view_in_browser,
+	#uploaded_return_to_feed {
+		text-align: left;
+	}
+	#uploaded_view_in_browser a,
+	#uploaded_return_to_feed a {
+		
+	}
+	#uploaded_view_in_browser a img ,
+	#uploaded_return_to_feed a img {
+		float: left;
+	}
+	#uploaded_view_in_browser span,
+	#uploaded_return_to_feed span {
+		position: relative;
+		top: 2px;
+		left: 2px;
+	}
+	#uploaded_view_in_browser a:hover,
+	#uploaded_return_to_feed a:hover {
+		color: rgb(59, 90, 153);	
+	}
+#updating_dialog {
+	display: none;
+}

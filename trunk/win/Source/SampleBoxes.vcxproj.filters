@@ -1,0 +1,1394 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{b52b3043-f04c-4685-b157-c2337f694108}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Source Files\MarkingMenu">
+      <UniqueIdentifier>{d86fba68-1c35-4e1e-b66d-d9af734deaaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Input">
+      <UniqueIdentifier>{41e2b8c0-9d42-4408-9fb0-ea8c5c80d643}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BumpTop">
+      <UniqueIdentifier>{3255b32f-3ba4-4f9e-97c7-b98caffbc9c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Win32">
+      <UniqueIdentifier>{e4ea6e00-de15-4824-98a0-ec09baa59099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers">
+      <UniqueIdentifier>{3be614e3-8c22-4e58-8b4c-f331f630f1f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers\TextureManager">
+      <UniqueIdentifier>{78c9a9cf-410e-4ed1-b987-0da4069181b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BumpObject">
+      <UniqueIdentifier>{9a1291b0-54a8-41d0-993f-ca889aee4fe9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interfaces">
+      <UniqueIdentifier>{ef6d4c0e-a620-453d-9505-3df03dbbdaff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\3rd Party">
+      <UniqueIdentifier>{55b6810c-a42b-49f1-a320-41414830a2a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests">
+      <UniqueIdentifier>{b2583f05-983d-4222-8a46-6eb1a99b904b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\Mock Objects">
+      <UniqueIdentifier>{a3badf26-2cb6-4c76-85e0-687616977f81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\Automated Tests">
+      <UniqueIdentifier>{f683b30e-cf07-4ab7-adcc-3085eeb7ecc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Rendering">
+      <UniqueIdentifier>{8231a14b-27e7-407e-a318-e541b6355ac1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Updater">
+      <UniqueIdentifier>{d3bd8dfa-c4fb-4190-9ea0-f5eab564d878}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ProtocolBuffers">
+      <UniqueIdentifier>{ac9ba54f-7ee1-4c95-914f-53bf66cef199}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\QtWindows">
+      <UniqueIdentifier>{3fc727b7-00f4-4fb0-a47f-f9a4553c6d66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BubbleClusters">
+      <UniqueIdentifier>{e1a00043-8213-4e01-bc40-b77b85711285}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{05fe1ffb-1424-4886-8a51-6053b8067f7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{ea805c4e-ca5d-460a-9b91-cfe1e0188b9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MarkingMenu">
+      <UniqueIdentifier>{fa9b0794-7725-4ae9-8c00-0b33a306bb2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Input">
+      <UniqueIdentifier>{6192a464-0850-42d0-b944-55b2325a0e6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Rendering">
+      <UniqueIdentifier>{d71c4a5b-189c-4986-8784-27c00b6c094b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Win32">
+      <UniqueIdentifier>{38c5ce85-9686-4f8d-89e3-6a5ca4c3bbcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Interfaces">
+      <UniqueIdentifier>{9de84b4c-bf64-4acd-b2e0-9c26d5f8250d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Managers">
+      <UniqueIdentifier>{2a824f91-4a65-404c-b303-2b9c014290e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Managers\TextureManager">
+      <UniqueIdentifier>{b3631c50-8b82-4e15-981c-e0a9a9b3ffcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Bump Object">
+      <UniqueIdentifier>{fbb5697c-57fd-4e86-aa77-07dd4d0f2dad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\3rd Party">
+      <UniqueIdentifier>{4ce5961d-a70c-47c1-8c84-5684a234bf0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BumpTop">
+      <UniqueIdentifier>{bd7848a2-55e0-41ba-96c3-e969f953753d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Tests">
+      <UniqueIdentifier>{6bdeac75-5ddc-462f-9f06-e5bf99cda0f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Tests\Mock Objects">
+      <UniqueIdentifier>{8669944f-fdaa-49fd-a8ee-3f42874f0d21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Tests\Automated Tests">
+      <UniqueIdentifier>{58c25d16-29f0-4102-baa6-44df9d37625b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Updater">
+      <UniqueIdentifier>{c9512111-a820-4d65-803f-b15b81ea6899}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ProtocolBuffers">
+      <UniqueIdentifier>{49ab7d38-a738-4ba4-a36e-a242ab61a60f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\QtWindows">
+      <UniqueIdentifier>{db93d024-822d-4940-a638-411ac09bea75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BubbleClusters">
+      <UniqueIdentifier>{07f093c7-df8d-4d87-9687-743bc277ca04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inline Files">
+      <UniqueIdentifier>{1571e8cf-2472-4b31-9610-13bd31b6f686}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inline Files\BumpObject">
+      <UniqueIdentifier>{b99db2ad-6b04-4ae5-9371-ba7edbd8495e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inline Files\Interfaces">
+      <UniqueIdentifier>{21b828a0-fe04-457e-aa62-530ce60c7fdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inline Files\Rendering">
+      <UniqueIdentifier>{eadaf3f6-ff4d-45ad-ae3b-7c62e3b37e46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inline Files\Marking Menu">
+      <UniqueIdentifier>{f30356c8-1e79-41ad-b7d7-84aaffb5f400}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inline Files\Managers">
+      <UniqueIdentifier>{eeb6dd08-4574-433e-ac0b-d858a88bbcd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inline Files\BumpTop">
+      <UniqueIdentifier>{a2853be5-ba12-4b8e-b7c2-232b17dac237}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inline Files\Win32">
+      <UniqueIdentifier>{148fde18-3124-4f7f-b5f5-11c5c4a8c2bc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BT_Common.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_EllipsisMenu.cpp">
+      <Filter>Source Files\MarkingMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_LassoMenu.cpp">
+      <Filter>Source Files\MarkingMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_LeafForwardMenuActionCustomizer.cpp">
+      <Filter>Source Files\MarkingMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_LibrariesMenuActionCustomizer.cpp">
+      <Filter>Source Files\MarkingMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_LibrarySubMenuActionCustomizer.cpp">
+      <Filter>Source Files\MarkingMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_MarkingMenu.cpp">
+      <Filter>Source Files\MarkingMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_MenuAction.cpp">
+      <Filter>Source Files\MarkingMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_MenuActionManager.cpp">
+      <Filter>Source Files\MarkingMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_PileBreakMenuActionCustomizer.cpp">
+      <Filter>Source Files\MarkingMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_PopupMenuActionCustomizer.cpp">
+      <Filter>Source Files\MarkingMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Selection.cpp">
+      <Filter>Source Files\MarkingMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_StackIcon.cpp">
+      <Filter>Source Files\MarkingMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_StickyNoteMenuActionCustomizer.cpp">
+      <Filter>Source Files\MarkingMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_CameraPanGesture.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_CameraZoomGesture.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_FanOutGesture.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Gesture.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_GestureContext.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_KeyboardHandler.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_KeyCombo.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_LeafingGesture.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_ManipulationEventSink.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_MouseEventHandler.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_MousePointer.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Path.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_PhotoCropGesture.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_PinchZoomGesture.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_PullDownWallsGesture.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_RightClickGesture.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_RotateDesktopGesture.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_ScrunchGesture.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_ShoveGesture.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_TapZoomGesture.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_TouchPoint.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Authorization.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_AutomatedDemo.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_AutomatedJSONTesting.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_AutomatedTests.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_AutomatedTradeshowDemo.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_CommonFiniteStates.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_FacebookWidgetJavaScriptAPI.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Find.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_FiniteStateMachine.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_JavaScriptAPI.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_LibraryOverlay.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_NovodexOutputStream.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_PbPersistenceHelpers.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Profiler.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_QtUtil.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Rename.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Settings.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_SharingFlyout.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_SpinnerWidget.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_ThreadableUnit.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Training.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_UndoStack.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Util.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_WebPage.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BumpTop.cpp">
+      <Filter>Source Files\BumpTop</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_ChooseVersionDialog.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_CrashDialog.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_DesktopLock.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_DesktopLockTest.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_DragDrop.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_DragHandler.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_DropHandler.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_ExplorerAliveChecker.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_HoverControl.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Library.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_PhotoFrameDialog.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_ProxySettings.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_ProxySettingsTest.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_SettingsAppMessageHandler.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_SystemTray.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_ThankYouDialog.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Timer.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_VistaFileOperation.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Windows7Multitouch.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_WindowsHelper.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_WindowsOS.cpp">
+      <Filter>Source Files\Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_AnimationManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_DialogManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_EventManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_FileSystemManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_FileTransferManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_GestureManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_KeyboardManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_LegacyPersistenceManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_LibraryManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Logger.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_MouseEventManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_MultipleMice.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_PbPersistenceManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_RenderManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_RepositionManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_SceneManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_SmartBoard.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_StatsManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_StatsManagerTest.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_TextManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_ThemeManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_WidgetManager.cpp">
+      <Filter>Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_AnimatedTextureSource.cpp">
+      <Filter>Source Files\Managers\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_GLTextureManager.cpp">
+      <Filter>Source Files\Managers\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_GLTextureObject.cpp">
+      <Filter>Source Files\Managers\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_TexHelperManager.cpp">
+      <Filter>Source Files\Managers\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Actor.cpp">
+      <Filter>Source Files\BumpObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_BumpObject.cpp">
+      <Filter>Source Files\BumpObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_CustomActor.cpp">
+      <Filter>Source Files\BumpObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_FileSystemActor.cpp">
+      <Filter>Source Files\BumpObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_FileSystemActorFactory.cpp">
+      <Filter>Source Files\BumpObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_FileSystemPile.cpp">
+      <Filter>Source Files\BumpObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_FlickrPhotoFrameSource.cpp">
+      <Filter>Source Files\BumpObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_LocalPhotoFrameSource.cpp">
+      <Filter>Source Files\BumpObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_ObjectType.cpp">
+      <Filter>Source Files\BumpObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_PhotoFrameActor.cpp">
+      <Filter>Source Files\BumpObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_PhotoFrameSource.cpp">
+      <Filter>Source Files\BumpObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_PhotoFrameSourceItem.cpp">
+      <Filter>Source Files\BumpObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Pile.cpp">
+      <Filter>Source Files\BumpObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_RSSPhotoFrameSource.cpp">
+      <Filter>Source Files\BumpObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_StickyNoteActor.cpp">
+      <Filter>Source Files\BumpObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_WebActor.cpp">
+      <Filter>Source Files\BumpObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_WebThumbnailActor.cpp">
+      <Filter>Source Files\BumpObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Animatable.cpp">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_AnimationEntry.cpp">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_DragObject.cpp">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_DropDownMenu.cpp">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_DropObject.cpp">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_LaunchTarget.cpp">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Nameable.cpp">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_NxActorWrapper.cpp">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_OverlayComponent.cpp">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_OverlayEvent.cpp">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_RaycastReports.cpp">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Renderable.cpp">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Replayable.cpp">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Selectable.cpp">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_TossTarget.cpp">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Watchable.cpp">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_WatchedObjects.cpp">
+      <Filter>Source Files\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="BackgroundPixmapBuffer.cpp">
+      <Filter>Source Files\3rd Party</Filter>
+    </ClCompile>
+    <ClCompile Include="BlitzBlur.cpp">
+      <Filter>Source Files\3rd Party</Filter>
+    </ClCompile>
+    <ClCompile Include="EnumProc.cpp">
+      <Filter>Source Files\3rd Party</Filter>
+    </ClCompile>
+    <ClCompile Include="FacebookClient.cpp">
+      <Filter>Source Files\3rd Party</Filter>
+    </ClCompile>
+    <ClCompile Include="FlickrClient.cpp">
+      <Filter>Source Files\3rd Party</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkAccessManager.cpp">
+      <Filter>Source Files\3rd Party</Filter>
+    </ClCompile>
+    <ClCompile Include="OAuthClient.cpp">
+      <Filter>Source Files\3rd Party</Filter>
+    </ClCompile>
+    <ClCompile Include="TextPixmapBuffer.cpp">
+      <Filter>Source Files\3rd Party</Filter>
+    </ClCompile>
+    <ClCompile Include="TwitterClient.cpp">
+      <Filter>Source Files\3rd Party</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_TestCommon.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_TestKeyboardManager.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_TestPhotoFrameActor.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_MockFileTransferEventHandler.cpp">
+      <Filter>Source Files\Tests\Mock Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_MockKeyboardEventHandler.cpp">
+      <Filter>Source Files\Tests\Mock Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_AutomatedTest.cpp">
+      <Filter>Source Files\Tests\Automated Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_BumpTopDXRender.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Camera.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_DXRender.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_FontManager.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Mesh.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_SlideShow.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_VideoRender.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeVis.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_UpdateInstaller.cpp">
+      <Filter>Source Files\Updater</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_UpdateInstallerTest.cpp">
+      <Filter>Source Files\Updater</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Updater.cpp">
+      <Filter>Source Files\Updater</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_UpdaterTest.cpp">
+      <Filter>Source Files\Updater</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_UpdateServer.cpp">
+      <Filter>Source Files\Updater</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_UpdateServerTest.cpp">
+      <Filter>Source Files\Updater</Filter>
+    </ClCompile>
+    <ClCompile Include="BumpTop.pb.cc">
+      <Filter>Source Files\ProtocolBuffers</Filter>
+    </ClCompile>
+    <ClCompile Include="Nx.pb.cc">
+      <Filter>Source Files\ProtocolBuffers</Filter>
+    </ClCompile>
+    <ClCompile Include="PhotoFrameSource.pb.cc">
+      <Filter>Source Files\ProtocolBuffers</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_CustomizeWizard.cpp">
+      <Filter>Source Files\QtWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_CustomQLineEdit.cpp">
+      <Filter>Source Files\QtWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_FacebookWizard.cpp">
+      <Filter>Source Files\QtWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Flyout.cpp">
+      <Filter>Source Files\QtWindows</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Box2.cpp">
+      <Filter>Source Files\BubbleClusters</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Bubbles.cpp">
+      <Filter>Source Files\BubbleClusters</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_Cluster.cpp">
+      <Filter>Source Files\BubbleClusters</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_ClusterItem.cpp">
+      <Filter>Source Files\BubbleClusters</Filter>
+    </ClCompile>
+    <ClCompile Include="BT_QuadNode.cpp">
+      <Filter>Source Files\BubbleClusters</Filter>
+    </ClCompile>
+    <ClCompile Include="Delaunay.cpp">
+      <Filter>Source Files\BubbleClusters</Filter>
+    </ClCompile>
+    <ClCompile Include="Test_FlickrClient.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\Test_Gestures.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectoryChanges.cpp">
+      <Filter>Source Files\3rd Party</Filter>
+    </ClCompile>
+    <ClCompile Include="DelayedDirectoryChangeHandler.cpp">
+      <Filter>Source Files\3rd Party</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Textures\bumptop.ico">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="BT_Actor.inl">
+      <Filter>Inline Files\BumpObject</Filter>
+    </None>
+    <None Include="BT_BumpObject.inl">
+      <Filter>Inline Files\BumpObject</Filter>
+    </None>
+    <None Include="BT_Pile.inl">
+      <Filter>Inline Files\BumpObject</Filter>
+    </None>
+    <None Include="BT_Animatable.inl">
+      <Filter>Inline Files\Interfaces</Filter>
+    </None>
+    <None Include="BT_AnimationEntry.inl">
+      <Filter>Inline Files\Interfaces</Filter>
+    </None>
+    <None Include="BT_BitmapPixelBuffer.inl">
+      <Filter>Inline Files\Interfaces</Filter>
+    </None>
+    <None Include="BT_Nameable.inl">
+      <Filter>Inline Files\Interfaces</Filter>
+    </None>
+    <None Include="BT_NxActorWrapper.inl">
+      <Filter>Inline Files\Interfaces</Filter>
+    </None>
+    <None Include="BT_Renderable.inl">
+      <Filter>Inline Files\Interfaces</Filter>
+    </None>
+    <None Include="BT_Singleton.inl">
+      <Filter>Inline Files\Interfaces</Filter>
+    </None>
+    <None Include="BT_WatchableEvent.inl">
+      <Filter>Inline Files\Interfaces</Filter>
+    </None>
+    <None Include="BT_ColorVal.inl">
+      <Filter>Inline Files\Rendering</Filter>
+    </None>
+    <None Include="BT_FontManager.inl">
+      <Filter>Inline Files\Rendering</Filter>
+    </None>
+    <None Include="BT_Selection.inl">
+      <Filter>Inline Files\Marking Menu</Filter>
+    </None>
+    <None Include="BT_GLTextureManager.inl">
+      <Filter>Inline Files\Managers</Filter>
+    </None>
+    <None Include="BT_RenderManager.inl">
+      <Filter>Inline Files\Managers</Filter>
+    </None>
+    <None Include="BT_SceneManager.inl">
+      <Filter>Inline Files\Managers</Filter>
+    </None>
+    <None Include="BT_ActorUndoData.inl">
+      <Filter>Inline Files\BumpTop</Filter>
+    </None>
+    <None Include="BT_UndoStackEntry.inl">
+      <Filter>Inline Files\BumpTop</Filter>
+    </None>
+    <None Include="BT_Util.inl">
+      <Filter>Inline Files\BumpTop</Filter>
+    </None>
+    <None Include="BT_Timer.inl">
+      <Filter>Inline Files\Win32</Filter>
+    </None>
+    <None Include="Textures\bt_activate.bmp" />
+    <None Include="Textures\bt_activate_disabled.bmp" />
+    <None Include="Textures\bt_activate_hover.bmp" />
+    <None Include="Textures\bt_auth_header.bmp" />
+    <None Include="Textures\bt_choose_version.bmp" />
+    <None Include="Textures\bt_get_pro.bmp" />
+    <None Include="Textures\bt_get_pro_hover.bmp" />
+    <None Include="Textures\bt_no_problem.bmp" />
+    <None Include="Textures\bt_no_problem_hover.bmp" />
+    <None Include="Textures\bt_other_goodness.bmp" />
+    <None Include="Textures\bt_thank_you.bmp" />
+    <None Include="Textures\bt_use_free.bmp" />
+    <None Include="Textures\bt_use_free_hover.bmp" />
+    <None Include="Textures\personalize.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="InputDialog.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BT_Common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_EllipsisMenu.h">
+      <Filter>Header Files\MarkingMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_LassoMenu.h">
+      <Filter>Header Files\MarkingMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_LeafForwardMenuActionCustomizer.h">
+      <Filter>Header Files\MarkingMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_LibrariesMenuActionCustomizer.h">
+      <Filter>Header Files\MarkingMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_LibrarySubMenuActionCustomizer.h">
+      <Filter>Header Files\MarkingMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_MarkingMenu.h">
+      <Filter>Header Files\MarkingMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_MenuAction.h">
+      <Filter>Header Files\MarkingMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_MenuActionCustomizer.h">
+      <Filter>Header Files\MarkingMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_MenuActionManager.h">
+      <Filter>Header Files\MarkingMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_PileBreakMenuActionCustomizer.h">
+      <Filter>Header Files\MarkingMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_PopupMenuActionCustomizer.h">
+      <Filter>Header Files\MarkingMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Selection.h">
+      <Filter>Header Files\MarkingMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_StackIcon.h">
+      <Filter>Header Files\MarkingMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_StickyNoteMenuActionCustomizer.h">
+      <Filter>Header Files\MarkingMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_CameraPanGesture.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_CameraZoomGesture.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_FanOutGesture.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Gesture.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_GestureContext.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_KeyboardHandler.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_KeyCombo.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_LeafingGesture.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Manipulation.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_ManipulationEventSink.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_MouseEventHandler.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_MousePointer.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Path.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_PhotoCropGesture.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_PinchZoomGesture.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_PullDownWallsGesture.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_RightClickGesture.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_RotateDesktopGesture.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_ScrunchGesture.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_ShoveGesture.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_TapZoomGesture.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_TouchPoint.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Camera.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_ColorVal.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_DXRender.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_FontManager.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Mesh.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_SlideShow.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Vertex.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_VideoRender.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeVis.h">
+      <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_ChooseVersionDialog.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_CrashDialog.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_DesktopLock.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_DesktopLockTest.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_DragDrop.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_DragHandler.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_DropHandler.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_ExplorerAliveChecker.H">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_HoverControl.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Library.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_PhotoFrameDialog.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_ProxySettings.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_ProxySettingsTest.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_SettingsAppMessageHandler.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_SystemTray.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_ThankYouDialog.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Timer.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_VistaFileOperation.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Windows7CommonControlsOverride.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Windows7Multitouch.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Windows7User32Override.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_WindowsHelper.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_WindowsOS.h">
+      <Filter>Header Files\Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Animatable.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_AnimationEntry.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_BitmapPixelBufffer.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_DragObject.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_DropDownMenu.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_DropObject.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_LaunchTarget.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Nameable.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_NxActorWrapper.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_OverlayComponent.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_OverlayEvent.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_RaycastReports.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Renderable.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Replayable.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Selectable.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Singleton.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_TossTarget.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Watchable.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_WatchableEvent.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_WatchedObjects.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_AnimationManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_DialogManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_EventManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_FileSystemManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_FileTransferManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_GestureManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_KeyboardManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_LegacyPersistenceManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_LibraryManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Logger.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_MouseEventManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_MultipleMice.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_PbPersistenceManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_RenderManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_RepositionManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_SceneManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_SmartBoard.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_StatsManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_StatsManagerTest.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_TextManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_ThemeManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_WidgetManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_AnimatedTextureSource.h">
+      <Filter>Header Files\Managers\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_GLTextureManager.h">
+      <Filter>Header Files\Managers\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_GLTextureObject.h">
+      <Filter>Header Files\Managers\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_TexHelperManager.h">
+      <Filter>Header Files\Managers\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="TexHelperResponse.h">
+      <Filter>Header Files\Managers\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Actor.h">
+      <Filter>Header Files\Bump Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_BumpObject.h">
+      <Filter>Header Files\Bump Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_CustomActor.h">
+      <Filter>Header Files\Bump Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_FileSystemActor.h">
+      <Filter>Header Files\Bump Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_FileSystemActorFactory.h">
+      <Filter>Header Files\Bump Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_FileSystemPile.h">
+      <Filter>Header Files\Bump Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_FlickrPhotoFrameSource.h">
+      <Filter>Header Files\Bump Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_LocalPhotoFrameSource.h">
+      <Filter>Header Files\Bump Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_ObjectType.h">
+      <Filter>Header Files\Bump Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_PhotoFrameActor.h">
+      <Filter>Header Files\Bump Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_PhotoFrameSource.h">
+      <Filter>Header Files\Bump Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_PhotoFrameSourceItem.h">
+      <Filter>Header Files\Bump Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Pile.h">
+      <Filter>Header Files\Bump Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_RSSPhotoFrameSource.h">
+      <Filter>Header Files\Bump Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_StickyNoteActor.h">
+      <Filter>Header Files\Bump Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_WebActor.h">
+      <Filter>Header Files\Bump Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_WebThumbnailActor.h">
+      <Filter>Header Files\Bump Object</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundPixmapBuffer.h">
+      <Filter>Header Files\3rd Party</Filter>
+    </ClInclude>
+    <ClInclude Include="BlitzBlur.h">
+      <Filter>Header Files\3rd Party</Filter>
+    </ClInclude>
+    <ClInclude Include="EnumProc.h">
+      <Filter>Header Files\3rd Party</Filter>
+    </ClInclude>
+    <ClInclude Include="FacebookClient.h">
+      <Filter>Header Files\3rd Party</Filter>
+    </ClInclude>
+    <ClInclude Include="FlickrClient.h">
+      <Filter>Header Files\3rd Party</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkAccessManager.h">
+      <Filter>Header Files\3rd Party</Filter>
+    </ClInclude>
+    <ClInclude Include="OAuthClient.h">
+      <Filter>Header Files\3rd Party</Filter>
+    </ClInclude>
+    <ClInclude Include="TextPixmapBuffer.h">
+      <Filter>Header Files\3rd Party</Filter>
+    </ClInclude>
+    <ClInclude Include="TwitterClient.h">
+      <Filter>Header Files\3rd Party</Filter>
+    </ClInclude>
+    <ClInclude Include="VC_Manifest.h">
+      <Filter>Header Files\3rd Party</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_ActorUndoData.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Authorization.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_AutomatedDemo.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_AutomatedJSONTesting.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_AutomatedTests.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_AutomatedTradeshowDemo.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_CommonFiniteStates.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_FacebookWidgetJavaScriptAPI.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Find.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_FiniteStateMachine.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_JavaScriptAPI.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_LibraryOverlay.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Macros.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_NovodexOutputStream.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_PbPersistenceHelpers.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Profiler.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_QtUtil.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Rename.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Settings.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_SpinnerWidget.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Struct.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_ThreadableUnit.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Training.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_UndoStack.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_UndoStackEntry.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Util.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_WebPage.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BumpTop.h">
+      <Filter>Header Files\BumpTop</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_TestCommon.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_TestKeyboardManager.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_TestPhotoFrameActor.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_MockFileTransferEventHandler.h">
+      <Filter>Header Files\Tests\Mock Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_MockKeyboardEventHandler.h">
+      <Filter>Header Files\Tests\Mock Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_ATestGeneral.h">
+      <Filter>Header Files\Tests\Automated Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_AutomatedTest.h">
+      <Filter>Header Files\Tests\Automated Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_UpdateInstaller.h">
+      <Filter>Header Files\Updater</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_UpdateInstallerTest.h">
+      <Filter>Header Files\Updater</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Updater.h">
+      <Filter>Header Files\Updater</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_UpdaterTest.h">
+      <Filter>Header Files\Updater</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_UpdateServer.h">
+      <Filter>Header Files\Updater</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_UpdateServerTest.h">
+      <Filter>Header Files\Updater</Filter>
+    </ClInclude>
+    <ClInclude Include="BumpTop.pb.h">
+      <Filter>Header Files\ProtocolBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="Nx.pb.h">
+      <Filter>Header Files\ProtocolBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="PhotoFrameSource.pb.h">
+      <Filter>Header Files\ProtocolBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_CustomizeWizard.h">
+      <Filter>Header Files\QtWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_CustomQLineEdit.h">
+      <Filter>Header Files\QtWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_FacebookWizard.h">
+      <Filter>Header Files\QtWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Flyout.h">
+      <Filter>Header Files\QtWindows</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Box2.h">
+      <Filter>Header Files\BubbleClusters</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Bubbles.h">
+      <Filter>Header Files\BubbleClusters</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_Cluster.h">
+      <Filter>Header Files\BubbleClusters</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_ClusterItem.h">
+      <Filter>Header Files\BubbleClusters</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_QuadNode.h">
+      <Filter>Header Files\BubbleClusters</Filter>
+    </ClInclude>
+    <ClInclude Include="Delaunay.h">
+      <Filter>Header Files\BubbleClusters</Filter>
+    </ClInclude>
+    <ClInclude Include="BT_SharingFlyout.h" />
+    <ClInclude Include="DelayedDirectoryChangeHandler.h">
+      <Filter>Header Files\3rd Party</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectoryChanges.h">
+      <Filter>Header Files\3rd Party</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

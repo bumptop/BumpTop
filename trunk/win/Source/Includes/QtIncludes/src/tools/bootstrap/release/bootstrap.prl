@@ -1,0 +1,5 @@
+QMAKE_PRL_BUILD_DIR = D:/qt-everywhere-opensource-src-4.7.4/src/tools/bootstrap
+QMAKE_PRO_INPUT = bootstrap.pro
+QMAKE_PRL_TARGET = bootstrap
+QMAKE_PRL_CONFIG = include_source_dir lex yacc warn_on uic resources incremental_off thread_off release ReleaseBuild Release build_pass warn_on release incremental flat link_prl precompile_header autogen_precompile_source copy_dir_files debug_and_release debug_and_release_target embed_manifest_dll embed_manifest_exe ltcg stl exceptions rtti mmx 3dnow sse sse2 minimal-config small-config medium-config large-config full-config build_all incremental msvc_mp create_prl link_prl depend_includepath QTDIR_build release ReleaseBuild Release build_pass staticlib console qtinc release ReleaseBuild Release build_pass no_autoqmake static staticlib
+QMAKE_PRL_LIBS =   

@@ -1,0 +1,161 @@
+/*
+ Copyright 2011 Google Inc. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+*/
+
+* {
+	margin: 0px;
+	padding: 0px;
+}
+		
+body {
+	font-family: calibri;
+	
+	/* temp	
+	border: 1px solid black; */		
+}
+
+.bumpwidget {
+	width: 1040px;
+	height: 655px;
+	overflow: hidden;
+}
+
+.item_template {
+	display: none;
+}
+
+/* COMMON CSS */
+#btfb_header {
+	height: 40px;
+	padding-left: 15px;
+	
+	color: white;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.0, rgb(89, 119, 182)), color-stop(0.80, rgb(59, 89, 152)));
+	font-size: 19pt;		
+}
+	#btfb_header .navtitle {
+		float: left;
+		position: relative;
+		top: 4px;
+	}
+	#btfb_header span.navtitle {	
+		cursor: default;
+	}
+	#btfb_header .logo {
+		float: left;
+		position: relative;
+		top: 5px;
+		width: 133px;
+		height: 36px;
+	}
+	#btfb_header a {
+		text-decoration: none;
+		color: white;
+		font-weight: bold;
+	}
+	#btfb_header .navtitle {
+		margin-left: 15px;
+		margin-top: 3pt;
+		
+		color: rgb(184, 199, 225);
+		font-size: 16pt;
+		font-weight: bold;
+	}
+	#btfb_header .selected,
+	#btfb_header a.navtitle:hover {	
+		color: rgb(224, 229, 255);
+		text-shadow: 0px 1px 1px black;
+	}
+		#btfb_header .navtitle img {
+			position: relative; 
+			top: 4px;
+		}
+	
+#btfb_content {
+	width: 100%;
+	height: 615px;	/* 655 - 40 for header */
+	/* REMOVE FOR DEBUGGING FEEDS */
+	overflow-x: hidden;
+	overflow-y: hidden;
+	
+	/* TEMP
+	background-color: rgb(255, 0, 0);
+	*/
+}
+
+#btfb_content div,
+#btfb_content .media img {
+	-webkit-border-radius: 4px;
+}
+
+/* STATUS UPDATE SPECIFIC CSS */
+#status_dialog {
+	position: absolute;
+	top: 35px;
+	left: 212px;
+	padding: 4px 10px 10px 10px;
+	display: none;
+	
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.0, rgb(84, 125, 212)), color-stop(1.0, rgb(59, 90, 153)));	
+	-webkit-border-radius: 4px;
+}
+	#status_dialog .label { 
+		margin-bottom: 5px;
+		color: rgb(224, 229, 255);
+		font-weight: bold;
+		font-size: 12pt;	
+		cursor: default;	
+	}
+	#status_dialog .last_status {
+		display: none;
+		margin-bottom: 2px;
+		max-width: 500px;	
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		
+		font-style: italic;
+		color: rgb(184, 199, 225);
+	}
+	#status_dialog textarea {
+		width: 500px;
+		height: 64px;
+		resize: none;
+		padding: 5px;
+		
+		color: rgb(32, 32, 32);
+		font-size: 12pt;
+	}
+	#status_dialog .status_update .share {
+		margin-top: 5px;
+		padding: 2px 20px 2px 20px;
+		cursor: pointer;
+		color: rgb(255, 233, 242);
+		font-weight: bold;
+		font-size: 13pt;
+		text-shadow: 0px 1px 1px rgb(64, 64, 64);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0.0, rgb(84, 125, 212)), color-stop(1.0, rgb(74, 105, 168)));	
+		border: 0px;
+		border-top: 2px solid rgb(104, 145, 232);
+		-webkit-border-radius: 4px;
+		
+		cursor: hand;
+	}
+	#status_dialog .status_update .cancel {
+		margin-left: 5px;
+		
+		color: rgb(184, 199, 225);
+		text-decoration: none;
+	}

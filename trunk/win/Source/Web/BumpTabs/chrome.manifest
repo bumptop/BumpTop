@@ -1,0 +1,3 @@
+content bumptabs content/
+overlay chrome://browser/content/browser.xul chrome://bumptabs/content/bumptabs.xul
+skin bumptabs classic/1.0 skin/

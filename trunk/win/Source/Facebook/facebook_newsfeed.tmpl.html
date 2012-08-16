@@ -1,0 +1,140 @@
+{#
+ Copyright 2011 Google Inc. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+#}
+
+{% extends "bt_base.tmpl.html" %}
+
+{% block head %}
+	<link rel="stylesheet" type="text/css" href="btfb_common.css" />
+	<link rel="stylesheet" type="text/css" href="btfb_newsfeed.css" />
+	<script type="text/javascript" src="jquery.timers-1.2.js"></script>
+	<script type="text/javascript" src="jquery.easing.1.3.js"></script>
+	<script type="text/javascript" src="jquery.blockUI.js"></script>
+	<script type="text/javascript" src="jquery-ui-1.7.2.custom.min.js"></script>
+	<script type="text/javascript" src="{{ common_js_dir }}/json2.min.js"></script>
+
+	<script type="text/javascript" src="btfb_common.js"></script>
+	<script type="text/javascript" src="btfb_kineticscroll.js"></script>
+	<script type="text/javascript" src="btfb_newsfeed.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			var page = new FacebookWidgetNewsFeedPage();
+			page.init();
+		});
+	</script>	
+{% endblock head %}
+
+{% block body %}
+	<div class="bumpwidget">
+		<div id="btfb_header">
+			<img class="logo" src="facebook_logo.png"/>
+			<span class="navtitle selected">{{ _("Feed") }}</span>
+			<a href="#" class="navtitle status_button">{{ _("Status") }}</a>
+			<a href="facebook_photoalbums.html" class="navtitle">{{ _("My Photos") }}</a>
+			<a href="facebook_upload.html" class="navtitle">{{ _("Upload") }}</a>
+			<a href="#" class="navtitle logout">{{ _("Logout") }}</a>
+		</div>
+		<div id="btfb_content">
+			<div class="feed">
+				<img class="background" src="background.png"/>
+				<div class="item loading_label">
+					<div>{{ _("Loading your photo feed...") }}</div>
+				</div>
+				<div class="item item_template">
+					<div class="item_left">
+						<div class="item_profilepic_container">
+							<img class="item_profilepic" />
+						</div>
+					</div>
+					<div class="item_middle">
+						<div class="item_middle_photo">
+							<img class="image_src auto"/>
+							<img class="image_src manual"/>
+						</div>
+						<div class="photo_overlay">
+							<div class="item_description"></div>
+							<div class="item_album_name"></div>
+							<div class="item_album_size"></div>
+						</div>
+						<div class="item_middle_status">
+							<div class="status_text_container">
+								<div class="status_text">
+									<textarea class='status_text_field'></textarea>
+								</div>
+								<div class="status_spacer"></div>
+							</div>
+							<img class="status_thumb"></img>
+							<a class="status_link"></a>
+							<span class="status_link_domain"></span>
+							<span class="status_link_desc"></span>
+						</div>
+						<img class="status_pointer" src="statusPointer.png"/>
+						<img class="status_update_button" src="share.png"/>
+					</div>
+					<div class="item_right">
+						<div class="item_profile"></div>
+						<div class="item_time_cl_container">
+							<div class="item_time"></div>
+							<div class="item_cl">
+								<span class="comments">
+									<img class="comments_pic" src="comment.png"/>
+									<span class="comments_num"></span>
+								</span>
+								<span class="likes">
+									<img class="likes_pic" src="like.png"/>
+									<span class="likes_num"></span>
+								</span>
+							</div>
+						</div>
+					</div>
+					<!-- <div class="item_curtain"></div> -->
+				</div>
+				<div class="load_more">
+				    <div>
+				        <span>{{ _("More") }}<img class="more_arrow" src="more.png"/></span>
+				        <img class="more_throbber" src="../Textures/throbber.gif" height="16px" width="16px"/>
+				    </div>
+				</div>
+				<div class="options_overlay">
+					<div class="open_button"></div>
+					<div class="options_list">
+						<div id="status_option" class="option">
+							<label><input type="checkbox" checked="checked" name="post_type_status"/>{{ _("Show status updates") }}</label>
+						</div>
+						<div id="photos_option" class="option">
+							<label><input type="checkbox" checked="checked" name="post_type_photos"/>{{ _("Show photos") }}</label>
+						</div>
+						<div id="slideshow_option" class="option">
+							<label><input type="checkbox" checked="checked" name="slideshow"/>{{ _("Automatic slideshow") }}</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="status_dialog">
+			<div class="label">{{ _("Update your status") }}</div>
+			<div class="status_update selected">
+				<form>
+					<div class="last_status"></div>
+					<textarea class="status_update_textarea"></textarea>
+					<div class="share_gloss">
+						<input type="submit" id="status_dialog_submit" class="share" value="" />
+						<a href="#" class="cancel">{{ _("Cancel") }}</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock body %}

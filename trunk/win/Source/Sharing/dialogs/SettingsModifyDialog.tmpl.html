@@ -1,0 +1,89 @@
+{#
+ Copyright 2011 Google Inc. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+#}
+
+{% extends "../Sharing/dialogs/dialogs_common.tmpl.html" %}
+
+{% block dialog_head %}
+	<script type="text/javascript">
+		var dropData = BumpTopNative.getDialogUserData();
+		$(document).ready(function () {
+			$("#password").focus( function () {
+				if($(this).val() === dropData.password) {
+					$(this).val("");
+				}
+			});
+			$("#passwordConfirm").focus( function () {
+				if($(this).val() === dropData.password) {
+					$(this).val("");
+				}
+			});
+			$("#publicPassword").focus( function () {
+				if($(this).val() === dropData.publicPassword) {
+					$(this).val("");
+				}
+			});
+		});
+		$(window).load(function () {
+			$("#dropUrl").html("http://drop.io/" + dropData.dropName);
+			if(dropData.password === "") {
+				$("#userEmail").val(dropData.email);
+				$("#isUser").show();
+			} else {
+				$("#publicPassword").val(dropData.publicPassword);
+				$("#password").val(dropData.password);
+				$("#passwordConfirm").val(dropData.password);
+				$("#email").val(dropData.email);
+				$("#isAdmin").show();
+			}
+		});
+	</script>
+	
+	<style type="text/css">
+		/* Hide these all by default */
+		#isAdmin, #isUser , #passwordEmptyAlert, #passwordMatchAlert {
+			display: none;
+		}
+	</style>
+{% endblock dialog_head %}
+	
+{% block dialog_content %}
+	<div id="content">
+		<b>{{ _("Modifying Settings for:") }}</b><span id="dropUrl"></span><br/><br/>
+		<div id="isAdmin">
+			<p class="fieldlabel">{{ _("Public Access Password (<em>optional</em>):") }}</p>
+			<input id="publicPassword" type="password" /><br/>
+
+			<p class="fieldlabel">{{ _("Administrator Email") }}</p>
+			<div class="subHeader">{{ _("Enter your email if you wish to receive updates") }}</div>
+			<input id="email" type="text" /><br/><br/>
+
+			<b>{{ _("Set Administrator Password") }}</b><br/>
+			<span id="passwordMatchAlert">{{ _("Administrator passwords do not match!") }}<br/></span>
+			<span id="passwordEmptyAlert">{{ _("Please enter an administrator password!") }}<br/></span>
+			<input id="password" type="password" /><br/>
+			<div class="subHeader">{{ _("Confirm Administrator Password") }}</div>
+			<input id="passwordConfirm" type="password" /><br/><br/>
+			<button id="okButton" class="btn">{{ _("Ok") }}</button>
+			<button id="cancelButton" class="btn">{{ _("Cancel") }}</button>
+		</div>
+		<div id="isUser">
+			<b>{{ _("Enter or change your email if you wish to receive updates") }}</b><br/>
+			<input id="userEmail" type="text" /><br/><br/>
+			<button id="okUserButton" class="btn">{{ _("Ok") }}</button>
+			<button id="cancelUserButton" class="btn">{{ _("Cancel") }}</button>
+		</div>
+	</div>
+{% endblock dialog_content %}

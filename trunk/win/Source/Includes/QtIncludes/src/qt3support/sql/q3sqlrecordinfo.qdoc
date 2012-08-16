@@ -1,0 +1,75 @@
+/****************************************************************************
+**
+** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
+** All rights reserved.
+** Contact: Nokia Corporation (qt-info@nokia.com)
+**
+** This file is part of the documentation of the Qt Toolkit.
+**
+** $QT_BEGIN_LICENSE:FDL$
+** GNU Free Documentation License
+** Alternatively, this file may be used under the terms of the GNU Free
+** Documentation License version 1.3 as published by the Free Software
+** Foundation and appearing in the file included in the packaging of
+** this file.
+**
+** Other Usage
+** Alternatively, this file may be used in accordance with the terms
+** and conditions contained in a signed written agreement between you
+** and Nokia.
+**
+**
+**
+**
+** $QT_END_LICENSE$
+**
+****************************************************************************/
+
+/*!
+    \class Q3SqlRecordInfo
+    \brief The Q3SqlRecordInfo class encapsulates a set of database field meta data.
+
+    \compat
+
+    This class is a list that holds a set of database field meta
+    data. Use contains() to see if a given field name exists in the
+    record, and use find() to get a QSqlFieldInfo record for a named
+    field.
+
+    \sa Q3SqlFieldInfo
+*/
+
+/*!
+    \fn Q3SqlRecordInfo::Q3SqlRecordInfo()
+
+    Constructs an empty record info object.
+*/
+
+/*!
+    \fn Q3SqlRecordInfo::Q3SqlRecordInfo(const Q3SqlFieldInfoList& other)
+    \fn Q3SqlRecordInfo::Q3SqlRecordInfo(const QSqlRecord& other)
+
+    Constructs a copy of \a other.
+*/
+
+/*!
+    \fn size_type Q3SqlRecordInfo::contains(const QString& fieldName) const
+
+    Returns the number of times a field called \a fieldName occurs in
+    the record. Returns 0 if no field by that name could be found.
+*/
+
+/*!
+    \fn Q3SqlFieldInfo Q3SqlRecordInfo::find(const QString& fieldName) const
+
+    Returns a QSqlFieldInfo object for the first field in the record
+    which has the field name \a fieldName. If no matching field is
+    found then an empty QSqlFieldInfo object is returned.
+*/
+
+/*!
+    \fn QSqlRecord Q3SqlRecordInfo::toRecord() const
+
+    Returns an empty QSqlRecord based on the field information
+    in this Q3SqlRecordInfo.
+*/

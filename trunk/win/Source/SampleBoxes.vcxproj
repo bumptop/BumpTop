@@ -1,0 +1,927 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug_GL|Win32">
+      <Configuration>Debug_GL</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_GL|Win32">
+      <Configuration>Release_GL</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|Win32">
+      <Configuration>Template</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>BumpTop</ProjectName>
+    <ProjectGuid>{9CEA8847-A860-4EEA-90E8-F6B0E7D00FB6}</ProjectGuid>
+    <RootNamespace>BumpTop</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <UseOfAtl>false</UseOfAtl>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_GL|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <UseOfAtl>false</UseOfAtl>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_GL|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug_GL|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_GL|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_GL|Win32'">.\$(Configuration)\tmp\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_GL|Win32'">.\$(Configuration)\tmp\</IntDir>
+    <ExtensionsToDeleteOnClean Condition="'$(Configuration)|$(Platform)'=='Release_GL|Win32'">*.obj%3b*.pch%3b*.ilk%3b*.tlb%3b*.tli%3b*.tlh%3b*.tmp%3b*.rsp%3b*.pgc%3b*.pgd%3b$(TargetPath)</ExtensionsToDeleteOnClean>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_GL|Win32'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug_GL|Win32'">.\$(Configuration)\tmp\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug_GL|Win32'">.\$(Configuration)\tmp\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug_GL|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\tmp\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\temp\</IntDir>
+    <ExtensionsToDeleteOnClean Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">*.obj%3b*.pch%3b*.ilk%3b*.tlb%3b*.tli%3b*.tlh%3b*.tmp%3b*.rsp%3b*.pgc%3b*.pgd%3b$(TargetPath)</ExtensionsToDeleteOnClean>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug_GL|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug_GL|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug_GL|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release_GL|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release_GL|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release_GL|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IncludePath);%DXSDK_DIR%Include</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(LibraryPath);%DXSDK_DIR%Lib\x86</LibraryPath>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IncludePath);%DXSDK_DIR%Include</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(LibraryPath);%DXSDK_DIR%Lib\x86</LibraryPath>
+    <ExecutablePath Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\python_26\files;$(ExecutablePath)</ExecutablePath>
+    <ExecutablePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\python_26\files;$(ExecutablePath)</ExecutablePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_GL|Win32'">
+    <PreBuildEvent>
+      <Message>Pre-build scripts</Message>
+      <Command>"C:\Program Files\TortoiseSVN\bin\SubWCRev.exe" . BT_SVNRevision.txt BT_SVNRevision.h
+"$(SolutionDir)\bin\make" -f "$(SolutionDir)\MOC_Makefile"
+"$(SolutionDir)\bin\protoc" --proto_path="$(SolutionDir)\ProtoBuf" --cpp_out="$(SolutionDir)\" "$(SolutionDir)\ProtoBuf\*.proto"
+"$(ProjectDir)LUpdateString\lupdate.exe" -log "$(ProjectDir)LUpdateString\unwrapped_strings.txt" "$(ProjectDir)LUpdateString\BumpTop_strings.pro"
+python "$(SolutionDir)\bin\processJavaScriptSources.py"
+python "$(SolutionDir)\bin\processHtmlSources.py"
+</Command>
+    </PreBuildEvent>
+    <Midl>
+      <TypeLibraryName>.\..\..\..\Bin\win32/SampleBoxes.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>/MP2 /Zm195 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>.;Doors\;Includes\;Includes\Adp;Includes\Cppunit;Includes\Devil;Includes\Novodex\Foundation;Includes\Novodex\Graphics;Includes\Novodex\Physics;Includes\GLEW;Includes\GLUT;Includes\WML;Includes\EPSLite;Includes\TinyXML;Includes\Boost;Includes\JSON;Includes\QtIncludes\include;Includes\QtIncludes\include\QtCore;Includes\QtIncludes\QtWinMigrate;Includes\protobuf;C:\Program Files\Microsoft Visual Studio 8\VC\atlmfc\src\mfc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>VIP_VERSION;BT_PRO;WIN32;NDEBUG;_CONSOLE;BUMPTOP;ENABLE_WEBKIT;QT_TEXT_RENDERING;_BIND_TO_CURRENT_VCLIBS_VERSION=1;WIN7LIBRARIES;_HAS_CPP0X=0;BOOST_NO_0X_HDR_TYPEINDEX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>BT_Common.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>.\Release\tmp\BumpTop.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>
+      </AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+      <ErrorReporting>Prompt</ErrorReporting>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>VIP_VERSION;BT_PRO;TABLE;VIP_VERSION;TABLE;VIP_VERSION;TABLE;VIP_VERSION;TABLE;VIP_VERSION;TABLE;VIP_VERSION;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
+    </ProjectReference>
+    <Link>
+      <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>Comctl32.lib;cppunit.lib;DevIL.lib;epslite.lib;gdiplus.lib;glew32.lib;glu32.lib;gtest.lib;ILU.lib;ILUT.lib;iphlpapi.lib;libjson_mt.lib;libprotobuf.lib;newmat.lib;NxFoundation.lib;NxPhysics.lib;opengl32.lib;Psapi.lib;QtCore4.lib;QtGui4.lib;QtNetwork4.lib;QtWebKit4.lib;Urlmon.lib;usp10.lib;winhttp.lib;winmm.lib;wldap32.lib;ws2_32.lib;Wtsapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(SolutionDir)\$(Configuration)\$(ProjectName)-OpenGL.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>Libraries\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateMapFile>false</GenerateMapFile>
+      <SubSystem>Windows</SubSystem>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <RandomizedBaseAddress>
+      </RandomizedBaseAddress>
+      <FixedBaseAddress>
+      </FixedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>xptheme.bin;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
+    <Xdcmake>
+      <OutputFile>$(TargetDir)\tmp\$(TargetName).xml</OutputFile>
+    </Xdcmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug_GL|Win32'">
+    <PreBuildEvent>
+      <Message>Pre-build scripts</Message>
+      <Command>"C:\Program Files\TortoiseSVN\bin\SubWCRev.exe" . BT_SVNRevision.txt BT_SVNRevision.h
+"$(SolutionDir)\bin\make" -f "$(SolutionDir)\MOC_Makefile"
+"$(ProjectDir)LUpdateString\lupdate.exe" -log "$(ProjectDir)LUpdateString\unwrapped_strings.txt" "$(ProjectDir)LUpdateString\BumpTop_strings.pro"
+python "$(SolutionDir)\bin\processJavaScriptSources.py"
+python "$(SolutionDir)\bin\processHtmlSources.py"
+</Command>
+    </PreBuildEvent>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <Midl>
+      <TypeLibraryName>.\..\..\..\Bin\win32/SampleBoxes.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>/Zm225 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.;Doors\;Includes\;Includes\Adp;Includes\Devil;Includes\Novodex\Foundation;Includes\Novodex\Graphics;Includes\Novodex\Physics;Includes\GLUT;Includes\WML;Includes\EPSLite;Includes\TinyXML;Includes\Boost_1_40;Includes\GLEW;Includes\JSON;Includes\QtIncludes\include;Includes\QtIncludes\include\QtCore;Includes\QtIncludes\QtWinMigrate;Includes\protobuf;C:\Program Files\Microsoft Visual Studio 8\VC\atlmfc\src\mfc;C:\Program Files\SMARTBoardSDK\DLL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>VIP_VERSION;BT_PRO;WIN32;_DEBUG;_CONSOLE;BTDEBUG;BUMPTOP;ENABLE_WEBKIT;QT_TEXT_RENDERING;_BIND_TO_CURRENT_VCLIBS_VERSION=1;WIN7LIBRARIES;_HAS_CPP0X=0;BOOST_NO_0X_HDR_TYPEINDEX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>BT_Common.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>.\Debug\tmp\BumpTop.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>
+      </AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <BrowseInformation>
+      </BrowseInformation>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+      <DisableSpecificWarnings>4018;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>VIP_VERSION;BT_PRO;TABLE;VIP_VERSION;TABLE;VIP_VERSION;TABLE;VIP_VERSION;TABLE;VIP_VERSION;TABLE;VIP_VERSION;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <ResourceOutputFileName>$(IntDir)tmp/%(Filename).res</ResourceOutputFileName>
+    </ResourceCompile>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
+    </ProjectReference>
+    <Link>
+      <AdditionalDependencies>Comctl32.lib;DevIL.lib;epslite.lib;gdiplus.lib;glew32d.lib;glu32.lib;gtestd.lib;ilu.lib;ilut.lib;iphlpapi.lib;libjson_mt.lib;libprotobuf.lib;newmat.lib;NxFoundation.lib;NxPhysics.lib;opengl32.lib;Psapi.lib;QtCored4.lib;Urlmon.lib;usp10.lib;winhttp.lib;winmm.lib;wldap32.lib;ws2_32.lib;Wtsapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(SolutionDir)\$(Configuration)\$(ProjectName).exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>C:\Program Files\SMARTBoardSDK\DLL\lib;Libraries\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>.\Debug\SampleBoxesDEBUG.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <FixedBaseAddress>false</FixedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>xptheme.bin;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
+    <Xdcmake>
+      <OutputFile>$(TargetDir)\tmp\$(TargetName).xml</OutputFile>
+    </Xdcmake>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PreBuildEvent>
+      <Message>Pre-build scripts</Message>
+      <Command>"C:\Program Files\TortoiseSVN\bin\SubWCRev.exe" . BT_SVNRevision.txt BT_SVNRevision.h
+"$(SolutionDir)\bin\make" -f "$(SolutionDir)\MOC_Makefile"
+"$(ProjectDir)LUpdateString\lupdate.exe" -log "$(ProjectDir)LUpdateString\unwrapped_strings.txt" "$(ProjectDir)LUpdateString\BumpTop_strings.pro"
+python "$(SolutionDir)\bin\processJavaScriptSources.py"
+python "$(SolutionDir)\bin\processHtmlSources.py"
+python "$(SolutionDir)\bin\mergeWebStringsIntoTS.py"
+</Command>
+    </PreBuildEvent>
+    <CustomBuildStep>
+      <Command>
+      </Command>
+    </CustomBuildStep>
+    <Midl>
+      <TypeLibraryName>.\..\..\..\Bin\win32/SampleBoxes.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>/Zm225 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.;Doors\;Includes\;Includes\Adp;Includes\Devil;Includes\Novodex\Foundation;Includes\Novodex\Graphics;Includes\Novodex\Physics;Includes\GLUT;Includes\WML;Includes\EPSLite;Includes\TinyXML;Includes\Boost;Includes\GLEW;Includes\JSON;Includes\QtIncludes\include;Includes\QtIncludes\include\QtCore;Includes\QtIncludes\QtWinMigrate;Includes\protobuf;C:\Program Files\Microsoft Visual Studio 8\VC\atlmfc\src\mfc;C:\Program Files\SMARTBoardSDK\DLL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>VIP_VERSION;BT_PRO;WIN32;_DEBUG;_CONSOLE;BTDEBUG;BUMPTOP;DXRENDER;ENABLE_WEBKIT;QT_TEXT_RENDERING;_BIND_TO_CURRENT_VCLIBS_VERSION=1;WIN7LIBRARIES;_HAS_CPP0X=0;BOOST_NO_0X_HDR_TYPEINDEX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>BT_Common.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)BumpTop.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>
+      </AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)</ProgramDataBaseFileName>
+      <BrowseInformation>
+      </BrowseInformation>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+      <DisableSpecificWarnings>4018;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>VIP_VERSION;BT_PRO;TABLE;VIP_VERSION;TABLE;VIP_VERSION;TABLE;VIP_VERSION;TABLE;VIP_VERSION;TABLE;VIP_VERSION;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <ResourceOutputFileName>$(IntDir)tmp/%(Filename).res</ResourceOutputFileName>
+    </ResourceCompile>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
+    </ProjectReference>
+    <Link>
+      <AdditionalOptions>/STACK:4194304 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>Comctl32.lib;DevIL.lib;DirectoryChanges.lib;gdiplus.lib;gtestd.lib;ilu.lib;ilut.lib;iphlpapi.lib;libjson_mt.lib;libprotobuf.lib;newmat.lib;NxFoundation.lib;NxPhysics.lib;Psapi.lib;QtCored4.lib;Shlwapi.lib;Urlmon.lib;usp10.lib;winhttp.lib;winmm.lib;wldap32.lib;ws2_32.lib;Wtsapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(SolutionDir)\$(Configuration)\$(ProjectName).exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>C:\Program Files\SMARTBoardSDK\DLL\lib;Libraries\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(TargetDir)$(TargetName).pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <FixedBaseAddress>false</FixedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>xptheme.bin;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
+    <Xdcmake>
+      <OutputFile>$(TargetDir)\tmp\$(TargetName).xml</OutputFile>
+    </Xdcmake>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <PreBuildEvent>
+      <Message>Pre-build scripts</Message>
+      <Command>"C:\Program Files\TortoiseSVN\bin\SubWCRev.exe" . BT_SVNRevision.txt BT_SVNRevision.h
+"$(SolutionDir)\bin\make" -f "$(SolutionDir)\MOC_Makefile"
+"$(SolutionDir)\bin\protoc" --proto_path="$(SolutionDir)\ProtoBuf" --cpp_out="$(SolutionDir)\" "$(SolutionDir)\ProtoBuf\*.proto"
+"$(ProjectDir)LUpdateString\lupdate.exe" -log "$(ProjectDir)LUpdateString\unwrapped_strings.txt" "$(ProjectDir)LUpdateString\BumpTop_strings.pro"
+python "$(SolutionDir)\bin\processJavaScriptSources.py"
+python "$(SolutionDir)\bin\processHtmlSources.py"
+</Command>
+    </PreBuildEvent>
+    <Midl>
+      <TypeLibraryName>.\..\..\..\Bin\win32/SampleBoxes.tlb</TypeLibraryName>
+      <HeaderFileName>
+      </HeaderFileName>
+    </Midl>
+    <ClCompile>
+      <AdditionalOptions>/MP2 /Zm195 %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>.;Doors\;Includes\;Includes\Adp;Includes\Devil;Includes\Novodex\Foundation;Includes\Novodex\Graphics;Includes\Novodex\Physics;Includes\GLUT;Includes\WML;Includes\EPSLite;Includes\TinyXML;Includes\Boost_1_40;Includes\GLEW;Includes\JSON;Includes\QtIncludes\include;Includes\QtIncludes\include\QtCore;Includes\QtIncludes\QtWinMigrate;Includes\protobuf;C:\Program Files\Microsoft Visual Studio 8\VC\atlmfc\src\mfc;C:\Program Files\SMARTBoardSDK\DLL\include;%DXSDK_DIR%Utilities\Bin\x86;%DXSDK_DIR%Include;%DXSDK_DIR%Utilities\Bin\x64;C:\Program Files (x86)\Microsoft DirectX SDK (March 2009)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>VIP_VERSION;BT_PRO;WIN32;NDEBUG;_CONSOLE;BUMPTOP;DXRENDER;ENABLE_WEBKIT;QT_TEXT_RENDERING;_BIND_TO_CURRENT_VCLIBS_VERSION=1;WIN7LIBRARIES;_HAS_CPP0X=0;BOOST_NO_0X_HDR_TYPEINDEX;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>false</MinimalRebuild>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>BT_Common.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)BumpTop.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>
+      </AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(OutDir)</ProgramDataBaseFileName>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>VIP_VERSION;BT_PRO;TABLE;VIP_VERSION;TABLE;VIP_VERSION;TABLE;VIP_VERSION;TABLE;VIP_VERSION;TABLE;VIP_VERSION;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
+    </ProjectReference>
+    <Link>
+      <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>Comctl32.lib;DevIL.lib;gdiplus.lib;gtest.lib;ILU.lib;ILUT.lib;iphlpapi.lib;libjson_mt.lib;libprotobuf.lib;newmat.lib;NxFoundation.lib;NxPhysics.lib;Psapi.lib;QtCore4.lib;QtGui4.lib;QtNetwork4.lib;QtWebKit4.lib;Shlwapi.lib;Urlmon.lib;usp10.lib;winhttp.lib;winmm.lib;wldap32.lib;ws2_32.lib;Wtsapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(SolutionDir)\$(Configuration)\$(ProjectName).exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>Libraries\Release;C:\Program Files (x86)\Microsoft DirectX SDK (March 2009)\Lib\x86;%DXSDK_DIR%Lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateMapFile>false</GenerateMapFile>
+      <SubSystem>Windows</SubSystem>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <RandomizedBaseAddress>
+      </RandomizedBaseAddress>
+      <FixedBaseAddress>
+      </FixedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>xptheme.bin;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
+    <Xdcmake>
+      <OutputFile>$(TargetDir)\tmp\$(TargetName).xml</OutputFile>
+    </Xdcmake>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="BT_Common.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug_GL|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_GL|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="BT_EllipsisMenu.cpp" />
+    <ClCompile Include="BT_LassoMenu.cpp" />
+    <ClCompile Include="BT_LeafForwardMenuActionCustomizer.cpp" />
+    <ClCompile Include="BT_LibrariesMenuActionCustomizer.cpp" />
+    <ClCompile Include="BT_LibrarySubMenuActionCustomizer.cpp" />
+    <ClCompile Include="BT_MarkingMenu.cpp" />
+    <ClCompile Include="BT_MenuAction.cpp" />
+    <ClCompile Include="BT_MenuActionManager.cpp" />
+    <ClCompile Include="BT_PileBreakMenuActionCustomizer.cpp" />
+    <ClCompile Include="BT_PopupMenuActionCustomizer.cpp" />
+    <ClCompile Include="BT_Selection.cpp" />
+    <ClCompile Include="BT_StackIcon.cpp" />
+    <ClCompile Include="BT_StickyNoteMenuActionCustomizer.cpp" />
+    <ClCompile Include="BT_CameraPanGesture.cpp" />
+    <ClCompile Include="BT_CameraZoomGesture.cpp" />
+    <ClCompile Include="BT_FanOutGesture.cpp" />
+    <ClCompile Include="BT_Gesture.cpp" />
+    <ClCompile Include="BT_GestureContext.cpp" />
+    <ClCompile Include="BT_KeyboardHandler.cpp" />
+    <ClCompile Include="BT_KeyCombo.cpp" />
+    <ClCompile Include="BT_LeafingGesture.cpp" />
+    <ClCompile Include="BT_ManipulationEventSink.cpp" />
+    <ClCompile Include="BT_MouseEventHandler.cpp" />
+    <ClCompile Include="BT_MousePointer.cpp" />
+    <ClCompile Include="BT_Path.cpp" />
+    <ClCompile Include="BT_PhotoCropGesture.cpp" />
+    <ClCompile Include="BT_PinchZoomGesture.cpp" />
+    <ClCompile Include="BT_PullDownWallsGesture.cpp" />
+    <ClCompile Include="BT_RightClickGesture.cpp" />
+    <ClCompile Include="BT_RotateDesktopGesture.cpp" />
+    <ClCompile Include="BT_ScrunchGesture.cpp" />
+    <ClCompile Include="BT_ShoveGesture.cpp" />
+    <ClCompile Include="BT_TapZoomGesture.cpp" />
+    <ClCompile Include="BT_TouchPoint.cpp" />
+    <ClCompile Include="BT_Authorization.cpp" />
+    <ClCompile Include="BT_AutomatedDemo.cpp" />
+    <ClCompile Include="BT_AutomatedJSONTesting.cpp" />
+    <ClCompile Include="BT_AutomatedTests.cpp" />
+    <ClCompile Include="BT_AutomatedTradeshowDemo.cpp" />
+    <ClCompile Include="BT_CommonFiniteStates.cpp" />
+    <ClCompile Include="BT_FacebookWidgetJavaScriptAPI.cpp" />
+    <ClCompile Include="BT_Find.cpp" />
+    <ClCompile Include="BT_FiniteStateMachine.cpp" />
+    <ClCompile Include="BT_JavaScriptAPI.cpp" />
+    <ClCompile Include="BT_LibraryOverlay.cpp" />
+    <ClCompile Include="BT_NovodexOutputStream.cpp" />
+    <ClCompile Include="BT_PbPersistenceHelpers.cpp" />
+    <ClCompile Include="BT_Profiler.cpp" />
+    <ClCompile Include="BT_QtUtil.cpp" />
+    <ClCompile Include="BT_Rename.cpp" />
+    <ClCompile Include="BT_Settings.cpp" />
+    <ClCompile Include="BT_SharingFlyout.cpp" />
+    <ClCompile Include="BT_SpinnerWidget.cpp" />
+    <ClCompile Include="BT_ThreadableUnit.cpp" />
+    <ClCompile Include="BT_Training.cpp" />
+    <ClCompile Include="BT_UndoStack.cpp" />
+    <ClCompile Include="BT_Util.cpp" />
+    <ClCompile Include="BT_WebPage.cpp" />
+    <ClCompile Include="BumpTop.cpp" />
+    <ClCompile Include="BT_ChooseVersionDialog.cpp" />
+    <ClCompile Include="BT_CrashDialog.cpp" />
+    <ClCompile Include="BT_DesktopLock.cpp" />
+    <ClCompile Include="BT_DesktopLockTest.cpp" />
+    <ClCompile Include="BT_DragDrop.cpp" />
+    <ClCompile Include="BT_DragHandler.cpp" />
+    <ClCompile Include="BT_DropHandler.cpp" />
+    <ClCompile Include="BT_ExplorerAliveChecker.cpp" />
+    <ClCompile Include="BT_HoverControl.cpp" />
+    <ClCompile Include="BT_Library.cpp" />
+    <ClCompile Include="BT_PhotoFrameDialog.cpp" />
+    <ClCompile Include="BT_ProxySettings.cpp" />
+    <ClCompile Include="BT_ProxySettingsTest.cpp" />
+    <ClCompile Include="BT_SettingsAppMessageHandler.cpp" />
+    <ClCompile Include="BT_SystemTray.cpp" />
+    <ClCompile Include="BT_ThankYouDialog.cpp" />
+    <ClCompile Include="BT_Timer.cpp" />
+    <ClCompile Include="BT_VistaFileOperation.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug_GL|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_GL|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="BT_Windows7Multitouch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug_GL|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="BT_WindowsHelper.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug_GL|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_GL|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="BT_WindowsOS.cpp" />
+    <ClCompile Include="BT_AnimationManager.cpp" />
+    <ClCompile Include="BT_DialogManager.cpp" />
+    <ClCompile Include="BT_EventManager.cpp" />
+    <ClCompile Include="BT_FileSystemManager.cpp" />
+    <ClCompile Include="BT_FileTransferManager.cpp" />
+    <ClCompile Include="BT_GestureManager.cpp" />
+    <ClCompile Include="BT_KeyboardManager.cpp" />
+    <ClCompile Include="BT_LegacyPersistenceManager.cpp" />
+    <ClCompile Include="BT_LibraryManager.cpp" />
+    <ClCompile Include="BT_Logger.cpp" />
+    <ClCompile Include="BT_MouseEventManager.cpp" />
+    <ClCompile Include="BT_MultipleMice.cpp" />
+    <ClCompile Include="BT_PbPersistenceManager.cpp" />
+    <ClCompile Include="BT_RenderManager.cpp" />
+    <ClCompile Include="BT_RepositionManager.cpp" />
+    <ClCompile Include="BT_SceneManager.cpp" />
+    <ClCompile Include="BT_SmartBoard.cpp" />
+    <ClCompile Include="BT_StatsManager.cpp" />
+    <ClCompile Include="BT_StatsManagerTest.cpp" />
+    <ClCompile Include="BT_TextManager.cpp" />
+    <ClCompile Include="BT_ThemeManager.cpp" />
+    <ClCompile Include="BT_WidgetManager.cpp" />
+    <ClCompile Include="BT_AnimatedTextureSource.cpp" />
+    <ClCompile Include="BT_GLTextureManager.cpp" />
+    <ClCompile Include="BT_GLTextureObject.cpp" />
+    <ClCompile Include="BT_TexHelperManager.cpp" />
+    <ClCompile Include="BT_Actor.cpp" />
+    <ClCompile Include="BT_BumpObject.cpp" />
+    <ClCompile Include="BT_CustomActor.cpp" />
+    <ClCompile Include="BT_FileSystemActor.cpp" />
+    <ClCompile Include="BT_FileSystemActorFactory.cpp" />
+    <ClCompile Include="BT_FileSystemPile.cpp" />
+    <ClCompile Include="BT_FlickrPhotoFrameSource.cpp" />
+    <ClCompile Include="BT_LocalPhotoFrameSource.cpp" />
+    <ClCompile Include="BT_ObjectType.cpp" />
+    <ClCompile Include="BT_PhotoFrameActor.cpp" />
+    <ClCompile Include="BT_PhotoFrameSource.cpp" />
+    <ClCompile Include="BT_PhotoFrameSourceItem.cpp" />
+    <ClCompile Include="BT_Pile.cpp" />
+    <ClCompile Include="BT_RSSPhotoFrameSource.cpp" />
+    <ClCompile Include="BT_StickyNoteActor.cpp" />
+    <ClCompile Include="BT_WebActor.cpp" />
+    <ClCompile Include="BT_WebThumbnailActor.cpp" />
+    <ClCompile Include="BT_Animatable.cpp" />
+    <ClCompile Include="BT_AnimationEntry.cpp" />
+    <ClCompile Include="BT_DragObject.cpp" />
+    <ClCompile Include="BT_DropDownMenu.cpp" />
+    <ClCompile Include="BT_DropObject.cpp" />
+    <ClCompile Include="BT_LaunchTarget.cpp" />
+    <ClCompile Include="BT_Nameable.cpp" />
+    <ClCompile Include="BT_NxActorWrapper.cpp" />
+    <ClCompile Include="BT_OverlayComponent.cpp" />
+    <ClCompile Include="BT_OverlayEvent.cpp" />
+    <ClCompile Include="BT_RaycastReports.cpp" />
+    <ClCompile Include="BT_Renderable.cpp" />
+    <ClCompile Include="BT_Replayable.cpp" />
+    <ClCompile Include="BT_Selectable.cpp" />
+    <ClCompile Include="BT_TossTarget.cpp" />
+    <ClCompile Include="BT_Watchable.cpp" />
+    <ClCompile Include="BT_WatchedObjects.cpp" />
+    <ClCompile Include="BackgroundPixmapBuffer.cpp" />
+    <ClCompile Include="BlitzBlur.cpp" />
+    <ClCompile Include="DelayedDirectoryChangeHandler.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="DirectoryChanges.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="EnumProc.cpp" />
+    <ClCompile Include="FacebookClient.cpp" />
+    <ClCompile Include="FlickrClient.cpp" />
+    <ClCompile Include="NetworkAccessManager.cpp" />
+    <ClCompile Include="OAuthClient.cpp" />
+    <ClCompile Include="TextPixmapBuffer.cpp" />
+    <ClCompile Include="TwitterClient.cpp" />
+    <ClCompile Include="BT_TestCommon.cpp" />
+    <ClCompile Include="BT_TestKeyboardManager.cpp" />
+    <ClCompile Include="BT_TestPhotoFrameActor.cpp" />
+    <ClCompile Include="BT_MockFileTransferEventHandler.cpp" />
+    <ClCompile Include="BT_MockKeyboardEventHandler.cpp" />
+    <ClCompile Include="BT_AutomatedTest.cpp" />
+    <ClCompile Include="BT_BumpTopDXRender.cpp" />
+    <ClCompile Include="BT_Camera.cpp" />
+    <ClCompile Include="BT_DXRender.cpp" />
+    <ClCompile Include="BT_FontManager.cpp" />
+    <ClCompile Include="BT_Mesh.cpp" />
+    <ClCompile Include="BT_SlideShow.cpp" />
+    <ClCompile Include="BT_VideoRender.cpp" />
+    <ClCompile Include="ShapeVis.cpp" />
+    <ClCompile Include="BT_UpdateInstaller.cpp" />
+    <ClCompile Include="BT_UpdateInstallerTest.cpp" />
+    <ClCompile Include="BT_Updater.cpp" />
+    <ClCompile Include="BT_UpdaterTest.cpp" />
+    <ClCompile Include="BT_UpdateServer.cpp" />
+    <ClCompile Include="BT_UpdateServerTest.cpp" />
+    <ClCompile Include="BumpTop.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug_GL|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_GL|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Nx.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug_GL|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_GL|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="PhotoFrameSource.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug_GL|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release_GL|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="BT_CustomizeWizard.cpp" />
+    <ClCompile Include="BT_CustomQLineEdit.cpp" />
+    <ClCompile Include="BT_FacebookWizard.cpp" />
+    <ClCompile Include="BT_Flyout.cpp" />
+    <ClCompile Include="BT_Box2.cpp" />
+    <ClCompile Include="BT_Bubbles.cpp" />
+    <ClCompile Include="BT_Cluster.cpp" />
+    <ClCompile Include="BT_ClusterItem.cpp" />
+    <ClCompile Include="BT_QuadNode.cpp" />
+    <ClCompile Include="Delaunay.cpp" />
+    <ClCompile Include="Test_FlickrClient.cpp" />
+    <ClCompile Include="Tests\Test_Gestures.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Textures\bumptop.ico" />
+    <None Include="BT_Actor.inl" />
+    <None Include="BT_BumpObject.inl" />
+    <None Include="BT_Pile.inl" />
+    <None Include="BT_Animatable.inl" />
+    <None Include="BT_AnimationEntry.inl" />
+    <None Include="BT_BitmapPixelBuffer.inl" />
+    <None Include="BT_Nameable.inl" />
+    <None Include="BT_NxActorWrapper.inl" />
+    <None Include="BT_Renderable.inl" />
+    <None Include="BT_Singleton.inl" />
+    <None Include="BT_WatchableEvent.inl" />
+    <None Include="BT_ColorVal.inl" />
+    <None Include="BT_FontManager.inl" />
+    <None Include="BT_Selection.inl" />
+    <None Include="BT_GLTextureManager.inl" />
+    <None Include="BT_RenderManager.inl" />
+    <None Include="BT_SceneManager.inl" />
+    <None Include="BT_ActorUndoData.inl" />
+    <None Include="BT_UndoStackEntry.inl" />
+    <None Include="BT_Util.inl" />
+    <None Include="BT_Timer.inl" />
+    <None Include="Textures\bt_activate.bmp" />
+    <None Include="Textures\bt_activate_disabled.bmp" />
+    <None Include="Textures\bt_activate_hover.bmp" />
+    <None Include="Textures\bt_auth_header.bmp" />
+    <None Include="Textures\bt_choose_version.bmp" />
+    <None Include="Textures\bt_get_pro.bmp" />
+    <None Include="Textures\bt_get_pro_hover.bmp" />
+    <None Include="Textures\bt_no_problem.bmp" />
+    <None Include="Textures\bt_no_problem_hover.bmp" />
+    <None Include="Textures\bt_other_goodness.bmp" />
+    <None Include="Textures\bt_thank_you.bmp" />
+    <None Include="Textures\bt_use_free.bmp" />
+    <None Include="Textures\bt_use_free_hover.bmp" />
+    <None Include="Textures\personalize.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="InputDialog.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BT_Common.h" />
+    <ClInclude Include="DelayedDirectoryChangeHandler.h" />
+    <ClInclude Include="DirectoryChanges.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="BT_EllipsisMenu.h" />
+    <ClInclude Include="BT_LassoMenu.h" />
+    <ClInclude Include="BT_LeafForwardMenuActionCustomizer.h" />
+    <ClInclude Include="BT_LibrariesMenuActionCustomizer.h" />
+    <ClInclude Include="BT_LibrarySubMenuActionCustomizer.h" />
+    <ClInclude Include="BT_MarkingMenu.h" />
+    <ClInclude Include="BT_MenuAction.h" />
+    <ClInclude Include="BT_MenuActionCustomizer.h" />
+    <ClInclude Include="BT_MenuActionManager.h" />
+    <ClInclude Include="BT_PileBreakMenuActionCustomizer.h" />
+    <ClInclude Include="BT_PopupMenuActionCustomizer.h" />
+    <ClInclude Include="BT_Selection.h" />
+    <ClInclude Include="BT_StackIcon.h" />
+    <ClInclude Include="BT_StickyNoteMenuActionCustomizer.h" />
+    <ClInclude Include="BT_CameraPanGesture.h" />
+    <ClInclude Include="BT_CameraZoomGesture.h" />
+    <ClInclude Include="BT_FanOutGesture.h" />
+    <ClInclude Include="BT_Gesture.h" />
+    <ClInclude Include="BT_GestureContext.h" />
+    <ClInclude Include="BT_KeyboardHandler.h" />
+    <ClInclude Include="BT_KeyCombo.h" />
+    <ClInclude Include="BT_LeafingGesture.h" />
+    <ClInclude Include="BT_Manipulation.h" />
+    <ClInclude Include="BT_ManipulationEventSink.h" />
+    <ClInclude Include="BT_MouseEventHandler.h" />
+    <ClInclude Include="BT_MousePointer.h" />
+    <ClInclude Include="BT_Path.h" />
+    <ClInclude Include="BT_PhotoCropGesture.h" />
+    <ClInclude Include="BT_PinchZoomGesture.h" />
+    <ClInclude Include="BT_PullDownWallsGesture.h" />
+    <ClInclude Include="BT_RightClickGesture.h" />
+    <ClInclude Include="BT_RotateDesktopGesture.h" />
+    <ClInclude Include="BT_ScrunchGesture.h" />
+    <ClInclude Include="BT_ShoveGesture.h" />
+    <ClInclude Include="BT_TapZoomGesture.h" />
+    <ClInclude Include="BT_TouchPoint.h" />
+    <ClInclude Include="BT_Camera.h" />
+    <ClInclude Include="BT_ColorVal.h" />
+    <ClInclude Include="BT_DXRender.h" />
+    <ClInclude Include="BT_FontManager.h" />
+    <ClInclude Include="BT_Mesh.h" />
+    <ClInclude Include="BT_SlideShow.h" />
+    <ClInclude Include="BT_Vertex.h" />
+    <ClInclude Include="BT_VideoRender.h" />
+    <ClInclude Include="ShapeVis.h" />
+    <ClInclude Include="BT_ChooseVersionDialog.h" />
+    <ClInclude Include="BT_CrashDialog.h" />
+    <ClInclude Include="BT_DesktopLock.h" />
+    <ClInclude Include="BT_DesktopLockTest.h" />
+    <ClInclude Include="BT_DragDrop.h" />
+    <ClInclude Include="BT_DragHandler.h" />
+    <ClInclude Include="BT_DropHandler.h" />
+    <ClInclude Include="BT_ExplorerAliveChecker.H" />
+    <ClInclude Include="BT_HoverControl.h" />
+    <ClInclude Include="BT_Library.h" />
+    <ClInclude Include="BT_PhotoFrameDialog.h" />
+    <ClInclude Include="BT_ProxySettings.h" />
+    <ClInclude Include="BT_ProxySettingsTest.h" />
+    <ClInclude Include="BT_SettingsAppMessageHandler.h" />
+    <ClInclude Include="BT_SystemTray.h" />
+    <ClInclude Include="BT_ThankYouDialog.h" />
+    <ClInclude Include="BT_Timer.h" />
+    <ClInclude Include="BT_VistaFileOperation.h" />
+    <ClInclude Include="BT_Windows7CommonControlsOverride.h" />
+    <ClInclude Include="BT_Windows7Multitouch.h" />
+    <ClInclude Include="BT_Windows7User32Override.h" />
+    <ClInclude Include="BT_WindowsHelper.h" />
+    <ClInclude Include="BT_WindowsOS.h" />
+    <ClInclude Include="BT_Animatable.h" />
+    <ClInclude Include="BT_AnimationEntry.h" />
+    <ClInclude Include="BT_BitmapPixelBufffer.h" />
+    <ClInclude Include="BT_DragObject.h" />
+    <ClInclude Include="BT_DropDownMenu.h" />
+    <ClInclude Include="BT_DropObject.h" />
+    <ClInclude Include="BT_LaunchTarget.h" />
+    <ClInclude Include="BT_Nameable.h" />
+    <ClInclude Include="BT_NxActorWrapper.h" />
+    <ClInclude Include="BT_OverlayComponent.h" />
+    <ClInclude Include="BT_OverlayEvent.h" />
+    <ClInclude Include="BT_RaycastReports.h" />
+    <ClInclude Include="BT_Renderable.h" />
+    <ClInclude Include="BT_Replayable.h" />
+    <ClInclude Include="BT_Selectable.h" />
+    <ClInclude Include="BT_Singleton.h" />
+    <ClInclude Include="BT_TossTarget.h" />
+    <ClInclude Include="BT_Watchable.h" />
+    <ClInclude Include="BT_WatchableEvent.h" />
+    <ClInclude Include="BT_WatchedObjects.h" />
+    <ClInclude Include="BT_AnimationManager.h" />
+    <ClInclude Include="BT_DialogManager.h" />
+    <ClInclude Include="BT_EventManager.h" />
+    <ClInclude Include="BT_FileSystemManager.h" />
+    <ClInclude Include="BT_FileTransferManager.h" />
+    <ClInclude Include="BT_GestureManager.h" />
+    <ClInclude Include="BT_KeyboardManager.h" />
+    <ClInclude Include="BT_LegacyPersistenceManager.h" />
+    <ClInclude Include="BT_LibraryManager.h" />
+    <ClInclude Include="BT_Logger.h" />
+    <ClInclude Include="BT_MouseEventManager.h" />
+    <ClInclude Include="BT_MultipleMice.h" />
+    <ClInclude Include="BT_PbPersistenceManager.h" />
+    <ClInclude Include="BT_RenderManager.h" />
+    <ClInclude Include="BT_RepositionManager.h" />
+    <ClInclude Include="BT_SceneManager.h" />
+    <ClInclude Include="BT_SmartBoard.h" />
+    <ClInclude Include="BT_StatsManager.h" />
+    <ClInclude Include="BT_StatsManagerTest.h" />
+    <ClInclude Include="BT_TextManager.h" />
+    <ClInclude Include="BT_ThemeManager.h" />
+    <ClInclude Include="BT_WidgetManager.h" />
+    <ClInclude Include="BT_AnimatedTextureSource.h" />
+    <ClInclude Include="BT_GLTextureManager.h" />
+    <ClInclude Include="BT_GLTextureObject.h" />
+    <ClInclude Include="BT_TexHelperManager.h" />
+    <ClInclude Include="TexHelperResponse.h" />
+    <ClInclude Include="BT_Actor.h" />
+    <ClInclude Include="BT_BumpObject.h" />
+    <ClInclude Include="BT_CustomActor.h" />
+    <ClInclude Include="BT_FileSystemActor.h" />
+    <ClInclude Include="BT_FileSystemActorFactory.h" />
+    <ClInclude Include="BT_FileSystemPile.h" />
+    <ClInclude Include="BT_FlickrPhotoFrameSource.h" />
+    <ClInclude Include="BT_LocalPhotoFrameSource.h" />
+    <ClInclude Include="BT_ObjectType.h" />
+    <ClInclude Include="BT_PhotoFrameActor.h" />
+    <ClInclude Include="BT_PhotoFrameSource.h" />
+    <ClInclude Include="BT_PhotoFrameSourceItem.h" />
+    <ClInclude Include="BT_Pile.h" />
+    <ClInclude Include="BT_RSSPhotoFrameSource.h" />
+    <ClInclude Include="BT_StickyNoteActor.h" />
+    <ClInclude Include="BT_WebActor.h" />
+    <ClInclude Include="BT_WebThumbnailActor.h" />
+    <ClInclude Include="BackgroundPixmapBuffer.h" />
+    <ClInclude Include="BlitzBlur.h" />
+    <ClInclude Include="EnumProc.h" />
+    <ClInclude Include="FacebookClient.h" />
+    <ClInclude Include="FlickrClient.h" />
+    <ClInclude Include="NetworkAccessManager.h" />
+    <ClInclude Include="OAuthClient.h" />
+    <ClInclude Include="TextPixmapBuffer.h" />
+    <ClInclude Include="TwitterClient.h" />
+    <ClInclude Include="VC_Manifest.h" />
+    <ClInclude Include="BT_ActorUndoData.h" />
+    <ClInclude Include="BT_Authorization.h" />
+    <ClInclude Include="BT_AutomatedDemo.h" />
+    <ClInclude Include="BT_AutomatedJSONTesting.h" />
+    <ClInclude Include="BT_AutomatedTests.h" />
+    <ClInclude Include="BT_AutomatedTradeshowDemo.h" />
+    <ClInclude Include="BT_CommonFiniteStates.h" />
+    <ClInclude Include="BT_FacebookWidgetJavaScriptAPI.h" />
+    <ClInclude Include="BT_Find.h" />
+    <ClInclude Include="BT_FiniteStateMachine.h" />
+    <ClInclude Include="BT_JavaScriptAPI.h" />
+    <ClInclude Include="BT_LibraryOverlay.h" />
+    <ClInclude Include="BT_Macros.h" />
+    <ClInclude Include="BT_NovodexOutputStream.h" />
+    <ClInclude Include="BT_PbPersistenceHelpers.h" />
+    <ClInclude Include="BT_Profiler.h" />
+    <ClInclude Include="BT_QtUtil.h" />
+    <ClInclude Include="BT_Rename.h" />
+    <ClInclude Include="BT_Settings.h" />
+    <ClInclude Include="BT_SpinnerWidget.h" />
+    <ClInclude Include="BT_Struct.h" />
+    <ClInclude Include="BT_ThreadableUnit.h" />
+    <ClInclude Include="BT_Training.h" />
+    <ClInclude Include="BT_UndoStack.h" />
+    <ClInclude Include="BT_UndoStackEntry.h" />
+    <ClInclude Include="BT_Util.h" />
+    <ClInclude Include="BT_WebPage.h" />
+    <ClInclude Include="BumpTop.h" />
+    <ClInclude Include="BT_TestCommon.h" />
+    <ClInclude Include="BT_TestKeyboardManager.h" />
+    <ClInclude Include="BT_TestPhotoFrameActor.h" />
+    <ClInclude Include="BT_MockFileTransferEventHandler.h" />
+    <ClInclude Include="BT_MockKeyboardEventHandler.h" />
+    <ClInclude Include="BT_ATestGeneral.h" />
+    <ClInclude Include="BT_AutomatedTest.h" />
+    <ClInclude Include="BT_UpdateInstaller.h" />
+    <ClInclude Include="BT_UpdateInstallerTest.h" />
+    <ClInclude Include="BT_Updater.h" />
+    <ClInclude Include="BT_UpdaterTest.h" />
+    <ClInclude Include="BT_UpdateServer.h" />
+    <ClInclude Include="BT_UpdateServerTest.h" />
+    <ClInclude Include="BumpTop.pb.h" />
+    <ClInclude Include="Nx.pb.h" />
+    <ClInclude Include="PhotoFrameSource.pb.h" />
+    <ClInclude Include="BT_CustomizeWizard.h" />
+    <ClInclude Include="BT_CustomQLineEdit.h" />
+    <ClInclude Include="BT_FacebookWizard.h" />
+    <ClInclude Include="BT_Flyout.h" />
+    <ClInclude Include="BT_Box2.h" />
+    <ClInclude Include="BT_Bubbles.h" />
+    <ClInclude Include="BT_Cluster.h" />
+    <ClInclude Include="BT_ClusterItem.h" />
+    <ClInclude Include="BT_QuadNode.h" />
+    <ClInclude Include="Delaunay.h" />
+    <ClInclude Include="BT_SharingFlyout.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="InputDialog.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

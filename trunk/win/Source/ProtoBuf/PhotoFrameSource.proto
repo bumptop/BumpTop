@@ -1,0 +1,39 @@
+// Copyright 2011 Google Inc. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+message PbPhotoFrameSource {
+	optional string current_resource_id			= 1;
+	
+	extensions 100 to 4999;
+}
+message PbRSSPhotoFrameSource {
+	extend PbPhotoFrameSource {
+		optional uint32 ext_min_tag				= 100;
+		optional string feed_url				= 101;
+	}
+}
+message PbLocalPhotoFrameSource {
+	extend PbPhotoFrameSource {
+		optional uint32 ext_min_tag				= 200;
+		optional string file_path				= 201;		
+	}
+}
+message PbFlickrPhotoFrameSource {
+	extend PbPhotoFrameSource {
+		optional uint32 ext_min_tag				= 300;
+		optional string group_id				= 301;
+		optional string tag_id					= 302;
+		optional string user_id					= 303;		
+	}
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{#
+ Copyright 2011 Google Inc. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+#}
+{# 
+This is the main template for all HTML files.
+At template render time, it replaces all translatable strings with specially-
+marked SPANs. Then, the script at the bottom runs at page load and replaces
+all those spans with the translated contents (without the SPAN).
+
+Required parameters:
+	nls_class - the class that the translatable SPANs will have
+	common_js_dir - the directory containing the common JS files
+	
+Blocks:
+	head - for child templates to insert extra stuff into the HEAD
+	body - the main contents of the page, inserted in to the BODY tag
+#}<html lang="en-US">
+<head>
+	<title></title>
+	{# Temporary hack to allow child templates to override the version of jQuery #}
+	{% block jquery_include %}<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>{% endblock %}
+	<script type="text/javascript" src="{{ common_js_dir }}/btutil.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// Translate all the translatable strings in the document
+			$("span.{{ nls_class }}").each(function () {
+				// NOTE: This assumes a globally-defined function named "TR"
+				var translation = TR($(this).html());
+				$(this).removeClass("{{ nls_class }}").html(translation);
+			});
+		});
+	</script>
+	{% block head %}{% endblock %}
+
+	<style type="text/css">
+		span.{{ nls_class }}
+		{
+			background-color: #ff0000;
+		}
+	</style>
+</head>
+<body>
+{% block body %}{% endblock %}
+</body>
+</html>

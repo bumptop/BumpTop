@@ -1,0 +1,204 @@
+// Copyright 2011 Google Inc. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// BumpTop Theme properties
+
+// 
+
+// NOTE: All colors are represented in [Red, Green, Blue, Alpha]
+
+// NOTE: Font familys are a set of fallbacks, which will be tried in
+
+//		 the order specified in the set, defaulting to Arial if none
+
+// 		 of the fonts in the set are found
+
+//
+
+{// Theme header block
+
+   "header" : {
+      "author" : "Electrik Jesus.",
+      "description" : "The executive BumpTop Hi Res desktop theme.",
+      "name" : "executive HiRes Theme", // NOTE: This represents the schema from which this theme file will be validated 
+// 		 against.  This allows BumpTop to add and modify default theme changes as 
+
+// 		 time progresses, and allows theme developers to ensure that their themes 
+
+// 		 work on the latest compatible versions of BumpTop.  Do not change this 
+
+// 		 value, unless your theme conforms to the specified in the value.  
+
+// 		 Please see the theming docs for more information.
+
+      "schema" : "theme/1.0",
+      "url" : "http://www.bumptop.com/themes",
+      "version" : "0.1.1552"
+   }, // Theme textures block
+   "textures" : {
+      "floor" : {// NOTE: the desktop background specified here is only used
+
+// 		 if the user has disabled their own windows background
+
+// 		 (or if there are errors loading their background)
+
+         "desktop" : "Bumptop Wood HiRes bottom.jpg",
+         "infinite" : "floor_infinite.png",
+         "relativeRoot" : "./desktop/"
+      },
+      "icon" : {
+         "custom" : {
+            "email" : "email.png",
+            "printer" : "printer.png", // NOTE: Note the hierarchy, this is relative to the icon relative
+// 		 root path
+
+            "relativeRoot" : "./custom/"
+         },
+         "linkOverlay" : "link_arrow_overlay.png",
+         "relativeRoot" : "./core/icon/",
+         "selection" : {
+            "alphaMask" : "selection_alphaMask.png"
+         }
+      }, // NOTE: the override textures usage depends on whether the user's settings
+// 		 are set to override native os textures
+
+      "override" : {// NOTE: with the exception of folders, you can add an override for any 
+
+// 		 file type by adding an entry below and putting the texture in the
+
+// 		 appropriate folder
+
+         "ext" : {
+            "doc" : "doc.png",
+            "folder" : "folder.png",
+            "pdf" : "pdf.png",
+            "txt" : "txt.png"
+         },
+         "relativeRoot" : "./override/",
+         "virtual" : {
+            "myComputer" : "myComputer.png"
+         }
+      },
+      "pile" : {
+         "background" : "background.png",
+         "relativeRoot" : "./core/pile/"
+      },
+      "relativeRoot" : "./",
+      "slideshow" : {
+         "next" : "next.png",
+         "previous" : "previous.png",
+         "relativeRoot" : "./slideshow/"
+      },
+      "wall" : {// NOTE: all the wall textures will have an AO-baked overlay 
+
+// 		 applied to them unless otherwise specified, to give 
+
+// 		 the desktop a more 3d feel.  If you choose to bake your
+
+// 		 own effects onto your wall textures, disable this setting
+
+// 		 below.
+
+         "allowOverlay" : true,
+         "bottom" : "Bumptop Wood HiRes back.jpg",
+         "left" : "Bumptop Wood HiRes left.jpg",
+         "relativeRoot" : "./desktop/",
+         "right" : "Bumptop Wood HiRes right.jpg",
+         "top" : "Bumptop Wood HiRes front.jpg"
+      },
+      "widget" : {
+         "close" : "close.png",
+         "lassoMenu" : {
+            "dragAndCross" : "dragAndCross.png"
+         },
+         "launchInExplorer" : "launchInExplorer.png",
+         "relativeRoot" : "./widgets/",
+         "scroll" : {
+            "down" : "scrollDown.png",
+            "down_disabled" : "scrollDown_disabled.png",
+            "up" : "scrollUp.png",
+            "up_disabled" : "scrollUp_disabled.png"
+         }
+      }
+   }, // UI theme block
+   "ui" : {
+      "icon" : {
+         "font" : {
+            "background" : {
+               "default" : [ 0, 0, 0, 0 ],
+               "selection" : [ 0, 0, 0, 140 ]
+            }, // NOTE: alpha is ignored for this font color		
+            "color" : [ 255, 255, 255, 255 ],
+            "family" : [ "Arial", "Tahoma" ],
+            "size" : 12
+         },
+         "highlight" : {
+            "color" : {
+				"selection" : [ 255, 255, 255, 140 ],
+				"hover" : 	  [ 110, 140, 215, 220 ],
+				"freshness" : [ 160, 255, 85, 220 ]
+            }
+         }
+      },
+      "lasso" : {
+         "color" : {
+            "border" : {
+               "bottom" : [ 0, 0, 0, 255 ],
+               "top" : [ 255, 255, 255, 77 ]
+            },
+            "overlay" : [ 43, 79, 134, 76 ]
+         }
+      },
+      "markingMenu" : {
+         "color" : {// NOTE: the border alpha is determined by the animated
+
+//  	 alpha of the inner color for now (it is ignored)
+
+            "border" : [ 0, 0, 0, 255 ],
+            "default" : {
+               "inner" : [ 87, 126, 187, 255 ],
+               "outer" : [ 87, 126, 187, 220 ]
+            },
+            "highlight" : {
+               "inner" : [ 108, 151, 217, 255 ],
+               "outer" : [ 108, 151, 217, 220 ]
+            }
+         },
+         "font" : {// NOTE: the font alpha is determined by the menu animation
+
+// 		 and is ignored for both the color and subtext color
+
+            "color" : [ 255, 255, 255, 255 ],
+            "disabledColor" : [ 159, 159, 159, 111 ],
+            "family" : [ "Arial", "Tahoma" ],
+            "size" : 18,
+            "subTextColor" : [ 235, 235, 235, 255 ],
+            "subTextSize" : 12
+         }
+      },
+      "message" : {
+         "color" : {
+            "background" : [ 25, 25, 30, 160 ]
+         },
+         "font" : {// NOTE: the font alpha is determined by the animated alpha
+
+// 		 of the message for now (it is ignored)
+
+            "color" : [ 255, 255, 255, 0 ],
+            "family" : [ "Tahoma", "Arial" ],
+            "size" : 24
+         }
+      }
+   }
+}

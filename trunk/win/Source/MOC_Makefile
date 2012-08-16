@@ -1,0 +1,87 @@
+# Copyright 2011 Google Inc. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# for more info, read http://doc.trolltech.com/4.5.1/moc.html
+
+all: qt_preprocess
+
+MOC=bin/moc
+
+DEFINES=-DENABLE_WEBKIT
+
+qt_preprocess: moc \
+	moc/moc_BT_WebPage.cpp \
+	moc/moc_BT_WebActor.cpp \
+	moc/moc_BT_WebThumbnailActor.cpp \
+	moc/moc_BT_FacebookWidgetJavaScriptAPI.cpp \
+	moc/moc_BT_JavaScriptAPI.cpp \
+	moc/moc_NetworkAccessManager.cpp \
+	moc/moc_BT_CustomizeWizard.cpp \
+	moc/moc_BT_FacebookWizard.cpp \
+	moc/moc_BT_SpinnerWidget.cpp \
+	moc/moc_BT_SharingFlyout.cpp \
+	moc/moc_BT_Rename.cpp \
+	moc/moc_BT_CustomQLineEdit.cpp \
+	moc/moc_BT_StickyNoteActor.cpp \
+	moc/moc_BT_Flyout.cpp \
+	moc/moc_BT_FileTransferManager.cpp \ 
+	
+moc:
+	mkdir moc
+	
+moc/moc_BT_WebPage.cpp: BT_WebPage.h
+	$(MOC) $(DEFINES) $< -o $@
+	
+moc/moc_BT_WebActor.cpp: BT_WebActor.h
+	$(MOC) $(DEFINES) $< -o $@
+		
+moc/moc_BT_WebThumbnailActor.cpp: BT_WebThumbnailActor.h
+	$(MOC) $(DEFINES) $< -o $@
+
+moc/moc_BT_FacebookWidgetJavaScriptAPI.cpp: BT_FacebookWidgetJavaScriptAPI.h
+	$(MOC) $(DEFINES) $< -o $@
+
+moc/moc_BT_JavaScriptAPI.cpp: BT_JavaScriptAPI.h
+	$(MOC) $(DEFINES) $< -o $@
+
+moc/moc_NetworkAccessManager.cpp: NetworkAccessManager.h
+	$(MOC) $(DEFINES) $< -o $@
+
+moc/moc_BT_CustomizeWizard.cpp: BT_CustomizeWizard.h
+	$(MOC) $(DEFINES) $< -o $@
+	
+moc/moc_BT_FacebookWizard.cpp: BT_FacebookWizard.h
+	$(MOC) $(DEFINES) $< -o $@
+
+moc/moc_BT_SpinnerWidget.cpp: BT_SpinnerWidget.h
+	$(MOC) $(DEFINES) $< -o $@
+	
+moc/moc_BT_SharingFlyout.cpp: BT_SharingFlyout.h
+	$(MOC) $(DEFINES) $< -o $@
+
+moc/moc_BT_Rename.cpp: BT_Rename.h
+	$(MOC) $(DEFINES) $< -o $@
+	
+moc/moc_BT_CustomQLineEdit.cpp: BT_CustomQLineEdit.h
+	$(MOC) $(DEFINES) $< -o $@
+	
+moc/moc_BT_StickyNoteActor.cpp: BT_StickyNoteActor.h
+	$(MOC) $(DEFINES) $< -o $@
+
+moc/moc_BT_Flyout.cpp: BT_Flyout.h
+	$(MOC) $(DEFINES) $< -o $@
+
+moc/moc_BT_FileTransferManager.cpp: BT_FileTransferManager.h
+	$(MOC) $(DEFINES) $< -o $@
+	

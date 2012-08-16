@@ -1,0 +1,170 @@
+/*
+ Copyright 2011 Google Inc. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+*/
+
+/* PHOTO ALBUM SPECIFIC CSS */
+#btfb_content .feed {
+	overflow: hidden;
+}
+
+#btfb_content .feed .item {
+	height: auto;
+	width: auto;
+	font-size: 18px;
+	opacity: 1;
+}
+#btfb_content .feed .item .media .play {
+	float: left;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+	#btfb_content .feed .item .aid {
+		display: none;
+	}
+	#btfb_content .feed .item .label {
+		padding-bottom: 0px;
+		color: rgb(145, 153, 166);
+	}
+	#btfb_content .feed .loading_label div {
+		margin-top: 50%;
+	
+		color: rgb(145, 153, 166);
+		font-size: 16pt;
+	}
+	#btfb_content .feed .item .media .image_src {
+		max-height: 535px;
+	}
+	#btfb_content .feed .item .media .description .title {
+		height: 20px;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		float: right;	
+		text-align: right;
+		text-decoration: none;
+		color: #3B5998;
+	}
+#btfb_content .feed .item .media .description .comments {
+	float: right;
+}
+
+#btfb_slideshow_view {
+	float: left;
+	width: 1040px;
+	height: 655px;
+	position: absolute;
+	top: 0px;
+	display: none;
+	overflow-x: visible;
+	overflow-y: hidden;
+	
+	/* background: -webkit-gradient(radial, 160 180, 10, 640, 180, 30, color-stop(0.0, rgb(1,1,1)), color-stop(1.0, rgb(29, 30 ,32)));	 */
+	background: -webkit-gradient(radial, 0 0,0, 180 160, 640, from(rgb(38,40,42)), to(rgb(19,20,22)));
+}
+	#btfb_slideshow_view .slideshow_images {
+		height: 608px;
+		margin-top: 10px;
+		overflow: hidden;
+	}	
+	#btfb_slideshow_view .slideshow_images .slideshow_image_template {
+		display: none;
+	}
+	#btfb_slideshow_view .slideshow_images .slideshow_image {
+		float: left;
+		position: relative;
+		margin-left: 10px;
+		
+		/*
+		-webkit-box-shadow: rgba(0,0,0,0.15) 0px 0px 3px 3px;
+		-webkit-border-radius: 4px;
+		opacity: 0.15;
+		*/
+	}
+		#btfb_slideshow_view .slideshow_images .slideshow_image img {
+			max-height: 618px;
+
+			/*
+			-webkit-box-shadow: rgba(0,0,0,0.45) 0px 0px 2px 2px;
+			-webkit-border-radius: 4px;
+			*/
+		}
+		#btfb_slideshow_view .slideshow_images .slideshow_image .permalink:hover {
+			cursor: hand;
+		}
+		#btfb_slideshow_view .slideshow_images .slideshow_image .description {
+			display: none;
+			position: relative;
+			top: -25px;
+			
+			color: rgb(220, 220, 220);
+			font-size: 12pt;
+		}
+			#btfb_slideshow_view .slideshow_images .slideshow_image .description .title {
+				float: left;
+				margin-left: 12px;
+				text-shadow: 0px 0px 5px black;
+			}
+			#btfb_slideshow_view .slideshow_images .slideshow_image .description .comments {
+				float: right;		
+				margin-right: 12px;		
+				text-shadow: 0px 0px 4px black;	
+			}
+		#btfb_slideshow_view .button {
+			position: fixed;
+			top: 10px;
+			padding: 0 10px 5px 10px;
+					
+			background-color: rgb(28,30,32);
+			font-size: 14pt;
+			font-variant:small-caps;
+			text-align: center;
+			-webkit-border-bottom-right-radius: 4px;
+		}
+		#btfb_slideshow_view .back {
+			float: left;
+		}
+			#btfb_slideshow_view .back a {
+				opacity: 0.5;
+				color: rgb(240,240,240);
+				text-decoration: none;
+			}
+			#btfb_slideshow_view .back a:hover {
+				opacity: 0.75;
+			}		
+		#btfb_slideshow_view .divider {			
+			float: left;
+			margin: 0px 4px 0px 4px;
+			
+			opacity: 0.5;
+			color: rgb(240,240,240);
+		}
+		#btfb_slideshow_view .play {
+			float: left;
+		}
+			#btfb_slideshow_view .play a {
+				opacity: 0.5;
+				color: rgb(240,240,240);
+				text-decoration: none;
+			}
+			#btfb_slideshow_view .play a:hover {
+				opacity: 0.75;
+			}
+#loading_dialog {
+	display: none;
+}
+#btfb_content .feed .loading_label div {
+	margin-top: 40%;
+}

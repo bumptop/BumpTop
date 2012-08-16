@@ -1,0 +1,57 @@
+{#
+ Copyright 2011 Google Inc. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+#}
+
+{% extends "../Sharing/dialogs/dialogs_common.tmpl.html" %}
+
+{% block dialog_head %}
+	<style type="text/css">
+		#isAdmin, #isUser {
+			display: none;
+		}
+	</style>
+
+	<script type="text/javascript">
+		$(window).load(function () {
+			var dropData = BumpTopNative.getDialogUserData();
+			$("#dropUrl").text("http://drop.io/" + dropData.dropName);
+			if (dropData.isAdmin) {
+				$("#isAdmin").show();
+			} else {
+				$("#isUser").show();
+				$("#noButton").hide();
+			}
+		});
+	</script>
+{% endblock dialog_head %}
+
+{% block dialog_content %}
+	<div id="content">
+		<b>{{ _("Deleting:") }}</b><span id="dropUrl"></span><br/><br/>
+		<div id="isAdmin">
+			<b>{{ _("Delete this BumpShare permanently?") }}</b><br/>
+			<div class="subHeader">{{ _("If you select no, you will be able to reconnect to this share at a later date.") }}</div>
+			<br/>
+		</div>
+		<div id="isUser">
+			<b>{{ _("Are you sure you want to remove this BumpShare from your tabs?") }}</b><br/>
+			<div class="subHeader">{{ _("Note: Only administrators can delete BumpShares permanently.") }}</div>
+			<br/>
+		</div>
+		<button id="yesButton" class="btn">{{ _("Yes") }}</button>
+		<button id="noButton" class="btn">{{ _("No") }}</button>
+		<button id="cancelButton" class="btn">{{ _("Cancel") }}</button>
+	</div>
+{% endblock dialog_content %}

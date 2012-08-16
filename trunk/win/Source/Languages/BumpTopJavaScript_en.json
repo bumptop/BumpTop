@@ -1,0 +1,232 @@
+[
+    {
+        "location": "../Facebook/btfb_photoalbums.js", 
+        "source": "%1 (%2 Photos)", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_upload.js", 
+        "source": "%1 non-image file(s) skipped", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/sharedFolder.js", 
+        "source": ":", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/sharedFolder.js", 
+        "source": "AM", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_photoalbums.js", 
+        "source": "Album", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_newsfeed.js,../Facebook/btfb_photoalbums.js", 
+        "source": "April", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_newsfeed.js,../Facebook/btfb_photoalbums.js", 
+        "source": "August", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_common.js", 
+        "source": "Cancel", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_common.js", 
+        "source": "Close", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_photoalbums.js", 
+        "source": "Could not load your photo albums", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/sharedFolder.js", 
+        "source": "Could not share file(s)", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_upload.js", 
+        "source": "Create Album", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_newsfeed.js,../Facebook/btfb_photoalbums.js", 
+        "source": "December", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_upload.js", 
+        "source": "Default BumpTop Photos", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/sharedFolder.js", 
+        "source": "Deleting...", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_upload.js", 
+        "source": "Facebook only accepts images!", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/sharedFolder.js", 
+        "source": "Failed to delete file", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_newsfeed.js,../Facebook/btfb_photoalbums.js", 
+        "source": "February", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/sharedFolder.js", 
+        "source": "File won't fit in a drop!", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/sharedFolder.js", 
+        "source": "Files must be under 100MB", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_newsfeed.js,../Facebook/btfb_photoalbums.js", 
+        "source": "January", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_newsfeed.js,../Facebook/btfb_photoalbums.js", 
+        "source": "July", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_newsfeed.js,../Facebook/btfb_photoalbums.js", 
+        "source": "June", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/sharedFolder.js", 
+        "source": "Loading...", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_newsfeed.js,../Facebook/btfb_photoalbums.js", 
+        "source": "March", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_newsfeed.js,../Facebook/btfb_photoalbums.js", 
+        "source": "May", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_newsfeed.js,../Facebook/btfb_photoalbums.js", 
+        "source": "November", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_newsfeed.js,../Facebook/btfb_photoalbums.js", 
+        "source": "October", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/sharedFolder.js", 
+        "source": "PM", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_upload.js", 
+        "source": "Please enter an album name", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_common.js", 
+        "source": "Sending...", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_newsfeed.js,../Facebook/btfb_photoalbums.js", 
+        "source": "September", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_common.js", 
+        "source": "Share", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_upload.js", 
+        "source": "Some files are already in queue to upload!", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_newsfeed.js", 
+        "source": "There are no photos in your feed to display. Upload photos to see them here!", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/sharedFolder.js", 
+        "source": "Today, ", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/sharedFolder.js", 
+        "source": "Unable to connect to server", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/sharedFolder.js", 
+        "source": "Unable to create new share", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/sharedFolder.js", 
+        "source": "Unable to download file.", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/sharedFolder.js", 
+        "source": "Unable to subscribe to drop", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/sharedFolder.js", 
+        "source": "Unable to update drop", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_newsfeed.js", 
+        "source": "What's on your mind?", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Sharing/sharedFolder.js", 
+        "source": "Yesterday, ", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_newsfeed.js", 
+        "source": "by %1", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_photoalbums.js", 
+        "source": "play", 
+        "translation": ""
+    }, 
+    {
+        "location": "../Facebook/btfb_photoalbums.js", 
+        "source": "stop", 
+        "translation": ""
+    }
+]

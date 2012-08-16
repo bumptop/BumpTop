@@ -1,0 +1,13 @@
+Index: Source\Includes\QtIncludes\src\corelib\kernel\qcoreapplication.h
+===================================================================
+--- Source\Includes\QtIncludes\src\corelib\kernel\qcoreapplication.h	(revision 4295)
++++ Source\Includes\QtIncludes\src\corelib\kernel\qcoreapplication.h	(working copy)
+@@ -259,6 +259,8 @@
+     static inline QString trUtf8(const char *sourceText, const char *disambiguation, int n) \
+         { return QCoreApplication::translate(#context, sourceText, disambiguation, \
+                                              QCoreApplication::UnicodeUTF8, n); } \
++    static inline char * trContext() \
++		{ return #context; } \
+ private:
+ 
+ typedef void (*QtCleanUpFunction)();

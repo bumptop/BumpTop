@@ -1,0 +1,28 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qtaccessiblewidgets", "D:/qt-everywhere-opensource-src-4.7.4/src/plugins/accessible/widgets\qtaccessiblewidgets.vcxproj", "{C42FA4AD-A0BA-3CD7-83D3-BBCAD09780CD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qtaccessiblecompatwidgets", "D:/qt-everywhere-opensource-src-4.7.4/src/plugins/accessible/compat\qtaccessiblecompatwidgets.vcxproj", "{90A9C4BE-F436-3EA4-9EF0-5C6772F05CFF}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug|Win32
+		ConfigName.1 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{C42FA4AD-A0BA-3CD7-83D3-BBCAD09780CD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C42FA4AD-A0BA-3CD7-83D3-BBCAD09780CD}.Debug|Win32.Build.0 = Debug|Win32
+		{C42FA4AD-A0BA-3CD7-83D3-BBCAD09780CD}.Release|Win32.ActiveCfg = Release|Win32
+		{C42FA4AD-A0BA-3CD7-83D3-BBCAD09780CD}.Release|Win32.Build.0 = Release|Win32
+		{90A9C4BE-F436-3EA4-9EF0-5C6772F05CFF}.Debug|Win32.ActiveCfg = Debug|Win32
+		{90A9C4BE-F436-3EA4-9EF0-5C6772F05CFF}.Debug|Win32.Build.0 = Debug|Win32
+		{90A9C4BE-F436-3EA4-9EF0-5C6772F05CFF}.Release|Win32.ActiveCfg = Release|Win32
+		{90A9C4BE-F436-3EA4-9EF0-5C6772F05CFF}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

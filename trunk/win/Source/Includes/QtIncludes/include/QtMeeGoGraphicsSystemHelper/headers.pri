@@ -1,0 +1,3 @@
+SYNCQT.HEADER_FILES = qmeegofencesync.h qmeegographicssystemhelper.h qmeegolivepixmap.h qmeegooverlaywidget.h qmeegoruntime.h qmeegoswitchevent.h ../../include/QtMeeGoGraphicsSystemHelper/QtMeeGoGraphicsSystemHelper 
+SYNCQT.HEADER_CLASSES = ../../include/QtMeeGoGraphicsSystemHelper/QMeeGoFenceSync ../../include/QtMeeGoGraphicsSystemHelper/QMeeGoGraphicsSystemHelper ../../include/QtMeeGoGraphicsSystemHelper/QMeeGoLivePixmap ../../include/QtMeeGoGraphicsSystemHelper/QMeeGoOverlayWidget ../../include/QtMeeGoGraphicsSystemHelper/QMeeGoRuntime ../../include/QtMeeGoGraphicsSystemHelper/QMeeGoSwitchEvent 
+SYNCQT.PRIVATE_HEADER_FILES = qmeegofencesync_p.h qmeegolivepixmap_p.h 
