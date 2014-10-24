@@ -5,11 +5,11 @@ Mac Build instructions
 ======================
 Prerequisites: Xcode, Mac OS X 10.6+
 
-Checkout trunk/mac from the source tree.
-Download and install [CMake](http://www.cmake.org/cmake/resources/software.html)
-Open Terminal.app, go to the trunk/mac/Dependencies directory, and type "make" (this will take over 20 minutes)
-Launch the BumpTop Xcode project (trunk/mac/Build/Mac/BumpTop.xcodeproj)
-Select the "BumpTop" target, or if you'd like to build a downloadable .dmg, select the "Deploy" target
+Checkout trunk/mac from the source tree.  
+Download and install [CMake](http://www.cmake.org/cmake/resources/software.html)  
+Open Terminal.app, go to the trunk/mac/Dependencies directory, and type "make" (this will take over 20 minutes)  
+Launch the BumpTop Xcode project (trunk/mac/Build/Mac/BumpTop.xcodeproj)  
+Select the "BumpTop" target, or if you'd like to build a downloadable .dmg, select the "Deploy" target  
 Build the project
 
 
