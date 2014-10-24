@@ -17,21 +17,21 @@ Windows Build instructions
 ==========================
 Prerequisites: [Microsoft Visual C++ 2010 Express](http://www.microsoft.com/visualstudio/en-us/products/2010-editions/visual-cpp-express) (free), [Python 2.6](http://python.org/getit/) installed and added to your path.
 
-Checkout trunk/win from the source tree.
-Install DirectX 9 SDK, June 2010 release [download](http://www.microsoft.com/en-us/download/details.aspx?id=6812)
-Download the [Qt 4.6.1 source](http://download.qt-project.org/archive/qt/4.6/qt-everywhere-opensource-src-4.6.1.tar.gz) into your /Dependencies folder 
-Open BumpTop.sln in Visual Studio, right-click on BumpTop project and select "Set as StartUp Project"
+Checkout trunk/win from the source tree.  
+Install DirectX 9 SDK, June 2010 release [download](http://www.microsoft.com/en-us/download/details.aspx?id=6812)  
+Download the [Qt 4.6.1 source](http://download.qt-project.org/archive/qt/4.6/qt-everywhere-opensource-src-4.6.1.tar.gz) into your /Dependencies folder  
+Open BumpTop.sln in Visual Studio, right-click on BumpTop project and select "Set as StartUp Project"  
 
 
 Flash Build instructions
 ========================
 Prerequisites: [Flex 4.6 SDK](http://www.adobe.com/devnet/flex/flex-sdk-download.html). [Flash Builder 4.6](http://www.adobe.com/cfusion/tdrc/index.cfm?product=flash_builder) to follow the below instructions. Note: it was originally built against Flex 3 so you may see some warnings.
 
-Checkout trunk/flash from the source tree.
-File -> New -> Flex Project named "TileUI"
-Step through wizard
-Copy the files under src to src
-Copy the files under libs to libs
-Delete TileUI.mxml (which was created automatically by Flash Builder when setting up the new project)
-Right click TileUI_Flex.mxml -> Debug as… -> Web Application
-(Note: you may need to install the [debugger version of Flash Player](http://www.adobe.com/support/flashplayer/downloads.html) and for Google Chrome you need to [disable the built-in version of Flash](http://www.aaronwest.net/blog/index.cfm/2010/4/27/Configuring-Chrome-with-Flash-Player-Debugger))
+Checkout trunk/flash from the source tree.  
+File -> New -> Flex Project named "TileUI"  
+Step through wizard  
+Copy the files under src to src  
+Copy the files under libs to libs  
+Delete TileUI.mxml (which was created automatically by Flash Builder when setting up the new project)  
+Right click TileUI_Flex.mxml -> Debug as… -> Web Application  
+(Note: you may need to install the [debugger version of Flash  Player](http://www.adobe.com/support/flashplayer/downloads.html) and for Google Chrome you need to [disable the built-in version of Flash](http://www.aaronwest.net/blog/index.cfm/2010/4/27/Configuring-Chrome-with-Flash-Player-Debugger))
