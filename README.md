@@ -1,6 +1,8 @@
 bumptop
 =======
 
+Although BumpTop was acquired by Google, this is not an official Google product.  
+
 Mac Build instructions
 ======================
 Prerequisites: Xcode, Mac OS X 10.6+
