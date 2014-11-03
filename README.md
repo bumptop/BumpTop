@@ -1,7 +1,7 @@
 bumptop
 =======
 
-Although BumpTop was acquired by Google, this is not an official Google product.  
+Although BumpTop was acquired by Google, this is not an official Google product.  We are excited to have folks develop on top of our work and it is presented here under the Apache license but unfortunately the BumpTop team does not have time to maintain it and so contributions to the main product will not be accepted, but fork away!  
 
 Mac Build instructions
 ======================
