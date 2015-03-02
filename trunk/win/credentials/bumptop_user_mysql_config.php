@@ -1,6 +1,6 @@
 <?php 
-$mysql_server = "localhost";
-$mysql_user = "bumptop";
-$mysql_password = "Flames285";
-$mysql_dbname = "bumptopusers";
+$mysql_server = "";
+$mysql_user = "";
+$mysql_password = "";
+$mysql_dbname = "";
 ?>

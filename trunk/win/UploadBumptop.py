@@ -1,3 +1,19 @@
+#!/usr/bin/python
+
+# Copyright 2011 Google Inc. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 from subprocess import call
 import ftplib
 import os
@@ -9,59 +25,7 @@ S3FUNNEL = PYTHON + '"' + os.getcwd() + '\\bin\\s3funnelcmd" download.bumptop.co
 
 
 
-versions = { 'release' : {'version_upload_url' : 's3://download.bumptop.com/', 
-                           'version_download_url' : 'http://download.bumptop.com/',
-                           'version_prefix' : "v3_",
-                           'bt_upload_url' : 'ftp://serveradmin@bumptop.com:K45skrz6!@ftp.s47095.gridserver.com/domains/bumptop.com/html/download/',
-                           'bt_download_url' : 'http://bumptop.com/download/',
-                           's3_upload_url' : 's3://download.bumptop.com', 
-                           's3_download_url' : 'http://download.bumptop.com/',
-                           'installername' : 'BumpTopInstaller.msi',
-                           'installerexename' : 'BumpTopInstaller.exe'},						  
-             'vip' : 	  {'version_upload_url' : 's3://download.bumptop.com', 
-                           'version_download_url' : 'http://download.bumptop.com/',
-                           'version_prefix' : 'vip_v3_',
-                           'bt_upload_url' : 'ftp://serveradmin@bumptop.com:K45skrz6!@ftp.s47095.gridserver.com/domains/bumptop.com/html/download/',
-                           'bt_download_url' : 'http://bumptop.com/download/',
-                           's3_upload_url' : 's3://download.bumptop.com', 
-                           's3_download_url' : 'http://download.bumptop.com/',
-                           'installername' : 'BumpTopInstallerVIP.msi',
-                           'installerexename' : 'BumpTopInstallerVIP.exe'},
-             'OEM_LENOVO' : 	  {'version_upload_url' : 's3://download.bumptop.com', 
-                           'version_download_url' : 'http://download.bumptop.com/',
-                           'version_prefix' : 'OEM_LENOVO_',
-                           's3_upload_url' : 's3://download.bumptop.com', 
-                           's3_download_url' : 'http://download.bumptop.com/',
-                           'installername' : 'BumpTopInstaller_OEM_LENOVO.msi',
-                           'installerexename' : 'BumpTopInstaller_OEM_LENOVO.exe'},
-             'OEM_ASUS' : 	  {'version_upload_url' : 's3://download.bumptop.com', 
-                           'version_download_url' : 'http://download.bumptop.com/',
-                           'version_prefix' : 'OEM_ASUS_',
-                           's3_upload_url' : 's3://download.bumptop.com', 
-                           's3_download_url' : 'http://download.bumptop.com/',
-                           'installername' : 'BumpTopInstaller_OEM_ASUS.msi',
-                           'installerexename' : 'BumpTopInstaller_OEM_ASUS.exe'},
-             'OEM_ACER' : 	  {'version_upload_url' : 's3://download.bumptop.com', 
-                           'version_download_url' : 'http://download.bumptop.com/',
-                           'version_prefix' : 'OEM_ACER_',
-                           's3_upload_url' : 's3://download.bumptop.com', 
-                           's3_download_url' : 'http://download.bumptop.com/',
-                           'installername' : 'BumpTopInstaller_OEM_ACER.msi',
-                           'installerexename' : 'BumpTopInstaller_OEM_ACER.exe'},
-             'VGA_ASUS' : 	  {'version_upload_url' : 's3://download.bumptop.com', 
-                           'version_download_url' : 'http://download.bumptop.com/',
-                           'version_prefix' : 'VGA_ASUS_',
-                           's3_upload_url' : 's3://download.bumptop.com', 
-                           's3_download_url' : 'http://download.bumptop.com/',
-                           'installername' : 'BumpTopInstaller_VGA_ASUS.msi',
-                           'installerexename' : 'BumpTopInstaller_VGA_ASUS.exe'},
-             'VGA_TUL' : 	  {'version_upload_url' : 's3://download.bumptop.com', 
-                           'version_download_url' : 'http://download.bumptop.com/',
-                           'version_prefix' : 'VGA_TUL_',
-                           's3_upload_url' : 's3://download.bumptop.com', 
-                           's3_download_url' : 'http://download.bumptop.com/',
-                           'installername' : 'BumpTopInstaller_VGA_TUL.msi',
-                           'installerexename' : 'BumpTopInstaller_VGA_TUL.exe'}}
+versions = {}
                           
 old_versions = {'old_release' : { 'version_prefix' : None, 'version_download_url' :  'http://download.bumptop.com/'},
                 'old_vip' : { 'version_prefix' : 'vip_', 'version_download_url' :  'http://download.bumptop.com/'}}
