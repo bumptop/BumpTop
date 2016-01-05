@@ -1,7 +1,10 @@
 bumptop
 =======
 
-Although BumpTop was acquired by Google, this is not an official Google product.  We are excited to have folks develop on top of our work and it is presented here under the Apache license but unfortunately the BumpTop team does not have time to maintain it and so contributions to the main product will not be accepted, but fork away!  
+Although BumpTop was acquired by Google, this is not an official Google product. We are excited to have folks develop on top of our work and it is presented here under the Apache license but unfortunately the BumpTop team will not be able to maintain it and so contributions to the main product will not be accepted. The code is provided on an as-is, unsupported basis but please fork away!
+
+We really believe we’re just scratching the surface of what's possible with the way we interact with technology. As touch and virtual reality interfaces rapidly evolve, we think some of the ideas we explored might be relevant now more than ever. The future of BumpTop is now in your hands, the community of passionate fans and developers of BumpTop who supported our mission of a bold new, physical dimension of UIs since the beginning.
+
 
 Mac Build instructions
 ======================
