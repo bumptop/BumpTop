@@ -18,6 +18,8 @@ Launch the BumpTop Xcode project (trunk/mac/Build/Mac/BumpTop.xcodeproj)
 Select the "BumpTop" target, or if you'd like to build a downloadable .dmg, select the "Deploy" target  
 Build the project
 
+Note: Mac OS Sierra users need to [install X11](https://www.xquartz.org/) in order for BumpTop to work.  
+
 
 Windows Build instructions
 ==========================
