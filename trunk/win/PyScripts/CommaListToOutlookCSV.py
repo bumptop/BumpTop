@@ -16,7 +16,7 @@
 #From there you can import it into Gmail and ask it add it to the VIP list for example. 
 
 
-vips='''mrcai7@gmail.com, gal.bumptop@szkolnik.com, angryfrommanchester@cityblue.co.uk, qweeeee@mail4trash.com, bill.t.liu@gmail.com, zagar@aixdesign.net, a.robinson91@gmail.com, jongscripter@gmail.com, dmondark@gmail.com, Oberlin_M@hotmail.com, jmrlopez@gmail.com, pikachu098@hotmail.com, thedragoninsideme@hotmail.com, zamadatix@gmail.com, gal.bumptop@szkolnik.com, jzraikes@googlemail.com, dphugo@gmail.com, hlynurhalldors@gmail.com, surfinsilky@hotmail.com, morningmonster@gmail.com, fidel_1992@hotmail.de, YunoIRC@gmail.com,mikejurka@gmail.com, wty@inbox.lv, jontyab@gmail.com, pcstalljr16@yahoo.com, shreddedcheddar@gmail.com, sajjaad_ramzeydss@yahoo.com, apgriffith@comcast.net, t.hianik@gmail.com, kfqd@bellsouth.net, aaaaaaaaaaaaaaaaaaaaaaaaaaa@master.com, ammok1972@yahoo.fr, romantz@nana10.co.il'''
+vips='''mrcai7@gmail.com, gal.bumptop@szkolnik.com, angryfrommanchester@cityblue.co.uk, qweeeee@mail4trash.com, bill.t.liu@gmail.com, zagar@aixdesign.net, a.robinson91@gmail.com, jongscripter@gmail.com, dmondark@gmail.com, Oberlin_M@hotmail.com, jmrlopez@gmail.com, pikachu098@hotmail.com, thedragoninsideme@hotmail.com, zamadatix@gmail.com, gal.bumptop@szkolnik.com, jzraikes@googlemail.com, hlynurhalldors@gmail.com, surfinsilky@hotmail.com, morningmonster@gmail.com, fidel_1992@hotmail.de, YunoIRC@gmail.com,mikejurka@gmail.com, wty@inbox.lv, jontyab@gmail.com, pcstalljr16@yahoo.com, shreddedcheddar@gmail.com, sajjaad_ramzeydss@yahoo.com, apgriffith@comcast.net, t.hianik@gmail.com, kfqd@bellsouth.net, aaaaaaaaaaaaaaaaaaaaaaaaaaa@master.com, ammok1972@yahoo.fr, romantz@nana10.co.il'''
 vips=vips.replace(' ','').split(',')
 
 #header
