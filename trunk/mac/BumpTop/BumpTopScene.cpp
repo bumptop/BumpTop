@@ -17,6 +17,7 @@
 #include "BumpTop/BumpTopScene.h"
 
 #include "BumpTop/BumpTopApp.h"
+#include "BumpTop/BumpTopCommands.h"
 #include "BumpTop/BumpTopInstanceLock.h"
 #include "BumpTop/FileManager.h"
 #include "BumpTop/PersistenceManager.h"
@@ -82,6 +83,38 @@ void BumpTopScene::init() {
     for_each(VisualPhysicsActor* actor, room_->room_actor_list()) {
       if (QFileInfo(actor->path()).fileName() == wanted) {
         actor->set_selected(true);
+      }
+    }
+  }
+
+  // Repro hooks for debugging without mouse input.
+  // BUMPTOP_TEST_GROW=1: grow every desktop item once (like toolbar Grow).
+  // BUMPTOP_TEST_PILE_GRID=1: pile the first two file items, then open the
+  // pile as a grid (like double-clicking it).
+  if (getenv("BUMPTOP_TEST_GROW") != NULL || getenv("BUMPTOP_TEST_PILE_GRID") != NULL) {
+    BumpEnvironment env(app_->physics(), room_, app_->ogre_scene_manager());
+    VisualPhysicsActorList test_actors;
+    for_each(VisualPhysicsActor* actor, room_->room_actor_list()) {
+      if (actor->actor_type() == BUMP_BOX)
+        test_actors.append(actor);
+    }
+    if (getenv("BUMPTOP_TEST_GROW") != NULL && test_actors.size() > 0) {
+      int grow_times = std::max(1, atoi(getenv("BUMPTOP_TEST_GROW")));
+      for (int i = 0; i < grow_times; i++)
+        Grow::singleton()->applyToActors(env, test_actors);
+      fprintf(stderr, "[test] grew %d actors %d times\n", (int)test_actors.size(), grow_times);
+    }
+    if (getenv("BUMPTOP_TEST_PILE_GRID") != NULL && test_actors.size() >= 2) {
+      VisualPhysicsActorList pile_members;
+      pile_members.append(test_actors[0]);
+      pile_members.append(test_actors[1]);
+      CreatePile::singleton()->applyToActors(env, pile_members);
+      for_each(VisualPhysicsActor* actor, room_->room_actor_list()) {
+        if (actor->actor_type() == BUMP_PILE) {
+          fprintf(stderr, "[test] launching pile as grid\n");
+          actor->launch();
+          break;
+        }
       }
     }
   }
