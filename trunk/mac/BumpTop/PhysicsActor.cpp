@@ -16,6 +16,8 @@
 
 #include "BumpTop/PhysicsActor.h"
 
+#include "BumpTop/Math.h"
+
 #include "BumpTop/Box.h"
 #include "BumpTop/BumpTopApp.h"
 #include "BumpTop/OgreBulletConverter.h"
@@ -206,7 +208,12 @@ Ogre::Vector3 PhysicsActor::angular_velocity() {
 Ogre::AxisAlignedBox PhysicsActor::world_bounding_box() {
   btVector3 aabbMin, aabbMax;
   rigid_body_->getAabb(aabbMin, aabbMax);
-  Ogre::AxisAlignedBox bounding_box(toOgre(aabbMin), toOgre(aabbMax));
+  // Bullet can hand back a degenerate/inverted box mid-update (e.g. for a
+  // transiently zero-sized body); Ogre asserts on min > max, so normalize.
+  Ogre::Vector3 box_min = toOgre(aabbMin);
+  Ogre::Vector3 box_max = toOgre(aabbMax);
+  Ogre::AxisAlignedBox bounding_box(Math::componentwise_min(box_min, box_max),
+                                    Math::componentwise_max(box_min, box_max));
   return bounding_box;
 }
 

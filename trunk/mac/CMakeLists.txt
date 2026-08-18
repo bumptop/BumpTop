@@ -15,6 +15,13 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_OBJCXX_STANDARD 17)
 set(CMAKE_OSX_DEPLOYMENT_TARGET "26.0")
+
+# Without a build type nothing defines NDEBUG, leaving Ogre's header asserts
+# live in app TUs (a degenerate AABB then aborts the app instead of being a
+# visual glitch).
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE RelWithDebInfo)
+endif()
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(MAC_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
