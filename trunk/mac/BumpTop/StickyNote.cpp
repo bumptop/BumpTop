@@ -191,9 +191,13 @@ void StickyNote::launch() {
   // size equals the editing QTextEdit (kDocSize points). The old constant
   // (750) was tuned for ~1050pt-tall displays and misaligns on anything else.
   Ogre::Radian fov_y = camera->getFOVy();
-  Ogre::Real screen_height_points = BumpTopApp::singleton()->screen_resolution().y;
+  // The projection spans the window in device pixels, so target kDocSize
+  // in device pixels too — with points the note rendered device_scale times
+  // larger than the editor (measured: 695pt vs the intended 350pt).
+  Ogre::Real window_height_px = BumpTopApp::singleton()->window_size().y;
+  Ogre::Real doc_size_px = kDocSize * BumpTopApp::singleton()->device_scale();
   const Ogre::Real kDesiredDistanceToCamera =
-      size().x * screen_height_points / (2.0 * Ogre::Math::Tan(fov_y / 2.0) * kDocSize);
+      size().x * window_height_px / (2.0 * Ogre::Math::Tan(fov_y / 2.0) * doc_size_px);
   Ogre::Vector3 vector_between_camera_and_actor = camera->getPosition() - position();
   vector_between_camera_and_actor.normalise();
   Ogre::Plane camera_plane(camera->getDirection(), camera->getPosition());
@@ -212,10 +216,34 @@ void StickyNote::launch() {
   set_position(position_to_animate_to);
   set_orientation(desired_orientation);
 
-  const Ogre::Real kScreenMargin = 40;
-  Ogre::AxisAlignedBox screen_box(40, 40, -1, BumpTopApp::singleton()->screen_resolution().x - kScreenMargin,
-                                            BumpTopApp::singleton()->screen_resolution().y - kScreenMargin,
-                                            1);
+  // The analytic distance assumes a plain centered frustum, but this camera
+  // does not have one (the note measured 2x the target size). Calibrate:
+  // measure the note's actual on-screen height at that distance and scale
+  // the distance so it really is kDocSize points tall.
+  {
+    Ogre::AxisAlignedBox measured_box = screenBoundingBox();
+    Ogre::Real measured_px = measured_box.getMaximum().y - measured_box.getMinimum().y;
+    // The editing animation also scales the copy (to world size 200, the
+    // final_actor_scale_factor passed below), so the note ends up that much
+    // larger on screen than what we measure here at its current size.
+    Ogre::Real final_scale_factor = 200.0 / scale().x;
+    Ogre::Real predicted_final_px = measured_px * final_scale_factor;
+    Ogre::Real target_px = kDocSize * BumpTopApp::singleton()->device_scale();
+    if (predicted_final_px > 1 && fabs(predicted_final_px - target_px) > 2) {
+      Ogre::Vector3 from_camera = position_to_animate_to - camera->getPosition();
+      position_to_animate_to = camera->getPosition() + from_camera * (predicted_final_px / target_px);
+      set_position(position_to_animate_to);
+    }
+  }
+
+  // screenBoundingBox() is in device pixels, so the screen box must be too —
+  // comparing it against point coordinates shoved the note to odd corners.
+  const Ogre::Real kScreenMargin = 40 * BumpTopApp::singleton()->device_scale();
+  Ogre::Vector2 window_size = BumpTopApp::singleton()->window_size();
+  Ogre::AxisAlignedBox screen_box(kScreenMargin, kScreenMargin, -1,
+                                  window_size.x - kScreenMargin,
+                                  window_size.y - kScreenMargin,
+                                  1);
   Ogre::AxisAlignedBox sticky_bounding_box = screenBoundingBox();
 
   Ogre::Real tolerance = 0.5;
@@ -283,14 +311,33 @@ void StickyNote::beginEditingAnimationFinished(VisualPhysicsActorAnimation* anim
   QTextEdit* editable_text = text_->text_edit();
 
   Ogre::AxisAlignedBox sticky_bounding_box = visual_copy_of_actor_->screenBoundingBox();
-  // The screen bounding box is in device pixels; QTextEdit::move takes points.
+  // The screen bounding box is in device pixels; QTextEdit geometry is points.
+  // Cover the 3D copy exactly — the old +5/+26 offset assumed a window that
+  // began below the menu bar, and left slivers of the 3D note showing.
   Ogre::Real device_scale = BumpTopApp::singleton()->device_scale();
-  editable_text->move(sticky_bounding_box.getMinimum().x / device_scale + 5,
-                      sticky_bounding_box.getMinimum().y / device_scale + 26);
+  int editor_x = sticky_bounding_box.getMinimum().x / device_scale;
+  int editor_y = sticky_bounding_box.getMinimum().y / device_scale;
+  int editor_w = (sticky_bounding_box.getMaximum().x - sticky_bounding_box.getMinimum().x) / device_scale + 1;
+  int editor_h = (sticky_bounding_box.getMaximum().y - sticky_bounding_box.getMinimum().y) / device_scale + 1;
+  editable_text->move(editor_x, editor_y);
+  editable_text->resize(editor_w, editor_h);
 
-  // Do not remove this code -- this shows how the size is calculated
-  /*editable_text->resize(sticky_bounding_box.getMaximum().x - sticky_bounding_box.getMinimum().x - 9,
-                         sticky_bounding_box.getMaximum().y - sticky_bounding_box.getMinimum().y - 8);*/
+  // Paint the editor with the note's own paper texture (soft gradient) so
+  // the 2D view reads as the same object, not a flat color patch.
+  QPixmap paper(FileManager::getResourcePath() + "/StickyNote.png");
+  if (!paper.isNull()) {
+    // The texture is the die-cut note (curled edges, shadow, white margin);
+    // stretch only its interior so the editor gets the plain paper gradient.
+    int inset_x = paper.width() * 0.15;
+    int inset_y = paper.height() * 0.15;
+    paper = paper.copy(inset_x, inset_y, paper.width() - 2 * inset_x, paper.height() - 2 * inset_y);
+    QPixmap scaled_paper = paper.scaled(editor_w * device_scale, editor_h * device_scale,
+                                        Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    scaled_paper.setDevicePixelRatio(device_scale);
+    QPalette editor_palette = editable_text->palette();
+    editor_palette.setBrush(QPalette::Base, QBrush(scaled_paper));
+    editable_text->setPalette(editor_palette);
+  }
 
   // xxx ??
   editable_text->show();
@@ -426,6 +473,7 @@ void StickyNoteText::init() {
   sticky_note_text_edit_ = new QTextEdit();
   sticky_note_text_edit_->setWindowFlags(Qt::FramelessWindowHint);
   sticky_note_text_edit_->setContextMenuPolicy(Qt::PreventContextMenu);
+  sticky_note_text_edit_->setFrameStyle(QFrame::NoFrame);
   sticky_note_text_edit_->resize(kDocSize, kDocSize);
 
   QPalette p;

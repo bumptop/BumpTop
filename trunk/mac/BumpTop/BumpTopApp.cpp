@@ -160,7 +160,8 @@ void BumpTopApp::renderTick() {
   emit onRender();
   if (profile_frames) t_on_render = frame_timer.elapsed();
 
-  if (!isInIdleMode()) {
+  bool did_render = !isInIdleMode();
+  if (did_render) {
     pushGLContextAndSwitchToOgreGLContext();
     Ogre::Root::getSingleton().renderOneFrame();
     popGLContext();
@@ -172,7 +173,10 @@ void BumpTopApp::renderTick() {
   }
 
   if (profile_frames) {
+    static bool profile_all = getenv("BUMPTOP_PROFILE_ALL") != NULL;
     qint64 total = frame_timer.elapsed();
+    if (profile_all)
+      fprintf(stderr, "[profile] tick %lldms rendered=%d\n", total, (int)did_render);
     if (total > 34) {
       fprintf(stderr, "[profile] frame %lldms: workqueue %lld, onRender %lld, gl %lld, physics %lld\n",
               total, t_responses, t_on_render - t_responses,
