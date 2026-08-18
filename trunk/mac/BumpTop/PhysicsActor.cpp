@@ -208,13 +208,19 @@ Ogre::Vector3 PhysicsActor::angular_velocity() {
 Ogre::AxisAlignedBox PhysicsActor::world_bounding_box() {
   btVector3 aabbMin, aabbMax;
   rigid_body_->getAabb(aabbMin, aabbMax);
-  // Bullet can hand back a degenerate/inverted box mid-update (e.g. for a
-  // transiently zero-sized body); Ogre asserts on min > max, so normalize.
-  Ogre::Vector3 box_min = toOgre(aabbMin);
-  Ogre::Vector3 box_max = toOgre(aabbMax);
-  Ogre::AxisAlignedBox bounding_box(Math::componentwise_min(box_min, box_max),
-                                    Math::componentwise_max(box_min, box_max));
-  return bounding_box;
+  // Bullet can hand back a degenerate box mid-update (inverted for a
+  // transiently zero-sized body, or NaN before the first sync); Ogre asserts
+  // on anything but min <= max, so sanitize.
+  Ogre::Vector3 box_min = Math::componentwise_min(toOgre(aabbMin), toOgre(aabbMax));
+  Ogre::Vector3 box_max = Math::componentwise_max(toOgre(aabbMin), toOgre(aabbMax));
+  if (!(box_min.x <= box_max.x && box_min.y <= box_max.y && box_min.z <= box_max.z)) {
+    // NaN somewhere: collapse to a point box at the body's position.
+    Ogre::Vector3 fallback_position = toOgre(position_);
+    if (fallback_position.isNaN())
+      fallback_position = Ogre::Vector3::ZERO;
+    return Ogre::AxisAlignedBox(fallback_position, fallback_position);
+  }
+  return Ogre::AxisAlignedBox(box_min, box_max);
 }
 
 Ogre::Matrix4 PhysicsActor::transform() {

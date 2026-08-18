@@ -16,9 +16,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_OBJCXX_STANDARD 17)
 set(CMAKE_OSX_DEPLOYMENT_TARGET "26.0")
 
-# Without a build type nothing defines NDEBUG, leaving Ogre's header asserts
-# live in app TUs (a degenerate AABB then aborts the app instead of being a
-# visual glitch).
+# Optimized build, but with asserts LIVE: the codebase wraps side-effectful
+# calls in assert() — notably hundreds of assert(QObject::connect(...)) — so
+# NDEBUG must never be defined or those connections silently vanish
+# (broken icons, textures, everything signal-driven).
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE RelWithDebInfo)
 endif()
@@ -99,6 +100,7 @@ target_include_directories(BumpTop PRIVATE
 # as ObjC++ too; they use Cocoa types directly).
 target_compile_options(BumpTop PRIVATE
     -x objective-c++
+    -UNDEBUG
     -include ${MAC_ROOT}/BumpTop/port_prefix.h
     -Wno-deprecated-declarations
     -Wno-inconsistent-missing-override
