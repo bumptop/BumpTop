@@ -76,9 +76,11 @@ void ToolTipOverlay::initWithTextLines(QStringList text_lines, ToolTipPointingDi
   background_->setMaterialName(utf8(background_material_name_));
   background_->setMetricsMode(Ogre::GMM_PIXELS);
 
+  // Tooltip textures are shown 1:1 in device pixels; scale for Retina.
+  Ogre::Real device_scale = BumpTopApp::singleton()->device_scale();
   font_ = QFont("Lucida Grande");
   font_.setBold(true);
-  font_.setPointSize(13);
+  font_.setPointSize(qRound(13 * device_scale));
   text_lines_list_ = text_lines;
   createTipText(text_lines);
 
@@ -95,7 +97,7 @@ void ToolTipOverlay::initWithTextLines(QStringList text_lines, ToolTipPointingDi
   panel_->addChildImpl(background_);
   panel_->addChildImpl(text_lines_);
 
-  setSize(Ogre::Vector2(220, 94));
+  setSize(Ogre::Vector2(220 * device_scale, 94 * device_scale));
   setCenter(Ogre::Vector2(500, 500));
 
   overlay_ = Ogre::OverlayManager::getSingleton().create("ToolTipOverlay" + address);

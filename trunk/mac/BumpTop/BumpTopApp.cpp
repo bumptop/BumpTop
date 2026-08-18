@@ -90,6 +90,13 @@ Ogre::RenderWindow* BumpTopApp::render_window() {
   return render_window_;
 }
 
+Ogre::Real BumpTopApp::device_scale() {
+  Ogre::Real screen_width = screen_resolution().x;
+  if (screen_width <= 0 || render_window_ == NULL)
+    return 1.0;
+  return window_size().x / screen_width;
+}
+
 Ogre::SceneManager* BumpTopApp::ogre_scene_manager() {
   return scene_manager_;
 }

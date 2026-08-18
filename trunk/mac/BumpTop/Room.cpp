@@ -151,6 +151,13 @@ void Room::init(Ogre::Real floor_width, Ogre::Real floor_depth, Ogre::Real wall_
       AppSettings::singleton()->set_floor_image_path(utf8(parity_wallpaper));
       AppSettings::singleton()->set_apply_floor_to_all_surfaces(false);
     }
+  } else if (AppSettings::singleton()->floor_image_path() == kDefaultFloorTexturePath) {
+    // Unless the user picked a custom floor, use their actual desktop
+    // wallpaper (keeps the room feeling like *their* desktop).
+    QString wallpaper_floor = FileManager::getDesktopWallpaperCachePath();
+    if (!wallpaper_floor.isEmpty()) {
+      AppSettings::singleton()->set_floor_image_path(utf8(wallpaper_floor));
+    }
   }
 
   Ogre::ColourValue room_colour = Ogre::ColourValue(0, 0.36, 0.68, 0.0);
@@ -288,6 +295,9 @@ void Room::init(Ogre::Real floor_width, Ogre::Real floor_depth, Ogre::Real wall_
     // Uniform lighting for the desktop parity test.
     app_->ogre_scene_manager()->setAmbientLight(Ogre::ColourValue(1, 1, 1));
   } else {
+    // A healthy ambient term keeps icons clearly readable; the point light
+    // just adds the soft lightbox shading on top.
+    app_->ogre_scene_manager()->setAmbientLight(Ogre::ColourValue(0.55, 0.55, 0.55));
     Ogre::String light_name = "RoomLight" + addressToString(this);
     Ogre::Light* scene_light = app_->ogre_scene_manager()->createLight(light_name);
     scene_light->setPosition(floor_width/2.0, 800, floor_depth/2.0);

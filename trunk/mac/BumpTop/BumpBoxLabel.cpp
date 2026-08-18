@@ -105,8 +105,7 @@ void BumpBoxLabel::set_label_colour(BumpBoxLabelColour label_colour) {
 void BumpBoxLabel::init(Ogre::Real size_factor) {
   // Labels render into textures shown 1:1 in device pixels; scale the type up
   // on Retina displays so it keeps its visual point size.
-  Ogre::Real device_scale = BumpTopApp::singleton()->window_size().x /
-                            BumpTopApp::singleton()->screen_resolution().x;
+  Ogre::Real device_scale = BumpTopApp::singleton()->device_scale();
   // First, just find out how big the label is
   // Lucida Grande was the system font when this was written; use the current
   // system font (SF), which is also what Finder draws desktop labels with.

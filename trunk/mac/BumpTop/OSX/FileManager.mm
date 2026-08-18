@@ -310,6 +310,43 @@ QString FileManager::getResourcePath() {
   return QStringFromNSString([[NSBundle mainBundle] resourcePath]);
 }
 
+QString FileManager::getDesktopWallpaperCachePath() {
+  NSURL* wallpaper_url = [[NSWorkspace sharedWorkspace]
+                          desktopImageURLForScreen:[[NSScreen screens] objectAtIndex:0]];
+  if (wallpaper_url == nil)
+    return "";
+  NSString* source_path = [wallpaper_url path];
+
+  BOOL is_directory = NO;
+  if (![[NSFileManager defaultManager] fileExistsAtPath:source_path isDirectory:&is_directory] || is_directory)
+    return "";  // rotating-wallpaper folders etc.
+
+  // Cache keyed by the source's modification time so wallpaper changes are
+  // picked up on the next launch.
+  NSDictionary* attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:source_path error:nil];
+  qint64 modification_time = (qint64)[[attributes fileModificationDate] timeIntervalSince1970];
+  QString cache_path = getApplicationDataPath() +
+                       QString("wallpaper_floor_%1.png").arg(modification_time);
+  if (QFileInfo(cache_path).exists())
+    return cache_path;
+
+  // NSImage handles formats Ogre's codec cannot (HEIC in particular).
+  NSImage* wallpaper_image = [[NSImage alloc] initWithContentsOfFile:source_path];
+  if (wallpaper_image == nil)
+    return "";
+  CGImageRef cg_image = [wallpaper_image CGImageForProposedRect:NULL context:nil hints:nil];
+  if (cg_image == NULL) {
+    [wallpaper_image release];
+    return "";
+  }
+  NSBitmapImageRep* rep = [[NSBitmapImageRep alloc] initWithCGImage:cg_image];
+  NSData* png_data = [rep representationUsingType:NSBitmapImageFileTypePNG properties:@{}];
+  BOOL wrote = [png_data writeToFile:NSStringFromQString(cache_path) atomically:YES];
+  [rep release];
+  [wallpaper_image release];
+  return wrote ? cache_path : QString("");
+}
+
 QString FileManager::getApplicationDataPath() {
   NSArray* paths;
   paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, NO);

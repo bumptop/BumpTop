@@ -301,7 +301,11 @@ const bool kShowSplashScreen = false;
   [status_bar_menu_ setDelegate:(id<NSMenuDelegate>)self];
   bumptop_status_item_ = [[NSStatusBar systemStatusBar] statusItemWithLength:31];
   [bumptop_status_item_ retain];
-  [bumptop_status_item_ setImage:[NSImage imageNamed:@"statusBarImage.png"]];
+  NSImage* status_image = [NSImage imageNamed:@"statusBarImage.png"];
+  // Template rendering keeps the glyph visible in the modern dark/translucent
+  // menu bar (a fixed-color bitmap can vanish against it).
+  [status_image setTemplate:YES];
+  [bumptop_status_item_ setImage:status_image];
   [bumptop_status_item_ setEnabled:YES];
   [bumptop_status_item_ setHighlightMode:YES];
   [bumptop_status_item_ setMenu:status_bar_menu_];
