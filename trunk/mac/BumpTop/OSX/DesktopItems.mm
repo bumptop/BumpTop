@@ -106,6 +106,10 @@ std::vector<DesktopItem> getDrives() {
       if (item.file_path == "/")
         continue;
     }
+    // Only volumes mounted under /Volumes appear on the desktop; the disks
+    // query also returns hidden system volumes (Preboot, iSCPreboot, ...).
+    if (!item.file_path.startsWith("/Volumes/"))
+      continue;
     if (!QFileInfo(item.file_path).exists())
       continue;
 
