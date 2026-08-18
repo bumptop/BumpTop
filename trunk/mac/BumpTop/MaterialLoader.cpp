@@ -72,6 +72,7 @@ void BumpMaterialManager::decrementReferenceCountAndDeleteIfZero(QString materia
 
 MaterialLoader::MaterialLoader()
 : enable_depth_check_(true),
+  lighting_enabled_(true),
   manual_loader_(NULL),
   expected_number_texture_loaded_callbacks_(0),
   delete_self_on_load_complete_(false) {
@@ -130,6 +131,9 @@ void MaterialLoader::initAsIconForFilePath(const QString& file_path,
   material_name_ = generateUniqueMaterialNameWithPrefix(QString("IconFor%1").arg(file_path));
   texture_names_.push_back(material_name_);
   enable_depth_check_ = false;
+  // Icons render full-bright like Finder's; the point light otherwise dims
+  // them at grazing angles (noticeably darker at the front of the room).
+  lighting_enabled_ = false;
   init(is_background_loaded);
 }
 
@@ -138,6 +142,8 @@ void MaterialLoader::initAsImageWithFilePath(const QString& texture_path, bool i
   texture_paths.push_back(texture_path);
   material_name_ = texture_path;
   enable_depth_check_ = false;
+  // Global UI textures (sticky notes, toolbars, highlights) read full-bright.
+  lighting_enabled_ = false;
   initAsImageWithFilePaths(texture_paths, is_background_loaded);
 }
 
@@ -187,6 +193,7 @@ void MaterialLoader::materialLoadingComplete() {
     if (!enable_depth_check_) {
       texture_pass->setDepthCheckEnabled(false);
     }
+    texture_pass->setLightingEnabled(lighting_enabled_);
   }
 
   BumpTopApp::singleton()->markGlobalStateAsChanged();

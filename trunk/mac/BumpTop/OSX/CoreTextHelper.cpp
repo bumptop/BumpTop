@@ -53,6 +53,10 @@ void drawNativeText(QPainter* painter, int x, int y, QString text, QColor backgr
   if (text_rect.width() == 0 || text_rect.height() == 0) {
     return;
   }
+  // Qt's boundingRect can be narrower than CoreText's rendered width (right
+  // side bearing, advance rounding); size the buffer generously so trailing
+  // glyphs don't clip.
+  text_rect.setWidth(std::max(text_rect.width(), metrics.horizontalAdvance(text)) + 8);
 
   bool use_native_text_rendering = true;
   if (use_native_text_rendering) {

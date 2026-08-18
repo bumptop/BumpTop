@@ -103,6 +103,7 @@ class MaterialLoader: public QObject, public Ogre::Resource::Listener {
   QStringList texture_names_;
   QString material_name_;
   bool enable_depth_check_;
+  bool lighting_enabled_;
   Ogre::ManualResourceLoader *manual_loader_;
   int expected_number_texture_loaded_callbacks_;
   bool delete_self_on_load_complete_;

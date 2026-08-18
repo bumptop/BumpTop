@@ -36,12 +36,30 @@
 #include "ThirdParty/BlitzBlur.h"
 
 const int kInitialLabelMaxWidth = 20 + kInitialActorSize;
-const int kRoundedRectCorner = 9;
-const int kTextMarginHorizontal = 1;
-const int kTextMarginVertical = 0;
-const int kShadowOffsetVertical = 1;
-const int kShadowOffsetHorizontal = 0;
-const int kExtraSizeForShadowRect = 4;
+// Label textures are shown 1:1 in device pixels, so these point-based
+// metrics are scaled by the device scale the first time a label is built.
+int kRoundedRectCorner = 9;
+int kTextMarginHorizontal = 1;
+int kTextMarginVertical = 0;
+int kShadowOffsetVertical = 1;
+int kShadowOffsetHorizontal = 0;
+int kExtraSizeForShadowRect = 4;
+int kShadowBlurRadius = 2;
+
+static void scaleLabelMetricsForDevice() {
+  static bool label_metrics_scaled = false;
+  if (label_metrics_scaled)
+    return;
+  Ogre::Real device_scale = BumpTopApp::singleton()->device_scale();
+  kRoundedRectCorner = qRound(kRoundedRectCorner * device_scale);
+  kTextMarginHorizontal = qRound(kTextMarginHorizontal * device_scale);
+  kTextMarginVertical = qRound(kTextMarginVertical * device_scale);
+  kShadowOffsetVertical = qRound(kShadowOffsetVertical * device_scale);
+  kShadowOffsetHorizontal = qRound(kShadowOffsetHorizontal * device_scale);
+  kExtraSizeForShadowRect = qRound(kExtraSizeForShadowRect * device_scale);
+  kShadowBlurRadius = qRound(kShadowBlurRadius * device_scale);
+  label_metrics_scaled = true;
+}
 
 
 SINGLETON_IMPLEMENTATION(BumpBoxLabelManager)
@@ -105,16 +123,18 @@ void BumpBoxLabel::set_label_colour(BumpBoxLabelColour label_colour) {
 void BumpBoxLabel::init(Ogre::Real size_factor) {
   // Labels render into textures shown 1:1 in device pixels; scale the type up
   // on Retina displays so it keeps its visual point size.
+  scaleLabelMetricsForDevice();
   Ogre::Real device_scale = BumpTopApp::singleton()->device_scale();
   // First, just find out how big the label is
   // Lucida Grande was the system font when this was written; use the current
   // system font (SF), which is also what Finder draws desktop labels with.
   font_ = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
-  // Finder's labels are regular weight; keep bold in normal (3D) mode for
-  // legibility against the room.
-  font_.setBold(getenv("BUMPTOP_PARITY") == NULL);
-  // Finder's desktop labels are 12pt (DesktopViewSettings textSize).
-  int label_point_size = getenv("BUMPTOP_PARITY") != NULL ? 12 : 13;
+  // Finder's desktop labels are semibold system font (verified by pixel diff
+  // against Finder's rendering; full bold measures visibly heavier).
+  font_.setWeight(QFont::DemiBold);
+  int label_point_size = 13;
+  if (getenv("BUMPTOP_LABEL_SIZE") != NULL)
+    label_point_size = atoi(getenv("BUMPTOP_LABEL_SIZE"));
   font_.setPointSize(qRound(label_point_size * device_scale));
 
   text_size_ = getTextBounds(&text_lines_, &text_line_sizes_, 0,
@@ -190,7 +210,10 @@ Ogre::Entity* BumpBoxLabel::_entity() {
 }
 
 void BumpBoxLabel::set_position_in_pixel_coords(Ogre::Vector2 position) {
-  Ogre::Vector2 adjusted_position = position - Ogre::Vector2(width_of_drawn_region()/2, 0);
+  // Tuck the label up toward the icon like Finder does (calibrated against
+  // Finder's rendering in the parity test).
+  Ogre::Real label_gap_adjust = 7 * BumpTopApp::singleton()->device_scale();
+  Ogre::Vector2 adjusted_position = position - Ogre::Vector2(width_of_drawn_region()/2, label_gap_adjust);
   Ogre::Vector2 normalized_position = screenPositionToNormalizedScreenPosition(adjusted_position);
   node_->setPosition(Ogre::Vector3(normalized_position.x, normalized_position.y, 0));
 }
@@ -276,7 +299,7 @@ QImage BumpBoxLabel::createBlurredText() {
   }
   painter.end();
 
-  return Blitz::blur(unblurred_text, 2);
+  return Blitz::blur(unblurred_text, kShadowBlurRadius);
 }
 
 
@@ -336,14 +359,13 @@ void BumpBoxLabel::draw(QPainter* painter) {
   if (!is_selected_
       && label_colour() == COLOURLESS) {
     // if it's not selected we draw the blurred shadow
-    // Create and draw the blurred shadow text; we draw it thrice to increase the strength
+    // With the Retina-scaled blur radius a single pass matches Finder's
+    // subtle shadow (the original stamped it three times at radius 2).
     QImage blurred_text = createBlurredText();
 
-    for (int i = 0; i < 3; i++) {
-      painter->drawImage(kShadowOffsetHorizontal - kExtraSizeForShadowRect/2.0,
-                         kShadowOffsetVertical - kExtraSizeForShadowRect/2.0,
-                         blurred_text);
-    }
+    painter->drawImage(kShadowOffsetHorizontal - kExtraSizeForShadowRect/2.0,
+                       kShadowOffsetVertical - kExtraSizeForShadowRect/2.0,
+                       blurred_text);
 
     text_background_color = Qt::gray;
   }
