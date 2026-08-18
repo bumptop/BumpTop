@@ -201,6 +201,9 @@ void BumpBox::initAsVisualCopyOfActor(VisualPhysicsActor* actor) {
           texture_pass->createTextureUnitState(texture->getName());
           texture_pass->setSceneBlending(Ogre::SBT_TRANSPARENT_ALPHA);
           texture_pass->setDepthCheckEnabled(false);
+          // Match the unlit source: with lighting on, the room's dim lights
+          // render the fade copy much darker than the actor it stands in for.
+          texture_pass->setLightingEnabled(false);
           set_material_name(QStringFromUtf8(material_name));
           copied_material_name_ = material_name;
         }
