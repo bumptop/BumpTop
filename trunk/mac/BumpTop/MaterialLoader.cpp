@@ -324,8 +324,11 @@ QSize MaterialLoader::desiredBGSizeGivenMaxDimensionsAndSourceImageSize(QSize ma
 QSize MaterialLoader::maxResolutionForBackground() {
   GLint max_texture_size;
   glGetIntegerv(GL_MAX_TEXTURE_SIZE, &max_texture_size);
-  int max_width = std::min(max_texture_size, (GLint)round(BumpTopApp::singleton()->screen_resolution().x));
-  int max_height = std::min(max_texture_size, (GLint)round(BumpTopApp::singleton()->screen_resolution().y));
+  // Use the render window's device-pixel size (not points) so backgrounds
+  // stay sharp on Retina displays.
+  Ogre::Vector2 window_size = BumpTopApp::singleton()->window_size();
+  int max_width = std::min(max_texture_size, (GLint)round(window_size.x));
+  int max_height = std::min(max_texture_size, (GLint)round(window_size.y));
   return QSize(max_width, max_height);
 }
 

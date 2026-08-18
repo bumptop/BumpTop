@@ -102,12 +102,17 @@ void BumpBoxLabel::set_label_colour(BumpBoxLabelColour label_colour) {
 }
 
 void BumpBoxLabel::init(Ogre::Real size_factor) {
+  // Labels render into textures shown 1:1 in device pixels; scale the type up
+  // on Retina displays so it keeps its visual point size.
+  Ogre::Real device_scale = BumpTopApp::singleton()->window_size().x /
+                            BumpTopApp::singleton()->screen_resolution().x;
   // First, just find out how big the label is
   font_ = QFont("Lucida Grande");
   font_.setBold(true);
-  font_.setPointSize(13);
+  font_.setPointSize(qRound(13 * device_scale));
 
-  text_size_ = getTextBounds(&text_lines_, &text_line_sizes_, 0, kInitialLabelMaxWidth * size_factor);
+  text_size_ = getTextBounds(&text_lines_, &text_line_sizes_, 0,
+                             kInitialLabelMaxWidth * size_factor * device_scale);
 
   QFontMetrics metrics(font_);
   QRect text_rect = metrics.boundingRect(text_);

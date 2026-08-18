@@ -102,8 +102,19 @@ void loadRoomFromDesktop(Room* room) {
         BumpBox* box = new BumpFlatSquare(BumpTopApp::singleton()->ogre_scene_manager(),
                                           BumpTopApp::singleton()->physics(), room);
         box->initWithPath(desktop_item.file_path);
-        box->set_position(Ogre::Vector3(desktop_item.position_x, 100, desktop_item.position_y));
-        box->set_size(Ogre::Vector3(kInitialActorSize, kInitialActorSize, kInitialActorSize));
+        // Calibrated against Finder's rendering in the desktop parity test.
+        Ogre::Real parity_offset_x = getenv("BUMPTOP_PARITY") != NULL ? 17 : 0;
+        Ogre::Real parity_offset_y = getenv("BUMPTOP_PARITY") != NULL ? 20 : 0;
+        box->set_position(Ogre::Vector3(desktop_item.position_x + parity_offset_x, 100,
+                                        desktop_item.position_y + parity_offset_y));
+        // Parity mode sizes icons like Finder does (BUMPTOP_PARITY_ICON_SIZE,
+        // default 64pt, matching Finder's desktop view settings).
+        Ogre::Real initial_size = kInitialActorSize;
+        if (getenv("BUMPTOP_PARITY") != NULL) {
+          initial_size = getenv("BUMPTOP_PARITY_ICON_SIZE") != NULL ?
+                         atof(getenv("BUMPTOP_PARITY_ICON_SIZE")) : 64;
+        }
+        box->set_size(Ogre::Vector3(initial_size, initial_size, initial_size));
         FileManager::getAndSetLabelColourThroughNSTask(box->unique_id());
       }
     }

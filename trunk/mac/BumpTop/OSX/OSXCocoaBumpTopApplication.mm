@@ -154,7 +154,10 @@ Ogre::Vector2 OSXCocoaBumpTopApplication::mouse_location() {
 
 Ogre::Vector2 OSXCocoaBumpTopApplication::cocoaCoordinatesToOgreCoordinates(Ogre::Vector2 cocoa_coordinates) {
   cocoa_coordinates.y = [ogre_view_ bounds].size.height - cocoa_coordinates.y;
-  return cocoa_coordinates;
+  // The GL surface runs at native (Retina) resolution, so Ogre-space
+  // coordinates are device pixels while Cocoa's are points.
+  CGFloat backing_scale = [ogre_view_ window] != nil ? [[ogre_view_ window] backingScaleFactor] : 1.0;
+  return cocoa_coordinates * (Ogre::Real)backing_scale;
 }
 
 bool OSXCocoaBumpTopApplication::isRunningLeopardOrEarlier() {

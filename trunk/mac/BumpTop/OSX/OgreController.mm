@@ -117,6 +117,10 @@ const bool kShowSplashScreen = false;
 }
 
 - (void)setupWindowsForLaunch {
+  // The nib's window compiles to a titled window under modern AppKit; the
+  // desktop must be borderless.
+  [fullScreenWindow setStyleMask:NSWindowStyleMaskBorderless];
+
   // If there is a splash screen, we want to center it;
   NSRect screen_rect = [[[NSScreen screens] objectAtIndex:0] frame];
   screen_rect.origin.x = screen_rect.origin.x + ((screen_rect.size.width - kSplashScreenWidth)/2);
@@ -250,8 +254,9 @@ const bool kShowSplashScreen = false;
 }
 
 - (void)updateWindowSizeAndPlacement {
+  // Cover the whole screen like the real desktop (the old build subtracted
+  // MENU_BAR_HEIGHT; modern wallpaper bleeds under the menu bar).
   NSRect screen_rect = [[[NSScreen screens] objectAtIndex:0] frame];
-  screen_rect.size.height = screen_rect.size.height - MENU_BAR_HEIGHT;
   // When you disconnect an external display, you get a 1x1 sized screen for
   // a second or two, in this case we want to ignore
   if (!(screen_rect.size.width <= 50 && screen_rect.size.height <= 50)) {
@@ -356,6 +361,17 @@ const bool kShowSplashScreen = false;
   bumptop_app_->renderTick();
 #ifndef BUMPTOP_TEST
   render_tick_count_++;
+  // Parity mode: periodically dump the framebuffer for the diff harness
+  // (independent of window-server capture, which fails across Spaces).
+  if (getenv("BUMPTOP_PARITY") != NULL && render_tick_count_ > kFadeInLength + kDisplayDelay &&
+      render_tick_count_ % 200 == 0) {
+    // The harness requests a dump by deleting the file; encoding a ~10MB PNG
+    // is expensive, so never rewrite one that is already there.
+    QString parity_render_path = FileManager::getApplicationDataPath() + "parity_render.png";
+    if (!QFileInfo(parity_render_path).exists()) {
+      bumptop_app_->render_window()->writeContentsToFile(utf8(parity_render_path));
+    }
+  }
   [self manageSplashScreenAndFadeIn];
   if (render_tick_count_ > kDisplayDelay)
     [self checkAndCorrectWindowSizeAndPlacementIfChanged];
@@ -376,7 +392,7 @@ const bool kShowSplashScreen = false;
   if (render_tick_count_ > kDisplayDelay && render_tick_count_ <= kFadeInLength + kDisplayDelay) {
     float window_alpha = (render_tick_count_-kDisplayDelay)/(kFadeInLength*1.0);
     [fullScreenWindow setAlphaValue:window_alpha];
-    if (window_alpha == 1) {
+    if (window_alpha == 1 && getenv("BUMPTOP_PARITY") == NULL) {
       ToolTipManager::singleton()->showTaskbarTooltip();
     }
   }

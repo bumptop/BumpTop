@@ -112,7 +112,9 @@ void BumpTopScene::applicationWillTerminate() {
 
 void BumpTopScene::windowRectChanged() {
   if (room_ != NULL) {
-    Ogre::Vector2 window_size = app_->window_size();
+    // Room dimensions are in points (Finder desktop coordinates); with Retina
+    // rendering window_size() is in device pixels, so use the screen size.
+    Ogre::Vector2 window_size = app_->screen_resolution();
     room_->resizeRoomForResolution(window_size.x, window_size.y);
   }
 }
