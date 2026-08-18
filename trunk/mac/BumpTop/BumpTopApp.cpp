@@ -17,6 +17,7 @@
 #include "BumpTop/BumpTopApp.h"
 
 #include <QtCore/QCoreApplication>
+#include <QtCore/QElapsedTimer>
 #include <QtCore/QDir>
 #include <string>
 
@@ -130,21 +131,44 @@ void BumpTopApp::windowRectChanged() {
 }
 
 void BumpTopApp::renderTick() {
+  // BUMPTOP_PROFILE=1: log a per-phase breakdown of frames slower than ~2
+  // vsync intervals to find hitches.
+  static bool profile_frames = getenv("BUMPTOP_PROFILE") != NULL;
+  QElapsedTimer frame_timer;
+  qint64 t_responses = 0, t_on_render = 0, t_gl = 0, t_physics = 0;
+  if (profile_frames)
+    frame_timer.start();
+
   // We cap off the maximum elapsed time to prevent a feedback loop of slowness
   uint64_t elapsed = std::min((uint64_t)20, render_stopwatch_.elapsed());
   render_stopwatch_.restart();
 
   // need this so background loaded textures will fire their events and force visuals to refresh
   Ogre::Root::getSingleton().getWorkQueue()->processResponses();
+  if (profile_frames) t_responses = frame_timer.elapsed();
 
   emit onRender();
+  if (profile_frames) t_on_render = frame_timer.elapsed();
+
   if (!isInIdleMode()) {
     pushGLContextAndSwitchToOgreGLContext();
     Ogre::Root::getSingleton().renderOneFrame();
     popGLContext();
+    if (profile_frames) t_gl = frame_timer.elapsed();
 #define NUM_PHYSICS_ITERS_PER_STEP 3.0f
     float time_step = (1.1*elapsed)/1000.0;  // The factor of 1.1 is here to speed up physics a bit
     physics_->stepSimulation(time_step, NUM_PHYSICS_ITERS_PER_STEP, time_step/NUM_PHYSICS_ITERS_PER_STEP);
+    if (profile_frames) t_physics = frame_timer.elapsed();
+  }
+
+  if (profile_frames) {
+    qint64 total = frame_timer.elapsed();
+    if (total > 34) {
+      fprintf(stderr, "[profile] frame %lldms: workqueue %lld, onRender %lld, gl %lld, physics %lld\n",
+              total, t_responses, t_on_render - t_responses,
+              t_gl > 0 ? t_gl - t_on_render : 0,
+              t_physics > 0 ? t_physics - t_gl : 0);
+    }
   }
 
   global_state_changed_last_frame_ = global_state_changed_this_frame_;

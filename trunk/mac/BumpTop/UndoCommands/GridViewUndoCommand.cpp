@@ -17,6 +17,7 @@
 #include "BumpTop/UndoCommands/GridViewUndoCommand.h"
 
 #include "BumpTop/AnimationManager.h"
+#include "BumpTop/BumpTopApp.h"
 #include "BumpTop/BumpBoxLabel.h"
 #include "BumpTop/Room.h"
 #include "BumpTop/RoomItemPoseConstraints.h"
@@ -241,8 +242,11 @@ Ogre::Real GridViewUndoCommand::getMarginBetweenItems(QList<VisualPhysicsActorId
   for_each(VisualPhysicsActorId actor_id, actors_ids) {
     VisualPhysicsActor* actor = room_->actor_with_unique_id(actor_id);
     if (actor->label() != NULL) {
-      if (actor->label()->width_of_drawn_region() - actor->size().z > max_label_margin_width) {
-        max_label_margin_width = actor->label()->width_of_drawn_region() - actor->size().z;
+      // width_of_drawn_region is in device pixels; actor sizes are points.
+      Ogre::Real label_width_points = actor->label()->width_of_drawn_region() /
+                                      BumpTopApp::singleton()->device_scale();
+      if (label_width_points - actor->size().z > max_label_margin_width) {
+        max_label_margin_width = label_width_points - actor->size().z;
       }
     }
   }

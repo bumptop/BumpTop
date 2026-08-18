@@ -14,6 +14,8 @@
  *  limitations under the License.
  */
 
+#include <QtGui/QFontDatabase>
+
 #include "BumpTop/AnimationManager.h"
 #include "BumpTop/AppSettings.h"
 #include "BumpTop/BumpBoxLabel.h"
@@ -1416,7 +1418,9 @@ int Rename::position_within_my_category() {
 #include "BumpTop/ToolTipManager.h"
 void Rename::applyToActors(const BumpEnvironment& env, VisualPhysicsActorList actors, int subcommand) {
   actor_ = actors[0];
-  label_pos_ = actor_->labelPositionForCurrentPosition() + Ogre::Vector2(0, MENU_BAR_HEIGHT);
+  // Label coords are device pixels; the Qt line edit positions in points
+  // (and the window now spans the full screen, so no menu-bar offset).
+  label_pos_ = actor_->labelPositionForCurrentPosition() / BumpTopApp::singleton()->device_scale();
 
   line_edit_ = new CustomQLineEdit();
   line_edit_->setWindowFlags(Qt::FramelessWindowHint);
@@ -1473,8 +1477,8 @@ void Rename::applyToActors(const BumpEnvironment& env, VisualPhysicsActorList ac
 bool does_string_have_display_size(QString str) {
   QPainter temp_painter;
 
-  QFont label_font = QFont("Lucida Grande");
-  label_font.setBold(true);
+  QFont label_font = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
+  label_font.setWeight(QFont::DemiBold);
   label_font.setPointSize(13);
 
   QImage dummy_image  = QImage(1, 1, QImage::Format_ARGB32);
@@ -1493,8 +1497,8 @@ bool does_string_have_display_size(QString str) {
 void Rename::textBoxChanged(const QString& str) {
   QPainter temp_painter;
 
-  QFont label_font = QFont("Lucida Grande");
-  label_font.setBold(true);
+  QFont label_font = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
+  label_font.setWeight(QFont::DemiBold);
   label_font.setPointSize(13);
 
   QImage dummy_image  = QImage(1, 1, QImage::Format_ARGB32);
@@ -1533,7 +1537,7 @@ void Rename::textBoxChanged(const QString& str) {
 void Rename::poseChanged(VisualPhysicsActorId actor_id) {
   Ogre::Vector2 new_pos;
   if (actor_ != NULL)
-    new_pos = actor_->labelPositionForCurrentPosition() + Ogre::Vector2(0, MENU_BAR_HEIGHT);
+    new_pos = actor_->labelPositionForCurrentPosition() / BumpTopApp::singleton()->device_scale();
   if (line_edit_ != NULL && (label_pos_ - new_pos).length() > 5) {
     label_pos_ = new_pos;
     line_edit_->move(label_pos_.x - line_edit_size_.width()/2.0 - 4, label_pos_.y);
