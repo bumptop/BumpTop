@@ -269,6 +269,24 @@ class ChangeBackground : public BumpTopCommand {
   virtual int position_within_my_category();
 };
 
+class BumpTopSettings : public BumpTopCommand {
+  SINGLETON_HEADER(BumpTopSettings)
+ public:
+  virtual QString name();
+  virtual void applyToActors(const BumpEnvironment& env, VisualPhysicsActorList list_of_actors, int subcommand = 0);
+  virtual int number_of_separators_above_me();
+  virtual int position_within_my_category();
+};
+
+class AboutBumpTop : public BumpTopCommand {
+  SINGLETON_HEADER(AboutBumpTop)
+ public:
+  virtual QString name();
+  virtual void applyToActors(const BumpEnvironment& env, VisualPhysicsActorList list_of_actors, int subcommand = 0);
+  virtual int number_of_separators_above_me();
+  virtual int position_within_my_category();
+};
+
 class Grow : public BumpTopToolbarCommand {
   SINGLETON_HEADER(Grow)
  public:

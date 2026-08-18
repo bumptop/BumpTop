@@ -22,6 +22,7 @@
 
 #include "BumpTop/AppSettings.h"
 #include "BumpTop/BumpBoxLabel.h"
+#include "BumpTop/BumpToolbar.h"
 #include "BumpTop/BumpFlatSquare.h"
 #include "BumpTop/BumpTopApp.h"
 #include "BumpTop/BumpTopCommands.h"
@@ -490,6 +491,10 @@ void BumpBox::mouseDown(MouseEvent* mouse_event) {
 
   if (mouse_event->num_clicks == 2) {
     launch();
+    // Launching ends the interaction: drop the selection so the toolbar
+    // doesn't pop up under the just-opened item.
+    room_->deselectActors();
+    room_->bump_toolbar()->hide();
   } else {
     bool command_or_shift_pressed = mouse_event->modifier_flags & COMMAND_KEY_MASK
                                     || mouse_event->modifier_flags & SHIFT_KEY_MASK;

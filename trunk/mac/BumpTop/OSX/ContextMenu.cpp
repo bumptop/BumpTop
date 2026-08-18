@@ -167,10 +167,12 @@ void launchContextMenu(const BumpEnvironment& env, const VisualPhysicsActorList&
   Ogre::Vector2 mouse_location = BumpTopApp::singleton()->mouse_location();
   BumpTopApp::singleton()->mouseUp(mouse_location.x, mouse_location.y, 1, NO_KEY_MODIFIERS_MASK);
 
-  // mouse_in_window_space uses a top-left origin; NSMenu wants bottom-left
-  // screen coordinates.
+  // mouse_in_window_space is top-left-origin device pixels; NSMenu wants
+  // bottom-left-origin screen points.
+  Ogre::Real device_scale = BumpTopApp::singleton()->device_scale();
   CGFloat screen_height = [[[NSScreen screens] objectAtIndex:0] frame].size.height;
-  NSPoint popup_point = NSMakePoint(mouse_in_window_space.x, screen_height - mouse_in_window_space.y);
+  NSPoint popup_point = NSMakePoint(mouse_in_window_space.x / device_scale,
+                                    screen_height - mouse_in_window_space.y / device_scale);
 
   BumpTopApp::singleton()->set_context_menu_open(true);
   [context_menu popUpMenuPositioningItem:nil atLocation:popup_point inView:nil];

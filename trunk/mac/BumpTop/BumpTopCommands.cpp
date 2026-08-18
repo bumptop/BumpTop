@@ -918,6 +918,52 @@ void ChangeBackground::execute(const BumpEnvironment& env) {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+SINGLETON_IMPLEMENTATION(BumpTopSettings)
+
+QString BumpTopSettings::name() {
+  return "BumpTop Settings"+QString(QChar(0x2026));
+}
+
+int BumpTopSettings::number_of_separators_above_me() {
+  return 5;
+}
+
+int BumpTopSettings::position_within_my_category() {
+  return 1;
+}
+
+void BumpTopSettings::applyToActors(const BumpEnvironment& env, VisualPhysicsActorList actors, int subcommand) {
+#ifndef BUMPTOP_TEST
+  [[PreferencesController singleton] showWindowWithView:@"General"];
+#endif
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#import "BumpTop/OSX/OgreController.h"
+
+SINGLETON_IMPLEMENTATION(AboutBumpTop)
+
+QString AboutBumpTop::name() {
+  return "About BumpTop";
+}
+
+int AboutBumpTop::number_of_separators_above_me() {
+  return 5;
+}
+
+int AboutBumpTop::position_within_my_category() {
+  return 2;
+}
+
+void AboutBumpTop::applyToActors(const BumpEnvironment& env, VisualPhysicsActorList actors, int subcommand) {
+#ifndef BUMPTOP_TEST
+  [(OgreController*)[[NSApplication sharedApplication] delegate] showAboutWindow:nil];
+#endif
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 SINGLETON_IMPLEMENTATION(Grow)
 
 QString Grow::name() {

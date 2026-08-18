@@ -47,10 +47,12 @@ class BumpToolbar : public ClickableOverlay, public AlphaElement {
   virtual Ogre::OverlayContainer* overlay_container();
   virtual void setAlpha(Ogre::Real alpha);
 
-  virtual void show(int delay = 250);
+  // The default show delay covers the double-click interval so the toolbar
+  // doesn't flash when a click turns out to be a double-click launch.
+  virtual void show(int delay = 500);
   virtual void hide();
   virtual void fadeOut(Ogre::Real final_alpha = 0.0);
-  virtual void fadeIn(int delay = 250);
+  virtual void fadeIn(int delay = 500);
   virtual bool faded();
 
   virtual void lassoComplete(VisualPhysicsActorList actors);

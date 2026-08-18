@@ -40,14 +40,16 @@ const Ogre::Real RoomSurface::kSurfaceThickness = 50.0;
 const Ogre::Real RoomSurface::kSurfaceThickness = 1.0;
 #endif
 
-BumpTopCommandSet* RoomSurface::context_menu_items_set = MakeQSet(7,  // count, must keep this updated
+BumpTopCommandSet* RoomSurface::context_menu_items_set = MakeQSet(9,  // count, must keep this updated
                                                                    NewFolder::singleton(),
                                                                    GetInfo::singleton(),
                                                                    ChangeBackground::singleton(),
                                                                    Undo::singleton(),
                                                                    Redo::singleton(),
                                                                    PileByTypeForAllActors::singleton(),
-                                                                   Paste::singleton());
+                                                                   Paste::singleton(),
+                                                                   BumpTopSettings::singleton(),
+                                                                   AboutBumpTop::singleton());
 
 
 BumpTopCommandSet* RoomSurface::supported_context_menu_items() {

@@ -278,7 +278,10 @@ void StickyNote::beginEditingAnimationFinished(VisualPhysicsActorAnimation* anim
   QTextEdit* editable_text = text_->text_edit();
 
   Ogre::AxisAlignedBox sticky_bounding_box = visual_copy_of_actor_->screenBoundingBox();
-  editable_text->move(sticky_bounding_box.getMinimum().x + 5, sticky_bounding_box.getMinimum().y + 26);
+  // The screen bounding box is in device pixels; QTextEdit::move takes points.
+  Ogre::Real device_scale = BumpTopApp::singleton()->device_scale();
+  editable_text->move(sticky_bounding_box.getMinimum().x / device_scale + 5,
+                      sticky_bounding_box.getMinimum().y / device_scale + 26);
 
   // Do not remove this code -- this shows how the size is calculated
   /*editable_text->resize(sticky_bounding_box.getMaximum().x - sticky_bounding_box.getMinimum().x - 9,

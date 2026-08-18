@@ -34,10 +34,10 @@ int main(int argc, char *argv[])
     exit(0);
   }
   NSString *now = [[[NSDate date] description] stringByReplacingOccurrencesOfString:@" " withString: @"#"];
-  NSString *stdout_path = [NSString stringWithFormat:@"%s/stdout-%@.txt", FileManager::getResourcePath().toUtf8().data(), now];
+  NSString *stdout_path = [NSString stringWithFormat:@"%s/stdout-%@.txt", FileManager::getApplicationDataPath().toUtf8().data(), now];
   freopen([stdout_path cStringUsingEncoding:NSUTF8StringEncoding], "w", stdout);
 
-  NSString *stderr_path = [NSString stringWithFormat:@"%s/stderr-%@.txt", FileManager::getResourcePath().toUtf8().data(), now];
+  NSString *stderr_path = [NSString stringWithFormat:@"%s/stderr-%@.txt", FileManager::getApplicationDataPath().toUtf8().data(), now];
   freopen([stderr_path cStringUsingEncoding:NSUTF8StringEncoding], "w", stderr);
   [pool release];
 #endif
