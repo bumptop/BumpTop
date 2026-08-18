@@ -122,4 +122,3 @@ Ogre::Entity* ClickableOverlay::_entity() {
   return NULL;
 }
 
-#include "BumpTop/moc/moc_Clickable.cpp"

@@ -138,4 +138,3 @@ VisualPhysicsActorType BumpButton::actor_type() {
   return NULL_ACTOR_TYPE;
 }
 
-#include "moc/moc_BumpButton.cpp"

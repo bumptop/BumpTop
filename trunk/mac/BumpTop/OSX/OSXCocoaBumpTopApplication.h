@@ -26,7 +26,7 @@
 @class OgreController;
 class OSXCocoaBumpTopApplication : public BumpTopApp {
 public:
-  explicit OSXCocoaBumpTopApplication(OgreView* ogre_view, OgreController* ogre_controller);
+  explicit OSXCocoaBumpTopApplication(OgreGLView* ogre_view, OgreController* ogre_controller);
   virtual ~OSXCocoaBumpTopApplication();
 
   static OSXCocoaBumpTopApplication* singleton();
@@ -34,7 +34,7 @@ public:
   virtual void init();
 
   virtual QString platform();
-  virtual OgreView* ogre_view();
+  virtual OgreGLView* ogre_view();
   virtual void processOneEvent(int milliseconds = -1);
   virtual QString bumptopVersion();
 
@@ -57,7 +57,7 @@ protected:
   virtual void initOgreCore();
 
   OgreController* ogre_controller_;
-  OgreView *ogre_view_;
+  OgreGLView *ogre_view_;
   FullScreenWindow* window_;
   NSOpenGLContext *ogre_gl_context_;
   NSOpenGLContext *pushed_gl_context_;

@@ -83,9 +83,7 @@ void BumpTopApp::initUsageTracker() {
 }
 
 void BumpTopApp::makeSelfForegroundApp() {
-  ProcessSerialNumber bumptop_process_serial_number;
-  GetCurrentProcess(&bumptop_process_serial_number);
-  SetFrontProcess(&bumptop_process_serial_number);
+  [[NSRunningApplication currentApplication] activateWithOptions:NSApplicationActivateIgnoringOtherApps];
 }
 
 Ogre::RenderWindow* BumpTopApp::render_window() {
@@ -177,10 +175,11 @@ bool BumpTopApp::context_menu_open() {
 void BumpTopApp::createRootNode() {
   QString resource_path = FileManager::getResourcePath();
 
-  // Create a new root object with the correct paths
-  new Ogre::Root(utf8(resource_path + "/plugins.cfg"),
-                 utf8(resource_path + "/ogre.cfg"),
-                 utf8(resource_path + "/Ogre.log"));
+  // Static Ogre build: install the render system and codec plugins directly
+  // instead of loading them through plugins.cfg.
+  new Ogre::Root("", "", utf8(FileManager::getApplicationDataPath() + "Ogre.log"));
+  Ogre::Root::getSingleton().installPlugin(new Ogre::GLPlugin());
+  Ogre::STBIImageCodec::startup();
 }
 
 void BumpTopApp::setRenderSystem() {
@@ -190,7 +189,10 @@ void BumpTopApp::setRenderSystem() {
 
 void BumpTopApp::createSceneManager() {
   // Create the SceneManager, in this case a generic one
-  scene_manager_ = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC);
+  scene_manager_ = Ogre::Root::getSingleton().createSceneManager();
+  // Modern Ogre moved overlays into a component that must be registered with
+  // the scene manager for the overlay render queue to be processed.
+  scene_manager_->addRenderQueueListener(new Ogre::OverlaySystem());
 }
 
 void BumpTopApp::initResources() {
@@ -318,4 +320,3 @@ BumpTopScene* BumpTopApp::scene() {
   return scene_;
 }
 
-#include "BumpTop/moc/moc_BumpTopApp.cpp"

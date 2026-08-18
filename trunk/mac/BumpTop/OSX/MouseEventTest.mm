@@ -253,4 +253,3 @@ namespace {
   }
 }  // namespace
 
-#include "BumpTop/moc/moc_MouseEventTest.mm";

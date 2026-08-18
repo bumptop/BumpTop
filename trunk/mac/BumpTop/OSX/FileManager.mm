@@ -377,7 +377,7 @@ FileKind FileManager::getFileKind(QString path) {
 bool FileManager::isStartupDrive(QString path) {
   // the actual path of startup drive is "/" which is the local host but the path we are using is "/Volumes/(name)" which
   // is a link to the "/" so we can just check if the file is in Volumes and links to "/"
-  return isVolume(path) && QFileInfo(path).readLink() == "/";
+  return isVolume(path) && QFileInfo(path).symLinkTarget() == "/";
 }
 
 bool FileManager::isVolume(QString path) {
@@ -515,13 +515,13 @@ void FileManager::makeAliasOfFile(QString file_path) {
 
   if (getFileKind(file_path) == ALIAS) {
     // if file is an alias, we want to get the original item the alias is pointing to and make alias of that
-    if (QFileInfo(file_path).readLink() == "/") {
+    if (QFileInfo(file_path).symLinkTarget() == "/") {
       // if the link is "/", it means that the alias is pointing to the startup drive; so, we want to get the
       // startup disk thats in /Volumes/
       original_path = "/Volumes/" + getStartupDriveName();
     } else {
       // gets the path to the original item the alias is pointing to
-      original_path = QFileInfo(file_path).readLink();
+      original_path = QFileInfo(file_path).symLinkTarget();
     }
   } else {
     original_path = file_path;

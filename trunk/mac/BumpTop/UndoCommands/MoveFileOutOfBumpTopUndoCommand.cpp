@@ -14,6 +14,7 @@
  *  limitations under the License.
  */
 
+#include <sys/stat.h>
 #include "BumpTop/UndoCommands/MoveFileOutOfBumpTopUndoCommand.h"
 #include "BumpTop/FileManager.h"
 #include "BumpTop/QStringHelpers.h"

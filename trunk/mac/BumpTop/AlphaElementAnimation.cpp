@@ -89,4 +89,3 @@ void AlphaElementAnimation::endAnimation() {
   AnimationManager::singleton()->AlphaElementAnimationComplete(this);
 }
 
-#include "BumpTop/moc/moc_AlphaElementAnimation.cpp"

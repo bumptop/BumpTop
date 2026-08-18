@@ -130,4 +130,3 @@ int FileSystemEventTest::numEventsOfType(QString event_type) {
   return i;
 }
 
-#include "moc/moc_FileSystemEventTestHelper.cpp"

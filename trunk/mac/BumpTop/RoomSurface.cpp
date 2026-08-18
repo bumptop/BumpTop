@@ -141,8 +141,8 @@ std::pair<bool, Ogre::Vector3> RoomSurface::mouseIntersectionAbove(Ogre::Vector2
   if (mouse_intersection_behavior == IGNORE_SURFACE_BOUNDS) {
     return std::pair<bool, Ogre::Vector3>(intersect_result.first, intersect_point);
   } else {  // if (mouse_intersection_behavior == ENFORCE_SURFACE_BOUNDS)
-    if (intersect_result.first && world_transform.isAffine()) {
-      Ogre::Matrix4 world_transform_inverse = world_transform.inverseAffine();
+    if (intersect_result.first) {
+      Ogre::Matrix4 world_transform_inverse = world_transform.inverse();
       Ogre::Vector3 intersect_point = mouse_ray.getPoint(intersect_result.second);
 
       // we'll keep the scaled size of the object, but otherwise transform this to object space
@@ -348,4 +348,3 @@ const QString& RoomSurface::path() {
   return path_;
 }
 
-#include "moc/moc_RoomSurface.cpp"

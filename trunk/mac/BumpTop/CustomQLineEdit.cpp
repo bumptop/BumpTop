@@ -35,4 +35,3 @@ void CustomQLineEdit::inputMethodEvent(QInputMethodEvent * event) {
   emit QLineEdit::textChanged(string_to_emit);
 }
 
-#include "BumpTop/moc/moc_CustomQLineEdit.cpp"

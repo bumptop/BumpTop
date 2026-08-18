@@ -22,7 +22,7 @@
 #include "BumpTop/OSX/OSXCocoaDragAndDrop.h"
 #include "BumpTop/QStringHelpers.h"
 
-OSXCocoaBumpTopApplication::OSXCocoaBumpTopApplication(OgreView* ogre_view, OgreController* ogre_controller)
+OSXCocoaBumpTopApplication::OSXCocoaBumpTopApplication(OgreGLView* ogre_view, OgreController* ogre_controller)
 : BumpTopApp(),
   ogre_view_(ogre_view),
   ogre_controller_(ogre_controller) {
@@ -58,7 +58,7 @@ QString OSXCocoaBumpTopApplication::platform() {
   return "OSX";
 }
 
-OgreView* OSXCocoaBumpTopApplication::ogre_view() {
+OgreGLView* OSXCocoaBumpTopApplication::ogre_view() {
   return ogre_view_;
 }
 

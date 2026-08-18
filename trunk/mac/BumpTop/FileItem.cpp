@@ -70,4 +70,3 @@ void FileItem::fileModified(const QString& path) {
   }
 }
 
-#include "moc/moc_FileItem.cpp"

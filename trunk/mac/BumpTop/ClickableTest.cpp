@@ -97,4 +97,3 @@ namespace {
 
 }  // namespace
 
-#include "BumpTop/moc/moc_ClickableTest.cpp"

@@ -213,21 +213,21 @@ void KeyboardEventManager::keyDown(KeyboardEvent keyboard_event) {
     }
 
     // Arrow Keys
-    if (keyboard_event.characters.startsWith(QChar(ARROW_UP))) {
+    if (keyboard_event.characters.startsWith(QChar((ushort)ARROW_UP))) {
       bumptop_->scene()->room()->process_arrow_key(ARROW_UP, keyboard_event.modifier_flags);
     }
-    if (keyboard_event.characters.startsWith(QChar(ARROW_DOWN))) {
+    if (keyboard_event.characters.startsWith(QChar((ushort)ARROW_DOWN))) {
       bumptop_->scene()->room()->process_arrow_key(ARROW_DOWN, keyboard_event.modifier_flags);
     }
   } else {
     // Arrow Keys
-    if (keyboard_event.characters.startsWith(QChar(ARROW_UP)))
+    if (keyboard_event.characters.startsWith(QChar((ushort)ARROW_UP)))
       bumptop_->scene()->room()->process_arrow_key(ARROW_UP, keyboard_event.modifier_flags);
-    if (keyboard_event.characters.startsWith(QChar(ARROW_DOWN)))
+    if (keyboard_event.characters.startsWith(QChar((ushort)ARROW_DOWN)))
       bumptop_->scene()->room()->process_arrow_key(ARROW_DOWN, keyboard_event.modifier_flags);
-    if (keyboard_event.characters.startsWith(QChar(ARROW_LEFT)))
+    if (keyboard_event.characters.startsWith(QChar((ushort)ARROW_LEFT)))
       bumptop_->scene()->room()->process_arrow_key(ARROW_LEFT, keyboard_event.modifier_flags);
-    if (keyboard_event.characters.startsWith(QChar(ARROW_RIGHT)))
+    if (keyboard_event.characters.startsWith(QChar((ushort)ARROW_RIGHT)))
       bumptop_->scene()->room()->process_arrow_key(ARROW_RIGHT, keyboard_event.modifier_flags);
 
     // Close View
@@ -278,4 +278,3 @@ bool KeyboardEventManager::option_key_down() {
   return option_key_down_;
 }
 
-#include "BumpTop/moc/moc_KeyboardEventManager.cpp"

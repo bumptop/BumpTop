@@ -345,4 +345,3 @@ bool PhysicsActor::physics_enabled() {
 }
 
 
-#include "BumpTop/moc/moc_PhysicsActor.cpp"

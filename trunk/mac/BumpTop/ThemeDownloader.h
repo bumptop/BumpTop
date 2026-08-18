@@ -22,10 +22,10 @@ class QProgressBar;
 class QWizard;
 class QWebView;
 
-#include <QtGui/QWizard>
-#include <QtGui/QProgressBar>
-#include <QtGui/QLabel>
-#include <QtGui/QVBoxLayout>
+#include <QtWidgets/QWizard>
+#include <QtWidgets/QProgressBar>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWebKit/QWebView>
 
 #include <QtNetwork/QNetworkAccessManager>

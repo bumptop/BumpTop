@@ -181,4 +181,3 @@ void VisualPhysicsActorAnimation::endAnimation() {
   AnimationManager::singleton()->VisualPhysicsActorAnimationComplete(this);
 }
 
-#include "BumpTop/moc/moc_VisualPhysicsActorAnimation.cpp"

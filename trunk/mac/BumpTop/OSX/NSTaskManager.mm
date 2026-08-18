@@ -46,7 +46,7 @@ static NSTaskManager *singleton_ = NULL;
         }
       }
     }
-  } else if (script.lastIndexOf("Get finder label colour and set label colour of" > 0)) {
+  } else if (script.lastIndexOf("Get finder label colour and set label colour of") > 0) {
     BumpBoxLabelColour label_colour = FileManager::bumpBoxLabelColourFromFinderLabelColour([NSTaskManager standardOutAsInt:note]);
 
     VisualPhysicsActorId actor_id = script.mid(script.lastIndexOf(':')+1).toInt();

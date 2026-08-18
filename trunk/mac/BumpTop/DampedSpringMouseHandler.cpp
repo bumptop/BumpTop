@@ -104,9 +104,9 @@ void DampedSpringMouseHandler::mouseDown(MouseEvent* mouse_event) {
 
   room_->draggingItemsBegan();
 
-  assert(world_transform.isAffine());
-  if (world_transform.isAffine()) {
-    Ogre::Matrix4 world_transform_inverse = world_transform.inverseAffine();
+  
+  if (true) {
+    Ogre::Matrix4 world_transform_inverse = world_transform.inverse();
     stab_point_object_space_ = world_transform_inverse*mouse_event->mouse_in_world_space;
   }
 
@@ -332,16 +332,16 @@ void DampedSpringMouseHandler::dragAndDropUpdate(MouseEvent* mouse_event) {
 
     if (drop_receiver_ != NULL && drag_operation_ == NSDragOperationCopy) {
       if (current_cursor_ != kCopyCursor) {
-        SetThemeCursor(kThemeCopyArrowCursor);
+        [[NSCursor dragCopyCursor] set];
         current_cursor_ = kCopyCursor;
       }
     } else if (drop_receiver_ != NULL && drag_operation_ == NSDragOperationLink) {
       if (current_cursor_ != kLinkCursor) {
-        SetThemeCursor(kThemeAliasArrowCursor);
+        [[NSCursor dragLinkCursor] set];
         current_cursor_ = kLinkCursor;
       }
     } else if (current_cursor_ != kRegularCursor) {
-      SetThemeCursor(kThemeArrowCursor);
+      [[NSCursor arrowCursor] set];
       current_cursor_ = kRegularCursor;
     }
   }
@@ -430,7 +430,7 @@ void DampedSpringMouseHandler::mouseUp(MouseEvent* mouse_event) {
       }
 
       if (current_cursor_ != kRegularCursor) {
-        SetThemeCursor(kThemeArrowCursor);
+        [[NSCursor arrowCursor] set];
       }
     }
 
@@ -590,8 +590,8 @@ void DampedSpringMouseHandler::renderUpdate() {
 
     last_mouse_in_window_space_ = mouse_in_window_space;
     Ogre::Matrix4 world_transform = actor_->transform();
-    assert(world_transform.isAffine());
-    Ogre::Matrix4 world_transform_inverse = world_transform.inverseAffine();
+    
+    Ogre::Matrix4 world_transform_inverse = world_transform.inverse();
 
     Ogre::Vector3 stab_point_delta = world_transform*stab_point_object_space_ - actor_->world_position();
 
@@ -679,4 +679,3 @@ void DampedSpringMouseHandler::renderUpdate() {
   }
 }
 
-#include "BumpTop/moc/moc_DampedSpringMouseHandler.cpp"

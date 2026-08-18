@@ -107,4 +107,3 @@ void CameraAnimation::endAnimation() {
   AnimationManager::singleton()->CameraAnimationComplete(this);
 }
 
-#include "BumpTop/moc/moc_CameraAnimation.cpp"

@@ -24,10 +24,10 @@
 #include <QtGui/QPainter>
 #include <QtGui/QPalette>
 #include <QtGui/QPen>
-#include <QtGui/QLineEdit>
-#include <QtGui/QApplication>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QApplication>
 #include <QtGui/QTextDocument>
-#include <QtGui/QTextEdit>
+#include <QtWidgets/QTextEdit>
 
 #endif  // BUMPTOP_QTGUI_INCLUDES_H_
 

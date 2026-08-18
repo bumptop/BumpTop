@@ -1036,7 +1036,8 @@ Ogre::Vector2 BumpPile::labelPositionForCurrentPosition() {
   Ogre::Real y = screenBoundingBox().getMaximum().y;
 
   Ogre::AxisAlignedBox bounding_box = world_bounding_box();
-  const Ogre::Vector3* world_corners_ptr = bounding_box.getAllCorners();
+  const Ogre::AxisAlignedBox::Corners world_corners_array = bounding_box.getAllCorners();
+  const Ogre::Vector3* world_corners_ptr = world_corners_array.data();
   QList<Ogre::Vector3> world_corners;
   for (int i = 0; i < 8; i++) {
     world_corners.push_back(world_corners_ptr[i]);
@@ -1240,5 +1241,4 @@ void BumpPileDropReceiver::draggingExited() {
   pile_->draggingExited();
 }
 
-#include "BumpTop/moc/moc_BumpPile.cpp"
 

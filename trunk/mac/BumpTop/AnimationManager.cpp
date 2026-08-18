@@ -142,4 +142,3 @@ void AnimationManager::renderTick() {
 #endif
 }
 
-#include "BumpTop/moc/moc_AnimationManager.cpp"

@@ -382,5 +382,4 @@ NewItemsPileMarker::NewItemsPileMarker(Ogre::SceneManager *scene_manager, Ogre::
   set_material_name(AppSettings::singleton()->global_material_name(NEW_ITEMS_PILE_ICON));
 }
 
-#include "BumpTop/moc/moc_NewItemsPile.cpp"
 

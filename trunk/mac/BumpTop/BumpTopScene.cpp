@@ -24,7 +24,6 @@
 #include "BumpTop/QuickLookPreviewPanel.h"
 #include "BumpTop/RoomItemPoseConstraints.h"
 #include "BumpTop/StickyNotePad.h"
-#include "BumpTop/ThemeDownloader.h"
 #include "BumpTop/Timer.h"
 #include "BumpTop/VisualPhysicsActorList.h"
 
@@ -130,4 +129,3 @@ RoomSurfaceType BumpTopScene::surface_that_camera_is_zoomed_to() {
   return surface_that_camera_is_zoomed_to_;
 }
 
-#include "BumpTop/moc/moc_BumpTopScene.cpp"

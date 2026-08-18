@@ -486,9 +486,9 @@ QSize BumpBoxLabel::getTextBounds(QStringList *linesOut, QList<QSize> *lineSizes
       while (lastBoundary < srcText.size()) {
         if (nextBoundary >= 0) {
           line = srcText.mid(lastBoundary, nextBoundary - lastBoundary).trimmed();
-          if ((metrics.width(line) > maxWidth) || (line.size() > 1 && line.endsWith("\n"))) {
+          if ((metrics.horizontalAdvance(line) > maxWidth) || (line.size() > 1 && line.endsWith("\n"))) {
             line = srcText.mid(lastBoundary, prevBoundary - lastBoundary).trimmed();
-            if (prevBoundary > lastBoundary && (metrics.width(line) > quarterMaxWidth)) {
+            if (prevBoundary > lastBoundary && (metrics.horizontalAdvance(line) > quarterMaxWidth)) {
               // the next boundary is OK
               line = srcText.mid(lastBoundary, prevBoundary - lastBoundary).trimmed();
               tmpSize = metrics.boundingRect(line).size();
@@ -501,7 +501,7 @@ QSize BumpBoxLabel::getTextBounds(QStringList *linesOut, QList<QSize> *lineSizes
             } else {  // prevBoundary <= lastBoundary
               // the next boundary is beyond the max width
               int tmpLen = nextBoundary - lastBoundary;
-              while (metrics.width(srcText.mid(lastBoundary, tmpLen)) > maxWidth && (tmpLen > 0)) {
+              while (metrics.horizontalAdvance(srcText.mid(lastBoundary, tmpLen)) > maxWidth && (tmpLen > 0)) {
                 --tmpLen;
               }
 
@@ -543,5 +543,4 @@ Ogre::Real BumpBoxLabel::boundingWidth() {
   return text_size_.width();
 }
 
-#include "moc/moc_BumpBoxLabel.cpp"
 

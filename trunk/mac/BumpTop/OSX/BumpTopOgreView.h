@@ -18,7 +18,7 @@
 
 class DropReceiver;
 
-@interface BumpTopOgreView : OgreView {
+@interface BumpTopOgreView : OgreGLView {
   NSTrackingRectTag bounds_tracking_tag_;
   DropReceiver* last_drop_receiver_to_receive_dragging_updated_message_;
   NSDragOperation last_drag_operation_returned_by_drop_receiver_;

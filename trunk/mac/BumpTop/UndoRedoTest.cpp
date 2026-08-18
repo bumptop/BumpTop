@@ -239,4 +239,3 @@ namespace {
   }
 }
 
-#include "BumpTop/moc/moc_UndoRedoTest.cpp";

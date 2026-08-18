@@ -118,4 +118,3 @@ void QPainterMaterial::setAlpha(Ogre::Real alpha) {
   update();
 }
 
-#include "moc/moc_QPainterMaterial.cpp"

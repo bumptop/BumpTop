@@ -40,7 +40,7 @@ class Authorization : public QObject {
   void set_authorized(bool value);
   QString key();
  public slots:  // NOLINT
-  void requestFinished(int id, bool error);
+  void requestFinished(QNetworkReply* reply);
  protected:
   virtual bool parseFromString(std::string data) = 0;
   virtual QString config_file_path() = 0;
@@ -48,10 +48,9 @@ class Authorization : public QObject {
   virtual std::pair<QString, QString> auth_script_web_host_and_path() = 0;
   virtual QString account_type() = 0;
   bool authorized_;
-  QHttp *http_;
+  QNetworkAccessManager *network_manager_;
   bool download_finished_;
   BoolAndQString download_return_value_;
-  int http_request_id_;
   License *license_;
 };
 

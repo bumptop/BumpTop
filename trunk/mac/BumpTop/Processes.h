@@ -17,14 +17,16 @@
 #ifndef BUMPTOP_PROCESSES_H_
 #define BUMPTOP_PROCESSES_H_
 
+// Ported from the Carbon Process Manager: processes are now identified by pid.
 struct ProcessInfo {
-  ProcessSerialNumber psn;
+  pid_t psn;
   QString name;
+  ProcessInfo() : psn(0) {}
 };
 
 QList<ProcessInfo> listAllProcesses();
-ProcessSerialNumber getFinder();
+pid_t getFinder();
 void setFinderToFront();
-bool isProcessRunning(ProcessSerialNumber psn);
+bool isProcessRunning(pid_t psn);
 
 #endif  // BUMPTOP_PROCESSES_H_

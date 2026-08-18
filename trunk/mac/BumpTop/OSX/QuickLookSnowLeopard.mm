@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#  if (MAC_OS_X_VERSION_MAX_ALLOWED == MAC_OS_X_VERSION_10_6)
+
 
 #import "BumpTop/OSX/QuickLookSnowLeopard.h"
 
@@ -119,7 +119,7 @@ static QuickLookPublic *singleton_instance = NULL;
   {
     if (singleton_instance == NULL) {
       singleton_instance = [[self alloc] init];
-      OgreView* ogre_view = OSXCocoaBumpTopApplication::singleton()->ogre_view();
+      OgreGLView* ogre_view = OSXCocoaBumpTopApplication::singleton()->ogre_view();
       [singleton_instance setNextResponder: [[ogre_view nextResponder] nextResponder]];
       [[ogre_view nextResponder] setNextResponder: singleton_instance ];
     }
@@ -193,6 +193,6 @@ static QuickLookPublic *singleton_instance = NULL;
 */
 
 @end
-#endif
+
 // *****************************
 

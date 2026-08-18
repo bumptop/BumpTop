@@ -44,22 +44,11 @@ struct BumpRaySceneQueryResultEntry : public Ogre::RaySceneQueryResultEntry {
       }
     }  // TODO: add support for  ManualObjects as well
 
-    if (lhs_renderable != NULL && rhs_renderable != NULL) {
-      if (lhs_renderable->getRenderableToRenderNextTo() == rhs_renderable) {
-        return lhs_renderable->renderAfterOtherRenderable();
-      } else if (rhs_renderable->getRenderableToRenderNextTo() == lhs_renderable) {
-        return !rhs_renderable->renderAfterOtherRenderable();
-      } else if (lhs_renderable->getRenderableToRenderNextTo() ==
-                 rhs_renderable->getRenderableToRenderNextTo()) {
-        if (lhs_renderable->renderAfterOtherRenderable() &&
-            !rhs_renderable->renderAfterOtherRenderable()) {
-          return true;
-        } else if (!lhs_renderable->renderAfterOtherRenderable() &&
-                   rhs_renderable->renderAfterOtherRenderable()) {
-          return false;
-        }
-      }
-    }
+    // The render-next-to tie-break relied on a BumpTop patch to Ogre 1.7's
+    // Renderable; nothing in the app ever set those properties, so it was
+    // dead code and is dropped in the Ogre 14 port.
+    (void)lhs_renderable;
+    (void)rhs_renderable;
 
     return this->distance < rhs.distance;
   }

@@ -27,4 +27,3 @@ void Cube::set_size(Ogre::Real size) {
 }
 
 
-#include "BumpTop/moc/moc_Cube.cpp"

@@ -933,7 +933,7 @@ void Room::deselectActors() {
 void Room::fileAdded(const QString& path) {
   if (isFileWithPathInRoom(path, room_actor_list())) {
     return;
-  } else if (path.startsWith("/Volumes") && !(QFileInfo(path).readLink() == "" || QFileInfo(path).readLink() == "/")) {
+  } else if (path.startsWith("/Volumes") && !(QFileInfo(path).symLinkTarget() == "" || QFileInfo(path).symLinkTarget() == "/")) {
     // Apple stores all its mounted drives and a link to the startup disk in folder "/Volumes"
     // the original path of the startup disk is "/".
     // Sometimes other special items for example the iDisk can get into Volumes, these items are not drives but links
@@ -1596,4 +1596,3 @@ VisualPhysicsActorId Room::new_items_pile() {
   return new_items_pile_id_;
 }
 
-#include "moc/moc_Room.cpp"

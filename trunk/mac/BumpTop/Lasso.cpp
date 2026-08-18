@@ -310,4 +310,3 @@ void Lasso::findBoxesInPolygon() {
   }
 }
 
-#include "moc/moc_Lasso.cpp"

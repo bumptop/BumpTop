@@ -256,5 +256,4 @@ void ToolTipOverlay::setAlpha(Ogre::Real alpha) {
   BumpTopApp::singleton()->markGlobalStateAsChanged();
 }
 
-#include "BumpTop/moc/moc_ToolTipOverlay.cpp"
 

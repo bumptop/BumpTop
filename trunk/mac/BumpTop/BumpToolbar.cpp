@@ -448,4 +448,3 @@ void BumpToolbar::renderTick() {
   }
 }
 
-#include "BumpTop/moc/moc_BumpToolbar.cpp"

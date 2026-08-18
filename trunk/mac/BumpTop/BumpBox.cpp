@@ -162,7 +162,7 @@ void BumpBox::initWithPath(QString file_path, bool physics_enabled) {
   init();
   set_path(file_path);
   if (FileManager::getFileKind(file_path) == ALIAS) {
-    QString original_path = QFileInfo(file_path).readLink();
+    QString original_path = QFileInfo(file_path).symLinkTarget();
     is_dir_ = QFileInfo(original_path).isDir();
   } else {
     is_dir_ = QFileInfo(file_path).isDir();
@@ -925,4 +925,3 @@ void BumpBox::updateActorSiblingOffsetPoseToParentBeforeDrag() {
   }
 }
 
-#include "moc/moc_BumpBox.cpp"

@@ -51,7 +51,7 @@ Ogre::Vector2 worldPositionToNormalizedScreenPosition(Ogre::Vector3 world_positi
 }
 
 Ogre::AxisAlignedBox worldBoundingBoxToScreenBoundingBox(Ogre::AxisAlignedBox world_bounding_box) {
-  const Ogre::Vector3* corners = world_bounding_box.getAllCorners();
+  const Ogre::AxisAlignedBox::Corners corners = world_bounding_box.getAllCorners();
   bool first_pass = true;
   Ogre::Real min_x, min_y, max_x, max_y;
   for (int i = 0; i < 8; i++) {
@@ -109,7 +109,7 @@ Ogre::AxisAlignedBox addPointToBoundingBox(Ogre::AxisAlignedBox box, Ogre::Vecto
 }
 
 Ogre::String addressToString(void *pointer) {
-  return Ogre::StringConverter::toString((uint)pointer);
+  return Ogre::StringConverter::toString((size_t)pointer);
 }
 
 BumpPose::BumpPose()

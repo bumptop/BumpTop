@@ -64,4 +64,3 @@ void FSEventsWatcher::_directoryChanged(QString path) {
   emit directoryChanged(path);
 }
 
-#include "moc/moc_FSEventsWatcher.cpp"

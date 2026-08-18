@@ -72,18 +72,19 @@ BoolAndQString Authorization::registerOverInternet(QString invite_code) {
   QRegExp eight_digit_hexadecimal("[a-f0-9]{8}");
   if (!eight_digit_hexadecimal.exactMatch(invite_code))
     return BoolAndQString(false, "Invite code is invalid. Please double-check your entry.");
-  http_ = new QHttp();
+  network_manager_ = new QNetworkAccessManager();
   std::pair<QString, QString> web_host_and_path = auth_script_web_host_and_path();
-  http_->setHost(web_host_and_path.first);
-  assert(QObject::connect(http_, SIGNAL(requestFinished(int, bool)), this, SLOT(requestFinished(int, bool))));
+  assert(QObject::connect(network_manager_, SIGNAL(finished(QNetworkReply*)),
+                          this, SLOT(requestFinished(QNetworkReply*))));
   download_finished_ = false;
   download_return_value_ = BoolAndQString(false, "");
   BoolAndQString bool_and_mac_address = GetPrimaryMacAddressString();
 
   if (bool_and_mac_address.first) {  // if successful
     QString mac_address = bool_and_mac_address.second;
-    http_request_id_ = http_->get(web_host_and_path.second + "?mac_addresses=" + mac_address +
-                                  "&invite_code=" + invite_code + "&account_type=" + account_type());
+    network_manager_->get(QNetworkRequest(QUrl("http://" + web_host_and_path.first +
+                                               web_host_and_path.second + "?mac_addresses=" + mac_address +
+                                               "&invite_code=" + invite_code + "&account_type=" + account_type())));
 
     while (!download_finished_)
       qApp->processEvents();
@@ -95,16 +96,16 @@ BoolAndQString Authorization::registerOverInternet(QString invite_code) {
   }
 }
 
-void Authorization::requestFinished(int request_id, bool error) {
-  if (request_id == http_request_id_) {
+void Authorization::requestFinished(QNetworkReply* reply) {
+  {
     download_finished_ = true;
-    if (error) {
+    if (reply->error() != QNetworkReply::NoError) {
       download_return_value_ = BoolAndQString(false,
                                               "Could not connect to BumpTop authorization server. Please check your internet.");  // NOLINT
       // TODO: Check if, say, google.com can be loaded
       return;
     }
-    QStringList server_response = QString(http_->readAll()).trimmed().split("|");
+    QStringList server_response = QString(reply->readAll()).trimmed().split("|");
 
     if (server_response.size() == 4 && server_response[0] == "success") {
       QString salt = server_response[2];
@@ -180,4 +181,3 @@ QString Authorization::key() {
   return QStringFromUtf8(license_->key());
 }
 
-#include "moc/moc_Authorization.cpp"

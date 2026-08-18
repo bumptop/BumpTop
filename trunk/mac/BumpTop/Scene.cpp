@@ -23,4 +23,3 @@ Scene::Scene(BumpTopApp *app)
 void Scene::init() {
 }
 
-#include "BumpTop/moc/moc_Scene.cpp"

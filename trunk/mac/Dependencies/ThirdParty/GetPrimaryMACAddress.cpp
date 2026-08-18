@@ -229,12 +229,12 @@ std::pair<bool, QString> GetPrimaryMacAddressString() {
     return std::pair<bool, QString>(false, "");
   } else {
     return std::pair<bool, QString>(true,
-                                    QString("").sprintf("%02x%02x%02x%02x%02x%02x",
-                                                        bool_and_mac_address.second.array[0],
-                                                        bool_and_mac_address.second.array[1],
-                                                        bool_and_mac_address.second.array[2],
-                                                        bool_and_mac_address.second.array[3],
-                                                        bool_and_mac_address.second.array[4],
-                                                        bool_and_mac_address.second.array[5]));
+                                    QString::asprintf("%02x%02x%02x%02x%02x%02x",
+                                                      bool_and_mac_address.second.array[0],
+                                                      bool_and_mac_address.second.array[1],
+                                                      bool_and_mac_address.second.array[2],
+                                                      bool_and_mac_address.second.array[3],
+                                                      bool_and_mac_address.second.array[4],
+                                                      bool_and_mac_address.second.array[5]));
   }
 }

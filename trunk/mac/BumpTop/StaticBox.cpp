@@ -27,5 +27,4 @@ btScalar StaticBox::mass() {
 }
 
 
-#include "BumpTop/moc/moc_StaticBox.cpp"
 

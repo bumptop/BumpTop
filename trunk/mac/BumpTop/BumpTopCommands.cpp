@@ -448,7 +448,8 @@ QStringList OpenWith::validApplicationList(VisualPhysicsActorList actors) {
   if (actors.count() > 0) {
     // Get complete list of candidate applications
     CFURLRef path_url = (CFURLRef) [NSURL fileURLWithPath:NSStringFromQString(actors[0]->path())];
-    candidate_applications = CFStringArrayTOQStringList(LSCopyApplicationURLsForURL(path_url, roles)).toSet();
+    QStringList first_candidates = CFStringArrayTOQStringList(LSCopyApplicationURLsForURL(path_url, roles));
+    candidate_applications = QSet<QString>(first_candidates.begin(), first_candidates.end());
 
     // Get the default application for this file
     CFURLRef default_app_url = NULL;
@@ -463,7 +464,8 @@ QStringList OpenWith::validApplicationList(VisualPhysicsActorList actors) {
   for (int i = 1; i < actors.count(); i++) {
     // Get complete list of candidate applications
     CFURLRef path_url = (CFURLRef) [NSURL fileURLWithPath:NSStringFromQString(actors[i]->path())];
-    candidate_applications &= CFStringArrayTOQStringList(LSCopyApplicationURLsForURL(path_url, roles)).toSet();
+    QStringList ith_candidates = CFStringArrayTOQStringList(LSCopyApplicationURLsForURL(path_url, roles));
+    candidate_applications &= QSet<QString>(ith_candidates.begin(), ith_candidates.end());
 
     // Get the default application for this file
     CFURLRef default_app_url = NULL;
@@ -479,7 +481,7 @@ QStringList OpenWith::validApplicationList(VisualPhysicsActorList actors) {
   }
 
   // rearrange the list to have the default application at the top and add a spacer
-  QStringList sorted_list = candidate_applications.toList();
+  QStringList sorted_list = candidate_applications.values();
   qSort(sorted_list.begin(), sorted_list.end(), shortenedLessThan);
   if (default_application != "") {
     sorted_list.removeAll(default_application);
@@ -527,7 +529,7 @@ bool OpenWith::canBeAppliedToActors(const BumpEnvironment& env, VisualPhysicsAct
     QFileInfo file_info = QFileInfo(actor->path());
     FileKind file_kind = FileManager::getFileKind(actor->path());
     if (file_kind == ALIAS) {
-      original_path = QFileInfo(actor->path()).readLink();
+      original_path = QFileInfo(actor->path()).symLinkTarget();
       file_kind = FileManager::getFileKind(original_path);
     }
 
@@ -892,7 +894,7 @@ bool NewFolder::canBeAppliedToActors(const BumpEnvironment& env, VisualPhysicsAc
 SINGLETON_IMPLEMENTATION(ChangeBackground)
 
 QString ChangeBackground::name() {
-  return "Change Background"+QString(133);
+  return "Change Background"+QString(QChar(0x2026));
 }
 
 int ChangeBackground::number_of_separators_above_me() {
@@ -1205,7 +1207,7 @@ int ShowOriginal::position_within_my_category() {
 void ShowOriginal::applyToActors(const BumpEnvironment& env, VisualPhysicsActorList actors, int subcommand) {
   QStringList paths_of_files_to_show_original;
   for_each(VisualPhysicsActor* actor, actors) {
-    paths_of_files_to_show_original.append(QFileInfo(actor->path()).readLink());
+    paths_of_files_to_show_original.append(QFileInfo(actor->path()).symLinkTarget());
   }
   QString paths = FileManager::getPathsInAppleScriptFormat(paths_of_files_to_show_original);
 
@@ -1687,4 +1689,3 @@ bool SeparatorBumpTopCommand::isSeparator() {
   return true;
 };
 
-#include "moc/moc_BumpTopCommands.cpp"

@@ -160,5 +160,4 @@ namespace {
   }
 }
 
-#include "moc/moc_FileSystemEventDispatcherTest.cpp"
 

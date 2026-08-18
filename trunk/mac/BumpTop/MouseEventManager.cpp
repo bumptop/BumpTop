@@ -218,9 +218,7 @@ MouseEvent MouseEventManager::routeMouseEvent(MouseEventType mouse_event_type, f
   Ogre::OverlayManager::OverlayMapIterator overlay_iterator = Ogre::OverlayManager::getSingleton().getOverlayIterator();
   while (overlay_iterator.hasMoreElements()) {
     Ogre::Overlay* overlay = overlay_iterator.getNext();
-    Ogre::Overlay::Overlay2DElementsIterator overlay_containers_iterator = overlay->get2DElementsIterator();
-    while (overlay_containers_iterator.hasMoreElements()) {
-      Ogre::OverlayContainer* overlay_container = overlay_containers_iterator.getNext();
+    for (Ogre::OverlayContainer* overlay_container : overlay->get2DElements()) {
       MouseEvent mouse_event = routeMouseEventThroughOverlayHierarchy(overlay_container, mouse_event_type, x, y,
                                                                       num_clicks, modifier_flags,
                                                                       source_drag_operations, delta_y);
@@ -379,4 +377,3 @@ void MouseEventManager::emitMouseSignal(MouseEventType mouse_event_type, Ogre::M
   }
 }
 
-#include "BumpTop/moc/moc_MouseEventManager.cpp"

@@ -16,6 +16,7 @@
 
 #include "BumpTop/MaterialLoader.h"
 
+#include <OpenGL/gl.h>
 #include <string>
 
 #include "BumpTop/Authorization.h"
@@ -223,11 +224,7 @@ void MaterialLoader::init(bool is_background_loaded) {
       if (is_background_loaded) {
         texture->setBackgroundLoaded(true);
         texture->addListener(this);
-        Ogre::ResourceBackgroundQueue::getSingleton().load("Texture",
-                                                            utf8(texture_name),
-                                                            DEFAULT_RESOURCE_GROUP_NAME,
-                                                            manually_loaded,
-                                                            manually_loaded ? manual_loader_ : NULL, 0, 0);
+        Ogre::ResourceBackgroundQueue::getSingleton().load(texture);
       }
     }
   }
@@ -323,4 +320,3 @@ bool MaterialLoader::createImageWithResolution(QString original_path, QString ne
   return true;
 }
 
-#include "moc/moc_MaterialLoader.cpp"

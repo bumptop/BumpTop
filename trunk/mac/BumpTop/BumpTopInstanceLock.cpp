@@ -154,4 +154,3 @@ void RedDot::drawRedDot(QPainter* painter) {
   painter->drawEllipse(rectangle);
 }
 
-#include "moc/moc_BumpTopInstanceLock.cpp"

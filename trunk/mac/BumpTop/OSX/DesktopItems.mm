@@ -76,7 +76,7 @@ std::vector<DesktopItem> getDrives() {
   for_each(QFileInfo drive_info, drives_info) {
     // We want to ignore the "/" and "/Volumes" returned by entryInfoList
     if (drive_info.absoluteFilePath().startsWith("/Volumes/")) {
-      if (drive_info.readLink() == "" || drive_info.readLink() == "/") {
+      if (drive_info.symLinkTarget() == "" || drive_info.symLinkTarget() == "/") {
         // Apple stores all its mounted drives and a link to the startup disk in folder "/Volumes"
         // the original path of the startup disk is "/".
         // Sometimes other special items for example the iDisk can get into Volumes, these items are not drives but links

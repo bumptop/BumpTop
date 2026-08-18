@@ -22,7 +22,6 @@
 #include <gtest/gtest.h>
 #endif
 
-#import <CMCrashReporter/CMCrashReporter.h>
 #ifndef BUMPTOP_TEST
 #import <Sparkle/Sparkle.h>
 #endif
@@ -61,7 +60,11 @@ const bool kShowSplashScreen = false;
 
 @implementation NSStatusItem (global_frame)
 - (NSRect)global_frame {
-  return [_fWindow frame];
+  // The original reached into the private _fWindow ivar; the button API has
+  // been public since 10.10.
+  NSStatusBarButton* status_button = [self button];
+  NSRect rect_in_window = [status_button convertRect:[status_button bounds] toView:nil];
+  return [[status_button window] convertRectToScreen:rect_in_window];
 }
 @end
 

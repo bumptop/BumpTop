@@ -130,7 +130,7 @@ void VisualActor::setParentNodeWhileMaintainingAbsolutePosition(Ogre::SceneNode*
   ogre_scene_node()->getParent()->removeChild(ogre_scene_node());
   parent_ogre_scene_node->addChild(ogre_scene_node());
 
-  current_world_transform =  new_parent_transform.inverseAffine()*current_world_transform;
+  current_world_transform =  new_parent_transform.inverse()*current_world_transform;
   set_position(current_world_transform.getTrans());
   set_orientation(current_world_transform.extractQuaternion());
 }
@@ -303,5 +303,4 @@ void VisualActor::set_clickable_parent(Clickable* clickable_parent) {
   clickable_parent_ = clickable_parent;
 }
 
-#include "BumpTop/moc/moc_VisualActor.cpp"
 

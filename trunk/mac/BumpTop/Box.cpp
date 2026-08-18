@@ -58,4 +58,3 @@ VisualPhysicsActorType Box::actor_type() {
 
 
 
-#include "BumpTop/moc/moc_Box.cpp"

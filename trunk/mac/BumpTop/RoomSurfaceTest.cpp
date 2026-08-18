@@ -113,4 +113,3 @@ namespace {
   }
 }  // namespace
 
-#include "BumpTop/moc/moc_RoomSurfaceTest.cpp";

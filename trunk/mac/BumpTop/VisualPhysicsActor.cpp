@@ -696,7 +696,7 @@ Ogre::AxisAlignedBox VisualPhysicsActor::screenBoundingBox() {
 std::vector<Ogre::Vector2> VisualPhysicsActor::getCornersInScreenSpace() {
   std::vector<Ogre::Vector2> corners;
   Ogre::AxisAlignedBox box = world_bounding_box();
-  const Ogre::Vector3* world_corners = box.getAllCorners();
+  const Ogre::AxisAlignedBox::Corners world_corners = box.getAllCorners();
 
   for (int i = 0; i < 8; i++) {
     corners.push_back(worldPositionToScreenPosition(world_corners[i]));
@@ -934,4 +934,3 @@ bool compareDisplayName(VisualPhysicsActor* actor_1, VisualPhysicsActor* actor_2
   return QString::compare(actor_1->display_name(), actor_2->display_name(), Qt::CaseInsensitive) < 0;
 }
 
-#include "BumpTop/moc/moc_VisualPhysicsActor.cpp"

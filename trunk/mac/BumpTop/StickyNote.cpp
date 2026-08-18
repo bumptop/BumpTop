@@ -491,4 +491,3 @@ QTextEdit* StickyNoteText::text_edit() {
   return sticky_note_text_edit_;
 }
 
-#include "moc/moc_StickyNote.cpp"

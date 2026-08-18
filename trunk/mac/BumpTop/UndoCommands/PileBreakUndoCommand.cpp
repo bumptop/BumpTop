@@ -103,4 +103,3 @@ void PileBreakUndoCommand::redo() {
   UndoRedoStack::last_command_changed_something = command_changed_something;
 }
 
-#include "BumpTop/moc/moc_PileBreakUndoCommand.cpp"
