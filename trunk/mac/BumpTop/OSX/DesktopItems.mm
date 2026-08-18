@@ -67,57 +67,56 @@ std::vector<DesktopItem> getDesktopItems() {
 }
 
 std::vector<DesktopItem> getDrives() {
-  // directory Volumes contains all mounted drives including the startup drive
-  QDir dir = QDir("/Volumes");
-  QFileInfoList drives_info = dir.entryInfoList();
   std::vector<DesktopItem> drives;
 
-  // get properites of each drive in the directory Volumes
-  for_each(QFileInfo drive_info, drives_info) {
-    // We want to ignore the "/" and "/Volumes" returned by entryInfoList
-    if (drive_info.absoluteFilePath().startsWith("/Volumes/")) {
-      if (drive_info.symLinkTarget() == "" || drive_info.symLinkTarget() == "/") {
-        // Apple stores all its mounted drives and a link to the startup disk in folder "/Volumes"
-        // the original path of the startup disk is "/".
-        // Sometimes other special items for example the iDisk can get into Volumes, these items are not drives but links
-        // to drives so in this case we don't want to include them in room (Apple does not include them on desktop as well)
+  // One index-matched query for every disk. Disks are identified by their
+  // mount-point URL, which stays unique even when two volumes share a display
+  // name (the old per-disk name lookup gave same-named volumes the position
+  // of whichever Finder resolved first).
+  NSString* script_source = @"tell application \"Finder\"\n"
+                            @"{URL, desktop position, ejectable, local volume} of disks\n"
+                            @"end tell";
+  NSAppleScript* desktop_script_for_disks = [[NSAppleScript alloc] initWithSource:script_source];
+  NSAppleEventDescriptor* script_result = [desktop_script_for_disks executeAndReturnError:nil];
+  [desktop_script_for_disks release];
+  if ([script_result numberOfItems] != 4) {
+    return drives;
+  }
 
-        NSString* script_format = @"tell application \"Finder\"\n"
-                                      @"set macpath to POSIX file \"/%@\" as text\n"
-                                      @"{URL, desktop position,ejectable,local volume} of item macpath\n"
-                                  @"end tell";
-        NSString* script = [NSString stringWithFormat:script_format, NSStringFromQString(drive_info.absoluteFilePath())];
+  NSAppleEventDescriptor* urls = [script_result descriptorAtIndex:1];
+  NSAppleEventDescriptor* positions = [script_result descriptorAtIndex:2];
+  NSAppleEventDescriptor* ejectables = [script_result descriptorAtIndex:3];
+  NSAppleEventDescriptor* local_volumes = [script_result descriptorAtIndex:4];
 
-        NSAppleScript *desktop_script_for_disks = [[NSAppleScript alloc] initWithSource:script];
-        NSAppleEventDescriptor *desktop_script_for_disks_return = [desktop_script_for_disks executeAndReturnError:nil];
-
-        //DEBUG_ASSERT([desktop_script_for_disks_return numberOfItems] == 4);
-        // TODO: Why is it that sometimes we're not getting a proper return from this script?
-        if ([desktop_script_for_disks_return numberOfItems] != 4) {
-          continue;
+  for (int i = 1; i <= [urls numberOfItems]; i++) {
+    DesktopItem item = createDesktopItem([urls descriptorAtIndex:i],
+                                         [positions descriptorAtIndex:i]);
+    if (item.file_path == "")
+      continue;
+    if (item.file_path == "/") {
+      // The startup disk mounts at "/"; its desktop item lives behind the
+      // /Volumes symlink.
+      QDir volumes_dir("/Volumes");
+      for_each(QFileInfo drive_info, volumes_dir.entryInfoList()) {
+        if (drive_info.symLinkTarget() == "/") {
+          item.file_path = drive_info.absoluteFilePath();
+          break;
         }
-
-        NSAppleEventDescriptor *url = [desktop_script_for_disks_return descriptorAtIndex:1];
-        NSAppleEventDescriptor *desktop_position = [desktop_script_for_disks_return descriptorAtIndex:2];
-        bool ejectable = [[desktop_script_for_disks_return descriptorAtIndex:3] booleanValue];
-        bool local_volume = [[desktop_script_for_disks_return descriptorAtIndex:4] booleanValue];
-
-        // Drives will _always_ be desktop items, so the below line is ok, as it they will always have a position
-        DesktopItem item = createDesktopItem(url, desktop_position);
-        // the URL from applescript is not the same as its actual URL for some reason so we are just gonna use the
-        // path of file using QFileInfo but we will still be using the positions received from applescript
-        item.file_path = drive_info.absoluteFilePath();
-        drives.push_back(item);
-        if (ejectable) {
-          FileManager::addEjectableDrive(item.file_path);
-        }
-        if (!local_volume) {
-          // Connected Servers not recognized as ejectable by applescript.
-          FileManager::addEjectableDrive(item.file_path);
-          FileManager::addConnectedServer(item.file_path);
-        }
-        [desktop_script_for_disks release];
       }
+      if (item.file_path == "/")
+        continue;
+    }
+    if (!QFileInfo(item.file_path).exists())
+      continue;
+
+    drives.push_back(item);
+    if ([[ejectables descriptorAtIndex:i] booleanValue]) {
+      FileManager::addEjectableDrive(item.file_path);
+    }
+    if (![[local_volumes descriptorAtIndex:i] booleanValue]) {
+      // Connected Servers not recognized as ejectable by applescript.
+      FileManager::addEjectableDrive(item.file_path);
+      FileManager::addConnectedServer(item.file_path);
     }
   }
 
