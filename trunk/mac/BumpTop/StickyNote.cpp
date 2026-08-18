@@ -334,7 +334,15 @@ void StickyNote::closeEditableStickyNote(MouseEvent* mouse_event) {
 }
 
 void StickyNote::finishEditingAnimationFinished(VisualPhysicsActorAnimation* animation) {
-  delete visual_copy_of_actor_;
+  // Delete the copy this fade actually animated. If editing was reopened
+  // while the fade was still in flight, visual_copy_of_actor_ already points
+  // to the NEW session's copy — deleting that (the old behavior) freed a
+  // copy still in use and crashed on the next close.
+  VisualPhysicsActor* faded_copy = animation->visual_physics_actor();
+  bool is_current_session = (faded_copy == visual_copy_of_actor_);
+  delete faded_copy;
+  if (!is_current_session)
+    return;
   visual_copy_of_actor_ = NULL;
   visual_actor()->set_visible(true);
 

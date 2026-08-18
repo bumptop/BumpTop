@@ -111,6 +111,11 @@ BumpBox::~BumpBox() {
     delete mouse_handler_;
   }
 
+  if (!copied_material_name_.empty()) {
+    Ogre::MaterialManager::getSingleton().remove(copied_material_name_,
+                                                 Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+  }
+
   clearMaterialLoader();
 }
 
@@ -178,7 +183,11 @@ void BumpBox::initWithPath(QString file_path, bool physics_enabled) {
 void BumpBox::initAsVisualCopyOfActor(VisualPhysicsActor* actor) {
   VisualPhysicsActor::initAsVisualCopyOfActor(actor);
 
-  std::string material_name = "copied material" + addressToString(this);
+  // The address alone is not unique over time: a previous copy at a reused
+  // address whose material was still registered would make create() throw
+  // ItemIdentityException (crashed on sticky note open/close fades).
+  static int copy_serial = 0;
+  std::string material_name = "copied material" + addressToString(this) + "_" + std::to_string(copy_serial++);
 
   Ogre::MaterialPtr source_material = Ogre::MaterialPtr(Ogre::MaterialManager::getSingleton().getByName(utf8(actor->visual_actor()->material_name())));  // NOLINT
   if (!source_material.isNull()) {
@@ -193,6 +202,7 @@ void BumpBox::initAsVisualCopyOfActor(VisualPhysicsActor* actor) {
           texture_pass->setSceneBlending(Ogre::SBT_TRANSPARENT_ALPHA);
           texture_pass->setDepthCheckEnabled(false);
           set_material_name(QStringFromUtf8(material_name));
+          copied_material_name_ = material_name;
         }
       }
     }

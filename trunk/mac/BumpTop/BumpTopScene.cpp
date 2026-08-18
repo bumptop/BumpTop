@@ -30,6 +30,7 @@
 #include "BumpTop/MouseEventManager.h"
 #include "BumpTop/OgreHelpers.h"
 #include "BumpTop/QStringHelpers.h"
+#include "BumpTop/StickyNote.h"
 #include "BumpTop/StickyNotePad.h"
 #include "BumpTop/VisualActor.h"
 #include "BumpTop/Timer.h"
@@ -174,6 +175,41 @@ void BumpTopScene::init() {
         }
       });
     }
+  }
+
+  // BUMPTOP_TEST_NOTE=N: create a sticky note and open/close it N times.
+  // Repro for the "copied material already exists" crash: each open makes a
+  // visual copy whose material outlived it; a copy reallocated at a reused
+  // heap address then collided in Ogre's MaterialManager.
+  if (getenv("BUMPTOP_TEST_NOTE") != NULL) {
+    int cycles = std::max(1, atoi(getenv("BUMPTOP_TEST_NOTE")));
+    StickyNote* note = new StickyNote(app_->ogre_scene_manager(), app_->physics(), room_);
+    note->init();
+    note->set_size(Ogre::Vector3(100, 100, 100));
+    note->set_position(Ogre::Vector3((room_->min_x() + room_->max_x()) / 2.0, 0,
+                                     (room_->min_z() + room_->max_z()) / 2.0));
+    room_->addActor(note);
+    for (int i = 0; i < cycles; i++) {
+      // Reopen 100ms into the 200ms close fade: forces the
+      // stale-finish overlap that used to free the new session's copy.
+      QTimer::singleShot(2000 + i * 900, [note, i]() {
+        fprintf(stderr, "[test] note open %d\n", i);
+        note->launch();
+      });
+      // Close via a synthetic click on empty floor, like a real user: it
+      // routes through the onMouseDown connection, so it is a no-op if the
+      // open animation has not finished yet (calling closeEditableStickyNote
+      // directly would trip its disconnect assert in that race).
+      BumpTopApp* app_for_note = app_;
+      QTimer::singleShot(2800 + i * 900, [app_for_note, i]() {
+        fprintf(stderr, "[test] note close %d\n", i);
+        app_for_note->mouseDown(50, 50, 1, 0);
+        app_for_note->mouseUp(50, 50, 1, 0);
+      });
+    }
+    QTimer::singleShot(2000 + cycles * 900 + 500, [cycles]() {
+      fprintf(stderr, "[test] note survived %d open/close cycles\n", cycles);
+    });
   }
 
   // BUMPTOP_TEST_NAN=1: after 3s, poison one body's velocity with NaN
