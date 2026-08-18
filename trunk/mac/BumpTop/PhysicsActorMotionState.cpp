@@ -35,6 +35,11 @@ void PhysicsActorMotionState::getWorldTransform(btTransform &world_transform) co
 }
 
 void PhysicsActorMotionState::setWorldTransform(const btTransform &world_transform) {
+  if (world_transform.getOrigin() != world_transform.getOrigin()) {
+    static int nan_log_count = 0;
+    if (nan_log_count++ < 10)
+      fprintf(stderr, "[nan] Bullet fed NaN transform to motion state\n");
+  }
   for (int i = NUM_FRAMES_TO_UPDATE_AFTER_SLEEPING - 1; i > 0; i--)
     was_physics_actor_sleeping_n_frames_ago[i] = was_physics_actor_sleeping_n_frames_ago[i-1];
   was_physics_actor_sleeping_n_frames_ago[0] = physics_actor_->isSleeping();

@@ -166,6 +166,6 @@ add_custom_command(TARGET BumpTop POST_BUILD
     # The resource location is indexed non-recursively, so flatten LightBox
     # (floor_overlay.png / wall_overlay.png) into Resources.
     COMMAND ${CMAKE_COMMAND} -E copy_directory ${MAC_ROOT}/Graphics/LightBox "${APP_RESOURCES_DIR}"
-    COMMAND ${CMAKE_COMMAND} -E copy ${MAC_ROOT}/Build/Mac/BUMPDEV.icns "${APP_RESOURCES_DIR}/"
+    COMMAND ${CMAKE_COMMAND} -E copy ${MAC_ROOT}/Build/Mac/BUMP.icns "${APP_RESOURCES_DIR}/"
     COMMENT "Copying resources"
 )

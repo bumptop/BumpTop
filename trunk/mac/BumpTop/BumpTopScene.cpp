@@ -27,6 +27,7 @@
 #include "BumpTop/QuickLookPreviewPanel.h"
 #include "BumpTop/RoomItemPoseConstraints.h"
 #include "BumpTop/MouseEventManager.h"
+#include "BumpTop/OgreHelpers.h"
 #include "BumpTop/QStringHelpers.h"
 #include "BumpTop/StickyNotePad.h"
 #include "BumpTop/VisualActor.h"
@@ -96,6 +97,8 @@ void BumpTopScene::init() {
   // BUMPTOP_TEST_PILE_GRID=1: pile the first two file items, then open the
   // pile as a grid (like double-clicking it).
   if (getenv("BUMPTOP_TEST_GROW") != NULL || getenv("BUMPTOP_TEST_PILE_GRID") != NULL) {
+    fprintf(stderr, "[test] hooks active, sandbox=%d, room actors=%d\n",
+            (int)BumpTopInstanceLock::is_running_in_sandbox(), (int)room_->room_actor_list().size());
     BumpEnvironment env(app_->physics(), room_, app_->ogre_scene_manager());
     VisualPhysicsActorList test_actors;
     for_each(VisualPhysicsActor* actor, room_->room_actor_list()) {
@@ -117,25 +120,55 @@ void BumpTopScene::init() {
       pile_members.append(test_actors[1]);
       CreatePile::singleton()->applyToActors(env, pile_members);
       for_each(VisualPhysicsActor* actor, room_->room_actor_list()) {
-        if (actor->actor_type() == BUMP_PILE) {
-          fprintf(stderr, "[test] launching pile as grid\n");
+        // Skip the (empty) New Items Pile: only launch a pile with members.
+        if (actor->actor_type() == BUMP_PILE && actor->children().size() >= 2) {
+          fprintf(stderr, "[test] launching pile (%d members) as grid\n",
+                  (int)actor->children().size());
           actor->launch();
           break;
         }
       }
+      // After the grid settles, click its close button through the real
+      // mouse pipeline, then dump again to verify it closed.
+      BumpTopApp* app_for_click = app_;
+      Room* room_for_click = room_;
+      QTimer::singleShot(4000, [app_for_click, room_for_click]() {
+        for_each(VisualPhysicsActor* actor, room_for_click->room_actor_list()) {
+          if (actor->actor_type() == GRIDDED_PILE) {
+            Ogre::Vector3 close_world = actor->world_position() + Ogre::Vector3(-213, 20, -213);
+            Ogre::Vector2 sp = worldPositionToScreenPosition(close_world);
+            fprintf(stderr, "[test] clicking close button at screen (%.0f,%.0f)\n", sp.x, sp.y);
+            app_for_click->mouseDown(sp.x, sp.y, 1, 0);
+            app_for_click->mouseUp(sp.x, sp.y, 1, 0);
+            break;
+          }
+        }
+      });
+      QTimer::singleShot(6000, [room_for_click]() {
+        int grids = 0;
+        for_each(VisualPhysicsActor* actor, room_for_click->room_actor_list()) {
+          if (actor->actor_type() == GRIDDED_PILE)
+            grids++;
+        }
+        fprintf(stderr, "[test] after close click: %d gridded piles remain\n", grids);
+      });
       Room* room_for_dump = room_;
       QTimer::singleShot(3000, [room_for_dump]() {
         for_each(VisualPhysicsActor* actor, room_for_dump->room_actor_list()) {
           Ogre::Vector3 p = actor->world_position();
-          fprintf(stderr, "[dump] type=%d visible=%d pos=(%.0f,%.0f,%.0f) children=%d path=%s\n",
-                  actor->actor_type(), -1,
-                  p.x, p.y, p.z, (int)actor->children().size(),
+          Ogre::Vector3 vp = actor->visual_actor() != NULL ?
+              actor->visual_actor()->ogre_scene_node()->_getDerivedPosition() : Ogre::Vector3::ZERO;
+          fprintf(stderr, "[dump] type=%d phys=(%.0f,%.0f,%.0f) visual=(%.0f,%.0f,%.0f) children=%d path=%s\n",
+                  actor->actor_type(), p.x, p.y, p.z, vp.x, vp.y, vp.z,
+                  (int)actor->children().size(),
                   utf8(QFileInfo(actor->path()).fileName()).c_str());
           for_each(VisualPhysicsActor* child, actor->children()) {
             Ogre::Vector3 cp = child->world_position();
-            fprintf(stderr, "[dump]    child type=%d visible=%d pos=(%.0f,%.0f,%.0f) path=%s\n",
-                    child->actor_type(), -1,
-                    cp.x, cp.y, cp.z, utf8(QFileInfo(child->path()).fileName()).c_str());
+            Ogre::Vector3 cvp = child->visual_actor() != NULL ?
+                child->visual_actor()->ogre_scene_node()->_getDerivedPosition() : Ogre::Vector3::ZERO;
+            fprintf(stderr, "[dump]    child type=%d phys=(%.0f,%.0f,%.0f) visual=(%.0f,%.0f,%.0f) path=%s\n",
+                    child->actor_type(), cp.x, cp.y, cp.z, cvp.x, cvp.y, cvp.z,
+                    utf8(QFileInfo(child->path()).fileName()).c_str());
           }
         }
       });

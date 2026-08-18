@@ -39,6 +39,10 @@ int main(int argc, char *argv[])
 
   NSString *stderr_path = [NSString stringWithFormat:@"%s/stderr-%@.txt", FileManager::getApplicationDataPath().toUtf8().data(), now];
   freopen([stderr_path cStringUsingEncoding:NSUTF8StringEncoding], "w", stderr);
+  // Redirected streams become block-buffered; diagnostics must not sit in
+  // a stdio buffer until exit.
+  setvbuf(stdout, NULL, _IOLBF, 0);
+  setvbuf(stderr, NULL, _IONBF, 0);
   [pool release];
 #endif
   return NSApplicationMain(argc,  (const char **) argv);

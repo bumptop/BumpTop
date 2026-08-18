@@ -44,11 +44,27 @@ struct BumpRaySceneQueryResultEntry : public Ogre::RaySceneQueryResultEntry {
       }
     }  // TODO: add support for  ManualObjects as well
 
-    // The render-next-to tie-break relied on a BumpTop patch to Ogre 1.7's
-    // Renderable; nothing in the app ever set those properties, so it was
-    // dead code and is dropped in the Ogre 14 port.
-    (void)lhs_renderable;
-    (void)rhs_renderable;
+    // Render-order ties (setToRenderBefore/After, restored via the vendored
+    // Ogre patch) also decide picking between co-planar renderables — e.g.
+    // the gridded pile's close button over its panel. Without this, the
+    // panel can win the pick and buttons become unclickable.
+    if (lhs_renderable != NULL && rhs_renderable != NULL) {
+      if (lhs_renderable->getRenderableToRenderNextTo() == rhs_renderable) {
+        return lhs_renderable->renderAfterOtherRenderable();
+      } else if (rhs_renderable->getRenderableToRenderNextTo() == lhs_renderable) {
+        return !rhs_renderable->renderAfterOtherRenderable();
+      } else if (lhs_renderable->getRenderableToRenderNextTo() != NULL &&
+                 lhs_renderable->getRenderableToRenderNextTo() ==
+                     rhs_renderable->getRenderableToRenderNextTo()) {
+        if (lhs_renderable->renderAfterOtherRenderable() &&
+            !rhs_renderable->renderAfterOtherRenderable()) {
+          return true;
+        } else if (!lhs_renderable->renderAfterOtherRenderable() &&
+                   rhs_renderable->renderAfterOtherRenderable()) {
+          return false;
+        }
+      }
+    }
 
     return this->distance < rhs.distance;
   }

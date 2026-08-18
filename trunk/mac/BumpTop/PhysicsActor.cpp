@@ -67,9 +67,13 @@ PhysicsActor::~PhysicsActor() {
 }
 
 void PhysicsActor::set_scale(Ogre::Vector3 scale) {
+  if (scale.isNaN() || scale.x <= 0 || scale.y <= 0 || scale.z <= 0)
+    fprintf(stderr, "[nan] set_scale got (%f,%f,%f)\n", scale.x, scale.y, scale.z);
   rigid_body_->getCollisionShape()->setLocalScaling(toBt(scale));
   btVector3 local_inertia(0, 0, 0);
   rigid_body_->getCollisionShape()->calculateLocalInertia(mass_, local_inertia);
+  if (local_inertia != local_inertia)
+    fprintf(stderr, "[nan] set_scale inertia NaN (mass=%f scale=%f,%f,%f)\n", mass_, scale.x, scale.y, scale.z);
   rigid_body_->setMassProps(mass_, local_inertia);
   rigid_body_->updateInertiaTensor();
 
@@ -137,6 +141,8 @@ void PhysicsActor::setMass(Ogre::Real mass) {
   btCollisionShape* collision_shape = rigid_body_->getCollisionShape();
   btVector3 inertia = btVector3(0, 0, 0);
   collision_shape->calculateLocalInertia(mass, inertia);
+  if (mass != mass || inertia != inertia)
+    fprintf(stderr, "[nan] setMass mass=%f inertia NaN?\n", mass);
   rigid_body_->setMassProps(mass, inertia);
   mass_ = mass;
   if (physics_enabled_) {
@@ -246,6 +252,8 @@ void PhysicsActor::setPose(Ogre::Vector3 position, Ogre::Quaternion orientation)
 }
 
 void PhysicsActor::updateTransform() {
+  if (position_ != position_)
+    fprintf(stderr, "[nan] updateTransform position NaN\n");
   setTransform(btTransform(orientation_, position_));
 }
 
