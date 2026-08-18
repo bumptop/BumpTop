@@ -210,9 +210,9 @@ Ogre::Entity* BumpBoxLabel::_entity() {
 }
 
 void BumpBoxLabel::set_position_in_pixel_coords(Ogre::Vector2 position) {
-  // Tuck the label up toward the icon like Finder does (calibrated against
-  // Finder's rendering in the parity test).
-  Ogre::Real label_gap_adjust = 7 * BumpTopApp::singleton()->device_scale();
+  // Nudge the label down so the icon-to-text gap matches Finder's
+  // (14.5pt, measured pixel-wise in the parity test).
+  Ogre::Real label_gap_adjust = -5.5 * BumpTopApp::singleton()->device_scale();
   Ogre::Vector2 adjusted_position = position - Ogre::Vector2(width_of_drawn_region()/2, label_gap_adjust);
   Ogre::Vector2 normalized_position = screenPositionToNormalizedScreenPosition(adjusted_position);
   node_->setPosition(Ogre::Vector3(normalized_position.x, normalized_position.y, 0));
