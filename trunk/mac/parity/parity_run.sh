@@ -18,6 +18,15 @@ mkdir -p "$OUT"
 pkill -x BumpTop 2>/dev/null || true
 sleep 1
 
+# Optional selection test: BUMPTOP_PARITY_SELECT=<desktop file name> selects
+# the item in both Finder (for the reference) and BumpTop.
+if [ -n "$BUMPTOP_PARITY_SELECT" ]; then
+  echo "== selecting '$BUMPTOP_PARITY_SELECT' in Finder"
+  osascript -e "tell application \"Finder\" to select file \"$BUMPTOP_PARITY_SELECT\" of desktop" || \
+  osascript -e "tell application \"Finder\" to select folder \"$BUMPTOP_PARITY_SELECT\" of desktop" || true
+  sleep 1
+fi
+
 echo "== capturing wallpaper + Finder icon layer"
 WALLPAPER_ID=$(swift "$SCRIPT_DIR/capture_desktop.swift" wallpaper)
 FINDER_ID=$(swift "$SCRIPT_DIR/capture_desktop.swift" finder)
@@ -60,7 +69,14 @@ rm -rf "$SUPPORT/backgrounds"
 
 echo "== launching BumpTop in parity mode"
 FINDER_ICON_SIZE=$(defaults read com.apple.finder DesktopViewSettings 2>/dev/null | awk '/iconSize/ {gsub(/;/,""); print $3}')
-BUMPTOP_PARITY=1 BUMPTOP_PARITY_ICON_SIZE=${FINDER_ICON_SIZE:-64} "$APP/Contents/MacOS/BumpTop" &
+if [ -n "$BUMPTOP_PARITY_SELECT" ]; then
+  osascript -e 'tell application "Finder" to set selection to {}' || true
+fi
+BUMPTOP_PARITY=1 BUMPTOP_PARITY_ICON_SIZE=${FINDER_ICON_SIZE:-64} \
+  BUMPTOP_PARITY_OFFSET_X=${BUMPTOP_PARITY_OFFSET_X:-0} \
+  BUMPTOP_PARITY_OFFSET_Y=${BUMPTOP_PARITY_OFFSET_Y:-0} \
+  BUMPTOP_PARITY_SELECT="$BUMPTOP_PARITY_SELECT" \
+  "$APP/Contents/MacOS/BumpTop" &
 sleep 15
 
 echo "== capturing BumpTop render"

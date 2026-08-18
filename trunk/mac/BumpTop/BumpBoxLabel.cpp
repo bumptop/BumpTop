@@ -17,6 +17,7 @@
 #include "BumpTop/BumpBoxLabel.h"
 
 #include <QtCore/QTextBoundaryFinder>
+#include <QtGui/QFontDatabase>
 
 #include "BumpTop/ArrayOnStack.h"
 #include "BumpTop/Authorization.h"
@@ -107,9 +108,15 @@ void BumpBoxLabel::init(Ogre::Real size_factor) {
   Ogre::Real device_scale = BumpTopApp::singleton()->window_size().x /
                             BumpTopApp::singleton()->screen_resolution().x;
   // First, just find out how big the label is
-  font_ = QFont("Lucida Grande");
-  font_.setBold(true);
-  font_.setPointSize(qRound(13 * device_scale));
+  // Lucida Grande was the system font when this was written; use the current
+  // system font (SF), which is also what Finder draws desktop labels with.
+  font_ = QFontDatabase::systemFont(QFontDatabase::GeneralFont);
+  // Finder's labels are regular weight; keep bold in normal (3D) mode for
+  // legibility against the room.
+  font_.setBold(getenv("BUMPTOP_PARITY") == NULL);
+  // Finder's desktop labels are 12pt (DesktopViewSettings textSize).
+  int label_point_size = getenv("BUMPTOP_PARITY") != NULL ? 12 : 13;
+  font_.setPointSize(qRound(label_point_size * device_scale));
 
   text_size_ = getTextBounds(&text_lines_, &text_line_sizes_, 0,
                              kInitialLabelMaxWidth * size_factor * device_scale);

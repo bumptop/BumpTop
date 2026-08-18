@@ -102,9 +102,16 @@ void loadRoomFromDesktop(Room* room) {
         BumpBox* box = new BumpFlatSquare(BumpTopApp::singleton()->ogre_scene_manager(),
                                           BumpTopApp::singleton()->physics(), room);
         box->initWithPath(desktop_item.file_path);
-        // Calibrated against Finder's rendering in the desktop parity test.
-        Ogre::Real parity_offset_x = getenv("BUMPTOP_PARITY") != NULL ? 17 : 0;
-        Ogre::Real parity_offset_y = getenv("BUMPTOP_PARITY") != NULL ? 20 : 0;
+        // Calibrated against Finder's rendering in the desktop parity test
+        // (override with BUMPTOP_PARITY_OFFSET_X/_Y, in points).
+        Ogre::Real parity_offset_x = 0;
+        Ogre::Real parity_offset_y = 0;
+        if (getenv("BUMPTOP_PARITY") != NULL) {
+          parity_offset_x = getenv("BUMPTOP_PARITY_OFFSET_X") != NULL ?
+                            atof(getenv("BUMPTOP_PARITY_OFFSET_X")) : 0;
+          parity_offset_y = getenv("BUMPTOP_PARITY_OFFSET_Y") != NULL ?
+                            atof(getenv("BUMPTOP_PARITY_OFFSET_Y")) : 0;
+        }
         box->set_position(Ogre::Vector3(desktop_item.position_x + parity_offset_x, 100,
                                         desktop_item.position_y + parity_offset_y));
         // Parity mode sizes icons like Finder does (BUMPTOP_PARITY_ICON_SIZE,

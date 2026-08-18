@@ -74,6 +74,17 @@ void BumpTopScene::init() {
 
   room_->deselectActors();
 
+  // Parity test: select the named desktop item so the selection rendering
+  // (label background + icon outline) can be diffed against Finder's.
+  if (getenv("BUMPTOP_PARITY_SELECT") != NULL) {
+    QString wanted = QString::fromUtf8(getenv("BUMPTOP_PARITY_SELECT"));
+    for_each(VisualPhysicsActor* actor, room_->room_actor_list()) {
+      if (QFileInfo(actor->path()).fileName() == wanted) {
+        actor->set_selected(true);
+      }
+    }
+  }
+
   /*
   ThemeDownloader* theme_downloader = new ThemeDownloader();
   theme_downloader->init();
