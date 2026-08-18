@@ -79,6 +79,13 @@ MaterialLoader::MaterialLoader()
 }
 
 MaterialLoader::~MaterialLoader() {
+  // Background loading registers this loader as a texture listener; the
+  // texture can outlive the loader, and firing a callback on the deleted
+  // loader crashes (removeListener on a non-listener is a harmless no-op).
+  for_each(Ogre::TexturePtr texture, textures_) {
+    if (texture)
+      texture->removeListener(this);
+  }
 }
 
 void MaterialLoader::initWithImageBuffer(unsigned char* image_buffer, ushort width, ushort height) {

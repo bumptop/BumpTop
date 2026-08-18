@@ -16,6 +16,8 @@
 
 #include "BumpTop/BumpTopScene.h"
 
+#include <QtCore/QTimer>
+
 #include "BumpTop/BumpTopApp.h"
 #include "BumpTop/BumpTopCommands.h"
 #include "BumpTop/BumpTopInstanceLock.h"
@@ -25,7 +27,9 @@
 #include "BumpTop/QuickLookPreviewPanel.h"
 #include "BumpTop/RoomItemPoseConstraints.h"
 #include "BumpTop/MouseEventManager.h"
+#include "BumpTop/QStringHelpers.h"
 #include "BumpTop/StickyNotePad.h"
+#include "BumpTop/VisualActor.h"
 #include "BumpTop/Timer.h"
 #include "BumpTop/VisualPhysicsActorList.h"
 
@@ -98,6 +102,9 @@ void BumpTopScene::init() {
       if (actor->actor_type() == BUMP_BOX)
         test_actors.append(actor);
     }
+    // room_actor_list() is hash-ordered; sort for a deterministic pick.
+    std::sort(test_actors.begin(), test_actors.end(),
+              [](VisualPhysicsActor* a, VisualPhysicsActor* b) { return a->path() < b->path(); });
     if (getenv("BUMPTOP_TEST_GROW") != NULL && test_actors.size() > 0) {
       int grow_times = std::max(1, atoi(getenv("BUMPTOP_TEST_GROW")));
       for (int i = 0; i < grow_times; i++)
@@ -116,6 +123,22 @@ void BumpTopScene::init() {
           break;
         }
       }
+      Room* room_for_dump = room_;
+      QTimer::singleShot(3000, [room_for_dump]() {
+        for_each(VisualPhysicsActor* actor, room_for_dump->room_actor_list()) {
+          Ogre::Vector3 p = actor->world_position();
+          fprintf(stderr, "[dump] type=%d visible=%d pos=(%.0f,%.0f,%.0f) children=%d path=%s\n",
+                  actor->actor_type(), -1,
+                  p.x, p.y, p.z, (int)actor->children().size(),
+                  utf8(QFileInfo(actor->path()).fileName()).c_str());
+          for_each(VisualPhysicsActor* child, actor->children()) {
+            Ogre::Vector3 cp = child->world_position();
+            fprintf(stderr, "[dump]    child type=%d visible=%d pos=(%.0f,%.0f,%.0f) path=%s\n",
+                    child->actor_type(), -1,
+                    cp.x, cp.y, cp.z, utf8(QFileInfo(child->path()).fileName()).c_str());
+          }
+        }
+      });
     }
   }
 

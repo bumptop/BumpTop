@@ -29,44 +29,52 @@ GriddedPileStencilBufferSetter::~GriddedPileStencilBufferSetter() {
 
 void GriddedPileStencilBufferSetter::renderQueueStarted(uint8 queueGroupId,
                                                         const Ogre::String &invocation, bool &skipThisInvocation) {
+  // Ported to Ogre 14's StencilState API. (The old setStencilBufferParams
+  // call kept compiling against the deprecated wrapper, but Ogre inserted a
+  // writeMask parameter mid-signature, silently shifting every argument:
+  // the stencil was never written and gridded-pile contents clipped away.)
   if (kMinGriddedPileRenderQueueGroup <= queueGroupId && queueGroupId < kMaxGriddedPileRenderQueueGroup &&
       queueGroupId % 3 == 1) {
-    Ogre::RenderSystem * render_system = Ogre::Root::getSingleton().getRenderSystem();
+    // Phase 1: the pile's background quad writes 1s into the stencil.
+    Ogre::RenderSystem* render_system = Ogre::Root::getSingleton().getRenderSystem();
     render_system->clearFrameBuffer(Ogre::FBT_STENCIL);
-    render_system->setStencilCheckEnabled(true);
-    render_system->setStencilBufferParams(Ogre::CMPF_ALWAYS_PASS,  // The comparison function applied
-                                          1,                       // The reference value used in the comparison
-                                          0xFFFFFFFF,              // The bitmask applied to both the stencil value
-                                                                       // and the reference value before comparison
-                                          Ogre::SOP_KEEP,          // The action to perform when the stencil check fails
-                                          Ogre::SOP_KEEP,          // The action to perform when the stencil check
-                                                                       // passes, but the depth buffer check still fails
-                                          Ogre::SOP_REPLACE);      // The action to take when both the stencil and depth
-                                                                       // check pass
+    Ogre::StencilState stencil_state;
+    stencil_state.enabled = true;
+    stencil_state.compareOp = Ogre::CMPF_ALWAYS_PASS;
+    stencil_state.referenceValue = 1;
+    stencil_state.compareMask = 0xFFFFFFFF;
+    stencil_state.writeMask = 0xFFFFFFFF;
+    stencil_state.stencilFailOp = Ogre::SOP_KEEP;
+    stencil_state.depthFailOp = Ogre::SOP_KEEP;
+    stencil_state.depthStencilPassOp = Ogre::SOP_REPLACE;
+    render_system->setStencilState(stencil_state);
   }
 
   if (kMinGriddedPileRenderQueueGroup <= queueGroupId && queueGroupId < kMaxGriddedPileRenderQueueGroup &&
       queueGroupId % 3 == 2) {
-    Ogre::RenderSystem * render_system = Ogre::Root::getSingleton().getRenderSystem();
-    render_system->setStencilCheckEnabled(true);
-    render_system->setStencilBufferParams(Ogre::CMPF_EQUAL,        // The comparison function applied
-                                          1,                       // The reference value used in the comparison
-                                          0xFFFFFFFF,              // The bitmask applied to both the stencil value
-                                                                       // and the reference value before comparison
-                                          Ogre::SOP_KEEP,          // The action to perform when the stencil check fails
-                                          Ogre::SOP_KEEP,          // The action to perform when the stencil check
-                                                                       // passes, but the depth buffer check still fails
-                                          Ogre::SOP_KEEP);         // The action to take when both the stencil and depth
-                                                                       // check pass
+    // Phase 2: pile members only draw where the stencil equals 1.
+    // (BUMPTOP_NO_STENCIL=1 disables the clip for debugging.)
+    Ogre::RenderSystem* render_system = Ogre::Root::getSingleton().getRenderSystem();
+    Ogre::StencilState stencil_state;
+    stencil_state.enabled = true;
+    stencil_state.compareOp = getenv("BUMPTOP_NO_STENCIL") != NULL ?
+                              Ogre::CMPF_ALWAYS_PASS : Ogre::CMPF_EQUAL;
+    stencil_state.referenceValue = 1;
+    stencil_state.compareMask = 0xFFFFFFFF;
+    stencil_state.writeMask = 0xFFFFFFFF;
+    stencil_state.stencilFailOp = Ogre::SOP_KEEP;
+    stencil_state.depthFailOp = Ogre::SOP_KEEP;
+    stencil_state.depthStencilPassOp = Ogre::SOP_KEEP;
+    render_system->setStencilState(stencil_state);
   }
 }
 
 void GriddedPileStencilBufferSetter::renderQueueEnded(uint8 queueGroupId,
                                                       const Ogre::String &invocation, bool &repeatThisInvocation) {
   if (kMinGriddedPileRenderQueueGroup <= queueGroupId && queueGroupId < kMaxGriddedPileRenderQueueGroup) {
-    Ogre::RenderSystem * render_system = Ogre::Root::getSingleton().getRenderSystem();
-    render_system->setStencilCheckEnabled(false);
-    render_system->setStencilBufferParams();
+    Ogre::RenderSystem* render_system = Ogre::Root::getSingleton().getRenderSystem();
+    Ogre::StencilState stencil_state;  // defaults: disabled
+    render_system->setStencilState(stencil_state);
   }
 }
 
