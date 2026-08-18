@@ -23,6 +23,7 @@
 #include "BumpTop/BumpTopInstanceLock.h"
 #include "BumpTop/FileManager.h"
 #include "BumpTop/PersistenceManager.h"
+#include "BumpTop/PhysicsActor.h"
 #include "BumpTop/PhysicsOnlyBox.h"
 #include "BumpTop/QuickLookPreviewPanel.h"
 #include "BumpTop/RoomItemPoseConstraints.h"
@@ -173,6 +174,50 @@ void BumpTopScene::init() {
         }
       });
     }
+  }
+
+  // BUMPTOP_TEST_NAN=1: after 3s, poison one body's velocity with NaN
+  // (mimicking a degenerate Bullet solve) to exercise the motion-state
+  // quarantine; the item must stay visible at its last pose.
+  if (getenv("BUMPTOP_TEST_NAN") != NULL) {
+    Room* room_for_nan = room_;
+    QTimer::singleShot(3000, [room_for_nan]() {
+      for_each(VisualPhysicsActor* actor, room_for_nan->room_actor_list()) {
+        if (actor->actor_type() == BUMP_BOX && actor->physics_actor() != NULL) {
+          Ogre::Vector3 before = actor->world_position();
+          fprintf(stderr, "[test] poisoning velocity of %s at (%.0f,%.0f,%.0f)\n",
+                  utf8(QFileInfo(actor->path()).fileName()).c_str(), before.x, before.y, before.z);
+          btRigidBody* body = actor->physics_actor()->rigid_body();
+          // Settled items sit in DISABLE_SIMULATION, which activate() will
+          // not override; force ACTIVE_TAG so the poison integrates.
+          body->forceActivationState(ACTIVE_TAG);
+          body->setLinearVelocity(btVector3(NAN, NAN, NAN));
+          // Plain Bullet setters don't mark global state changed; wake the
+          // render/physics loop so the poison actually integrates.
+          BumpTopApp::singleton()->markGlobalStateAsChanged();
+          Room* room_after = room_for_nan;
+          VisualPhysicsActor* poisoned = actor;
+          QTimer::singleShot(2000, [room_after, poisoned]() {
+            Ogre::Vector3 p = poisoned->world_position();
+            bool finite = std::isfinite(p.x) && std::isfinite(p.y) && std::isfinite(p.z);
+            int nan_actors = 0;
+            for_each(VisualPhysicsActor* a, room_after->room_actor_list()) {
+              Ogre::Vector3 ap = a->world_position();
+              if (!(std::isfinite(ap.x) && std::isfinite(ap.y) && std::isfinite(ap.z)))
+                nan_actors++;
+            }
+            btRigidBody* b = poisoned->physics_actor()->rigid_body();
+            btVector3 lv = b->getLinearVelocity();
+            btVector3 bo = b->getWorldTransform().getOrigin();
+            fprintf(stderr, "[test] after poison: pos=(%.0f,%.0f,%.0f) finite=%d nan_actors=%d "
+                    "vel=(%f,%f,%f) btpos=(%f,%f,%f) activation=%d\n",
+                    p.x, p.y, p.z, (int)finite, nan_actors,
+                    lv.x(), lv.y(), lv.z(), bo.x(), bo.y(), bo.z(), b->getActivationState());
+          });
+          break;
+        }
+      }
+    });
   }
 
   /*

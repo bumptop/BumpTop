@@ -91,6 +91,7 @@ class PhysicsActor : public QObject {
   virtual void activate();
 
   virtual void set_owner(VisualPhysicsActor* visual_physics_actor);
+  virtual VisualPhysicsActor* owner();
   virtual bool isSleeping();
   virtual bool isWall();
  protected:

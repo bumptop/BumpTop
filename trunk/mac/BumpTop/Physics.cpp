@@ -16,6 +16,8 @@
 
 #include "BumpTop/Physics.h"
 
+#include "BumpTop/PhysicsActorMotionState.h"
+
 Physics::Physics()
 : dynamics_world_(NULL) {
 }
@@ -56,5 +58,25 @@ btDiscreteDynamicsWorld* Physics::dynamics_world() {
 }
 
 int Physics::stepSimulation(btScalar timeStep, int maxSubSteps, btScalar fixedTimeStep) {
-  return dynamics_world_->stepSimulation(timeStep, maxSubSteps, fixedTimeStep);
+  int num_steps = dynamics_world_->stepSimulation(timeStep, maxSubSteps, fixedTimeStep);
+  // When a body's transform goes NaN mid-step, Bullet's AABB-overflow guard
+  // (btCollisionWorld::updateSingleAabb) silently freezes it with
+  // DISABLE_SIMULATION — leaving the item invisible (NaN pose) and
+  // unmovable forever. The app never uses DISABLE_SIMULATION itself, so any
+  // body in that state was guard-frozen: restore its last finite pose and
+  // let it sleep normally so it stays grabbable.
+  btCollisionObjectArray& objects = dynamics_world_->getCollisionObjectArray();
+  for (int i = 0; i < objects.size(); i++) {
+    btRigidBody* body = btRigidBody::upcast(objects[i]);
+    if (body != NULL && body->getActivationState() == DISABLE_SIMULATION &&
+        body->getMotionState() != NULL) {
+      static int rescue_log_count = 0;
+      if (rescue_log_count++ < 40)
+        fprintf(stderr, "[nan] rescuing body frozen by Bullet's AABB-overflow guard\n");
+      // All motion states in this app are PhysicsActorMotionState.
+      static_cast<PhysicsActorMotionState*>(body->getMotionState())->restoreLastGoodTransform(body);
+      body->forceActivationState(ISLAND_SLEEPING);
+    }
+  }
+  return num_steps;
 }

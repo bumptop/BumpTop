@@ -291,6 +291,10 @@ void PhysicsActor::_poseUpdatedByPhysics(const btTransform& transform) {
   BumpTopApp::singleton()->markGlobalStateAsChanged();
 }
 
+VisualPhysicsActor* PhysicsActor::owner() {
+  return owner_;
+}
+
 void PhysicsActor::set_owner(VisualPhysicsActor* visual_physics_actor) {
   owner_ = visual_physics_actor;
 }

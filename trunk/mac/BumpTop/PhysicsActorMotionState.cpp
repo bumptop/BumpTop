@@ -16,17 +16,37 @@
 
 #include "BumpTop/PhysicsActorMotionState.h"
 
+#include <cmath>
+
 #include "BumpTop/Box.h"
 #include "BumpTop/OgreBulletConverter.h"
 #include "BumpTop/PhysicsActor.h"
+#include "BumpTop/QStringHelpers.h"
+#include "BumpTop/VisualPhysicsActor.h"
 
 PhysicsActorMotionState::PhysicsActorMotionState(PhysicsActor *physics_actor)
-: physics_actor_(physics_actor) {
+: physics_actor_(physics_actor),
+  has_last_good_transform_(false) {
     for (int i = 0; i < NUM_FRAMES_TO_UPDATE_AFTER_SLEEPING; i++)
       was_physics_actor_sleeping_n_frames_ago[i] = false;
 }
 
 PhysicsActorMotionState::~PhysicsActorMotionState() {
+}
+
+void PhysicsActorMotionState::restoreLastGoodTransform(btRigidBody* body) {
+  btTransform restore_transform;
+  if (has_last_good_transform_) {
+    restore_transform = last_good_transform_;
+  } else {
+    getWorldTransform(restore_transform);
+  }
+  body->setCenterOfMassTransform(restore_transform);
+  body->setLinearVelocity(btVector3(0, 0, 0));
+  body->setAngularVelocity(btVector3(0, 0, 0));
+  body->clearForces();
+  // The visuals may already show the poisoned pose; snap them back too.
+  physics_actor_->_poseUpdatedByPhysics(restore_transform);
 }
 
 void PhysicsActorMotionState::getWorldTransform(btTransform &world_transform) const {  // NOLINT
@@ -35,11 +55,34 @@ void PhysicsActorMotionState::getWorldTransform(btTransform &world_transform) co
 }
 
 void PhysicsActorMotionState::setWorldTransform(const btTransform &world_transform) {
-  if (world_transform.getOrigin() != world_transform.getOrigin()) {
+  const btVector3& origin = world_transform.getOrigin();
+  btQuaternion rotation = world_transform.getRotation();
+  bool transform_is_finite =
+      std::isfinite(origin.x()) && std::isfinite(origin.y()) && std::isfinite(origin.z()) &&
+      std::isfinite(rotation.x()) && std::isfinite(rotation.y()) &&
+      std::isfinite(rotation.z()) && std::isfinite(rotation.w());
+  if (!transform_is_finite) {
+    // Bullet's solver can emit NaN from degenerate contact configurations
+    // (e.g. coincident bodies -> zero-length contact normal). Never let it
+    // reach the visuals or persist in the body: snap the body back to last
+    // frame's pose and kill all motion, which also stops the NaN spreading
+    // to other bodies through further collisions.
     static int nan_log_count = 0;
-    if (nan_log_count++ < 10)
-      fprintf(stderr, "[nan] Bullet fed NaN transform to motion state\n");
+    if (nan_log_count++ < 40) {
+      VisualPhysicsActor* owner = physics_actor_->owner();
+      fprintf(stderr, "[nan] quarantined NaN from Bullet solver: type=%d path=%s\n",
+              owner != NULL ? (int)owner->actor_type() : -1,
+              owner != NULL ? utf8(owner->path()).c_str() : "?");
+    }
+    btRigidBody* body = physics_actor_->rigid_body();
+    if (body != NULL) {
+      restoreLastGoodTransform(body);
+    }
+    return;
   }
+  last_good_transform_ = world_transform;
+  has_last_good_transform_ = true;
+
   for (int i = NUM_FRAMES_TO_UPDATE_AFTER_SLEEPING - 1; i > 0; i--)
     was_physics_actor_sleeping_n_frames_ago[i] = was_physics_actor_sleeping_n_frames_ago[i-1];
   was_physics_actor_sleeping_n_frames_ago[0] = physics_actor_->isSleeping();
