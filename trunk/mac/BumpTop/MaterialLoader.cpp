@@ -112,8 +112,14 @@ void MaterialLoader::initWithColourValue(Ogre::ColourValue color) {
                                                                                .arg(color.a);
 
   Ogre::MaterialPtr material;
-  material = Ogre::MaterialManager::getSingleton().create(utf8(material_name_),
-                                                          DEFAULT_RESOURCE_GROUP_NAME);
+  if (Ogre::MaterialManager::getSingleton().resourceExists(utf8(material_name_),
+                                                           DEFAULT_RESOURCE_GROUP_NAME)) {
+    material = Ogre::MaterialManager::getSingleton().getByName(utf8(material_name_),
+                                                               DEFAULT_RESOURCE_GROUP_NAME);
+  } else {
+    material = Ogre::MaterialManager::getSingleton().create(utf8(material_name_),
+                                                            DEFAULT_RESOURCE_GROUP_NAME);
+  }
   material->getTechnique(0)->getPass(0)->setAmbient(color);
 }
 
@@ -155,7 +161,7 @@ void MaterialLoader::initAsImageWithFilePaths(const QStringList& texture_paths, 
   init(is_background_loaded);
 }
 
-void MaterialLoader::backgroundLoadingComplete(Ogre::Resource *texture) {
+void MaterialLoader::loadingComplete(Ogre::Resource *texture) {
   expected_number_texture_loaded_callbacks_--;
 
   if (expected_number_texture_loaded_callbacks_ == 0) {
@@ -165,19 +171,22 @@ void MaterialLoader::backgroundLoadingComplete(Ogre::Resource *texture) {
 
 void MaterialLoader::materialLoadingComplete() {
   Ogre::Pass *texture_pass = material_->getTechnique(0)->getPass(0);
-  texture_pass->setSceneBlending(Ogre::SBT_TRANSPARENT_ALPHA);
-  Ogre::TextureUnitState *tus = texture_pass->createTextureUnitState(textures_[0].getPointer()->getName());
-  tus->setTextureAddressingMode(Ogre::TextureUnitState::TAM_CLAMP);
+  // A reused material already carries its texture units; don't add them twice.
+  if (texture_pass->getNumTextureUnitStates() == 0) {
+    texture_pass->setSceneBlending(Ogre::SBT_TRANSPARENT_ALPHA);
+    Ogre::TextureUnitState *tus = texture_pass->createTextureUnitState(textures_[0].getPointer()->getName());
+    tus->setTextureAddressingMode(Ogre::TextureUnitState::TAM_CLAMP);
 
-  if (textures_.count() == 2) {
-    Ogre::TextureUnitState* overlay_tex_state = texture_pass->createTextureUnitState(textures_[1].getPointer()->getName());  // NOLINT
-    overlay_tex_state->setAlphaOperation(Ogre::LBX_ADD);
-    overlay_tex_state->setColourOperationEx(Ogre::LBX_MODULATE);
-    overlay_tex_state->setTextureAddressingMode(Ogre::TextureUnitState::TAM_CLAMP);
-  }
+    if (textures_.count() == 2) {
+      Ogre::TextureUnitState* overlay_tex_state = texture_pass->createTextureUnitState(textures_[1].getPointer()->getName());  // NOLINT
+      overlay_tex_state->setAlphaOperation(Ogre::LBX_ADD);
+      overlay_tex_state->setColourOperationEx(Ogre::LBX_MODULATE);
+      overlay_tex_state->setTextureAddressingMode(Ogre::TextureUnitState::TAM_CLAMP);
+    }
 
-  if (!enable_depth_check_) {
-    texture_pass->setDepthCheckEnabled(false);
+    if (!enable_depth_check_) {
+      texture_pass->setDepthCheckEnabled(false);
+    }
   }
 
   BumpTopApp::singleton()->markGlobalStateAsChanged();
@@ -228,8 +237,16 @@ void MaterialLoader::init(bool is_background_loaded) {
       }
     }
   }
-  material_ = Ogre::MaterialManager::getSingleton().create(utf8(material_name_),
-                                                           DEFAULT_RESOURCE_GROUP_NAME);
+  // Materials can legitimately be requested twice (e.g. two walls sharing a
+  // texture); modern Ogre throws on duplicate create, so reuse instead.
+  if (Ogre::MaterialManager::getSingleton().resourceExists(utf8(material_name_),
+                                                           DEFAULT_RESOURCE_GROUP_NAME)) {
+    material_ = Ogre::MaterialManager::getSingleton().getByName(utf8(material_name_),
+                                                                DEFAULT_RESOURCE_GROUP_NAME);
+  } else {
+    material_ = Ogre::MaterialManager::getSingleton().create(utf8(material_name_),
+                                                             DEFAULT_RESOURCE_GROUP_NAME);
+  }
   // we won't be getting any texture loaded call-backs if we're not laoding
   // in the background
   if (!is_background_loaded) {

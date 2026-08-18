@@ -1342,7 +1342,8 @@ bool Room::setAndAdjustMaterialForSurface(RoomSurfaceType room_surface_type, con
   QString hashed_path = QString(sha1_hasher.result().toHex());
 
   QString background_path = FileManager::getBackgroundCachePath();
-  QString cache_format = ".tiff";
+  // .tiff needed the old FreeImage codec; the port's STBI codec speaks PNG.
+  QString cache_format = ".png";
 
   QDir background_dir = QDir(background_path);
   QSize source_resolution;

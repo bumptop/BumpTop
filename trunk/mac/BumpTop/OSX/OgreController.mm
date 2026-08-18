@@ -283,6 +283,12 @@ const bool kShowSplashScreen = false;
   [self updateWindowSizeAndPlacement];
 
   [fullScreenWindow setLevel:kCGDesktopIconWindowLevel];
+  // Modern macOS: behave like the desktop with Spaces / Mission Control /
+  // Exposé — visible on every Space, not swept aside by Exposé, and excluded
+  // from Cmd-Tab cycling. (collectionBehavior postdates the original code.)
+  [fullScreenWindow setCollectionBehavior:(NSWindowCollectionBehaviorCanJoinAllSpaces |
+                                           NSWindowCollectionBehaviorStationary |
+                                           NSWindowCollectionBehaviorIgnoresCycle)];
   [fullScreenWindow orderFrontRegardless];
 }
 

@@ -70,7 +70,9 @@ class MaterialLoader: public QObject, public Ogre::Resource::Listener {
   // Getters
   virtual QString name();
 
-  virtual void backgroundLoadingComplete(Ogre::Resource *texture);
+  // Ogre::Resource::Listener callback (named backgroundLoadingComplete before
+  // Ogre 1.8; renamed so the override actually fires on modern Ogre).
+  virtual void loadingComplete(Ogre::Resource *texture);
   virtual void backgroundPreparingComplete(Ogre::Resource *texture);
 
   virtual void set_delete_self_on_load_complete(bool value);
