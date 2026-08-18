@@ -479,7 +479,7 @@ bool Room::initFromBuffer(RoomBuffer* buffer, Ogre::Vector2 window_size) {
         box->set_size(expected_drive_icon_size_[drive.file_path]);
       } else {
         box->set_position(Ogre::Vector3(drive.position_x, 100, drive.position_y));
-        box->set_size(Ogre::Vector3(kInitialActorSize, kInitialActorSize, kInitialActorSize));
+        box->set_size(Ogre::Vector3(FileManager::finderDesktopIconSize(), FileManager::finderDesktopIconSize(), FileManager::finderDesktopIconSize()));
       }
     }
   }

@@ -187,8 +187,13 @@ void StickyNote::launch() {
   Ogre::Quaternion desired_orientation = camera->getOrientation();
   camera->setOrientation(original_camera_orientation);
 
-  // Move closer to the camera
-  const Ogre::Real kDesiredDistanceToCamera = 750;
+  // Move closer to the camera — exactly far enough that the note's on-screen
+  // size equals the editing QTextEdit (kDocSize points). The old constant
+  // (750) was tuned for ~1050pt-tall displays and misaligns on anything else.
+  Ogre::Radian fov_y = camera->getFOVy();
+  Ogre::Real screen_height_points = BumpTopApp::singleton()->screen_resolution().y;
+  const Ogre::Real kDesiredDistanceToCamera =
+      size().x * screen_height_points / (2.0 * Ogre::Math::Tan(fov_y / 2.0) * kDocSize);
   Ogre::Vector3 vector_between_camera_and_actor = camera->getPosition() - position();
   vector_between_camera_and_actor.normalise();
   Ogre::Plane camera_plane(camera->getDirection(), camera->getPosition());

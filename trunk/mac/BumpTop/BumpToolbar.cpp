@@ -53,6 +53,20 @@ BumpToolbar::~BumpToolbar() {
 }
 
 void BumpToolbar::init() {
+  // Overlay metrics are device pixels; scale the point-based layout constants
+  // once for Retina displays.
+  static bool toolbar_metrics_scaled = false;
+  if (!toolbar_metrics_scaled) {
+    Ogre::Real device_scale = BumpTopApp::singleton()->device_scale();
+    kToolbarItemWidth *= device_scale;
+    kToolbarItemHeight *= device_scale;
+    kToolbarVerticalPadding *= device_scale;
+    kToolbarHorizontalPadding *= device_scale;
+    kToolbarItemSpacing *= device_scale;
+    kMarginBetweenItemsAndToolbar *= device_scale;
+    kToolbarRegionPadding *= device_scale;
+    toolbar_metrics_scaled = true;
+  }
   // need to load a material synchronously
   // on click, output an event
 
@@ -121,13 +135,14 @@ void BumpToolbar::init() {
 }
 
 void BumpToolbar::setSize(Ogre::Vector2 size) {
+  Ogre::Real cap_height = 16 * BumpTopApp::singleton()->device_scale();
   panel_->setDimensions(size.x, size.y);
-  top_->setDimensions(size.x, 16);
+  top_->setDimensions(size.x, cap_height);
   top_->setPosition(0, 0);
-  middle_->setPosition(0, 16);
-  middle_->setDimensions(size.x, size.y - 32);
-  bottom_->setPosition(0, size.y - 16);
-  bottom_->setDimensions(size.x, 16);
+  middle_->setPosition(0, cap_height);
+  middle_->setDimensions(size.x, size.y - 2*cap_height);
+  bottom_->setPosition(0, size.y - cap_height);
+  bottom_->setDimensions(size.x, cap_height);
   top_->_notifyZOrder(1);
   middle_->_notifyZOrder(0);
   bottom_->_notifyZOrder(2);

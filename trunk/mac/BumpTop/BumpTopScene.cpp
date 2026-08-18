@@ -23,6 +23,7 @@
 #include "BumpTop/PhysicsOnlyBox.h"
 #include "BumpTop/QuickLookPreviewPanel.h"
 #include "BumpTop/RoomItemPoseConstraints.h"
+#include "BumpTop/MouseEventManager.h"
 #include "BumpTop/StickyNotePad.h"
 #include "BumpTop/Timer.h"
 #include "BumpTop/VisualPhysicsActorList.h"
@@ -107,7 +108,10 @@ void BumpTopScene::repositioningTimerTick(Timer* timer) {
 }
 
 void BumpTopScene::saveSceneFileTimerTick(Timer* timer) {
-  if (scene_file_should_be_saved_) {
+  // Serializing the room blocks the render/physics loop; never do it while
+  // the user is mid-drag (it read as a visible hitch), just retry next tick.
+  bool mouse_interaction_in_progress = app_->mouse_event_manager()->global_capture() != NULL;
+  if (scene_file_should_be_saved_ && !mouse_interaction_in_progress) {
     writeRoomToFile(room_, FileManager::getApplicationDataPath());
     scene_file_should_be_saved_ = false;
   }

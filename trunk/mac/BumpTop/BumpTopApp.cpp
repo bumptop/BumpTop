@@ -152,6 +152,10 @@ void BumpTopApp::renderTick() {
 }
 
 bool BumpTopApp::isInIdleMode() {
+  // Never idle while the mouse holds an item: pausing physics mid-drag makes
+  // the dragged item freeze, then snap when the simulation resumes.
+  if (mouse_event_manager_ != NULL && mouse_event_manager_->global_capture() != NULL)
+    return false;
   return !(global_state_changed_this_frame_ || global_state_changed_last_frame_);
 }
 

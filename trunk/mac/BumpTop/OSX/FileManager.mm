@@ -310,6 +310,23 @@ QString FileManager::getResourcePath() {
   return QStringFromNSString([[NSBundle mainBundle] resourcePath]);
 }
 
+float FileManager::finderDesktopIconSize() {
+  float icon_size = 64;
+  CFPropertyListRef desktop_view_settings =
+      CFPreferencesCopyAppValue(CFSTR("DesktopViewSettings"), CFSTR("com.apple.finder"));
+  if (desktop_view_settings != NULL) {
+    if (CFGetTypeID(desktop_view_settings) == CFDictionaryGetTypeID()) {
+      NSDictionary* icon_view_settings =
+          [(NSDictionary*)desktop_view_settings objectForKey:@"IconViewSettings"];
+      NSNumber* size = [icon_view_settings objectForKey:@"iconSize"];
+      if (size != nil && [size floatValue] > 0)
+        icon_size = [size floatValue];
+    }
+    CFRelease(desktop_view_settings);
+  }
+  return icon_size;
+}
+
 QString FileManager::getDesktopWallpaperCachePath() {
   NSURL* wallpaper_url = [[NSWorkspace sharedWorkspace]
                           desktopImageURLForScreen:[[NSScreen screens] objectAtIndex:0]];

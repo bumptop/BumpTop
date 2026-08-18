@@ -114,12 +114,12 @@ void loadRoomFromDesktop(Room* room) {
         }
         box->set_position(Ogre::Vector3(desktop_item.position_x + parity_offset_x, 100,
                                         desktop_item.position_y + parity_offset_y));
-        // Parity mode sizes icons like Finder does (BUMPTOP_PARITY_ICON_SIZE,
-        // default 64pt, matching Finder's desktop view settings).
-        Ogre::Real initial_size = kInitialActorSize;
-        if (getenv("BUMPTOP_PARITY") != NULL) {
-          initial_size = getenv("BUMPTOP_PARITY_ICON_SIZE") != NULL ?
-                         atof(getenv("BUMPTOP_PARITY_ICON_SIZE")) : 64;
+        // Imported items match Finder's icon size so the initial layout
+        // breathes like the real desktop (BUMPTOP_PARITY_ICON_SIZE overrides
+        // for the parity harness).
+        Ogre::Real initial_size = FileManager::finderDesktopIconSize();
+        if (getenv("BUMPTOP_PARITY") != NULL && getenv("BUMPTOP_PARITY_ICON_SIZE") != NULL) {
+          initial_size = atof(getenv("BUMPTOP_PARITY_ICON_SIZE"));
         }
         box->set_size(Ogre::Vector3(initial_size, initial_size, initial_size));
         FileManager::getAndSetLabelColourThroughNSTask(box->unique_id());
@@ -134,7 +134,7 @@ void loadRoomFromDesktop(Room* room) {
 
       box->initWithPath(file_path);  // NOLINT
       box->set_position(Ogre::Vector3(room->floor_width()/2, 100, room->floor_depth()/2));
-      box->set_size(Ogre::Vector3(kInitialActorSize, kInitialActorSize, kInitialActorSize));
+      box->set_size(Ogre::Vector3(FileManager::finderDesktopIconSize(), FileManager::finderDesktopIconSize(), FileManager::finderDesktopIconSize()));
       FileManager::getAndSetLabelColourThroughNSTask(box->unique_id());
     }
   }

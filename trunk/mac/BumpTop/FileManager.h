@@ -54,6 +54,8 @@ class FileManager {
   // Current desktop wallpaper converted to a cached PNG (empty on failure,
   // e.g. dynamic wallpaper folders).
   static QString getDesktopWallpaperCachePath();
+  // The icon size (points) from Finder's desktop view settings; 64 if unset.
+  static float finderDesktopIconSize();
   static QString getApplicationDataPath();
   static QString getBackgroundCachePath();
   static QString getApplicationsPath();
