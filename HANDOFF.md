@@ -97,14 +97,44 @@ side-by-side). Progression so far: 98% → 3.6% of pixels differing >16/255
 Don't touch the mouse/desktop during a run — it re-imports positions.
 
 ## Known gaps / next steps
-- Parity: finish position/label-offset calibration; label typography
-  (Finder uses SF, BumpTop Lucida Grande bold 13); selection-rendering diff.
+(as of 2026-08-18; done: parity ~1.9%, retina/label typography, gridded-pile
+close button, sticky-note crashes + editing polish, animation smoothness
+(idle-gate fix), branded DMG, NaN self-heal)
+
+- Quick Look zoom-from rect fixed (device-px→Cocoa-points in
+  QuickLookSnowLeopard.mm) but not yet user-verified — press space on a
+  selected item and check the panel zooms from it.
+- Bullet NaN root cause still unknown: the two-layer self-heal
+  (PhysicsActorMotionState quarantine + DISABLE_SIMULATION rescue in
+  Physics::stepSimulation) makes it harmless and logs `[nan] ...` with the
+  poisoned actor's path — if it recurs, that log line is the lead.
+- Lasso overlay churns materials while a drag grows it
+  (Lasso::updateLassoMaterial recreates the QPainter texture; Ogre spams
+  "force-disabling 'lighting'" warnings, each an unbuffered stderr write).
+  Likely the residual lasso-drag jank; cap texture size / reuse material.
+- Drag "stuck for half a second" report (DampedSpringMouseHandler): may
+  already be cured by the idle-gate fix; if it recurs, run with
+  BUMPTOP_PROFILE=1 (and BUMPTOP_PROFILE_ALL=1 for per-tick logs) and look
+  for tick gaps / rendered=0 stretches in the newest stderr-*.txt.
+- The New Items Pile is an always-present empty pile parked at room center;
+  double-clicking it opens an empty grid — confusing, maybe hide it until
+  it has members.
+- Pro-license gating still active: more than 2 sticky notes requires
+  `ProAuthorization` (server long dead) — consider unlocking in the port.
 - A second BumpTop window shows in Mission Control previews occasionally
   (the 0x0 helper window) — cosmetic.
-- Sticky notes render but font/colors need checking; Pro-license gating still
-  in place (`ProAuthorization`), server long dead.
 - Legacy deprecations still in use deliberately: OpenGL, NSOpenGLContext,
   QLThumbnailImageCreate, LSSharedFileList (login items), AppleScript Finder
-  automation (may prompt for permission on first run).
+  automation (may prompt for permission on first run; the DMG packager's
+  Finder-layout scripting needs Automation permission too).
 - `.port-deps/` is gitignored; document or vendor the Ogre patch if the
   machine changes.
+- Frame time on a busy desktop is ~30-50ms (legacy GL at 4K retina);
+  animations are smooth now but a deeper render-cost pass (or a Metal-era
+  RenderSystem) would lift everything.
+
+Repro/debug hooks (env vars): BUMPTOP_TEST_NOTE=N, BUMPTOP_TEST_PILE_GRID=1,
+BUMPTOP_TEST_GROW=N, BUMPTOP_TEST_NAN=1, BUMPTOP_PROFILE=1,
+BUMPTOP_PROFILE_ALL=1, BUMPTOP_NO_STENCIL=1, BUMPTOP_DEBUG_LABELS=1,
+BUMPTOP_LABEL_SIZE=N, BUMPTOP_PARITY_* (see parity section). Logs land in
+`~/Library/Application Support/BumpTop/stderr-*.txt`.
