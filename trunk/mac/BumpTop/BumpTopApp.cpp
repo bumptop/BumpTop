@@ -136,8 +136,18 @@ void BumpTopApp::renderTick() {
   static bool profile_frames = getenv("BUMPTOP_PROFILE") != NULL;
   QElapsedTimer frame_timer;
   qint64 t_responses = 0, t_on_render = 0, t_gl = 0, t_physics = 0;
-  if (profile_frames)
+  if (profile_frames) {
+    // A slow frame shows up in the per-phase log below; a *gap* here means
+    // the render timer starved (something else blocked the main run loop).
+    static QElapsedTimer since_last_tick;
+    if (since_last_tick.isValid()) {
+      qint64 gap = since_last_tick.elapsed();
+      if (gap > 50 && !isInIdleMode())
+        fprintf(stderr, "[profile] %lldms gap between render ticks (main loop blocked)\n", gap);
+    }
+    since_last_tick.restart();
     frame_timer.start();
+  }
 
   // We cap off the maximum elapsed time to prevent a feedback loop of slowness
   uint64_t elapsed = std::min((uint64_t)20, render_stopwatch_.elapsed());
