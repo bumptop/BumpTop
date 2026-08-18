@@ -58,7 +58,9 @@ void launchContextMenu(const BumpEnvironment& env,
 
   BumpTopCommandSet context_menu_items_to_remove;
   for_each(BumpTopCommand* option, supported_context_menu_items) {
-    if (!option->canBeAppliedToActors(env, actors) || option->is_toolbar_command()) {
+    // Toolbar commands (Create Pile, Grow, Shrink, ...) used to be excluded
+    // here; surfacing them makes pile creation discoverable via right-click.
+    if (!option->canBeAppliedToActors(env, actors)) {
       context_menu_items_to_remove.insert(option);
     }
   }

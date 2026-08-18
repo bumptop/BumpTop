@@ -359,13 +359,16 @@ void BumpBoxLabel::draw(QPainter* painter) {
   if (!is_selected_
       && label_colour() == COLOURLESS) {
     // if it's not selected we draw the blurred shadow
-    // With the Retina-scaled blur radius a single pass matches Finder's
-    // subtle shadow (the original stamped it three times at radius 2).
+    // Single pass at reduced opacity: pixel-diffed against Finder's subtle
+    // label shadow (the original stamped it three times at full strength).
     QImage blurred_text = createBlurredText();
 
+    qreal previous_opacity = painter->opacity();
+    painter->setOpacity(0.6 * previous_opacity);
     painter->drawImage(kShadowOffsetHorizontal - kExtraSizeForShadowRect/2.0,
                        kShadowOffsetVertical - kExtraSizeForShadowRect/2.0,
                        blurred_text);
+    painter->setOpacity(previous_opacity);
 
     text_background_color = Qt::gray;
   }
@@ -412,6 +415,10 @@ bool BumpBoxLabel::selected() {
 }
 
 QSize BumpBoxLabel::getTextBounds(QStringList *linesOut, QList<QSize> *lineSizesOut, int leading, int max_width) {
+  if (getenv("BUMPTOP_DEBUG_LABELS") != NULL) {
+    fprintf(stderr, "[label-in] '%s' max_width=%d truncated=%d single=%d\n",
+            utf8(text_).c_str(), max_width, truncated_, truncate_to_single_line_);
+  }
   if (text_.isEmpty()) {
     return QSize();
   }
@@ -443,131 +450,67 @@ QSize BumpBoxLabel::getTextBounds(QStringList *linesOut, QList<QSize> *lineSizes
     lineSizesOut->append(tmpSize);
     return QSize(tmpSize.width(), height);
   } else {  // !truncate_to_single_line_
-    QSize tmpSize;
-    int maxLineWidth = 0;
-
-    // we know that the line does not fit on a single line of the specified
-    // preferred width
-    if (truncated_) {
-      QString line;
-
-      // if the text is within the max bounds then just return it
-      // Note: we ignore the line height
-      if (width <= maxWidth) {
-        linesOut->append(srcText);
-        lineSizesOut->append(QSize(textRect.size().width(), height));
-        return textRect.size();
-      }
-
-      QTextBoundaryFinder boundaries(QTextBoundaryFinder::Word, srcText);
-      int prevBoundary = -1;
-      int nextBoundary = boundaries.toNextBoundary();
-      while (-1 < nextBoundary && metrics.boundingRect(srcText.mid(0, nextBoundary)).width() < maxWidth) {
-        prevBoundary = nextBoundary;
-        nextBoundary = boundaries.toNextBoundary();
-      }
-
-      if (prevBoundary < 0)  {
-        int currentChar = 0;
-        while (currentChar < srcText.size() &&
-            metrics.boundingRect(srcText.mid(0, currentChar + 1)).width() < maxWidth) {
-          currentChar++;
-        }
-        line = srcText.mid(0, currentChar);
-
-        // add first line
-        tmpSize = metrics.boundingRect(line).size();
-        int maxLineWidth = tmpSize.width();
-        linesOut->append(line);
-        lineSizesOut->append(tmpSize);
-
-        // break up the second line and add it
-        line = metrics.elidedText(srcText.mid(currentChar), Qt::ElideMiddle, maxWidth).trimmed();
-        tmpSize = metrics.boundingRect(line).size();
-        maxLineWidth = std::max(tmpSize.width(), maxLineWidth);
-        linesOut->append(line);
-        lineSizesOut->append(tmpSize);
-        return QSize(maxLineWidth, linesOut->size() * lineSpacing);
-      } else {
-        line = srcText.mid(0, prevBoundary).trimmed();
-        tmpSize = metrics.boundingRect(line).size();
-        linesOut->append(line);
-        lineSizesOut->append(tmpSize);
-        if (tmpSize.width() > maxLineWidth) {
-          maxLineWidth = tmpSize.width();
-        }
-
-        line = metrics.elidedText(srcText.mid(prevBoundary), Qt::ElideMiddle, maxWidth).trimmed();
-        tmpSize = metrics.boundingRect(line).size();
-        linesOut->append(line);
-        lineSizesOut->append(tmpSize);
-        if (tmpSize.width() > maxLineWidth) {
-          maxLineWidth = tmpSize.width();
-        }
-
-        return QSize(maxLineWidth, linesOut->size() * lineSpacing);
-      }
-    } else {
-      QString line;
-      QTextBoundaryFinder boundaries(QTextBoundaryFinder::Word, srcText);
-      int lastBoundary = 0;
-      int prevBoundary = 0;
-      int nextBoundary = std::min((unsigned int) srcText.indexOf("\n", prevBoundary),
-                                  (unsigned int) boundaries.toNextBoundary());
-      int quarterMaxWidth = maxWidth / 4;
-
-      while (lastBoundary < srcText.size()) {
-        if (nextBoundary >= 0) {
-          line = srcText.mid(lastBoundary, nextBoundary - lastBoundary).trimmed();
-          if ((metrics.horizontalAdvance(line) > maxWidth) || (line.size() > 1 && line.endsWith("\n"))) {
-            line = srcText.mid(lastBoundary, prevBoundary - lastBoundary).trimmed();
-            if (prevBoundary > lastBoundary && (metrics.horizontalAdvance(line) > quarterMaxWidth)) {
-              // the next boundary is OK
-              line = srcText.mid(lastBoundary, prevBoundary - lastBoundary).trimmed();
-              tmpSize = metrics.boundingRect(line).size();
-              linesOut->append(line);
-              lineSizesOut->append(tmpSize);
-              if (tmpSize.width() > maxLineWidth) {
-                maxLineWidth = tmpSize.width();
-              }
-              lastBoundary = prevBoundary;
-            } else {  // prevBoundary <= lastBoundary
-              // the next boundary is beyond the max width
-              int tmpLen = nextBoundary - lastBoundary;
-              while (metrics.horizontalAdvance(srcText.mid(lastBoundary, tmpLen)) > maxWidth && (tmpLen > 0)) {
-                --tmpLen;
-              }
-
-              line = srcText.mid(lastBoundary, tmpLen).trimmed();
-              tmpSize = metrics.boundingRect(line).size();
-              linesOut->append(line);
-              lineSizesOut->append(tmpSize);
-              if (tmpSize.width() > maxLineWidth) {
-                maxLineWidth = tmpSize.width();
-              }
-              lastBoundary += tmpLen;
-              // prevBoundary = lastBoundary;
-            }
-          } else {
-            // move to the next boundary
-            prevBoundary = nextBoundary;
-            nextBoundary = std::min((unsigned int) srcText.indexOf("\n", prevBoundary + 1),
-                                    (unsigned int) boundaries.toNextBoundary());
-          }
-        } else {
-          line = srcText.mid(lastBoundary).trimmed();
-          tmpSize = metrics.boundingRect(line).size();
-          linesOut->append(line);
-          lineSizesOut->append(tmpSize);
-          if (tmpSize.width() > maxLineWidth) {
-            maxLineWidth = tmpSize.width();
-          }
-          break;
-        }
-      }
-
-      return QSize(maxLineWidth, linesOut->size() * lineSpacing);
+    // Wrap like Finder's desktop labels: a single line when it fits,
+    // otherwise exactly two lines chosen to be BALANCED (Finder minimizes the
+    // longer line rather than filling the first line greedily), with the
+    // second line middle-elided when the tail cannot fit.
+    if (width <= maxWidth) {
+      linesOut->append(srcText);
+      lineSizesOut->append(QSize(textRect.size().width(), height));
+      return textRect.size();
     }
+
+    QTextBoundaryFinder boundaries(QTextBoundaryFinder::Line, srcText);
+    QString best_line1;
+    QString best_line2;
+    int best_score = -1;
+    int boundary = boundaries.toNextBoundary();
+    while (boundary > 0 && boundary < srcText.size()) {
+      QString line1 = srcText.left(boundary).trimmed();
+      int width1 = metrics.horizontalAdvance(line1);
+      if (width1 > maxWidth)
+        break;  // later break positions only make line 1 wider
+      QString line2 = metrics.elidedText(srcText.mid(boundary).trimmed(),
+                                         Qt::ElideMiddle, maxWidth).trimmed();
+      int width2 = metrics.horizontalAdvance(line2);
+      int score = std::max(width1, width2);
+      if (best_score < 0 || score < best_score) {
+        best_score = score;
+        best_line1 = line1;
+        best_line2 = line2;
+      }
+      boundary = boundaries.toNextBoundary();
+    }
+
+    if (best_score < 0) {
+      // No break opportunity fits (one enormous word): hard-split by
+      // characters and elide the rest.
+      int current_char = 0;
+      while (current_char < srcText.size() &&
+             metrics.horizontalAdvance(srcText.mid(0, current_char + 1)) < maxWidth) {
+        current_char++;
+      }
+      best_line1 = srcText.mid(0, current_char);
+      best_line2 = metrics.elidedText(srcText.mid(current_char), Qt::ElideMiddle, maxWidth).trimmed();
+    }
+
+    int maxLineWidth = 0;
+    QStringList balanced_lines;  // named: BOOST_FOREACH dangles on temporaries
+    balanced_lines << best_line1 << best_line2;
+    for_each(QString line, balanced_lines) {
+      QSize tmpSize = metrics.boundingRect(line).size();
+      linesOut->append(line);
+      lineSizesOut->append(tmpSize);
+      maxLineWidth = std::max(maxLineWidth, tmpSize.width());
+    }
+    if (getenv("BUMPTOP_DEBUG_LABELS") != NULL) {
+      fprintf(stderr, "[label] '%s' -> '%s' (%d) / '%s' (%d) max=%d spacing=%d\n",
+              utf8(text_).c_str(), utf8(best_line1).c_str(),
+              metrics.horizontalAdvance(best_line1),
+              utf8(best_line2).c_str(), metrics.horizontalAdvance(best_line2),
+              max_width, lineSpacing);
+    }
+    return QSize(maxLineWidth, linesOut->size() * lineSpacing);
   }
   return QSize();
 }
