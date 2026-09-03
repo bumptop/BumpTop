@@ -42,6 +42,60 @@ build/BumpTop.app/Contents/MacOS/BumpTop   # or open build/BumpTop.app
 
 Quit via `pkill -x BumpTop` or the menu-bar item.
 
+### Packaging a DMG
+`./trunk/mac/package_dmg.sh` → `dist/BumpTop.dmg`: builds, bundles Qt via
+macdeployqt, signs, and wraps in a branded DMG (background art, Applications
+alias; the Finder-layout scripting needs Automation permission and is skipped
+under CI).
+
+## CI, signing, and releases
+
+`.github/workflows/build-macos.yml` builds and packages the app on an Apple
+Silicon runner: manually (Actions → *Build macOS* → *Run workflow*), on every
+push to `master`, and on PRs targeting `master`. The patched Ogre is built
+once and cached (keyed on the Ogre version + the vendored patch); each run
+uploads `dist/BumpTop.dmg` as an artifact (90-day retention) after
+verification. Nothing is published anywhere — releases are a manual
+download-and-attach for now.
+
+### Signing tiers
+Signing upgrades itself automatically based on which repository secrets
+exist (Settings → Secrets and variables → Actions):
+
+1. **No secrets (default):** ad-hoc signature. The app runs fine when built
+   locally, but a *downloaded* DMG trips Gatekeeper ("unidentified
+   developer") — users must right-click → Open once.
+2. **Developer ID certificate** (requires the $99/yr Apple Developer
+   Program). Secrets:
+   - `MACOS_CERTIFICATE_P12` — the *Developer ID Application* certificate +
+     private key exported from Keychain Access as a `.p12`, then
+     `base64 -i DeveloperID.p12 | pbcopy`.
+   - `MACOS_CERTIFICATE_PASSWORD` — the `.p12` password.
+   CI imports the cert into a throwaway keychain and signs with the hardened
+   runtime, a secure timestamp, and
+   `trunk/mac/Build/Mac/BumpTop.entitlements` (Apple Events, so the Finder
+   automation keeps working under the hardened runtime).
+3. **Notarization** (recommended on top of tier 2 — this is what makes the
+   DMG double-clickable for everyone). Create an App Store Connect API key
+   (App Store Connect → Users and Access → Integrations → App Store Connect
+   API, role: Developer) and add:
+   - `NOTARY_KEY_ID` — the key ID.
+   - `NOTARY_ISSUER_ID` — the issuer ID shown on the same page.
+   - `NOTARY_KEY_P8` — the contents of the downloaded `AuthKey_XXXX.p8`.
+   CI submits the DMG with `notarytool --wait`, staples the ticket, and
+   verifies with `spctl`.
+
+### Signing locally
+`package_dmg.sh` honors `CODESIGN_IDENTITY`:
+
+```bash
+CODESIGN_IDENTITY="Developer ID Application: Your Name (TEAMID)" ./trunk/mac/package_dmg.sh
+# then, to notarize by hand:
+xcrun notarytool submit dist/BumpTop.dmg --wait --keychain-profile <profile>
+xcrun stapler staple dist/BumpTop.dmg
+```
+Unset, it ad-hoc signs (`--sign -`), which is fine for local use.
+
 ### Ogre flags that matter
 - `OGRE_NODELESS_POSITIONING=TRUE` — restores Camera/Light setPosition/lookAt
   (the codebase uses Ogre 1.7-style nodeless transforms everywhere).
