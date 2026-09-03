@@ -54,6 +54,11 @@ ln -s /Applications "$MOUNT/Applications"
 
 # Finder writes the .DS_Store carrying the view options. Needs Automation
 # permission for Finder; layout is cosmetic, so a TCC denial is not fatal.
+# CI runners can't grant that permission, so skip the scripting there
+# (the DMG still gets the background file, alias, and app).
+if [ -n "${CI:-}" ]; then
+  echo "CI detected: skipping Finder layout scripting"
+else
 osascript <<'EOS' || echo "warning: Finder layout scripting failed; DMG will use default view"
 tell application "Finder"
   tell disk "BumpTop"
@@ -76,6 +81,7 @@ tell application "Finder"
   end tell
 end tell
 EOS
+fi
 
 sync
 hdiutil detach "$DEVICE" -quiet
