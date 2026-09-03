@@ -61,8 +61,11 @@ jobs:
           cmake --build .port-deps/ogre-build
           cmake --install .port-deps/ogre-build
           # Slim the cache: keep install + source headers, drop git metadata
-          # and intermediates.
-          rm -rf .port-deps/ogre-build .port-deps/ogre-src/.git
+          # and intermediates. ogre-build/Dependencies must survive — Ogre
+          # auto-builds freetype there and its exported config links it by
+          # absolute path.
+          rm -rf .port-deps/ogre-src/.git
+          find .port-deps/ogre-build -mindepth 1 -maxdepth 1 ! -name Dependencies -exec rm -rf {} +
 
       - name: Build BumpTop
         run: |
