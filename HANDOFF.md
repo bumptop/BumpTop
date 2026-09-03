@@ -13,7 +13,7 @@ brew install cmake ninja pkg-config qt boost protobuf bullet
 
 # One-time: build the patched static Ogre 14 into .port-deps/
 git clone --depth 1 --branch v14.4.1 https://github.com/OGRECave/ogre.git .port-deps/ogre-src
-# (apply the render-order patch — see below — then:)
+git -C .port-deps/ogre-src apply "$PWD/trunk/mac/ogre-14-render-order.patch"
 cmake -S .port-deps/ogre-src -B .port-deps/ogre-build -G Ninja \
   -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_OSX_ARCHITECTURES=arm64 \
   -DCMAKE_INSTALL_PREFIX=$PWD/.port-deps/ogre-install \
@@ -48,10 +48,14 @@ Quit via `pkill -x BumpTop` or the menu-bar item.
 - `OGRE_RESOURCEMANAGER_STRICT=0` — legacy resource lookup; the app loads
   textures by absolute path.
 - Static GL render system (legacy OpenGL runs fine on Apple Silicon).
-- **Vendored patch** (`#ManuallySpecifyingRenderOrder`) in
-  `OgreMain/include/OgreRenderable.h` + `OgreMain/src/OgreRenderQueueSortingGrouping.cpp`:
-  re-adds BumpTop's setToRenderBefore/After render-order ties used for
-  labels/highlights over icons (grep the marker in `.port-deps/ogre-src`).
+- **Vendored patch**: `trunk/mac/ogre-14-render-order.patch`
+  (`#ManuallySpecifyingRenderOrder`) touches `OgreMain/include/OgreRenderable.h`
+  + `OgreMain/src/OgreRenderQueueSortingGrouping.cpp`: re-adds BumpTop's
+  setToRenderBefore/After render-order ties used for labels/highlights over
+  icons. Porting note for anyone re-deriving it from the vendored 1.7.3 tree:
+  Ogre renamed `DepthSortDescendingLess` to `DistanceSortDescendingLess` and
+  moved it from OgreRenderQueueSortingGrouping.h into the .cpp, so a literal
+  1.7.3 diff will not apply.
 
 ## What was ported (see git log for detail)
 - Legacy Xcode 3 project → CMake/Ninja (`trunk/mac/CMakeLists.txt`); all
@@ -62,9 +66,13 @@ Quit via `pkill -x BumpTop` or the menu-bar item.
   `BumpTopApp::createRootNode`, SharedPtr/AxisAlignedBox/Overlay API updates,
   `Resource::Listener::loadingComplete` rename — this one mattered: textures
   never applied without it).
-- Bullet 2.78 → brew Bullet 3 (API compatible), protobuf 2.4 → 35
-  (regenerated `AllMessages.pb.*`; generated classes un-`final`ed because the
-  app inherits from them — see `trunk/mac/BumpTop/protoc/`).
+- Bullet 2.78 → brew Bullet 3 (API compatible); protobuf gencode is produced
+  at build time from `trunk/mac/BumpTop/protoc/AllMessages.proto` with
+  whatever protoc is installed (generated headers hard-error on any version
+  mismatch, so committing gencode broke every brew protobuf bump). The build
+  post-processes the header to strip `final`/`PROTOBUF_FINAL` — the app
+  inherits from the generated messages (see
+  `trunk/mac/cmake/unfinal_protobuf_header.cmake`).
 - Carbon removal: Process Manager → NSRunningApplication, theme cursors →
   NSCursor, Carbon Menu Manager context menu → NSMenu
   (`OSX/ContextMenu.cpp`), NSStatusItem private ivar → button API.
@@ -127,8 +135,9 @@ close button, sticky-note crashes + editing polish, animation smoothness
   QLThumbnailImageCreate, LSSharedFileList (login items), AppleScript Finder
   automation (may prompt for permission on first run; the DMG packager's
   Finder-layout scripting needs Automation permission too).
-- `.port-deps/` is gitignored; document or vendor the Ogre patch if the
-  machine changes.
+- `.port-deps/` is gitignored, but the Ogre patch is vendored at
+  `trunk/mac/ogre-14-render-order.patch`, so a fresh machine only needs the
+  Building steps above.
 - Frame time on a busy desktop is ~30-50ms (legacy GL at 4K retina);
   animations are smooth now but a deeper render-cost pass (or a Metal-era
   RenderSystem) would lift everything.

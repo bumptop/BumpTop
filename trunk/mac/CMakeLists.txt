@@ -70,7 +70,26 @@ set(THIRD_PARTY_SOURCES
     ${MAC_ROOT}/Dependencies/qtlockedfile-2.4-opensource/src/qtlockedfile_unix.cpp
 )
 
-set(PROTO_SOURCES ${MAC_ROOT}/BumpTop/protoc/AllMessages.pb.cc)
+# Protobuf C++ is generated at build time from the committed .proto with
+# whatever protoc Homebrew ships, so the build does not depend on a pinned
+# gencode version (generated headers hard-error on version mismatch). The
+# post-process strips `final`/`PROTOBUF_FINAL` from the generated classes:
+# legacy BumpTop types inherit from the messages.
+set(PROTO_SRC_DIR ${MAC_ROOT}/BumpTop/protoc)
+set(PROTO_GEN_DIR ${CMAKE_BINARY_DIR}/proto-gen)
+set(PROTO_GEN_OUT ${PROTO_GEN_DIR}/BumpTop/protoc)
+set(PROTO_SOURCES ${PROTO_GEN_OUT}/AllMessages.pb.cc ${PROTO_GEN_OUT}/AllMessages.pb.h)
+add_custom_command(
+    OUTPUT ${PROTO_SOURCES}
+    COMMAND ${CMAKE_COMMAND} -E make_directory ${PROTO_GEN_OUT}
+    COMMAND protobuf::protoc -I ${PROTO_SRC_DIR} --cpp_out=${PROTO_GEN_OUT} ${PROTO_SRC_DIR}/AllMessages.proto
+    COMMAND ${CMAKE_COMMAND} -DPB_HEADER=${PROTO_GEN_OUT}/AllMessages.pb.h
+            -P ${MAC_ROOT}/cmake/unfinal_protobuf_header.cmake
+    DEPENDS ${PROTO_SRC_DIR}/AllMessages.proto ${MAC_ROOT}/cmake/unfinal_protobuf_header.cmake
+    COMMENT "Generating protobuf C++ from AllMessages.proto (un-final-ed for legacy inheritance)"
+    VERBATIM
+)
+set_source_files_properties(${PROTO_SOURCES} PROPERTIES GENERATED TRUE)
 
 add_executable(BumpTop MACOSX_BUNDLE
     ${BT_ALL_SOURCES}
@@ -83,6 +102,9 @@ add_executable(BumpTop MACOSX_BUNDLE
 # ---------------------------------------------------------------------------
 # NOTE: ${MAC_ROOT}/BumpTop must NOT be an include dir — on a case-insensitive
 # filesystem its Math.h would shadow the system <math.h>.
+target_include_directories(BumpTop BEFORE PRIVATE
+    ${PROTO_GEN_DIR}                  # generated "BumpTop/protoc/AllMessages.pb.h"
+)
 target_include_directories(BumpTop PRIVATE
     ${MAC_ROOT}                       # "BumpTop/..." includes
     ${MAC_ROOT}/PortShims             # stub <Sparkle/Sparkle.h>
