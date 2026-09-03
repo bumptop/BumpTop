@@ -5,6 +5,7 @@
 #
 # usage: package_dmg.sh [build-dir] [output-dir]
 set -e
+setopt null_glob  # unmatched globs (e.g. no dev logs to clean) expand to nothing
 SCRIPT_DIR=${0:a:h}
 REPO_ROOT=${SCRIPT_DIR:h:h}
 BUILD=${1:-$REPO_ROOT/build}
