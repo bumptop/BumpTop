@@ -1,0 +1,89 @@
+name: Build macOS
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+concurrency:
+  group: build-macos-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    # macos-15 runners are Apple Silicon (arm64), matching the port target.
+    runs-on: macos-15
+    timeout-minutes: 90
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Homebrew dependencies
+        run: brew install --quiet cmake ninja qt boost protobuf bullet pkg-config
+
+      # The patched static Ogre build is the expensive step (~15 min), so it
+      # is cached keyed on the Ogre version + the vendored patch + the brew
+      # environment. ogre-src headers are needed at app build time too
+      # (GLSupport include dir), so both trees are cached, slimmed of .git
+      # and the intermediate build dir.
+      - name: Cache patched Ogre
+        id: ogre-cache
+        uses: actions/cache@v4
+        with:
+          path: .port-deps
+          key: ogre-v14.4.1-${{ runner.arch }}-${{ hashFiles('trunk/mac/ogre-14-render-order.patch') }}-1
+
+      - name: Build patched Ogre
+        if: steps.ogre-cache.outputs.cache-hit != 'true'
+        run: |
+          git clone --depth 1 --branch v14.4.1 https://github.com/OGRECave/ogre.git .port-deps/ogre-src
+          git -C .port-deps/ogre-src apply "$PWD/trunk/mac/ogre-14-render-order.patch"
+          cmake -S .port-deps/ogre-src -B .port-deps/ogre-build -G Ninja \
+            -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_OSX_ARCHITECTURES=arm64 \
+            -DCMAKE_INSTALL_PREFIX=$PWD/.port-deps/ogre-install \
+            -DOGRE_STATIC=TRUE -DOGRE_BUILD_LIBS_AS_FRAMEWORKS=FALSE \
+            -DOGRE_BUILD_RENDERSYSTEM_GL=TRUE -DOGRE_BUILD_RENDERSYSTEM_GL3PLUS=FALSE \
+            -DOGRE_BUILD_RENDERSYSTEM_METAL=FALSE -DOGRE_BUILD_RENDERSYSTEM_GLES2=FALSE \
+            -DOGRE_BUILD_RENDERSYSTEM_VULKAN=FALSE -DOGRE_BUILD_RENDERSYSTEM_TINY=FALSE \
+            -DOGRE_BUILD_COMPONENT_OVERLAY=TRUE -DOGRE_BUILD_COMPONENT_OVERLAY_IMGUI=FALSE \
+            -DOGRE_BUILD_COMPONENT_BITES=FALSE -DOGRE_BUILD_COMPONENT_BULLET=FALSE \
+            -DOGRE_BUILD_COMPONENT_TERRAIN=FALSE -DOGRE_BUILD_COMPONENT_VOLUME=FALSE \
+            -DOGRE_BUILD_COMPONENT_PAGING=FALSE -DOGRE_BUILD_COMPONENT_MESHLODGENERATOR=FALSE \
+            -DOGRE_BUILD_COMPONENT_PROPERTY=FALSE -DOGRE_BUILD_COMPONENT_RTSHADERSYSTEM=FALSE \
+            -DOGRE_BUILD_PLUGIN_DOT_SCENE=FALSE -DOGRE_BUILD_PLUGIN_ASSIMP=FALSE \
+            -DOGRE_BUILD_PLUGIN_BSP=FALSE -DOGRE_BUILD_PLUGIN_OCTREE=FALSE \
+            -DOGRE_BUILD_PLUGIN_PCZ=FALSE -DOGRE_BUILD_PLUGIN_PFX=FALSE \
+            -DOGRE_BUILD_PLUGIN_STBI=TRUE -DOGRE_NODELESS_POSITIONING=TRUE \
+            -DOGRE_RESOURCEMANAGER_STRICT=0 \
+            -DOGRE_BUILD_SAMPLES=FALSE -DOGRE_BUILD_TOOLS=FALSE -DOGRE_INSTALL_DOCS=FALSE
+          cmake --build .port-deps/ogre-build
+          cmake --install .port-deps/ogre-build
+          # Slim the cache: keep install + source headers, drop git metadata
+          # and intermediates.
+          rm -rf .port-deps/ogre-build .port-deps/ogre-src/.git
+
+      - name: Build BumpTop
+        run: |
+          cmake -S trunk/mac -B build -G Ninja
+          cmake --build build
+
+      - name: Package DMG
+        run: ./trunk/mac/package_dmg.sh
+
+      - name: Verify bundle
+        # dist/BumpTop.app is the macdeployqt'd, ad-hoc-signed copy that went
+        # into the DMG (the one in build/ is unsigned).
+        run: |
+          codesign --verify --deep dist/BumpTop.app
+          plutil -extract NSAppleEventsUsageDescription raw dist/BumpTop.app/Contents/Info.plist
+          hdiutil verify dist/BumpTop.dmg
+
+      - name: Upload DMG
+        uses: actions/upload-artifact@v4
+        with:
+          name: BumpTop-${{ github.sha }}
+          path: dist/BumpTop.dmg
+          retention-days: 90
+          if-no-files-found: error
