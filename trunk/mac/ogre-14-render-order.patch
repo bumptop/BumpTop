@@ -1,0 +1,119 @@
+diff --git a/OgreMain/include/OgreRenderable.h b/OgreMain/include/OgreRenderable.h
+index ec3c8a5..da59431 100644
+--- a/OgreMain/include/OgreRenderable.h
++++ b/OgreMain/include/OgreRenderable.h
+@@ -75,6 +75,37 @@ namespace Ogre {
+         }
+         /** Virtual destructor needed as class has virtual methods. */
+         virtual ~Renderable() {}
++
++        // --- BumpTop patch (#ManuallySpecifyingRenderOrder) ---
++        // Lets a transparent renderable declare that it renders immediately
++        // before/after another renderable in the same render queue group.
++        // Consumed by DistanceSortDescendingLess in
++        // OgreRenderQueueSortingGrouping.cpp.
++        void setToRenderBefore(Renderable* renderable)
++        {
++            mRenderableToRenderNextTo = renderable;
++            mRenderAfterTheRenderableToRenderNextTo = false;
++            mRenderOrderTiedToOtherRenderable = (renderable != NULL);
++        }
++        void setToRenderAfter(Renderable* renderable)
++        {
++            mRenderableToRenderNextTo = renderable;
++            mRenderAfterTheRenderableToRenderNextTo = true;
++            mRenderOrderTiedToOtherRenderable = (renderable != NULL);
++        }
++        Renderable* getRenderableToRenderNextTo(void) const
++        {
++            return mRenderOrderTiedToOtherRenderable ? mRenderableToRenderNextTo : NULL;
++        }
++        bool renderAfterOtherRenderable(void) const
++        {
++            return mRenderOrderTiedToOtherRenderable && mRenderAfterTheRenderableToRenderNextTo;
++        }
++        bool renderOrderTiedToOtherRenderable(void) const
++        {
++            return mRenderOrderTiedToOtherRenderable;
++        }
++        // --- end BumpTop patch ---
+         /** Retrieves a weak reference to the material this renderable object uses.
+ 
+             Note that the Renderable also has the option to override the getTechnique method
+@@ -358,6 +389,10 @@ namespace Ogre {
+         UserObjectBindings mUserObjectBindings;      /// User objects binding.
+         uint16 mMaterialLodIndex;
+         bool mPolygonModeOverrideable;
++        // BumpTop patch (#ManuallySpecifyingRenderOrder)
++        Renderable* mRenderableToRenderNextTo = NULL;
++        bool mRenderAfterTheRenderableToRenderNextTo = false;
++        bool mRenderOrderTiedToOtherRenderable = false;
+         bool mUseIdentityProjection;
+         bool mUseIdentityView;
+     };
+diff --git a/OgreMain/src/OgreRenderQueueSortingGrouping.cpp b/OgreMain/src/OgreRenderQueueSortingGrouping.cpp
+index df4c58a..814a6dc 100644
+--- a/OgreMain/src/OgreRenderQueueSortingGrouping.cpp
++++ b/OgreMain/src/OgreRenderQueueSortingGrouping.cpp
+@@ -51,11 +51,47 @@ namespace {
+             }
+             else
+             {
++                // BumpTop patch (#ManuallySpecifyingRenderOrder): renderables
++                // tied to another renderable sort at that renderable's depth,
++                // then explicitly before/after it.
++                Renderable* a_renderable = a.renderable->renderOrderTiedToOtherRenderable()
++                                               ? a.renderable->getRenderableToRenderNextTo()
++                                               : a.renderable;
++                Renderable* b_renderable = b.renderable->renderOrderTiedToOtherRenderable()
++                                               ? b.renderable->getRenderableToRenderNextTo()
++                                               : b.renderable;
++
+                 // Different renderables, sort by distance
+-                Real adist = a.renderable->getSquaredViewDepth(camera);
+-                Real bdist = b.renderable->getSquaredViewDepth(camera);
++                Real adist = a_renderable->getSquaredViewDepth(camera);
++                Real bdist = b_renderable->getSquaredViewDepth(camera);
+                 if (Math::RealEqual(adist, bdist))
+                 {
++                    // Tie checks use the raw renderables; only the depth uses
++                    // the substituted one.
++                    if (a.renderable->getRenderableToRenderNextTo() == b.renderable)
++                    {
++                        return !a.renderable->renderAfterOtherRenderable();
++                    }
++                    else if (b.renderable->getRenderableToRenderNextTo() == a.renderable)
++                    {
++                        return b.renderable->renderAfterOtherRenderable();
++                    }
++                    else if (a.renderable->getRenderableToRenderNextTo() != NULL &&
++                             a.renderable->getRenderableToRenderNextTo() ==
++                                 b.renderable->getRenderableToRenderNextTo() &&
++                             a.renderable->renderAfterOtherRenderable() &&
++                             !b.renderable->renderAfterOtherRenderable())
++                    {
++                        return false;
++                    }
++                    else if (a.renderable->getRenderableToRenderNextTo() != NULL &&
++                             a.renderable->getRenderableToRenderNextTo() ==
++                                 b.renderable->getRenderableToRenderNextTo() &&
++                             !a.renderable->renderAfterOtherRenderable() &&
++                             b.renderable->renderAfterOtherRenderable())
++                    {
++                        return true;
++                    }
+                     // Must return deterministic result, doesn't matter what
+                     return a.pass < b.pass;
+                 }
+@@ -346,7 +382,10 @@ namespace {
+             // stable_sorts best-case scenario O(NlogN) it would be much higher.
+             // Take a stab at 2000 items.
+             
+-            if (mSortedDescending.size() > 2000)
++            // BumpTop patch: always use the comparator path so the manual
++            // render-order ties in DistanceSortDescendingLess are honoured
++            // (the radix path would ignore them).
++            if (false)
+             {
+                 // sort by pass
+                 msRadixSorter1.sort(mSortedDescending, RadixSortFunctorPass());
