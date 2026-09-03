@@ -69,8 +69,77 @@ jobs:
           cmake -S trunk/mac -B build -G Ninja
           cmake --build build
 
+      # -----------------------------------------------------------------
+      # Signing & notarization are optional: with no secrets configured the
+      # DMG is ad-hoc signed (runs locally; downloads need right-click →
+      # Open past Gatekeeper). To ship a double-clickable build, add these
+      # repository secrets (requires an Apple Developer membership):
+      #   MACOS_CERTIFICATE_P12      base64 of the "Developer ID Application"
+      #                              cert + private key (.p12):
+      #                              base64 -i DeveloperID.p12 | pbcopy
+      #   MACOS_CERTIFICATE_PASSWORD the .p12 password
+      # and, for notarization (App Store Connect → Users and Access →
+      # Integrations → App Store Connect API key with Developer access):
+      #   NOTARY_KEY_ID              the key id
+      #   NOTARY_ISSUER_ID           the issuer id
+      #   NOTARY_KEY_P8              contents of the AuthKey_XXXX.p8 file
+      # -----------------------------------------------------------------
+      - name: Import signing certificate
+        id: cert
+        env:
+          CERT_P12: ${{ secrets.MACOS_CERTIFICATE_P12 }}
+          CERT_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_PASSWORD }}
+        run: |
+          if [ -z "$CERT_P12" ]; then
+            echo "No signing certificate configured; DMG will be ad-hoc signed."
+            echo "identity=-" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          KEYCHAIN=$RUNNER_TEMP/signing.keychain-db
+          KEYCHAIN_PASSWORD=$(uuidgen)
+          echo "$CERT_P12" | base64 --decode > "$RUNNER_TEMP/cert.p12"
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+          security set-keychain-settings -lut 3600 "$KEYCHAIN"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+          security import "$RUNNER_TEMP/cert.p12" -k "$KEYCHAIN" \
+            -P "$CERT_PASSWORD" -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple: \
+            -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN" > /dev/null
+          security list-keychains -d user -s "$KEYCHAIN" login.keychain-db
+          IDENTITY=$(security find-identity -v -p codesigning "$KEYCHAIN" \
+            | awk -F'"' '/Developer ID Application/{print $2; exit}')
+          rm -f "$RUNNER_TEMP/cert.p12"
+          if [ -z "$IDENTITY" ]; then
+            echo "::error::No 'Developer ID Application' identity found in the imported .p12"
+            exit 1
+          fi
+          echo "Using identity: $IDENTITY"
+          echo "identity=$IDENTITY" >> "$GITHUB_OUTPUT"
+
       - name: Package DMG
+        env:
+          CODESIGN_IDENTITY: ${{ steps.cert.outputs.identity }}
         run: ./trunk/mac/package_dmg.sh
+
+      - name: Notarize and staple
+        env:
+          NOTARY_KEY_ID: ${{ secrets.NOTARY_KEY_ID }}
+          NOTARY_ISSUER_ID: ${{ secrets.NOTARY_ISSUER_ID }}
+          NOTARY_KEY_P8: ${{ secrets.NOTARY_KEY_P8 }}
+          SIGN_IDENTITY: ${{ steps.cert.outputs.identity }}
+        run: |
+          if [ "$SIGN_IDENTITY" = "-" ] || [ -z "$NOTARY_KEY_ID" ]; then
+            echo "Skipping notarization (no Developer ID signature or no notary secrets)."
+            exit 0
+          fi
+          printf '%s' "$NOTARY_KEY_P8" > "$RUNNER_TEMP/AuthKey.p8"
+          xcrun notarytool submit dist/BumpTop.dmg --wait \
+            --key "$RUNNER_TEMP/AuthKey.p8" \
+            --key-id "$NOTARY_KEY_ID" \
+            --issuer "$NOTARY_ISSUER_ID"
+          rm -f "$RUNNER_TEMP/AuthKey.p8"
+          xcrun stapler staple dist/BumpTop.dmg
+          spctl --assess --type open --context context:primary-signature dist/BumpTop.dmg
 
       - name: Verify bundle
         # dist/BumpTop.app is the macdeployqt'd, ad-hoc-signed copy that went

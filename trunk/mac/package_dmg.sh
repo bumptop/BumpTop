@@ -25,8 +25,20 @@ rm -f "$OUT/BumpTop.app/Contents/Resources"/stdout-*.txt \
 echo "== bundling dependencies (macdeployqt)"
 "$QT_BIN/macdeployqt" "$OUT/BumpTop.app"
 
-echo "== signing (ad hoc)"
-codesign --force --deep --sign - "$OUT/BumpTop.app"
+# Signing: ad hoc by default; set CODESIGN_IDENTITY to a Developer ID
+# Application identity for a distributable build. Real identities get the
+# hardened runtime + entitlements (required for notarization).
+CODESIGN_IDENTITY=${CODESIGN_IDENTITY:--}
+if [ "$CODESIGN_IDENTITY" = "-" ]; then
+  echo "== signing (ad hoc)"
+  codesign --force --deep --sign - "$OUT/BumpTop.app"
+else
+  echo "== signing ($CODESIGN_IDENTITY)"
+  codesign --force --deep --options runtime --timestamp \
+    --entitlements "$SCRIPT_DIR/Build/Mac/BumpTop.entitlements" \
+    --sign "$CODESIGN_IDENTITY" "$OUT/BumpTop.app"
+  codesign --verify --deep --strict "$OUT/BumpTop.app"
+fi
 
 echo "== creating DMG"
 # Branded layout, ported from Build/Mac/create_dmg.sh: background art,
