@@ -28,6 +28,20 @@
 
 typedef void (*ContextMenuItemFunction)(const QString& file_path);
 
+// Captures the menu item picked during the synchronous NSMenu tracking loop.
+@interface BTContextMenuTarget : NSObject {
+ @public
+  NSMenuItem* picked_item;
+}
+- (void)menuItemPicked:(id)sender;
+@end
+
+@implementation BTContextMenuTarget
+- (void)menuItemPicked:(id)sender {
+  picked_item = (NSMenuItem*)sender;
+}
+@end
+
 void launchContextMenu(const BumpEnvironment& env,
                        const VisualPhysicsActorList& actors, Ogre::Vector2 mouse_in_window_space) {
   assert(actors.size() > 0);
@@ -44,7 +58,9 @@ void launchContextMenu(const BumpEnvironment& env,
 
   BumpTopCommandSet context_menu_items_to_remove;
   for_each(BumpTopCommand* option, supported_context_menu_items) {
-    if (!option->canBeAppliedToActors(env, actors) || option->is_toolbar_command()) {
+    // Toolbar commands (Create Pile, Grow, Shrink, ...) used to be excluded
+    // here; surfacing them makes pile creation discoverable via right-click.
+    if (!option->canBeAppliedToActors(env, actors)) {
       context_menu_items_to_remove.insert(option);
     }
   }
@@ -86,99 +102,66 @@ void launchContextMenu(const BumpEnvironment& env, const VisualPhysicsActorList&
       ordered_context_menu_items.insert(separator->menu_index(), separator);
   }
 
-  Point point;
-  point.h = mouse_in_window_space.x;
-  point.v = mouse_in_window_space.y;
+  // Modern port: the Carbon Menu Manager (ContextualMenuSelect et al.) was
+  // removed from macOS, so the menu is built and tracked with NSMenu instead.
+  // popUpMenuPositioningItem: runs a synchronous tracking loop, and the picked
+  // item is captured by BTContextMenuTarget before it returns.
+  BTContextMenuTarget* menu_target = [[BTContextMenuTarget alloc] init];
+  NSMenu* context_menu = [[NSMenu alloc] initWithTitle:@"ItemContextMenu"];
+  [context_menu setAutoenablesItems:NO];
 
-  AEDescList file_list;
-  OSStatus err;
-
-
-  // Create a AEDesc for the file
-  // example that this is based off of:
-  // http://devworld.apple.com/technotes/tn/tn1002.html
-
-  AEDesc file_list_element;
-  AECreateList(NULL, 0, false, &file_list);
-  bool use_ae_desc_list = false;
-  for_each(VisualPhysicsActor* actor, actors) {
-    if (QFileInfo(actor->path()).exists()) {
-      use_ae_desc_list = true;
-
-      AliasHandle file_alias;
-      Boolean is_directory = false;
-
-      err = FSNewAliasFromPath(NULL, utf8(actor->path()).c_str(), 0,  &file_alias, &is_directory);
-
-      HLock((Handle) file_alias);
-
-      AECreateDesc(typeAlias, (Ptr) (*file_alias),
-                   GetHandleSize((Handle) file_alias), &file_list_element);
-      HUnlock((Handle) file_alias);
-
-      AEPutDesc(&file_list, 0, &file_list_element);
-    }
-
-  }
-
-  UInt32 user_selection_type;
-  MenuID menu_id;
-  MenuItemIndex menu_item_index;
-
-  IBNibRef nib_ref;
-  err = CreateNibReference(CFSTR("ContextMenu"), &nib_ref);
-  MenuRef carbon_context_menu;
-  err = CreateMenuFromNib(nib_ref, CFSTR("ItemContextMenu"), &carbon_context_menu);
-  // change double separators to just one separator:
-  err = ChangeMenuAttributes(carbon_context_menu, kMenuAttrCondenseSeparators, NULL);
-
-  DisposeNibReference(nib_ref);
-
-  int num_submenu_items = 0;
   int menu_size = 0;
   for_each(BumpTopCommand* option, ordered_context_menu_items) {
-    err = InsertMenuItemTextWithCFString(carbon_context_menu,
-                                         CFStringFromQString(option->name()),
-                                         menu_size,   // MenuItemIndex inAfterItem
-                                         option->isSeparator() ? kMenuItemAttrSeparator : 0,  // MenuItemAttributes inAttributes
-                                         0);  // MenuCommand inCommandID
+    NSMenuItem* menu_item;
+    if (option->isSeparator()) {
+      menu_item = (NSMenuItem*)[NSMenuItem separatorItem];
+      [context_menu addItem:menu_item];
+    } else {
+      menu_item = [[NSMenuItem alloc] initWithTitle:NSStringFromQString(option->name())
+                                             action:@selector(menuItemPicked:)
+                                      keyEquivalent:@""];
+      [menu_item setTarget:menu_target];
+      [context_menu addItem:menu_item];
+      [menu_item release];
+    }
+    [menu_item setTag:menu_size];
+
     if (option->has_subcommands()) {
       QStringList subcommand_names = option->subcommand_names(actors);
-      err = CreateNibReference(CFSTR("ContextMenu"), &nib_ref);
-      MenuRef carbon_context_sub_menu;
-      err = CreateMenuFromNib(nib_ref, CFSTR("ItemContextMenu"), &carbon_context_sub_menu);
-      err = ChangeMenuAttributes(carbon_context_sub_menu, kMenuAttrCondenseSeparators, NULL);
-      DisposeNibReference(nib_ref);
-
+      NSMenu* sub_menu = [[NSMenu alloc] initWithTitle:NSStringFromQString(option->name())];
+      [sub_menu setAutoenablesItems:NO];
 
       int sub_menu_size = 0;
       for_each(QString subcommand, subcommand_names) {
-        err = InsertMenuItemTextWithCFString(carbon_context_sub_menu,
-                                             CFStringFromQString(subcommand),
-                                             sub_menu_size,   // MenuItemIndex inAfterItem
-                                             subcommand == "" ? kMenuItemAttrSeparator : 0,  // MenuItemAttributes inAttributes
-                                             0); // MenuCommand inCommandID
+        NSMenuItem* sub_menu_item;
+        if (subcommand == "") {
+          sub_menu_item = (NSMenuItem*)[NSMenuItem separatorItem];
+          [sub_menu addItem:sub_menu_item];
+        } else {
+          sub_menu_item = [[NSMenuItem alloc] initWithTitle:NSStringFromQString(subcommand)
+                                                     action:@selector(menuItemPicked:)
+                                              keyEquivalent:@""];
+          [sub_menu_item setTarget:menu_target];
+          [sub_menu addItem:sub_menu_item];
+          [sub_menu_item release];
+        }
+        [sub_menu_item setTag:sub_menu_size];
 
         CGImageRef icon = option->iconForSubcommand(actors, sub_menu_size);
         if (icon) {
-          err = SetMenuItemIconHandle (carbon_context_sub_menu,
-                                       sub_menu_size+1,
-                                       kMenuCGImageRefType,
-                                       (Handle) icon);
+          NSImage* icon_image = [[NSImage alloc] initWithCGImage:icon size:NSMakeSize(16, 16)];
+          [sub_menu_item setImage:icon_image];
+          [icon_image release];
           CGImageRelease(icon);
         }
         sub_menu_size++;
-
       }
-      num_submenu_items = sub_menu_size;
-
-      SetMenuID(carbon_context_sub_menu, menu_size);
-      SetMenuItemHierarchicalMenu(carbon_context_menu, menu_size+1, carbon_context_sub_menu);
+      [menu_item setSubmenu:sub_menu];
+      [sub_menu release];
     }
 
     menu_size += 1;
   }
-  SetMenuID(carbon_context_menu, -1);
 
   // This is a bit hacky, but before we launch the context menu we want to call a mouse up so as to ensure
   // that any drag operations are ended properly -- this is required since the context menu will receive
@@ -186,43 +169,40 @@ void launchContextMenu(const BumpEnvironment& env, const VisualPhysicsActorList&
   Ogre::Vector2 mouse_location = BumpTopApp::singleton()->mouse_location();
   BumpTopApp::singleton()->mouseUp(mouse_location.x, mouse_location.y, 1, NO_KEY_MODIFIERS_MASK);
 
+  // mouse_in_window_space is top-left-origin device pixels; NSMenu wants
+  // bottom-left-origin screen points.
+  Ogre::Real device_scale = BumpTopApp::singleton()->device_scale();
+  CGFloat screen_height = [[[NSScreen screens] objectAtIndex:0] frame].size.height;
+  NSPoint popup_point = NSMakePoint(mouse_in_window_space.x / device_scale,
+                                    screen_height - mouse_in_window_space.y / device_scale);
+
   BumpTopApp::singleton()->set_context_menu_open(true);
-  // http://developer.apple.com/documentation/Carbon/Reference/Menu_Manager/Reference/reference.html#//apple_ref/c/func/ContextualMenuSelect
-  err = ContextualMenuSelect(carbon_context_menu,
-                             point,
-                             false,
-                             kCMHelpItemNoHelp,
-                             NULL,
-                             use_ae_desc_list ? NULL : &file_list,
-                             &user_selection_type,
-                             &menu_id,
-                             &menu_item_index);
+  [context_menu popUpMenuPositioningItem:nil atLocation:popup_point inView:nil];
   BumpTopApp::singleton()->set_context_menu_open(false);
 
-  if ((    (menu_id == -1 && menu_item_index <= ordered_context_menu_items.size())
-        || (menu_id != -1 && menu_item_index <= num_submenu_items))
-      && user_selection_type == kCMMenuItemSelected) {
-    // If menu_id is -1 the user selected an option from the root context menu
-    if (menu_id == -1) {
-      DEBUG_ASSERT(ordered_context_menu_items.size() >= menu_item_index &&
-                   ordered_context_menu_items.value(menu_item_index - 1) != NULL);
-      if (ordered_context_menu_items.size() >= menu_item_index &&
-          ordered_context_menu_items.value(menu_item_index - 1) != NULL) {
-
-        ordered_context_menu_items.value(menu_item_index - 1)->applyToActors(env, actors);
+  NSMenuItem* picked = menu_target->picked_item;
+  if (picked != nil) {
+    NSMenuItem* parent_item = [picked parentItem];
+    if (parent_item == nil) {
+      // Picked from the root context menu
+      int index = (int)[picked tag];
+      if (index < ordered_context_menu_items.size() &&
+          ordered_context_menu_items.value(index) != NULL) {
+        ordered_context_menu_items.value(index)->applyToActors(env, actors);
       }
-    // If menu_id is not -1, the user selected an option from a submenu
     } else {
-#ifdef DEBUG
-      assert(ordered_context_menu_items.size() > menu_id &&
-             ordered_context_menu_items.value(menu_id) != NULL);
-#endif
-      if (ordered_context_menu_items.size() > menu_id &&
-          ordered_context_menu_items.value(menu_id) != NULL) {
-        ordered_context_menu_items.value(menu_id)->applyToActors(env, actors, menu_item_index - 1);
+      // Picked from a submenu
+      int parent_index = (int)[parent_item tag];
+      int sub_index = (int)[picked tag];
+      if (parent_index < ordered_context_menu_items.size() &&
+          ordered_context_menu_items.value(parent_index) != NULL) {
+        ordered_context_menu_items.value(parent_index)->applyToActors(env, actors, sub_index);
       }
     }
   }
+
+  [context_menu release];
+  [menu_target release];
 }
 
 // Show package contents: use this: tell application "System Events" to get package folder of alias POSIX file "/Users/web/Desktop/BumpTop.app"

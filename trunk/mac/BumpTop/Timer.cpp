@@ -48,4 +48,3 @@ void Timer::renderTickReceived() {
   }
 }
 
-#include "moc/moc_Timer.cpp"

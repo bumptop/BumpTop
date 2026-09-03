@@ -138,8 +138,13 @@ void AnimationManager::renderTick() {
 // TODO: WINTODO
 #if defined(OS_WIN)
 #else
+  // Tween targets (visual-only fade copies, physics-disabled actors during
+  // pose animations) don't mark global state changed themselves, so without
+  // this the idle-mode gate skips rendering and animations play as a few
+  // incidental frames ("chunky"/"jump cut").
+  if (tween::Tweener::singleton()->hasActiveTweens())
+    BumpTopApp::singleton()->markGlobalStateAsChanged();
   tween::Tweener::singleton()->step(Stopwatch::currentTime());
 #endif
 }
 
-#include "BumpTop/moc/moc_AnimationManager.cpp"

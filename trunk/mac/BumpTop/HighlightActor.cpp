@@ -45,4 +45,3 @@ void HighlightActor::deleteMaterialLoader(MaterialLoader *material_loader) {
   delete material_loader;
 }
 
-#include "moc/moc_HighlightActor.cpp"

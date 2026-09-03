@@ -44,4 +44,3 @@ void NSTaskDeletionManager::delete_tasks() {
   BumpTopApp::singleton()->disconnect(this);
 }
 
-#include "moc/moc_NSTaskDeletionManager.cpp"

@@ -240,5 +240,4 @@ void SearchBox::hideOverlayAfterFading() {
   overlay_->hideSearchBoxOverlay();
 }
 
-#include "moc/moc_SearchBox.cpp"
 

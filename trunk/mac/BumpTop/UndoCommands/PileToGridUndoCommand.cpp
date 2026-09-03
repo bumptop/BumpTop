@@ -92,8 +92,11 @@ void PileToGridUndoCommand::redo() {
   bool did_anything_happen = false;
 
   BumpPile* pile = static_cast<BumpPile*>(room_->actor_with_unique_id(pile_id_));
+  fprintf(stderr, "[p2g] redo: pile=%p\n", (void*)pile);
   if (pile != NULL) {
     pile->breakPile();
+    fprintf(stderr, "[p2g] breakPile done, flattened=%d children=%d\n",
+            (int)pile->flattenedChildren().size(), (int)pile->children().size());
 
     for_each (VisualPhysicsActor* actor, pile->flattenedChildren()) {
       if (actor->actor_type() == BUMP_DUMMY) {
@@ -107,9 +110,12 @@ void PileToGridUndoCommand::redo() {
     gridded_pile->init();
     gridded_pile->set_position(Ogre::Vector3(pile->position().x, gridded_pile->position().y, pile->position().z));
 
+    fprintf(stderr, "[p2g] grid created at (%.0f,%.0f), adding %d children\n",
+            gridded_pile->position().x, gridded_pile->position().z, (int)pile->children().size());
     gridded_pile->addActors(pile->children(),
                             pile->children_offsets(),
                             pile->children_orientations());
+    fprintf(stderr, "[p2g] addActors done\n");
 
     std::pair<bool, Ogre::Vector3> adjusted_position;
     adjusted_position = getPositionConstrainedToRoom(gridded_pile->world_bounding_box(), room_);
@@ -130,6 +136,7 @@ void PileToGridUndoCommand::redo() {
     ToolTipManager::singleton()->hideGriddedPileTooltip();
     room_->removeActor(pile_id_);
     room_->addActor(gridded_pile);
+    fprintf(stderr, "[p2g] old pile removed, grid registered\n");
 
     delete pile;
     did_anything_happen = true;

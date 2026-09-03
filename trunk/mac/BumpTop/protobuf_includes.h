@@ -19,15 +19,10 @@
 
 #undef TYPE_BOOL
 
-#include <google/protobuf/stubs/once.h>
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/reflection_ops.h>
-#include <google/protobuf/wire_format_lite_inl.h>
-#include <google/protobuf/stubs/common.h>
-#include <google/protobuf/generated_message_reflection.h>
+#include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>
-#include <google/protobuf/extension_set.h>
 
 #endif  // BUMPTOP_PROTOBUF_INCLUDES_H_
 

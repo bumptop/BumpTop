@@ -330,7 +330,7 @@ QString PileByTypeUndoCommand::getFileType(QString path) {
   } else if (file_kind == APPLICATION) {
     return "app";
   } else if (file_kind == ALIAS) {
-    return getFileType(QFileInfo(path).readLink());
+    return getFileType(QFileInfo(path).symLinkTarget());
   } else {
     if (QFileInfo(path).isDir()) {
       if (QFileInfo(path).suffix() != "") {

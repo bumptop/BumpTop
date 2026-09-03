@@ -140,4 +140,3 @@ void SearchBoxOverlay::hideSearchBoxOverlay() {
   overlay_->hide();
 }
 
-#include "moc/moc_SearchBoxOverlay.cpp"

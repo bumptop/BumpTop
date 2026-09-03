@@ -86,4 +86,3 @@ void UsageTracker::replyFinished(QNetworkReply* reply) {
   reply->close();
 }
 
-#include "moc/moc_UsageTracker.cpp"

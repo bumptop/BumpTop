@@ -31,9 +31,15 @@ class PhysicsActorMotionState : public btMotionState {
 
   virtual void getWorldTransform(btTransform &worldTrans) const; // NOLINT
   virtual void setWorldTransform(const btTransform &worldTrans);
+  // NaN recovery: put the body back at the last finite pose Bullet reported
+  // (or the actor's set pose if none yet), kill all motion, and sync the
+  // visuals to match.
+  void restoreLastGoodTransform(btRigidBody* body);
  protected:
   PhysicsActor *physics_actor_;
   bool was_physics_actor_sleeping_n_frames_ago[NUM_FRAMES_TO_UPDATE_AFTER_SLEEPING];
+  btTransform last_good_transform_;
+  bool has_last_good_transform_;
 };
 
 #endif  // BUMPTOP_PHYSICSACTORMOTIONSTATE_H_

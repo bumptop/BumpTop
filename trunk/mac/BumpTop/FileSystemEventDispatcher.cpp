@@ -171,4 +171,3 @@ QString FileSystemEventDispatcher::getPathWithoutTrailingSlash(QString path) {
   }
 }
 
-#include "moc/moc_FileSystemEventDispatcher.cpp"

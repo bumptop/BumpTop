@@ -16,6 +16,8 @@
 
 #include "BumpTop/PhysicsActor.h"
 
+#include "BumpTop/Math.h"
+
 #include "BumpTop/Box.h"
 #include "BumpTop/BumpTopApp.h"
 #include "BumpTop/OgreBulletConverter.h"
@@ -65,9 +67,13 @@ PhysicsActor::~PhysicsActor() {
 }
 
 void PhysicsActor::set_scale(Ogre::Vector3 scale) {
+  if (scale.isNaN() || scale.x <= 0 || scale.y <= 0 || scale.z <= 0)
+    fprintf(stderr, "[nan] set_scale got (%f,%f,%f)\n", scale.x, scale.y, scale.z);
   rigid_body_->getCollisionShape()->setLocalScaling(toBt(scale));
   btVector3 local_inertia(0, 0, 0);
   rigid_body_->getCollisionShape()->calculateLocalInertia(mass_, local_inertia);
+  if (local_inertia != local_inertia)
+    fprintf(stderr, "[nan] set_scale inertia NaN (mass=%f scale=%f,%f,%f)\n", mass_, scale.x, scale.y, scale.z);
   rigid_body_->setMassProps(mass_, local_inertia);
   rigid_body_->updateInertiaTensor();
 
@@ -135,6 +141,8 @@ void PhysicsActor::setMass(Ogre::Real mass) {
   btCollisionShape* collision_shape = rigid_body_->getCollisionShape();
   btVector3 inertia = btVector3(0, 0, 0);
   collision_shape->calculateLocalInertia(mass, inertia);
+  if (mass != mass || inertia != inertia)
+    fprintf(stderr, "[nan] setMass mass=%f inertia NaN?\n", mass);
   rigid_body_->setMassProps(mass, inertia);
   mass_ = mass;
   if (physics_enabled_) {
@@ -206,8 +214,19 @@ Ogre::Vector3 PhysicsActor::angular_velocity() {
 Ogre::AxisAlignedBox PhysicsActor::world_bounding_box() {
   btVector3 aabbMin, aabbMax;
   rigid_body_->getAabb(aabbMin, aabbMax);
-  Ogre::AxisAlignedBox bounding_box(toOgre(aabbMin), toOgre(aabbMax));
-  return bounding_box;
+  // Bullet can hand back a degenerate box mid-update (inverted for a
+  // transiently zero-sized body, or NaN before the first sync); Ogre asserts
+  // on anything but min <= max, so sanitize.
+  Ogre::Vector3 box_min = Math::componentwise_min(toOgre(aabbMin), toOgre(aabbMax));
+  Ogre::Vector3 box_max = Math::componentwise_max(toOgre(aabbMin), toOgre(aabbMax));
+  if (!(box_min.x <= box_max.x && box_min.y <= box_max.y && box_min.z <= box_max.z)) {
+    // NaN somewhere: collapse to a point box at the body's position.
+    Ogre::Vector3 fallback_position = toOgre(position_);
+    if (fallback_position.isNaN())
+      fallback_position = Ogre::Vector3::ZERO;
+    return Ogre::AxisAlignedBox(fallback_position, fallback_position);
+  }
+  return Ogre::AxisAlignedBox(box_min, box_max);
 }
 
 Ogre::Matrix4 PhysicsActor::transform() {
@@ -233,6 +252,8 @@ void PhysicsActor::setPose(Ogre::Vector3 position, Ogre::Quaternion orientation)
 }
 
 void PhysicsActor::updateTransform() {
+  if (position_ != position_)
+    fprintf(stderr, "[nan] updateTransform position NaN\n");
   setTransform(btTransform(orientation_, position_));
 }
 
@@ -268,6 +289,10 @@ void PhysicsActor::_poseUpdatedByPhysics(const btTransform& transform) {
     owner_->poseUpdatedByPhysics(transform);
   }
   BumpTopApp::singleton()->markGlobalStateAsChanged();
+}
+
+VisualPhysicsActor* PhysicsActor::owner() {
+  return owner_;
 }
 
 void PhysicsActor::set_owner(VisualPhysicsActor* visual_physics_actor) {
@@ -345,4 +370,3 @@ bool PhysicsActor::physics_enabled() {
 }
 
 
-#include "BumpTop/moc/moc_PhysicsActor.cpp"

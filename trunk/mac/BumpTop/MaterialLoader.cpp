@@ -16,6 +16,7 @@
 
 #include "BumpTop/MaterialLoader.h"
 
+#include <OpenGL/gl.h>
 #include <string>
 
 #include "BumpTop/Authorization.h"
@@ -71,12 +72,20 @@ void BumpMaterialManager::decrementReferenceCountAndDeleteIfZero(QString materia
 
 MaterialLoader::MaterialLoader()
 : enable_depth_check_(true),
+  lighting_enabled_(true),
   manual_loader_(NULL),
   expected_number_texture_loaded_callbacks_(0),
   delete_self_on_load_complete_(false) {
 }
 
 MaterialLoader::~MaterialLoader() {
+  // Background loading registers this loader as a texture listener; the
+  // texture can outlive the loader, and firing a callback on the deleted
+  // loader crashes (removeListener on a non-listener is a harmless no-op).
+  for_each(Ogre::TexturePtr texture, textures_) {
+    if (texture)
+      texture->removeListener(this);
+  }
 }
 
 void MaterialLoader::initWithImageBuffer(unsigned char* image_buffer, ushort width, ushort height) {
@@ -111,8 +120,14 @@ void MaterialLoader::initWithColourValue(Ogre::ColourValue color) {
                                                                                .arg(color.a);
 
   Ogre::MaterialPtr material;
-  material = Ogre::MaterialManager::getSingleton().create(utf8(material_name_),
-                                                          DEFAULT_RESOURCE_GROUP_NAME);
+  if (Ogre::MaterialManager::getSingleton().resourceExists(utf8(material_name_),
+                                                           DEFAULT_RESOURCE_GROUP_NAME)) {
+    material = Ogre::MaterialManager::getSingleton().getByName(utf8(material_name_),
+                                                               DEFAULT_RESOURCE_GROUP_NAME);
+  } else {
+    material = Ogre::MaterialManager::getSingleton().create(utf8(material_name_),
+                                                            DEFAULT_RESOURCE_GROUP_NAME);
+  }
   material->getTechnique(0)->getPass(0)->setAmbient(color);
 }
 
@@ -123,6 +138,9 @@ void MaterialLoader::initAsIconForFilePath(const QString& file_path,
   material_name_ = generateUniqueMaterialNameWithPrefix(QString("IconFor%1").arg(file_path));
   texture_names_.push_back(material_name_);
   enable_depth_check_ = false;
+  // Icons render full-bright like Finder's; the point light otherwise dims
+  // them at grazing angles (noticeably darker at the front of the room).
+  lighting_enabled_ = false;
   init(is_background_loaded);
 }
 
@@ -131,6 +149,8 @@ void MaterialLoader::initAsImageWithFilePath(const QString& texture_path, bool i
   texture_paths.push_back(texture_path);
   material_name_ = texture_path;
   enable_depth_check_ = false;
+  // Global UI textures (sticky notes, toolbars, highlights) read full-bright.
+  lighting_enabled_ = false;
   initAsImageWithFilePaths(texture_paths, is_background_loaded);
 }
 
@@ -154,7 +174,7 @@ void MaterialLoader::initAsImageWithFilePaths(const QStringList& texture_paths, 
   init(is_background_loaded);
 }
 
-void MaterialLoader::backgroundLoadingComplete(Ogre::Resource *texture) {
+void MaterialLoader::loadingComplete(Ogre::Resource *texture) {
   expected_number_texture_loaded_callbacks_--;
 
   if (expected_number_texture_loaded_callbacks_ == 0) {
@@ -164,19 +184,23 @@ void MaterialLoader::backgroundLoadingComplete(Ogre::Resource *texture) {
 
 void MaterialLoader::materialLoadingComplete() {
   Ogre::Pass *texture_pass = material_->getTechnique(0)->getPass(0);
-  texture_pass->setSceneBlending(Ogre::SBT_TRANSPARENT_ALPHA);
-  Ogre::TextureUnitState *tus = texture_pass->createTextureUnitState(textures_[0].getPointer()->getName());
-  tus->setTextureAddressingMode(Ogre::TextureUnitState::TAM_CLAMP);
+  // A reused material already carries its texture units; don't add them twice.
+  if (texture_pass->getNumTextureUnitStates() == 0) {
+    texture_pass->setSceneBlending(Ogre::SBT_TRANSPARENT_ALPHA);
+    Ogre::TextureUnitState *tus = texture_pass->createTextureUnitState(textures_[0].getPointer()->getName());
+    tus->setTextureAddressingMode(Ogre::TextureUnitState::TAM_CLAMP);
 
-  if (textures_.count() == 2) {
-    Ogre::TextureUnitState* overlay_tex_state = texture_pass->createTextureUnitState(textures_[1].getPointer()->getName());  // NOLINT
-    overlay_tex_state->setAlphaOperation(Ogre::LBX_ADD);
-    overlay_tex_state->setColourOperationEx(Ogre::LBX_MODULATE);
-    overlay_tex_state->setTextureAddressingMode(Ogre::TextureUnitState::TAM_CLAMP);
-  }
+    if (textures_.count() == 2) {
+      Ogre::TextureUnitState* overlay_tex_state = texture_pass->createTextureUnitState(textures_[1].getPointer()->getName());  // NOLINT
+      overlay_tex_state->setAlphaOperation(Ogre::LBX_ADD);
+      overlay_tex_state->setColourOperationEx(Ogre::LBX_MODULATE);
+      overlay_tex_state->setTextureAddressingMode(Ogre::TextureUnitState::TAM_CLAMP);
+    }
 
-  if (!enable_depth_check_) {
-    texture_pass->setDepthCheckEnabled(false);
+    if (!enable_depth_check_) {
+      texture_pass->setDepthCheckEnabled(false);
+    }
+    texture_pass->setLightingEnabled(lighting_enabled_);
   }
 
   BumpTopApp::singleton()->markGlobalStateAsChanged();
@@ -223,16 +247,20 @@ void MaterialLoader::init(bool is_background_loaded) {
       if (is_background_loaded) {
         texture->setBackgroundLoaded(true);
         texture->addListener(this);
-        Ogre::ResourceBackgroundQueue::getSingleton().load("Texture",
-                                                            utf8(texture_name),
-                                                            DEFAULT_RESOURCE_GROUP_NAME,
-                                                            manually_loaded,
-                                                            manually_loaded ? manual_loader_ : NULL, 0, 0);
+        Ogre::ResourceBackgroundQueue::getSingleton().load(texture);
       }
     }
   }
-  material_ = Ogre::MaterialManager::getSingleton().create(utf8(material_name_),
-                                                           DEFAULT_RESOURCE_GROUP_NAME);
+  // Materials can legitimately be requested twice (e.g. two walls sharing a
+  // texture); modern Ogre throws on duplicate create, so reuse instead.
+  if (Ogre::MaterialManager::getSingleton().resourceExists(utf8(material_name_),
+                                                           DEFAULT_RESOURCE_GROUP_NAME)) {
+    material_ = Ogre::MaterialManager::getSingleton().getByName(utf8(material_name_),
+                                                                DEFAULT_RESOURCE_GROUP_NAME);
+  } else {
+    material_ = Ogre::MaterialManager::getSingleton().create(utf8(material_name_),
+                                                             DEFAULT_RESOURCE_GROUP_NAME);
+  }
   // we won't be getting any texture loaded call-backs if we're not laoding
   // in the background
   if (!is_background_loaded) {
@@ -310,8 +338,11 @@ QSize MaterialLoader::desiredBGSizeGivenMaxDimensionsAndSourceImageSize(QSize ma
 QSize MaterialLoader::maxResolutionForBackground() {
   GLint max_texture_size;
   glGetIntegerv(GL_MAX_TEXTURE_SIZE, &max_texture_size);
-  int max_width = std::min(max_texture_size, (GLint)round(BumpTopApp::singleton()->screen_resolution().x));
-  int max_height = std::min(max_texture_size, (GLint)round(BumpTopApp::singleton()->screen_resolution().y));
+  // Use the render window's device-pixel size (not points) so backgrounds
+  // stay sharp on Retina displays.
+  Ogre::Vector2 window_size = BumpTopApp::singleton()->window_size();
+  int max_width = std::min(max_texture_size, (GLint)round(window_size.x));
+  int max_height = std::min(max_texture_size, (GLint)round(window_size.y));
   return QSize(max_width, max_height);
 }
 
@@ -323,4 +354,3 @@ bool MaterialLoader::createImageWithResolution(QString original_path, QString ne
   return true;
 }
 
-#include "moc/moc_MaterialLoader.cpp"

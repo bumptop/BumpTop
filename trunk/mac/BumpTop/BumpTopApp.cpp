@@ -17,6 +17,7 @@
 #include "BumpTop/BumpTopApp.h"
 
 #include <QtCore/QCoreApplication>
+#include <QtCore/QElapsedTimer>
 #include <QtCore/QDir>
 #include <string>
 
@@ -83,13 +84,18 @@ void BumpTopApp::initUsageTracker() {
 }
 
 void BumpTopApp::makeSelfForegroundApp() {
-  ProcessSerialNumber bumptop_process_serial_number;
-  GetCurrentProcess(&bumptop_process_serial_number);
-  SetFrontProcess(&bumptop_process_serial_number);
+  [[NSRunningApplication currentApplication] activateWithOptions:NSApplicationActivateIgnoringOtherApps];
 }
 
 Ogre::RenderWindow* BumpTopApp::render_window() {
   return render_window_;
+}
+
+Ogre::Real BumpTopApp::device_scale() {
+  Ogre::Real screen_width = screen_resolution().x;
+  if (screen_width <= 0 || render_window_ == NULL)
+    return 1.0;
+  return window_size().x / screen_width;
 }
 
 Ogre::SceneManager* BumpTopApp::ogre_scene_manager() {
@@ -125,21 +131,58 @@ void BumpTopApp::windowRectChanged() {
 }
 
 void BumpTopApp::renderTick() {
+  // BUMPTOP_PROFILE=1: log a per-phase breakdown of frames slower than ~2
+  // vsync intervals to find hitches.
+  static bool profile_frames = getenv("BUMPTOP_PROFILE") != NULL;
+  QElapsedTimer frame_timer;
+  qint64 t_responses = 0, t_on_render = 0, t_gl = 0, t_physics = 0;
+  if (profile_frames) {
+    // A slow frame shows up in the per-phase log below; a *gap* here means
+    // the render timer starved (something else blocked the main run loop).
+    static QElapsedTimer since_last_tick;
+    if (since_last_tick.isValid()) {
+      qint64 gap = since_last_tick.elapsed();
+      if (gap > 50 && !isInIdleMode())
+        fprintf(stderr, "[profile] %lldms gap between render ticks (main loop blocked)\n", gap);
+    }
+    since_last_tick.restart();
+    frame_timer.start();
+  }
+
   // We cap off the maximum elapsed time to prevent a feedback loop of slowness
   uint64_t elapsed = std::min((uint64_t)20, render_stopwatch_.elapsed());
   render_stopwatch_.restart();
 
   // need this so background loaded textures will fire their events and force visuals to refresh
   Ogre::Root::getSingleton().getWorkQueue()->processResponses();
+  if (profile_frames) t_responses = frame_timer.elapsed();
 
   emit onRender();
-  if (!isInIdleMode()) {
+  if (profile_frames) t_on_render = frame_timer.elapsed();
+
+  bool did_render = !isInIdleMode();
+  if (did_render) {
     pushGLContextAndSwitchToOgreGLContext();
     Ogre::Root::getSingleton().renderOneFrame();
     popGLContext();
+    if (profile_frames) t_gl = frame_timer.elapsed();
 #define NUM_PHYSICS_ITERS_PER_STEP 3.0f
     float time_step = (1.1*elapsed)/1000.0;  // The factor of 1.1 is here to speed up physics a bit
     physics_->stepSimulation(time_step, NUM_PHYSICS_ITERS_PER_STEP, time_step/NUM_PHYSICS_ITERS_PER_STEP);
+    if (profile_frames) t_physics = frame_timer.elapsed();
+  }
+
+  if (profile_frames) {
+    static bool profile_all = getenv("BUMPTOP_PROFILE_ALL") != NULL;
+    qint64 total = frame_timer.elapsed();
+    if (profile_all)
+      fprintf(stderr, "[profile] tick %lldms rendered=%d\n", total, (int)did_render);
+    if (total > 34) {
+      fprintf(stderr, "[profile] frame %lldms: workqueue %lld, onRender %lld, gl %lld, physics %lld\n",
+              total, t_responses, t_on_render - t_responses,
+              t_gl > 0 ? t_gl - t_on_render : 0,
+              t_physics > 0 ? t_physics - t_gl : 0);
+    }
   }
 
   global_state_changed_last_frame_ = global_state_changed_this_frame_;
@@ -147,6 +190,10 @@ void BumpTopApp::renderTick() {
 }
 
 bool BumpTopApp::isInIdleMode() {
+  // Never idle while the mouse holds an item: pausing physics mid-drag makes
+  // the dragged item freeze, then snap when the simulation resumes.
+  if (mouse_event_manager_ != NULL && mouse_event_manager_->global_capture() != NULL)
+    return false;
   return !(global_state_changed_this_frame_ || global_state_changed_last_frame_);
 }
 
@@ -177,10 +224,11 @@ bool BumpTopApp::context_menu_open() {
 void BumpTopApp::createRootNode() {
   QString resource_path = FileManager::getResourcePath();
 
-  // Create a new root object with the correct paths
-  new Ogre::Root(utf8(resource_path + "/plugins.cfg"),
-                 utf8(resource_path + "/ogre.cfg"),
-                 utf8(resource_path + "/Ogre.log"));
+  // Static Ogre build: install the render system and codec plugins directly
+  // instead of loading them through plugins.cfg.
+  new Ogre::Root("", "", utf8(FileManager::getApplicationDataPath() + "Ogre.log"));
+  Ogre::Root::getSingleton().installPlugin(new Ogre::GLPlugin());
+  Ogre::STBIImageCodec::startup();
 }
 
 void BumpTopApp::setRenderSystem() {
@@ -190,7 +238,10 @@ void BumpTopApp::setRenderSystem() {
 
 void BumpTopApp::createSceneManager() {
   // Create the SceneManager, in this case a generic one
-  scene_manager_ = Ogre::Root::getSingleton().createSceneManager(Ogre::ST_GENERIC);
+  scene_manager_ = Ogre::Root::getSingleton().createSceneManager();
+  // Modern Ogre moved overlays into a component that must be registered with
+  // the scene manager for the overlay render queue to be processed.
+  scene_manager_->addRenderQueueListener(new Ogre::OverlaySystem());
 }
 
 void BumpTopApp::initResources() {
@@ -318,4 +369,3 @@ BumpTopScene* BumpTopApp::scene() {
   return scene_;
 }
 
-#include "BumpTop/moc/moc_BumpTopApp.cpp"

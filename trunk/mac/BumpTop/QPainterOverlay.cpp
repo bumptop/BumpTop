@@ -106,5 +106,4 @@ size_t QPainterOverlay::height() {
   return material_->height();
 }
 
-#include "BumpTop/moc/moc_QPainterOverlay.cpp"
 

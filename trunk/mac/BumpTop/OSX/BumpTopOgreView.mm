@@ -35,6 +35,10 @@
 - (id)initWithFrame:(NSRect)frame {
   self = [super initWithFrame:frame];
 
+  // Render at the display's native (Retina) resolution; Ogre's CocoaWindow
+  // picks this up and sizes the GL surface in device pixels.
+  [self setWantsBestResolutionOpenGLSurface:YES];
+
   // All this convoluted code about tracking areas is simply so that we get "mouseEntered" and "mouseExited" events
   //http://developer.apple.com/documentation/Cocoa/Conceptual/DisplayWebContent/Tasks/WebKitAvail.html
   // dynamically load the class, so that we can fall-back to a 10.4 (Tiger) friendly method

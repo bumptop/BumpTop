@@ -14,7 +14,7 @@
 //  limitations under the License.
 //
 
-#  if (MAC_OS_X_VERSION_MAX_ALLOWED == MAC_OS_X_VERSION_10_6)
+
 
 #import "BumpTop/OSX/QuickLookSnowLeopard.h"
 
@@ -119,7 +119,7 @@ static QuickLookPublic *singleton_instance = NULL;
   {
     if (singleton_instance == NULL) {
       singleton_instance = [[self alloc] init];
-      OgreView* ogre_view = OSXCocoaBumpTopApplication::singleton()->ogre_view();
+      OgreGLView* ogre_view = OSXCocoaBumpTopApplication::singleton()->ogre_view();
       [singleton_instance setNextResponder: [[ogre_view nextResponder] nextResponder]];
       [[ogre_view nextResponder] setNextResponder: singleton_instance ];
     }
@@ -179,9 +179,15 @@ static QuickLookPublic *singleton_instance = NULL;
   if (actor == NULL) {
     return NSZeroRect;
   } else {
-    Ogre::Vector2 screen_position = OSXCocoaBumpTopApplication::singleton()->cocoaCoordinatesToOgreCoordinates(actor->getScreenPosition());
+    // getScreenPosition() is Ogre space: device pixels, top-left origin.
+    // The panel wants global Cocoa coordinates: points, bottom-left origin.
+    // (cocoaCoordinatesToOgreCoordinates was only its own inverse at 1x.)
+    Ogre::Vector2 ogre_position = actor->getScreenPosition();
+    Ogre::Real device_scale = OSXCocoaBumpTopApplication::singleton()->device_scale();
+    Ogre::Real x_points = ogre_position.x / device_scale;
+    Ogre::Real y_points = [[NSScreen mainScreen] frame].size.height - ogre_position.y / device_scale;
 
-    return NSMakeRect(screen_position.x-50, screen_position.y-50, 100, 100);
+    return NSMakeRect(x_points - 50, y_points - 50, 100, 100);
   }
 }
 
@@ -193,6 +199,6 @@ static QuickLookPublic *singleton_instance = NULL;
 */
 
 @end
-#endif
+
 // *****************************
 

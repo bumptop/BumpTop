@@ -31,7 +31,10 @@
 
 #include <QtLockedFile>
 
-#include <QtNetwork/QHttp>
+#include <QtCore5Compat/QRegExp>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
+#include <QtNetwork/QNetworkRequest>
 
 #endif  // BUMPTOP_QTCORE_INCLUDES_H_
 

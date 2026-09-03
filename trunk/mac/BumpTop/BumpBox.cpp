@@ -22,6 +22,7 @@
 
 #include "BumpTop/AppSettings.h"
 #include "BumpTop/BumpBoxLabel.h"
+#include "BumpTop/BumpToolbar.h"
 #include "BumpTop/BumpFlatSquare.h"
 #include "BumpTop/BumpTopApp.h"
 #include "BumpTop/BumpTopCommands.h"
@@ -110,6 +111,11 @@ BumpBox::~BumpBox() {
     delete mouse_handler_;
   }
 
+  if (!copied_material_name_.empty()) {
+    Ogre::MaterialManager::getSingleton().remove(copied_material_name_,
+                                                 Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+  }
+
   clearMaterialLoader();
 }
 
@@ -162,7 +168,7 @@ void BumpBox::initWithPath(QString file_path, bool physics_enabled) {
   init();
   set_path(file_path);
   if (FileManager::getFileKind(file_path) == ALIAS) {
-    QString original_path = QFileInfo(file_path).readLink();
+    QString original_path = QFileInfo(file_path).symLinkTarget();
     is_dir_ = QFileInfo(original_path).isDir();
   } else {
     is_dir_ = QFileInfo(file_path).isDir();
@@ -177,7 +183,11 @@ void BumpBox::initWithPath(QString file_path, bool physics_enabled) {
 void BumpBox::initAsVisualCopyOfActor(VisualPhysicsActor* actor) {
   VisualPhysicsActor::initAsVisualCopyOfActor(actor);
 
-  std::string material_name = "copied material" + addressToString(this);
+  // The address alone is not unique over time: a previous copy at a reused
+  // address whose material was still registered would make create() throw
+  // ItemIdentityException (crashed on sticky note open/close fades).
+  static int copy_serial = 0;
+  std::string material_name = "copied material" + addressToString(this) + "_" + std::to_string(copy_serial++);
 
   Ogre::MaterialPtr source_material = Ogre::MaterialPtr(Ogre::MaterialManager::getSingleton().getByName(utf8(actor->visual_actor()->material_name())));  // NOLINT
   if (!source_material.isNull()) {
@@ -191,7 +201,11 @@ void BumpBox::initAsVisualCopyOfActor(VisualPhysicsActor* actor) {
           texture_pass->createTextureUnitState(texture->getName());
           texture_pass->setSceneBlending(Ogre::SBT_TRANSPARENT_ALPHA);
           texture_pass->setDepthCheckEnabled(false);
+          // Match the unlit source: with lighting on, the room's dim lights
+          // render the fade copy much darker than the actor it stands in for.
+          texture_pass->setLightingEnabled(false);
           set_material_name(QStringFromUtf8(material_name));
+          copied_material_name_ = material_name;
         }
       }
     }
@@ -490,6 +504,10 @@ void BumpBox::mouseDown(MouseEvent* mouse_event) {
 
   if (mouse_event->num_clicks == 2) {
     launch();
+    // Launching ends the interaction: drop the selection so the toolbar
+    // doesn't pop up under the just-opened item.
+    room_->deselectActors();
+    room_->bump_toolbar()->hide();
   } else {
     bool command_or_shift_pressed = mouse_event->modifier_flags & COMMAND_KEY_MASK
                                     || mouse_event->modifier_flags & SHIFT_KEY_MASK;
@@ -925,4 +943,3 @@ void BumpBox::updateActorSiblingOffsetPoseToParentBeforeDrag() {
   }
 }
 
-#include "moc/moc_BumpBox.cpp"

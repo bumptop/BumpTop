@@ -117,6 +117,19 @@ struct RoomSurfaceInitArgs {
 };
 
 // This method, given a width, depth and height, defines the standard 5-sided room
+// Parity-test mode (BUMPTOP_PARITY=1): top-down camera, uniform lighting and a
+// bare wallpaper floor so BumpTop's render can be pixel-diffed against the
+// real Finder desktop. Temporary scaffolding for the port.
+bool bumptopParityMode() {
+  return getenv("BUMPTOP_PARITY") != NULL;
+}
+
+// The floor/wall quads normally extend past the room bounds to hide seams;
+// in parity mode the floor must match the wallpaper bounds exactly.
+Ogre::Real roomSurfaceOverlap() {
+  return bumptopParityMode() ? 0 : kRoomSurfaceOverlap;
+}
+
 void Room::init(Ogre::Real floor_width, Ogre::Real floor_depth, Ogre::Real wall_height) {
   if (parent_ogre_scene_node_ == NULL) {
     parent_ogre_scene_node_ = ogre_scene_manager_->getRootSceneNode();
@@ -130,6 +143,23 @@ void Room::init(Ogre::Real floor_width, Ogre::Real floor_depth, Ogre::Real wall_
 
   AppSettings::singleton()->loadSettingsFile();
 
+  // Parity mode: after settings are (re)loaded, force the floor to be the
+  // captured wallpaper so the render can be diffed against the real desktop.
+  if (bumptopParityMode()) {
+    QString parity_wallpaper = FileManager::getApplicationDataPath() + "parity_wallpaper.png";
+    if (QFileInfo(parity_wallpaper).exists()) {
+      AppSettings::singleton()->set_floor_image_path(utf8(parity_wallpaper));
+      AppSettings::singleton()->set_apply_floor_to_all_surfaces(false);
+    }
+  } else if (AppSettings::singleton()->floor_image_path() == kDefaultFloorTexturePath) {
+    // Unless the user picked a custom floor, use their actual desktop
+    // wallpaper (keeps the room feeling like *their* desktop).
+    QString wallpaper_floor = FileManager::getDesktopWallpaperCachePath();
+    if (!wallpaper_floor.isEmpty()) {
+      AppSettings::singleton()->set_floor_image_path(utf8(wallpaper_floor));
+    }
+  }
+
   Ogre::ColourValue room_colour = Ogre::ColourValue(0, 0.36, 0.68, 0.0);
   ogre_scene_node_ = parent_ogre_scene_node_->createChildSceneNode();
 
@@ -140,8 +170,8 @@ void Room::init(Ogre::Real floor_width, Ogre::Real floor_depth, Ogre::Real wall_
   RoomSurfaceInitArgs& floor = room_surface_init_args[0];
   floor.is_pinnable_receiver = NOT_PINNABLE_RECEIVER;
   floor.normal_vector = Ogre::Vector3::UNIT_Y;
-  floor.x_size = floor_width + kRoomSurfaceOverlap;
-  floor.z_size = floor_depth + kRoomSurfaceOverlap;
+  floor.x_size = floor_width + roomSurfaceOverlap();
+  floor.z_size = floor_depth + roomSurfaceOverlap();
   floor.position = Ogre::Vector3(floor_width/2.0, -RoomSurface::kSurfaceThickness/2.0, floor_depth/2.0);
   floor.room_surface_type = FLOOR;
   floor.visible = true;
@@ -150,8 +180,8 @@ void Room::init(Ogre::Real floor_width, Ogre::Real floor_depth, Ogre::Real wall_
   RoomSurfaceInitArgs& left_wall = room_surface_init_args[1];
   left_wall.is_pinnable_receiver = PINNABLE_RECEIVER;
   left_wall.normal_vector = Ogre::Vector3::UNIT_X;
-  left_wall.x_size = floor_depth + kRoomSurfaceOverlap;
-  left_wall.z_size = wall_height + kRoomSurfaceOverlap;
+  left_wall.x_size = floor_depth + roomSurfaceOverlap();
+  left_wall.z_size = wall_height + roomSurfaceOverlap();
   left_wall.position = Ogre::Vector3(-RoomSurface::kSurfaceThickness/2.0, wall_height/2.0, floor_depth/2.0);
   left_wall.room_surface_type = LEFT_WALL;
   left_wall.visible = true;
@@ -160,8 +190,8 @@ void Room::init(Ogre::Real floor_width, Ogre::Real floor_depth, Ogre::Real wall_
   RoomSurfaceInitArgs& right_wall = room_surface_init_args[2];
   right_wall.is_pinnable_receiver = PINNABLE_RECEIVER;
   right_wall.normal_vector = -Ogre::Vector3::UNIT_X;
-  right_wall.x_size = floor_depth + kRoomSurfaceOverlap;
-  right_wall.z_size = wall_height + kRoomSurfaceOverlap;
+  right_wall.x_size = floor_depth + roomSurfaceOverlap();
+  right_wall.z_size = wall_height + roomSurfaceOverlap();
   right_wall.position = Ogre::Vector3(floor_width + RoomSurface::kSurfaceThickness/2.0,
                                       wall_height/2.0,
                                       floor_depth/2.0);
@@ -172,8 +202,8 @@ void Room::init(Ogre::Real floor_width, Ogre::Real floor_depth, Ogre::Real wall_
   RoomSurfaceInitArgs& back_wall = room_surface_init_args[3];
   back_wall.is_pinnable_receiver = PINNABLE_RECEIVER;
   back_wall.normal_vector = Ogre::Vector3::UNIT_Z;
-  back_wall.x_size = floor_width + kRoomSurfaceOverlap;
-  back_wall.z_size = wall_height + kRoomSurfaceOverlap;
+  back_wall.x_size = floor_width + roomSurfaceOverlap();
+  back_wall.z_size = wall_height + roomSurfaceOverlap();
   back_wall.position = Ogre::Vector3(floor_width/2.0, wall_height/2.0, -RoomSurface::kSurfaceThickness/2.0);
   back_wall.room_surface_type = BACK_WALL;
   back_wall.visible = true;
@@ -182,8 +212,8 @@ void Room::init(Ogre::Real floor_width, Ogre::Real floor_depth, Ogre::Real wall_
   RoomSurfaceInitArgs& front_wall = room_surface_init_args[4];
   front_wall.is_pinnable_receiver = PINNABLE_RECEIVER;
   front_wall.normal_vector = -Ogre::Vector3::UNIT_Z;
-  front_wall.x_size = floor_width + kRoomSurfaceOverlap;
-  front_wall.z_size = wall_height + kRoomSurfaceOverlap;
+  front_wall.x_size = floor_width + roomSurfaceOverlap();
+  front_wall.z_size = wall_height + roomSurfaceOverlap();
   front_wall.position = Ogre::Vector3(floor_width/2.0,
                                       wall_height/2.0,
                                       floor_depth + RoomSurface::kSurfaceThickness/2.0);
@@ -195,8 +225,8 @@ void Room::init(Ogre::Real floor_width, Ogre::Real floor_depth, Ogre::Real wall_
   RoomSurfaceInitArgs& left_safety_wall = room_surface_init_args[5];
   left_safety_wall.is_pinnable_receiver = NOT_PINNABLE_RECEIVER;
   left_safety_wall.normal_vector = Ogre::Vector3::UNIT_X;
-  left_safety_wall.x_size = floor_depth + kRoomSurfaceOverlap;
-  left_safety_wall.z_size = 10*wall_height + kRoomSurfaceOverlap;
+  left_safety_wall.x_size = floor_depth + roomSurfaceOverlap();
+  left_safety_wall.z_size = 10*wall_height + roomSurfaceOverlap();
   left_safety_wall.position = Ogre::Vector3(-RoomSurface::kSurfaceThickness/2.0,
                                             left_wall.position.y + left_wall.z_size/2.0
                                             + left_safety_wall.z_size/2.0, floor_depth/2.0);
@@ -207,8 +237,8 @@ void Room::init(Ogre::Real floor_width, Ogre::Real floor_depth, Ogre::Real wall_
   RoomSurfaceInitArgs& right_safety_wall = room_surface_init_args[6];
   right_safety_wall.is_pinnable_receiver = NOT_PINNABLE_RECEIVER;
   right_safety_wall.normal_vector = -Ogre::Vector3::UNIT_X;
-  right_safety_wall.x_size = floor_depth + kRoomSurfaceOverlap;
-  right_safety_wall.z_size = 10*wall_height + kRoomSurfaceOverlap;
+  right_safety_wall.x_size = floor_depth + roomSurfaceOverlap();
+  right_safety_wall.z_size = 10*wall_height + roomSurfaceOverlap();
   right_safety_wall.position = Ogre::Vector3(floor_width + RoomSurface::kSurfaceThickness/2.0,
                                             right_wall.position.y + right_wall.z_size/2.0
                                             + right_safety_wall.z_size/2.0, floor_depth/2.0);
@@ -219,8 +249,8 @@ void Room::init(Ogre::Real floor_width, Ogre::Real floor_depth, Ogre::Real wall_
   RoomSurfaceInitArgs& back_safety_wall = room_surface_init_args[7];
   back_safety_wall.is_pinnable_receiver = NOT_PINNABLE_RECEIVER;
   back_safety_wall.normal_vector = Ogre::Vector3::UNIT_Z;
-  back_safety_wall.x_size = floor_width + kRoomSurfaceOverlap;
-  back_safety_wall.z_size = 10*wall_height + kRoomSurfaceOverlap;
+  back_safety_wall.x_size = floor_width + roomSurfaceOverlap();
+  back_safety_wall.z_size = 10*wall_height + roomSurfaceOverlap();
   back_safety_wall.position = Ogre::Vector3(floor_width/2.0,
                                      back_wall.position.y + back_wall.z_size/2.0 + back_safety_wall.z_size/2.0,
                                      -RoomSurface::kSurfaceThickness/2.0);
@@ -231,8 +261,8 @@ void Room::init(Ogre::Real floor_width, Ogre::Real floor_depth, Ogre::Real wall_
   RoomSurfaceInitArgs& front_safety_wall = room_surface_init_args[8];
   front_safety_wall.is_pinnable_receiver = NOT_PINNABLE_RECEIVER;
   front_safety_wall.normal_vector = -Ogre::Vector3::UNIT_Z;
-  front_safety_wall.x_size = floor_width + kRoomSurfaceOverlap;
-  front_safety_wall.z_size = 10*wall_height + kRoomSurfaceOverlap;
+  front_safety_wall.x_size = floor_width + roomSurfaceOverlap();
+  front_safety_wall.z_size = 10*wall_height + roomSurfaceOverlap();
   front_safety_wall.position = Ogre::Vector3(floor_width/2.0,
                                      front_wall.position.y + front_wall.z_size/2.0 + front_safety_wall.z_size/2.0,
                                      floor_depth + RoomSurface::kSurfaceThickness/2.0);
@@ -261,9 +291,17 @@ void Room::init(Ogre::Real floor_width, Ogre::Real floor_depth, Ogre::Real wall_
 
   // Add a light to our scene
   // TODO: should this light be attached to the room's scene node?
-  Ogre::String light_name = "RoomLight" + addressToString(this);
-  Ogre::Light* scene_light = app_->ogre_scene_manager()->createLight(light_name);
-  scene_light->setPosition(floor_width/2.0, 800, floor_depth/2.0);
+  if (bumptopParityMode()) {
+    // Uniform lighting for the desktop parity test.
+    app_->ogre_scene_manager()->setAmbientLight(Ogre::ColourValue(1, 1, 1));
+  } else {
+    // A healthy ambient term keeps icons clearly readable; the point light
+    // just adds the soft lightbox shading on top.
+    app_->ogre_scene_manager()->setAmbientLight(Ogre::ColourValue(0.55, 0.55, 0.55));
+    Ogre::String light_name = "RoomLight" + addressToString(this);
+    Ogre::Light* scene_light = app_->ogre_scene_manager()->createLight(light_name);
+    scene_light->setPosition(floor_width/2.0, 800, floor_depth/2.0);
+  }
 
   undo_redo_stack_ = new UndoRedoStack(this);
   undo_redo_stack_->init();
@@ -295,40 +333,40 @@ void Room::resizeRoomForResolution(Ogre::Real floor_width, Ogre::Real floor_dept
   floor_depth_ = floor_depth;
   wall_height_ = wall_height;
 
-  getSurface(FLOOR)->set_size(floor_width + kRoomSurfaceOverlap, floor_depth + kRoomSurfaceOverlap);
+  getSurface(FLOOR)->set_size(floor_width + roomSurfaceOverlap(), floor_depth + roomSurfaceOverlap());
   getSurface(FLOOR)->set_position(Ogre::Vector3(floor_width/2.0,
                                                 -RoomSurface::kSurfaceThickness/2.0,
                                                 floor_depth/2.0));
-  getSurface(LEFT_WALL)->set_size(floor_depth + kRoomSurfaceOverlap, wall_height + kRoomSurfaceOverlap);
+  getSurface(LEFT_WALL)->set_size(floor_depth + roomSurfaceOverlap(), wall_height + roomSurfaceOverlap());
   getSurface(LEFT_WALL)->set_position(Ogre::Vector3(-RoomSurface::kSurfaceThickness/2.0,
                                                     wall_height/2.0,
                                                     floor_depth/2.0));
-  getSurface(RIGHT_WALL)->set_size(floor_depth + kRoomSurfaceOverlap, wall_height + kRoomSurfaceOverlap);
+  getSurface(RIGHT_WALL)->set_size(floor_depth + roomSurfaceOverlap(), wall_height + roomSurfaceOverlap());
   getSurface(RIGHT_WALL)->set_position(Ogre::Vector3(floor_width + RoomSurface::kSurfaceThickness/2.0,
                                                      wall_height/2.0,
                                                      floor_depth/2.0));
-  getSurface(BACK_WALL)->set_size(floor_width + kRoomSurfaceOverlap, wall_height + kRoomSurfaceOverlap);
+  getSurface(BACK_WALL)->set_size(floor_width + roomSurfaceOverlap(), wall_height + roomSurfaceOverlap());
   getSurface(BACK_WALL)->set_position(Ogre::Vector3(floor_width/2.0,
                                                     wall_height/2.0,
                                                     -RoomSurface::kSurfaceThickness/2.0));
-  getSurface(FRONT_WALL)->set_size(floor_width + kRoomSurfaceOverlap, wall_height + kRoomSurfaceOverlap);
+  getSurface(FRONT_WALL)->set_size(floor_width + roomSurfaceOverlap(), wall_height + roomSurfaceOverlap());
   getSurface(FRONT_WALL)->set_position(Ogre::Vector3(floor_width/2.0,
                                                      wall_height/2.0,
                                                      floor_depth + RoomSurface::kSurfaceThickness/2.0));
-  getSurface(LEFT_SAFETY_WALL)->set_size(floor_depth + kRoomSurfaceOverlap, 10*wall_height + kRoomSurfaceOverlap);
+  getSurface(LEFT_SAFETY_WALL)->set_size(floor_depth + roomSurfaceOverlap(), 10*wall_height + roomSurfaceOverlap());
   getSurface(LEFT_SAFETY_WALL)->set_position(Ogre::Vector3(-RoomSurface::kSurfaceThickness/2.0,
                                                      getSurface(LEFT_WALL)->position().y + getSurface(LEFT_WALL)->size().z/2.0  // NOLINT
                                                      + getSurface(LEFT_SAFETY_WALL)->size().z/2.0, floor_depth/2.0));
-  getSurface(RIGHT_SAFETY_WALL)->set_size(floor_depth + kRoomSurfaceOverlap, 10*wall_height + kRoomSurfaceOverlap);
+  getSurface(RIGHT_SAFETY_WALL)->set_size(floor_depth + roomSurfaceOverlap(), 10*wall_height + roomSurfaceOverlap());
   getSurface(RIGHT_SAFETY_WALL)->set_position(Ogre::Vector3(floor_width + RoomSurface::kSurfaceThickness/2.0,
                                                             getSurface(RIGHT_WALL)->position().y + getSurface(RIGHT_WALL)->size().z/2.0  // NOLINT
                                                             + getSurface(RIGHT_SAFETY_WALL)->size().z/2.0, floor_depth/2.0));  // NOLINT
-  getSurface(BACK_SAFETY_WALL)->set_size(floor_width + kRoomSurfaceOverlap, 10*wall_height + kRoomSurfaceOverlap);
+  getSurface(BACK_SAFETY_WALL)->set_size(floor_width + roomSurfaceOverlap(), 10*wall_height + roomSurfaceOverlap());
   getSurface(BACK_SAFETY_WALL)->set_position(Ogre::Vector3(floor_width/2.0,
                                                            getSurface(BACK_WALL)->position().y + getSurface(BACK_WALL)->size().z/2.0  // NOLINT
                                                            + getSurface(BACK_SAFETY_WALL)->size().z/2.0,
                                                            -RoomSurface::kSurfaceThickness/2.0));
-  getSurface(FRONT_SAFETY_WALL)->set_size(floor_width + kRoomSurfaceOverlap, 10*wall_height + kRoomSurfaceOverlap);
+  getSurface(FRONT_SAFETY_WALL)->set_size(floor_width + roomSurfaceOverlap(), 10*wall_height + roomSurfaceOverlap());
   getSurface(FRONT_SAFETY_WALL)->set_position(Ogre::Vector3(floor_width/2.0,
                                                             getSurface(FRONT_WALL)->position().y + getSurface(FRONT_WALL)->size().z/2.0  // NOLINT
                                                             + getSurface(FRONT_SAFETY_WALL)->size().z/2.0,
@@ -441,7 +479,7 @@ bool Room::initFromBuffer(RoomBuffer* buffer, Ogre::Vector2 window_size) {
         box->set_size(expected_drive_icon_size_[drive.file_path]);
       } else {
         box->set_position(Ogre::Vector3(drive.position_x, 100, drive.position_y));
-        box->set_size(Ogre::Vector3(kInitialActorSize, kInitialActorSize, kInitialActorSize));
+        box->set_size(Ogre::Vector3(FileManager::finderDesktopIconSize(), FileManager::finderDesktopIconSize(), FileManager::finderDesktopIconSize()));
       }
     }
   }
@@ -494,6 +532,8 @@ bool Room::isFileWithPathInRoom(QString path, VisualPhysicsActorList actors) {
 }
 
 void Room::addStickyPadInDefaultLocation() {
+  if (bumptopParityMode())
+    return;
   StickyNotePad* sticky_note_pad = new StickyNotePad(app_->ogre_scene_manager(), app_->physics(), this);
   sticky_note_pad->init();
   addActor(sticky_note_pad);
@@ -505,6 +545,8 @@ void Room::addStickyPadInDefaultLocation() {
 }
 
 void Room::addNewItemsPileInDefaultLocation() {
+  if (bumptopParityMode())
+    return;
   if (!AppSettings::singleton()->use_new_items_pile_setting()) {
     return;
   }
@@ -577,6 +619,11 @@ void Room::setBirdsEyeCameraForRoom() {
 }
 
 void Room::setCameraForRoom(bool animate) {
+  if (bumptopParityMode()) {
+    setBirdsEyeCameraForRoom();
+    app_->scene()->set_surface_that_camera_is_zoomed_to(NONE);
+    return;
+  }
   const Ogre::Real back_shift_factor = 1.025;
   const Ogre::Real upward_shift_factor = 1.075;
   Ogre::Radian fov_y = app_->camera()->getFOVy();
@@ -933,7 +980,7 @@ void Room::deselectActors() {
 void Room::fileAdded(const QString& path) {
   if (isFileWithPathInRoom(path, room_actor_list())) {
     return;
-  } else if (path.startsWith("/Volumes") && !(QFileInfo(path).readLink() == "" || QFileInfo(path).readLink() == "/")) {
+  } else if (path.startsWith("/Volumes") && !(QFileInfo(path).symLinkTarget() == "" || QFileInfo(path).symLinkTarget() == "/")) {
     // Apple stores all its mounted drives and a link to the startup disk in folder "/Volumes"
     // the original path of the startup disk is "/".
     // Sometimes other special items for example the iDisk can get into Volumes, these items are not drives but links
@@ -1342,7 +1389,8 @@ bool Room::setAndAdjustMaterialForSurface(RoomSurfaceType room_surface_type, con
   QString hashed_path = QString(sha1_hasher.result().toHex());
 
   QString background_path = FileManager::getBackgroundCachePath();
-  QString cache_format = ".tiff";
+  // .tiff needed the old FreeImage codec; the port's STBI codec speaks PNG.
+  QString cache_format = ".png";
 
   QDir background_dir = QDir(background_path);
   QSize source_resolution;
@@ -1388,9 +1436,13 @@ void Room::applyMaterialForSurface(RoomSurfaceType room_surface_type, const QStr
   if (old_material_name != "") {
     QString end_overlay_tag = "<ENDOVERLAY>";
     int image_path_index = old_material_name.indexOf(end_overlay_tag);
-    assert(image_path_index != -1);
-    image_path_index += end_overlay_tag.size();
-    QString old_texture_name = old_material_name.mid(image_path_index);
+    // Parity-mode surface materials have no overlay tag; their material name
+    // is the texture name itself.
+    QString old_texture_name;
+    if (image_path_index != -1)
+      old_texture_name = old_material_name.mid(image_path_index + end_overlay_tag.size());
+    else
+      old_texture_name = old_material_name;
 
     BumpTextureManager::singleton()->decrementReferenceCountAndDeleteIfZero(old_texture_name);
     BumpMaterialManager::singleton()->decrementReferenceCountAndDeleteIfZero(old_material_name);
@@ -1399,7 +1451,11 @@ void Room::applyMaterialForSurface(RoomSurfaceType room_surface_type, const QStr
   MaterialLoader *material = new MaterialLoader();
   assert(QObject::connect(material, SIGNAL(backgroundLoadingComplete(MaterialLoader*)),  // NOLINT
             this, SLOT(deleteMaterialLoader(MaterialLoader*))));  // NOLINT
-  if (room_surface_type == FLOOR) {
+  if (bumptopParityMode()) {
+    // No lightbox vignette overlay in parity mode; the floor must match the
+    // wallpaper exactly.
+    material->initAsImageWithFilePath(path, background_loaded);
+  } else if (room_surface_type == FLOOR) {
     material->initAsImageAndOverlayWithFilePaths(path, "floor_overlay.png", background_loaded);
   } else {
     material->initAsImageAndOverlayWithFilePaths(path, "wall_overlay.png", background_loaded);
@@ -1596,4 +1652,3 @@ VisualPhysicsActorId Room::new_items_pile() {
   return new_items_pile_id_;
 }
 
-#include "moc/moc_Room.cpp"

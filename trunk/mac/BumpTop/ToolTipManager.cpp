@@ -62,7 +62,8 @@ void ToolTipManager::showTaskbarTooltip() {
       taskbar_tooltip_->initWithTextLines(str_list, TOOLTIP_UP);
       // give 10 pixels of padding for the case of entering "show desktop" mode; otherwise, you wouldn't see
       // what we're pointing to in that case
-      taskbar_tooltip_->setCenter(Ogre::Vector2(BumpTopApp::singleton()->taskbar_item_location().x, 10) +
+      taskbar_tooltip_->setCenter(Ogre::Vector2(BumpTopApp::singleton()->taskbar_item_location().x,
+                                                10 * BumpTopApp::singleton()->device_scale()) +
                                   Ogre::Vector2(0, taskbar_tooltip_->size().y/2.0));
       taskbar_tooltip_->fadeIn(0);
     } else {

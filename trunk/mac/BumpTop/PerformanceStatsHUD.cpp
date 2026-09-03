@@ -72,4 +72,3 @@ void PerformanceStatsHUD::renderTick() {
   }
 }
 
-#include "BumpTop/moc/moc_PerformanceStatsHUD.cpp"

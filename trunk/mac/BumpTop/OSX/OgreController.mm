@@ -22,7 +22,6 @@
 #include <gtest/gtest.h>
 #endif
 
-#import <CMCrashReporter/CMCrashReporter.h>
 #ifndef BUMPTOP_TEST
 #import <Sparkle/Sparkle.h>
 #endif
@@ -61,7 +60,11 @@ const bool kShowSplashScreen = false;
 
 @implementation NSStatusItem (global_frame)
 - (NSRect)global_frame {
-  return [_fWindow frame];
+  // The original reached into the private _fWindow ivar; the button API has
+  // been public since 10.10.
+  NSStatusBarButton* status_button = [self button];
+  NSRect rect_in_window = [status_button convertRect:[status_button bounds] toView:nil];
+  return [[status_button window] convertRectToScreen:rect_in_window];
 }
 @end
 
@@ -114,6 +117,10 @@ const bool kShowSplashScreen = false;
 }
 
 - (void)setupWindowsForLaunch {
+  // The nib's window compiles to a titled window under modern AppKit; the
+  // desktop must be borderless.
+  [fullScreenWindow setStyleMask:NSWindowStyleMaskBorderless];
+
   // If there is a splash screen, we want to center it;
   NSRect screen_rect = [[[NSScreen screens] objectAtIndex:0] frame];
   screen_rect.origin.x = screen_rect.origin.x + ((screen_rect.size.width - kSplashScreenWidth)/2);
@@ -247,8 +254,9 @@ const bool kShowSplashScreen = false;
 }
 
 - (void)updateWindowSizeAndPlacement {
+  // Cover the whole screen like the real desktop (the old build subtracted
+  // MENU_BAR_HEIGHT; modern wallpaper bleeds under the menu bar).
   NSRect screen_rect = [[[NSScreen screens] objectAtIndex:0] frame];
-  screen_rect.size.height = screen_rect.size.height - MENU_BAR_HEIGHT;
   // When you disconnect an external display, you get a 1x1 sized screen for
   // a second or two, in this case we want to ignore
   if (!(screen_rect.size.width <= 50 && screen_rect.size.height <= 50)) {
@@ -280,6 +288,12 @@ const bool kShowSplashScreen = false;
   [self updateWindowSizeAndPlacement];
 
   [fullScreenWindow setLevel:kCGDesktopIconWindowLevel];
+  // Modern macOS: behave like the desktop with Spaces / Mission Control /
+  // Exposé — visible on every Space, not swept aside by Exposé, and excluded
+  // from Cmd-Tab cycling. (collectionBehavior postdates the original code.)
+  [fullScreenWindow setCollectionBehavior:(NSWindowCollectionBehaviorCanJoinAllSpaces |
+                                           NSWindowCollectionBehaviorStationary |
+                                           NSWindowCollectionBehaviorIgnoresCycle)];
   [fullScreenWindow orderFrontRegardless];
 }
 
@@ -287,7 +301,11 @@ const bool kShowSplashScreen = false;
   [status_bar_menu_ setDelegate:(id<NSMenuDelegate>)self];
   bumptop_status_item_ = [[NSStatusBar systemStatusBar] statusItemWithLength:31];
   [bumptop_status_item_ retain];
-  [bumptop_status_item_ setImage:[NSImage imageNamed:@"statusBarImage.png"]];
+  NSImage* status_image = [NSImage imageNamed:@"statusBarImage.png"];
+  // Template rendering keeps the glyph visible in the modern dark/translucent
+  // menu bar (a fixed-color bitmap can vanish against it).
+  [status_image setTemplate:YES];
+  [bumptop_status_item_ setImage:status_image];
   [bumptop_status_item_ setEnabled:YES];
   [bumptop_status_item_ setHighlightMode:YES];
   [bumptop_status_item_ setMenu:status_bar_menu_];
@@ -347,6 +365,17 @@ const bool kShowSplashScreen = false;
   bumptop_app_->renderTick();
 #ifndef BUMPTOP_TEST
   render_tick_count_++;
+  // Parity mode: periodically dump the framebuffer for the diff harness
+  // (independent of window-server capture, which fails across Spaces).
+  if (getenv("BUMPTOP_PARITY") != NULL && render_tick_count_ > kFadeInLength + kDisplayDelay &&
+      render_tick_count_ % 200 == 0) {
+    // The harness requests a dump by deleting the file; encoding a ~10MB PNG
+    // is expensive, so never rewrite one that is already there.
+    QString parity_render_path = FileManager::getApplicationDataPath() + "parity_render.png";
+    if (!QFileInfo(parity_render_path).exists()) {
+      bumptop_app_->render_window()->writeContentsToFile(utf8(parity_render_path));
+    }
+  }
   [self manageSplashScreenAndFadeIn];
   if (render_tick_count_ > kDisplayDelay)
     [self checkAndCorrectWindowSizeAndPlacementIfChanged];
@@ -367,7 +396,7 @@ const bool kShowSplashScreen = false;
   if (render_tick_count_ > kDisplayDelay && render_tick_count_ <= kFadeInLength + kDisplayDelay) {
     float window_alpha = (render_tick_count_-kDisplayDelay)/(kFadeInLength*1.0);
     [fullScreenWindow setAlphaValue:window_alpha];
-    if (window_alpha == 1) {
+    if (window_alpha == 1 && getenv("BUMPTOP_PARITY") == NULL) {
       ToolTipManager::singleton()->showTaskbarTooltip();
     }
   }

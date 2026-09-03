@@ -18,8 +18,14 @@
 #define BUMPTOP_OGRE_INCLUDES_H_
 
 #include <Ogre.h>
-#include <OgrePanelOverlayElement.h>
-#include <Threading/OgreDefaultWorkQueue.h>
+#include <Plugins/STBICodec/OgreSTBICodec.h>
+#include <RenderSystems/GL/OgreGLPlugin.h>
+#include <Overlay/OgreOverlay.h>
+#include <Overlay/OgreOverlayContainer.h>
+#include <Overlay/OgreOverlayElement.h>
+#include <Overlay/OgreOverlayManager.h>
+#include <Overlay/OgreOverlaySystem.h>
+#include <Overlay/OgrePanelOverlayElement.h>
 
 #endif  // BUMPTOP_OGRE_INCLUDES_H_
 

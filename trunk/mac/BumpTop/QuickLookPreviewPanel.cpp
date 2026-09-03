@@ -17,13 +17,10 @@
 #include "BumpTop/QuickLookPreviewPanel.h"
 
 #include "BumpTop/BumpTopApp.h"
-#  if (MAC_OS_X_VERSION_MAX_ALLOWED == MAC_OS_X_VERSION_10_6)
 #include "BumpTop/OSX/QuickLookSnowLeopard.h"
-#endif
 #include "BumpTop/Room.h"
 #include "BumpTop/VisualPhysicsActor.h"
 #include "BumpTop/OSX/OSXCocoaBumpTopApplication.h"
-#include "BumpTop/OSX/QuickLookLeopard.h"
 
 QuickLookPreviewPanel::QuickLookPreviewPanel(Room* room)
 : room_(room),
@@ -31,14 +28,9 @@ QuickLookPreviewPanel::QuickLookPreviewPanel(Room* room)
   assert(QObject::connect(room_, SIGNAL(onSelectedActorsChanged()),  // NOLINT
                           this, SLOT(selectedActorsChanged())));  // NOLINT
     if (NSClassFromString(@"QLPreviewPanel") != NULL) {
-#  if (MAC_OS_X_VERSION_MAX_ALLOWED == MAC_OS_X_VERSION_10_6)
-      if (OSXCocoaBumpTopApplication::isRunningLeopardOrEarlier())
-        quick_look_interface_ = new LeopardQuickLookInterface();
-      else
-        quick_look_interface_ = new SnowLeopardQuickLookInterface();
-#  else
-      quick_look_interface_ = new LeopardQuickLookInterface();
-#endif
+      // Modern port: the pre-10.6 private-API path is gone; always use the
+      // public QLPreviewPanel implementation.
+      quick_look_interface_ = new SnowLeopardQuickLookInterface();
     }
 }
 
@@ -100,5 +92,4 @@ QHash<QString, VisualPhysicsActorId> QuickLookPreviewPanel::getRoomSelectedActor
 }
 
 
-#include "moc/moc_QuickLookPreviewPanel.cpp"
 

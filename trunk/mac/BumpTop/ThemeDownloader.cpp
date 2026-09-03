@@ -14,7 +14,6 @@
  *  limitations under the License.
  */
 
-#include "BumpTop/ThemeDownloader.h"
 
 #include "BumpTop/BumpTopApp.h"
 
@@ -130,4 +129,3 @@ void ThemeDownloader::finished() {
 void ThemeDownloader::exitDialog(int result) {
 }
 
-#include "BumpTop/moc/moc_ThemeDownloader.cpp"

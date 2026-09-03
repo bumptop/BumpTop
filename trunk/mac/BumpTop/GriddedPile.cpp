@@ -578,9 +578,9 @@ void GriddedPile::draggingUpdated(MouseEvent* mouse_event) {
 
     Ogre::Matrix4 world_transform = ogre_scene_node_for_children_->_getFullTransform();
 
-    assert(world_transform.isAffine());
-    if (world_transform.isAffine()) {
-      Ogre::Matrix4 world_transform_inverse = world_transform.inverseAffine();
+    
+    if (true) {
+      Ogre::Matrix4 world_transform_inverse = world_transform.inverse();
       Ogre::Vector3 stab_point_object_space = world_transform_inverse*mouse_event->mouse_in_world_space;
 
       int vertical_pos = (stab_point_object_space.z - kVertOffset + kVertSpacing/2) / kVertSpacing;
@@ -863,4 +863,3 @@ void ActorStencil::deleteMaterialLoader(MaterialLoader *material_loader) {
   delete material_loader;
 }
 
-#include "moc/moc_GriddedPile.cpp"

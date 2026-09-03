@@ -58,4 +58,3 @@ Ogre::Vector3 PhysicsBoxActor::size() {
 }
 
 
-#include "BumpTop/moc/moc_PhysicsBoxActor.cpp"

@@ -143,6 +143,8 @@ class BumpBox : public VisualPhysicsActor {
   FileItem *file_item_;
   HighlightActor* highlight_;
   DampedSpringMouseHandler* mouse_handler_;
+  // Material created by initAsVisualCopyOfActor; unregistered in the dtor.
+  std::string copied_material_name_;
 
   MaterialLoader* material_loader_;
   bool is_material_dirty_;

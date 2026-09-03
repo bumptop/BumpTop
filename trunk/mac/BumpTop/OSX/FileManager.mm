@@ -310,6 +310,60 @@ QString FileManager::getResourcePath() {
   return QStringFromNSString([[NSBundle mainBundle] resourcePath]);
 }
 
+float FileManager::finderDesktopIconSize() {
+  float icon_size = 64;
+  CFPropertyListRef desktop_view_settings =
+      CFPreferencesCopyAppValue(CFSTR("DesktopViewSettings"), CFSTR("com.apple.finder"));
+  if (desktop_view_settings != NULL) {
+    if (CFGetTypeID(desktop_view_settings) == CFDictionaryGetTypeID()) {
+      NSDictionary* icon_view_settings =
+          [(NSDictionary*)desktop_view_settings objectForKey:@"IconViewSettings"];
+      NSNumber* size = [icon_view_settings objectForKey:@"iconSize"];
+      if (size != nil && [size floatValue] > 0)
+        icon_size = [size floatValue];
+    }
+    CFRelease(desktop_view_settings);
+  }
+  return icon_size;
+}
+
+QString FileManager::getDesktopWallpaperCachePath() {
+  NSURL* wallpaper_url = [[NSWorkspace sharedWorkspace]
+                          desktopImageURLForScreen:[[NSScreen screens] objectAtIndex:0]];
+  if (wallpaper_url == nil)
+    return "";
+  NSString* source_path = [wallpaper_url path];
+
+  BOOL is_directory = NO;
+  if (![[NSFileManager defaultManager] fileExistsAtPath:source_path isDirectory:&is_directory] || is_directory)
+    return "";  // rotating-wallpaper folders etc.
+
+  // Cache keyed by the source's modification time so wallpaper changes are
+  // picked up on the next launch.
+  NSDictionary* attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:source_path error:nil];
+  qint64 modification_time = (qint64)[[attributes fileModificationDate] timeIntervalSince1970];
+  QString cache_path = getApplicationDataPath() +
+                       QString("wallpaper_floor_%1.png").arg(modification_time);
+  if (QFileInfo(cache_path).exists())
+    return cache_path;
+
+  // NSImage handles formats Ogre's codec cannot (HEIC in particular).
+  NSImage* wallpaper_image = [[NSImage alloc] initWithContentsOfFile:source_path];
+  if (wallpaper_image == nil)
+    return "";
+  CGImageRef cg_image = [wallpaper_image CGImageForProposedRect:NULL context:nil hints:nil];
+  if (cg_image == NULL) {
+    [wallpaper_image release];
+    return "";
+  }
+  NSBitmapImageRep* rep = [[NSBitmapImageRep alloc] initWithCGImage:cg_image];
+  NSData* png_data = [rep representationUsingType:NSBitmapImageFileTypePNG properties:@{}];
+  BOOL wrote = [png_data writeToFile:NSStringFromQString(cache_path) atomically:YES];
+  [rep release];
+  [wallpaper_image release];
+  return wrote ? cache_path : QString("");
+}
+
 QString FileManager::getApplicationDataPath() {
   NSArray* paths;
   paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, NO);
@@ -377,7 +431,7 @@ FileKind FileManager::getFileKind(QString path) {
 bool FileManager::isStartupDrive(QString path) {
   // the actual path of startup drive is "/" which is the local host but the path we are using is "/Volumes/(name)" which
   // is a link to the "/" so we can just check if the file is in Volumes and links to "/"
-  return isVolume(path) && QFileInfo(path).readLink() == "/";
+  return isVolume(path) && QFileInfo(path).symLinkTarget() == "/";
 }
 
 bool FileManager::isVolume(QString path) {
@@ -515,13 +569,13 @@ void FileManager::makeAliasOfFile(QString file_path) {
 
   if (getFileKind(file_path) == ALIAS) {
     // if file is an alias, we want to get the original item the alias is pointing to and make alias of that
-    if (QFileInfo(file_path).readLink() == "/") {
+    if (QFileInfo(file_path).symLinkTarget() == "/") {
       // if the link is "/", it means that the alias is pointing to the startup drive; so, we want to get the
       // startup disk thats in /Volumes/
       original_path = "/Volumes/" + getStartupDriveName();
     } else {
       // gets the path to the original item the alias is pointing to
-      original_path = QFileInfo(file_path).readLink();
+      original_path = QFileInfo(file_path).symLinkTarget();
     }
   } else {
     original_path = file_path;

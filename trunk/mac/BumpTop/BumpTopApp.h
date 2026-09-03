@@ -77,6 +77,9 @@ class BumpTopApp : public QObject {
 
   virtual Ogre::Vector2 screen_resolution() = 0;
   virtual Ogre::Vector2 window_size() = 0;
+  // Ratio of render-window device pixels to screen points (2.0 on Retina);
+  // scale for anything rasterized with QPainter and shown 1:1 in pixels.
+  virtual Ogre::Real device_scale();
   virtual Ogre::Vector2 mouse_location() = 0;
   virtual void terminate_application() = 0;
   virtual FullScreenWindow* window() = 0;

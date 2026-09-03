@@ -92,7 +92,7 @@ BitmapImage iconBitmapForPath(QString path, int icon_size, MaterialLoader::IconL
   // check whether Quick Look is available on our system
   // you need to save it to an intermediate variable, and you need to cast it to uint32-- or else it fails
   // why? i have no fucking clue
-  uint32 quick_look_fn_pointer = (uint32)QLThumbnailImageCreate;
+  uintptr_t quick_look_fn_pointer = (uintptr_t)QLThumbnailImageCreate;
   bool quick_look_supported = (quick_look_fn_pointer != 0);
 
   CGImageRef quick_look_image_ref;
@@ -117,9 +117,36 @@ BitmapImage iconBitmapForPath(QString path, int icon_size, MaterialLoader::IconL
 
   // If QuickLook fails, get the standard icon
   if (attempt_quick_lock && quick_look_image_ref) {
-    icon_bitmap = [[NSBitmapImageRep alloc] initWithCGImage: quick_look_image_ref];
+    // Draw into a rep with a known 8-bit RGBA layout: on modern macOS
+    // initWithCGImage: can hand back 16-bit or BGRA reps whose raw bytes the
+    // copy loop below would misread (icons rendered black).
+    int ql_width = (int)CGImageGetWidth(quick_look_image_ref);
+    int ql_height = (int)CGImageGetHeight(quick_look_image_ref);
+    icon_bitmap = [[NSBitmapImageRep alloc]
+                    initWithBitmapDataPlanes:NULL
+                    pixelsWide:ql_width
+                    pixelsHigh:ql_height
+                    bitsPerSample:8
+                    samplesPerPixel:4
+                    hasAlpha:YES
+                    isPlanar:NO
+                    colorSpaceName:NSCalibratedRGBColorSpace
+                    bitmapFormat:0
+                    bytesPerRow:0
+                    bitsPerPixel:0];
+    NSGraphicsContext *ql_context = [NSGraphicsContext graphicsContextWithBitmapImageRep:icon_bitmap];
+    if (ql_context != nil) {
+      [NSGraphicsContext saveGraphicsState];
+      [NSGraphicsContext setCurrentContext:ql_context];
+      CGContextDrawImage([ql_context CGContext], CGRectMake(0, 0, ql_width, ql_height), quick_look_image_ref);
+      [NSGraphicsContext restoreGraphicsState];
+    }
   } else if (icon_load_method == MaterialLoader::kStandardIcon ||
-             icon_load_method == MaterialLoader::kQuickLookWithStandardIconFallback) {
+             icon_load_method == MaterialLoader::kQuickLookWithStandardIconFallback ||
+             icon_load_method == MaterialLoader::kQuickLook) {
+    // The kQuickLook case historically had no fallback (black texture); the
+    // deprecated QLThumbnailImageCreate fails often enough on modern macOS
+    // that falling back to the standard file icon is strictly better.
     NSImage *icon_image = [[NSWorkspace sharedWorkspace]
                            iconForFile:NSStringFromQString(path)];
 

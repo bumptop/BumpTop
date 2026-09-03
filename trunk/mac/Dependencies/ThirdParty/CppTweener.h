@@ -211,6 +211,7 @@ class WIN32DLL_EXPORT Tweener {
   void removeTween(TweenerParam  *param);
   void setFunction(short funcEnum);
   void step(long currentMillis);
+  bool hasActiveTweens() { return !tweens.empty(); }
 
  protected :
   explicit Tweener();

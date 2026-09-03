@@ -44,13 +44,18 @@ struct BumpRaySceneQueryResultEntry : public Ogre::RaySceneQueryResultEntry {
       }
     }  // TODO: add support for  ManualObjects as well
 
+    // Render-order ties (setToRenderBefore/After, restored via the vendored
+    // Ogre patch) also decide picking between co-planar renderables — e.g.
+    // the gridded pile's close button over its panel. Without this, the
+    // panel can win the pick and buttons become unclickable.
     if (lhs_renderable != NULL && rhs_renderable != NULL) {
       if (lhs_renderable->getRenderableToRenderNextTo() == rhs_renderable) {
         return lhs_renderable->renderAfterOtherRenderable();
       } else if (rhs_renderable->getRenderableToRenderNextTo() == lhs_renderable) {
         return !rhs_renderable->renderAfterOtherRenderable();
-      } else if (lhs_renderable->getRenderableToRenderNextTo() ==
-                 rhs_renderable->getRenderableToRenderNextTo()) {
+      } else if (lhs_renderable->getRenderableToRenderNextTo() != NULL &&
+                 lhs_renderable->getRenderableToRenderNextTo() ==
+                     rhs_renderable->getRenderableToRenderNextTo()) {
         if (lhs_renderable->renderAfterOtherRenderable() &&
             !rhs_renderable->renderAfterOtherRenderable()) {
           return true;

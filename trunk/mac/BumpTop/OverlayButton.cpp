@@ -182,5 +182,4 @@ void OverlayButton::buttonAction() {
   emit performAction();
 }
 
-#include "BumpTop/moc/moc_OverlayButton.cpp"
 

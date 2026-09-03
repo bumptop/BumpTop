@@ -156,7 +156,7 @@ static PreferencesController *singleton_ = NULL;
 }
 
 -(void)showWindowWithView:(NSString *)identifier {
-  AppSettings::singleton()->set_preferences_window_default_view("Backgrounds");
+  AppSettings::singleton()->set_preferences_window_default_view(utf8(QStringFromNSString(identifier)));
   AppSettings::singleton()->saveSettingsFile();
   [self showWindow:nil];
 }

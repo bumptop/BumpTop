@@ -39,7 +39,7 @@ FileDropReceiver::FileDropReceiver(DropTarget* target)
 
 QString FileDropReceiver::target_path() {
   if (FileManager::getFileKind(target_->path()) == ALIAS) {
-    return QFileInfo(target_->path()).readLink();
+    return QFileInfo(target_->path()).symLinkTarget();
   } else {
     return target_->path();
   }
@@ -126,4 +126,3 @@ void FileDropReceiver::draggingExited() {
   target_->draggingExited();
 }
 
-#include "BumpTop/moc/moc_FileDropReceiver.cpp"

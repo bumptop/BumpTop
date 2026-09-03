@@ -40,14 +40,16 @@ const Ogre::Real RoomSurface::kSurfaceThickness = 50.0;
 const Ogre::Real RoomSurface::kSurfaceThickness = 1.0;
 #endif
 
-BumpTopCommandSet* RoomSurface::context_menu_items_set = MakeQSet(7,  // count, must keep this updated
+BumpTopCommandSet* RoomSurface::context_menu_items_set = MakeQSet(9,  // count, must keep this updated
                                                                    NewFolder::singleton(),
                                                                    GetInfo::singleton(),
                                                                    ChangeBackground::singleton(),
                                                                    Undo::singleton(),
                                                                    Redo::singleton(),
                                                                    PileByTypeForAllActors::singleton(),
-                                                                   Paste::singleton());
+                                                                   Paste::singleton(),
+                                                                   BumpTopSettings::singleton(),
+                                                                   AboutBumpTop::singleton());
 
 
 BumpTopCommandSet* RoomSurface::supported_context_menu_items() {
@@ -141,8 +143,8 @@ std::pair<bool, Ogre::Vector3> RoomSurface::mouseIntersectionAbove(Ogre::Vector2
   if (mouse_intersection_behavior == IGNORE_SURFACE_BOUNDS) {
     return std::pair<bool, Ogre::Vector3>(intersect_result.first, intersect_point);
   } else {  // if (mouse_intersection_behavior == ENFORCE_SURFACE_BOUNDS)
-    if (intersect_result.first && world_transform.isAffine()) {
-      Ogre::Matrix4 world_transform_inverse = world_transform.inverseAffine();
+    if (intersect_result.first) {
+      Ogre::Matrix4 world_transform_inverse = world_transform.inverse();
       Ogre::Vector3 intersect_point = mouse_ray.getPoint(intersect_result.second);
 
       // we'll keep the scaled size of the object, but otherwise transform this to object space
@@ -348,4 +350,3 @@ const QString& RoomSurface::path() {
   return path_;
 }
 
-#include "moc/moc_RoomSurface.cpp"

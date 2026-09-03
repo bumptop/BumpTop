@@ -110,7 +110,7 @@ static TextureSettingsController *singleton_ = NULL;
             returnCode:(int)returnCode
            contextInfo:(void *)contextInfo
 {
-  RoomSurfaceType wall_type = static_cast<RoomSurfaceType>((int)contextInfo);
+  RoomSurfaceType wall_type = static_cast<RoomSurfaceType>((intptr_t)contextInfo);
   if (returnCode == NSOKButton) {
     NSString *path = [openPanel filename];
     QString image_path = QStringFromNSString(path);

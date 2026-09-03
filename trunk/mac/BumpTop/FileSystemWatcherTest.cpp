@@ -216,4 +216,3 @@ namespace {
   }
 }
 
-#include "moc/moc_FileSystemWatcherTest.cpp"

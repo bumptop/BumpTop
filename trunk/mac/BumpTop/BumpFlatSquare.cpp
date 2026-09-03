@@ -51,5 +51,4 @@ btVector3 BumpFlatSquare::physicsSize() {
   // return btVector3(1.0, 1.0, 1.0);
 }
 
-#include "moc/moc_BumpFlatSquare.cpp"
 

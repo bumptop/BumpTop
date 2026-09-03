@@ -225,4 +225,3 @@ boost::tuple<QStringList*,
                                                                                         file_paths_to_last_modified_date);  // NOLINT
 }
 
-#include "moc/moc_FileSystemWatcher.cpp"

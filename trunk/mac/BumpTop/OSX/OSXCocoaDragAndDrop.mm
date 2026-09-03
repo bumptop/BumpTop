@@ -41,7 +41,7 @@ NSImage *OSXCocoaDragAndDrop::iconImageForPath(QString path, int icon_size, Mate
   // check whether Quick Look is available on our system
   // you need to save it to an intermediate variable, and you need to cast it to uint32-- or else it fails
   // why? i have no fucking clue
-  uint32 quick_look_fn_pointer = (uint32)QLThumbnailImageCreate;
+  uintptr_t quick_look_fn_pointer = (uintptr_t)QLThumbnailImageCreate;
   bool quick_look_supported = (quick_look_fn_pointer != 0);
 
   CGImageRef quick_look_image_ref;
