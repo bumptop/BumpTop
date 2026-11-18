@@ -24,6 +24,7 @@ usage:
     > python add_version_string_to_exe.py VERSION_STRING [EXE_NAME]
     
     -- requires ResHacker.exe (http://angusj.com/resourcehacker/)
+    # Alternative: Resource Cracker https://www.pelock.com/download/resource-cracker.exe
     -- by default, modifies "Source\Release\BumpTop.exe"
 
     """
