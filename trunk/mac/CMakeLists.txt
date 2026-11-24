@@ -1,4 +1,4 @@
-# Modern macOS (arm64) port build for BumpTop.
+# Modern macOS port build for BumpTop.
 # Replaces the legacy Xcode 3 project in Build/Mac/BumpTop.xcodeproj.
 #
 # Prerequisites:
@@ -14,7 +14,7 @@ project(BumpTop LANGUAGES C CXX OBJC OBJCXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_OBJCXX_STANDARD 17)
-set(CMAKE_OSX_DEPLOYMENT_TARGET "26.0")
+set(CMAKE_OSX_DEPLOYMENT_TARGET "15.0")
 
 # Optimized build, but with asserts LIVE: the codebase wraps side-effectful
 # calls in assert() — notably hundreds of assert(QObject::connect(...)) — so
@@ -29,7 +29,30 @@ set(MAC_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 get_filename_component(REPO_ROOT ${MAC_ROOT}/../.. ABSOLUTE)
 set(PORT_DEPS ${REPO_ROOT}/.port-deps)
 
-list(APPEND CMAKE_PREFIX_PATH /opt/homebrew ${PORT_DEPS}/ogre-install)
+# Package manager prefix: Homebrew (/opt/homebrew) or MacPorts (/opt/local).
+# Override by hand with -DPKG_PREFIX=<path> (e.g. /usr/local for Intel Homebrew).
+if(NOT PKG_PREFIX)
+    if(EXISTS /opt/homebrew)
+        set(PKG_PREFIX /opt/homebrew)
+    elseif(EXISTS /opt/local)
+        set(PKG_PREFIX /opt/local)
+    else()
+        message(FATAL_ERROR "Neither /opt/homebrew nor /opt/local found; pass -DPKG_PREFIX=<path>")
+    endif()
+endif()
+message(STATUS "Package prefix: ${PKG_PREFIX}")
+
+list(APPEND CMAKE_PREFIX_PATH ${PKG_PREFIX} ${PORT_DEPS}/ogre-install)
+
+# MacPorts keeps Boost in a versioned libexec dir; use the newest one.
+if(PKG_PREFIX STREQUAL "/opt/local")
+    file(GLOB MACPORTS_BOOST_DIRS LIST_DIRECTORIES true /opt/local/libexec/boost/*)
+    if(MACPORTS_BOOST_DIRS)
+        list(SORT MACPORTS_BOOST_DIRS COMPARE NATURAL ORDER DESCENDING)
+        list(GET MACPORTS_BOOST_DIRS 0 MACPORTS_BOOST_DIR)
+        list(APPEND CMAKE_PREFIX_PATH ${MACPORTS_BOOST_DIR})
+    endif()
+endif()
 
 set(CMAKE_AUTOMOC ON)
 
@@ -37,7 +60,7 @@ find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Network Core5Compat)
 find_package(OGRE CONFIG REQUIRED PATHS ${PORT_DEPS}/ogre-install/CMake)
 find_package(Protobuf CONFIG REQUIRED)
 find_package(Boost REQUIRED)
-find_package(Bullet CONFIG REQUIRED PATHS /opt/homebrew/lib/cmake/bullet NO_DEFAULT_PATH)
+find_package(Bullet CONFIG REQUIRED PATHS ${PKG_PREFIX}/lib/cmake/bullet NO_DEFAULT_PATH)
 
 # ---------------------------------------------------------------------------
 # Sources
@@ -114,7 +137,7 @@ target_include_directories(BumpTop PRIVATE
     ${PORT_DEPS}/ogre-src/RenderSystems/GLSupport/include  # OSX/OgreOSXCocoaView.h
     ${PORT_DEPS}/ogre-install/include/OGRE/RenderSystems/glad
     ${PORT_DEPS}/ogre-install/include/OGRE/RenderSystems/KHR
-    /opt/homebrew/include/bullet
+    ${PKG_PREFIX}/include/bullet
 )
 
 # Every TU picks up the legacy prefix header (Qt/Ogre/Bullet/boost umbrella).
@@ -133,7 +156,7 @@ target_compile_definitions(BumpTop PRIVATE OGRE_STATIC_LIB OS_MACOSX)
 
 link_directories(${BULLET_LIBRARY_DIRS})
 
-target_link_directories(BumpTop PRIVATE /opt/homebrew/lib)
+target_link_directories(BumpTop PRIVATE ${PKG_PREFIX}/lib)
 
 target_link_libraries(BumpTop PRIVATE
     Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Network Qt6::Core5Compat
@@ -152,6 +175,10 @@ target_link_libraries(BumpTop PRIVATE
     "-framework CoreText"
     "-framework Security"
 )
+
+if(PKG_PREFIX STREQUAL "/opt/local")
+    target_link_libraries(BumpTop PRIVATE Boost::headers)
+endif()
 
 # ---------------------------------------------------------------------------
 # Bundle: Info.plist, nibs, resources
