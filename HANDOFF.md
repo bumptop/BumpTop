@@ -15,7 +15,7 @@ brew install cmake ninja pkg-config qt boost protobuf bullet
 git clone --depth 1 --branch v14.4.1 https://github.com/OGRECave/ogre.git .port-deps/ogre-src
 git -C .port-deps/ogre-src apply "$PWD/trunk/mac/ogre-14-render-order.patch"
 cmake -S .port-deps/ogre-src -B .port-deps/ogre-build -G Ninja \
-  -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_OSX_ARCHITECTURES=arm64 \
+  -DCMAKE_BUILD_TYPE=RelWithDebInfo \
   -DCMAKE_INSTALL_PREFIX=$PWD/.port-deps/ogre-install \
   -DOGRE_STATIC=TRUE -DOGRE_BUILD_LIBS_AS_FRAMEWORKS=FALSE \
   -DOGRE_BUILD_RENDERSYSTEM_GL=TRUE -DOGRE_BUILD_RENDERSYSTEM_GL3PLUS=FALSE \
